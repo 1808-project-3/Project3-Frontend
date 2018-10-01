@@ -31,16 +31,14 @@ git commit -m "<commit-message>"
 git push
 ```
 
-### Merging feature branch into group branch
+### Merging feature branch into group branch (do this in VSCode terminal)
 ```
 git checkout <group-branch>
 git pull <feature-name>
 ```
 
 ### If there is a merge conflict, resolve conflicts
-```
-git mergetool --tool=meld
-```
+In VSCode your merge conflicts will appear as errors. You will be able to accept yours or the origins version of the conflicted code, or write your own resolution.
 
 ### Push to group branch
 ```
