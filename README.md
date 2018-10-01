@@ -4,6 +4,11 @@ git clone https://github.com/1808-project-3/Project3-Frontend.git
 cd Project3-Frontend
 ```
 
+### Install dependencies
+```
+npm install
+```
+
 ### Creating group branch (only one person per group)
 ```
 git checkout dev
