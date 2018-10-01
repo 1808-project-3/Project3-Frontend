@@ -90,7 +90,7 @@ class SignInComponent extends React.Component<IProps, {}> {
         {errorMessage && <p id="error-message">{errorMessage}</p>}
       </form>
       <div className="row">
-          <p id="newUserLink"><Link to="/register">Not a current user? Click here to register now!!!</Link></p>
+          <p id="newUserLink"><Link to="/password-reset">Forgot Password</Link></p>
       </div>
     </div>
     );
