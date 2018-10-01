@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Col, Container, Row} from 'reactstrap';
+import {Col, Container, Row, Button} from 'reactstrap';
 import ProjectsTile from './dashboard-tile-projects.component';
 import AssociatesTile from './dashboard-tile-associates';
 import CertifiedAssociatesTile from './dashboard-tile-certified.component';
@@ -21,7 +21,7 @@ export default class DashboardTilesContainer extends React.Component {
                         <CertifiedAssociatesTile/>
                     </Row>
                 </Container>
-                {/* needs add profile button*/}
+                <Button>Add Profile</Button>
             </div>
         )
     }
