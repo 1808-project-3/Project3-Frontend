@@ -14,12 +14,11 @@ class App extends React.Component {
       <Provider store={store}>
         <BrowserRouter>
           <div>
-            <AppNav />
-            <div id="main-content-container">
+            {/* <AppNav /> */}
+            <div>
               <Switch>
-                <Route path="/home" component={HomeComponent} />
                 <Route path="/sign-in" component={SignInComponent} />
-                <Route component={HomeComponent} />
+                <Route component={this.wrappedRoutes} />
               </Switch>
             </div>
           </div>
@@ -27,6 +26,21 @@ class App extends React.Component {
       </Provider>
     );
   }
+
+  // these are the routes that include the nav/side bars.
+  public wrappedRoutes = () => (
+    <div>
+      <AppNav />
+      <div id="main-content-container">
+        <Switch>
+          <Route path="/home" component={HomeComponent} />
+          <Route component={HomeComponent}/>
+        </Switch>
+      </div>
+    </div>
+  )
 }
+
+
 
 export default App;
