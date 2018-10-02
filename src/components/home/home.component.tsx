@@ -1,5 +1,4 @@
 import * as React from 'react';
-import UiTableComponent from "../resource-list/tab.component";
 
 export class HomeComponent extends React.Component {
 
@@ -7,7 +6,6 @@ export class HomeComponent extends React.Component {
     return (
       <div>
         home component updated
-        <UiTableComponent />
       </div>
     );
   }

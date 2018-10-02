@@ -47,33 +47,29 @@ class TablesComponent extends React.Component<IProps, any> {
             )
         }
         return (
-            <div>
-                <Table>
-                    <thead>
-                    <tr>
-                        <th>Associate Name</th>
-                        <th>ID</th>
-                        <th>Certification</th>
-                        <th>Project Details</th>
-                        <th>Grade</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {resourceEntries}
-                    </tbody>
-                </Table>
-            </div>
+            <Table>
+                <thead>
+                <tr>
+                    <th>Associate Name</th>
+                    <th>ID</th>
+                    <th>Certification</th>
+                    <th>Project Details</th>
+                    <th>Grade</th>
+                </tr>
+                </thead>
+                <tbody>
+                {resourceEntries}
+                </tbody>
+            </Table>
         );
     }
 }
 const mapStateToProps = (state: IState) => {
     return {
-        // insert properties of the state here
     };
 };
 
 const mapDispatchToProps = {
-    // insert actions here
 };
 
 export default connect(

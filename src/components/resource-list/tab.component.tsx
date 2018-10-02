@@ -86,12 +86,10 @@ export class TabComponent extends React.Component<IProps, any> {
 }
 const mapStateToProps = (state: IState) => {
     return {
-        // insert properties of the state here
     };
 };
 
 const mapDispatchToProps = {
-    // insert actions here
 };
 
 export default connect(
