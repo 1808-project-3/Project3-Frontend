@@ -104,9 +104,6 @@ export default class SkillDoughnut extends React.Component<any, any> {
         return (
            
                   <Row>
-                    <div className='card__title'>
-                        <h5 className='bold-text'>Skills Doughnut</h5>
-                    </div>
                         <Col>
                             <Doughnut data={this.state.data} options={this.state.subOptions}/>
                         </Col>
