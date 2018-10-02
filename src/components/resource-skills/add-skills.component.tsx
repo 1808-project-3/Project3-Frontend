@@ -123,7 +123,7 @@ class AddSkillsComponent extends React.Component<any, {}> {
                                 <FormGroup row>
                                     <Label for="" lg={4} className="font-weight-bold">DURATION</Label>
                                     <Col lg={8}>
-                                        <div className="d-flex justify-content-between stacked-buttons">
+                                        <div className="d-flex justify-content-between">
                                             <DatePicker
                                                 onChange={this.onChange}
                                                 value={undefined}
