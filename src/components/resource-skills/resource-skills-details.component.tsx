@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { IoMdAddCircleOutline } from 'react-icons/io';
+import { TiDownload } from 'react-icons/ti';
 import { CardBody } from 'reactstrap';
 import Button from 'reactstrap/lib/Button';
 import Card from 'reactstrap/lib/Card';
@@ -81,7 +82,7 @@ export const ResourceSkillsDetail: React.StatelessComponent<IProps> = (props) =>
                             </Row>
                             <Row>
                                 <Col tag="dt" md={4}>RESUME DOCUMENT</Col>
-                                <Col tag="dd" md={8}>RESUME DOCUMENT.DOCX</Col>
+                                <Col tag="dd" md={8}><span className="mr-3">RESUME DOCUMENT.DOCX</span><TiDownload /></Col>
                             </Row>
                         </Col>
                     </Row>
