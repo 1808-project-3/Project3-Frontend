@@ -1,27 +1,79 @@
 import * as React from 'react';
-import {Col, Container, Row} from 'reactstrap';
+import {Col, Card,CardBody} from 'reactstrap';
+import {Doughnut} from 'react-chartjs-2';
 
 
 
 
 
+function getRandomInt(min:any, max:any) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
+  
+  const getState = () => ({
+   
+    datasets: [{
+      data: [getRandomInt(1,100), getRandomInt(1,100), getRandomInt(1,100),getRandomInt(1,100),getRandomInt(1,100)],
+
+      backgroundColor: [
+        '#FF6384', //red
+        '#36A2EB', //blue
+        '#FFCE56', //yellow
+        '#24e216', //green
+        '#3713d6' //purple
+      ],
+      borderColor: 'rgba(255,255,255,0.54)',
+    
+      hoverBackgroundColor: [
+        '#FF6384', //red
+        '#36A2EB', //blue
+        '#FFCE56',//yellow
+        '#24e216', //green
+        '#3713d6' //purple
+      ],
+      
+      labels: [
+        'Under 19',
+        '20~30',
+        '31~45',
+        '46~60',
+        'Over 60'
+    ],
+    
+   
+      
+    }]
+  });
 
 
-export default class CertificationsDoughnutComponent extends React.Component {
+export default class CertificationsDoughnutComponent extends React.Component<any,any> {
+
+    constructor(props:any) {
+        super(props);
+        this.state = {
+          data: getState()
+        };
+      }
+    
+    public componentWillMount() {
+        setInterval(() => {
+          this.setState({ data: getState() });
+        }, 4000);
+      }
+
     public render() {
         return (
-            <div>
-                <Container>
-                    <Row>
-                        <Col md={12}>
-                            <h3>Doughnut Component</h3>
-                        </Col>
-           
-                    </Row>
-                    
-                </Container>
-            
-            </div>
+            <Col md={12} lg={12} xl={6}>
+            <Card>
+              <CardBody>
+                <div className='card__title'>
+                  <h5 className='bold-text'>DEMO</h5>
+                </div>
+                <Doughnut data={this.state.data} />
+              </CardBody>
+            </Card>
+          </Col>
         )
     }
 
