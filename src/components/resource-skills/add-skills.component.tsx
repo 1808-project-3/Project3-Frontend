@@ -29,24 +29,28 @@ class AddSkillsComponent extends React.Component<any, {}> {
                                 </Col>
                             </FormGroup>
                             <FormGroup row>
-                                <Label for="" sm={4} className="font-weight-bold">AOP CERTIFIED</Label>
+                                <Label for="aopCertified" sm={4} className="font-weight-bold">AOP CERTIFIED</Label>
                                 <Col sm={8}>
-                                    <Row>
-                                        <CustomInput type="radio" id="aop-certified-yes" name="aopCertified" label="YES" required />
-                                        <CustomInput type="radio" id="aop-certified-no" name="aopCertified" label="NO" required />
-                                    </Row>
+                                    <CustomInput type="radio" id="aop-certified-yes" name="aopCertified" className="d-inline-block pr-4" label="YES" required />
+                                    <CustomInput type="radio" id="aop-certified-no" name="aopCertified" className="d-inline-block" label="NO" required />
                                 </Col>
                             </FormGroup>
                             <FormGroup row>
-                                <Label for="" sm={4} className="font-weight-bold">SKILLS - GROUP</Label>
+                                <Label for="skillsGroup" sm={4} className="font-weight-bold">SKILLS - GROUP</Label>
                                 <Col sm={8}>
                                     <Row>
-                                        <CustomInput type="checkbox" id="skills-group-ui-dev" name="skillsGroup" label="UI/Dev" required />
-                                        <CustomInput type="checkbox" id="skills-group-mobility" name="sillsGroup" label="Mobility" required />
-                                        <CustomInput type="checkbox" id="skills-group-fullstack" name="skillsGroup" label="Fullstack" required />
-                                        <CustomInput type="checkbox" id="skills-group-wcm" name="sillsGroup" label="WCM" required />
-                                        <CustomInput type="checkbox" id="skills-group-design" name="skillsGroup" label="Design" required />
-                                        <CustomInput type="checkbox" id="skills-group-ecm-ccm" name="skillsGroup" label="ECM/CCM" required />
+                                        <Col>
+                                            <CustomInput type="checkbox" id="skills-group-ui-dev" name="skillsGroup" className="pr-4" label="UI/Dev" required />
+                                            <CustomInput type="checkbox" id="skills-group-wcm" name="sillsGroup" className="pr-4" label="WCM" required />
+                                        </Col>
+                                        <Col>
+                                            <CustomInput type="checkbox" id="skills-group-mobility" name="skillsGroup" className="pr-4" label="Mobility" required />
+                                            <CustomInput type="checkbox" id="skills-group-design" name="skillsGroup" className="pr-4" label="Design" required />
+                                        </Col>
+                                        <Col>
+                                            <CustomInput type="checkbox" id="skills-group-fullstack" name="skillsGroup" className="pr-4" label="Fullstack" required />
+                                            <CustomInput type="checkbox" id="skills-group-ecm-ccm" name="skillsGroup" className="" label="ECM/CCM" required />
+                                        </Col>
                                     </Row>
                                 </Col>
                             </FormGroup>
