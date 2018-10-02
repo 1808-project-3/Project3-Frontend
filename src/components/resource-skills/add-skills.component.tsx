@@ -65,9 +65,9 @@ class AddSkillsComponent extends React.Component<any, {}> {
                                 </FormGroup>
                                 <FormGroup>
                                     <Row>
-                                        <Col lg={{ size: 8, offset: 4 }}>
+                                        <Col className="p-0" lg={{ size: 8, offset: 4 }}>
                                             <Card>
-                                                <CardHeader>
+                                                <CardHeader className="p-3">
                                                     <Row>
                                                         {['iOS', 'Android', 'React Native'].map((each, index) => {
                                                             return (
