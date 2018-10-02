@@ -57,7 +57,7 @@ export default class ChartComponent  extends React.Component<any,any> {
                     <Row>
                         <TabContent activeTab={this.state.activeTab}>
                             <TabPane tabId="1">
-                                <Row md={12}>
+                                <Row>
                                     <SkillDoughnutComponent />
                                 </Row>
                                 <Row>
