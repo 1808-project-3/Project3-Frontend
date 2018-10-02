@@ -14,7 +14,8 @@ class App extends React.Component {
       <Provider store={store}>
         <BrowserRouter>
           <div>
-            <AppNav />
+             <AppNav /> 
+            {/* need to make it so nav bar wont load on sign in screen */}
             <div id="main-content-container">
               <Switch>
                 <Route path="/home" component={HomeComponent} />
