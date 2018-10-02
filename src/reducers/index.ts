@@ -9,6 +9,10 @@ export interface ISignInState {
   errorMessage: string
 }
 
+export interface IInfoState {
+    
+}
+
 export interface IState {
   signIn: ISignInState,
 }
