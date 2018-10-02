@@ -17,20 +17,20 @@ function getRandomInt(min:any, max:any) {
       data: [getRandomInt(1,100), getRandomInt(1,100), getRandomInt(1,100),getRandomInt(1,100),getRandomInt(1,100)],
 
       backgroundColor: [
-        '#FF6384', //red
-        '#36A2EB', //blue
-        '#FFCE56', //yellow
-        '#24e216', //green
-        '#3713d6' //purple
+        '#FF6384', // red
+        '#36A2EB', // blue
+        '#FFCE56', // yellow
+        '#24e216', // green
+        '#3713d6' // purple
       ],
       borderColor: 'rgba(255,255,255,0.54)',
     
       hoverBackgroundColor: [
-        '#FF6384', //red
-        '#36A2EB', //blue
-        '#FFCE56',//yellow
-        '#24e216', //green
-        '#3713d6' //purple
+        '#FF6384', // red
+        '#36A2EB', // blue
+        '#FFCE56',// yellow
+        '#24e216', // green
+        '#3713d6' // purple
       ],
       
       labels: [

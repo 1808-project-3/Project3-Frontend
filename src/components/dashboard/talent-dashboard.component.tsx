@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Col, Container, Row,Button,TabContent,TabPane } from 'reactstrap';
+import { Col, Container, Row,Button } from 'reactstrap';
 // import DashboardTilesContainer from './dashboard-tiles/dashboard-tiles.component';
 import ChartComponent from './chart/chart.component';
 import AssociatesTile from './dashboard-tiles/dashboard-tile-associates';

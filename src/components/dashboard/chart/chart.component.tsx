@@ -2,10 +2,11 @@ import * as React from 'react';
 import {Col, Container, Row,TabContent,TabPane,Nav,NavItem,NavLink} from 'reactstrap';
 import SkillComponent from './skills/skills.component';
 import CertificationsComponent from './certifications/certifications.component';
+import classnames from 'classnames';
 
 
 
-export default class ChartComponent  extends React.Component {
+export default class ChartComponent  extends React.Component<any,any> {
     
     // displays total number of associates in db
     // clicking this page opens the associates list page
@@ -19,7 +20,7 @@ export default class ChartComponent  extends React.Component {
         };
       }
     
-      public toggle() {
+      public toggle(tab:any) {
         if (this.state.activeTab !==tab ) {
           this.setState({
             activeTab: tab
@@ -57,7 +58,7 @@ export default class ChartComponent  extends React.Component {
                             className={classnames({ active: this.state.activeTab === '2' })}
                             onClick={() => { this.toggle('2'); }}
                             >
-                            Moar Tabs
+                            Tab2
                             </NavLink>
                         </NavItem>
                         </Nav>    
