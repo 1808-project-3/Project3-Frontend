@@ -23,7 +23,6 @@ export default class TalentDashboard extends React.Component {
                     <AssociatesTile/>
                     <CertifiedAssociatesTile/>
                     <Button>Add Profile</Button>
-                    {/* <DashboardTilesContainer /> */}
                 </Row>
                 <Row>
                     <ChartComponent />

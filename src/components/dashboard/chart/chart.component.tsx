@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Card, Container, Row,TabContent,TabPane,Nav,NavItem,NavLink} from 'reactstrap';
+import {Card,Col, Container, Row,TabContent,TabPane,Nav,NavItem,NavLink} from 'reactstrap';
 import classnames from 'classnames';
 import SkillDoughnutComponent from './skills/skills-doughnut.component';
 import SkillGroupComponent from './skills/skillgroups.component';
@@ -35,6 +35,8 @@ export default class ChartComponent  extends React.Component<any,any> {
             <Container>
                 <Card>
                     <Row>
+
+                    <Col>
                     <Nav tabs>
                         <NavItem>
                             <NavLink
@@ -52,9 +54,13 @@ export default class ChartComponent  extends React.Component<any,any> {
                             Tab2
                             </NavLink>
                         </NavItem>
-                        </Nav>   
+                    </Nav>   
+                    </Col>
                     </Row>
+
                     <Row>
+                        <Col>
+                        
                         <TabContent activeTab={this.state.activeTab}>
                             <TabPane tabId="1">
                                 <Row>
@@ -75,7 +81,8 @@ export default class ChartComponent  extends React.Component<any,any> {
                                 </Row>
                             </TabPane>
 
-                        </TabContent>                        
+                        </TabContent>
+                        </Col>                        
                     </Row> 
                 </Card>
             </Container>
