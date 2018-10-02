@@ -61,7 +61,7 @@ class SignInComponent extends React.Component<IProps, {}> {
             required />
             <p id="new-user-link"><Link to="/password-reset">Forgot Password</Link></p>
 
-          <button className="btn btn-primary btn-block" id="sign-in-button" type="button">LOGIN</button>
+          <button className="btn btn-primary btn-block" id="sign-in-button" type="submit">LOGIN</button>
           {errorMessage && <p id="error-message">{errorMessage}</p>}
           <button className="btn btn-outline-secondary btn-block" id="register-button" type="button">Register</button>
           
