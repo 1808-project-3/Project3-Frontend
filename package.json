@@ -16,6 +16,7 @@
   "dependencies": {
     "@types/react-icons": "^2.2.6",
     "@types/reactstrap": "^6.4.0",
+    "@types/redux-mock-store": "^1.0.0",
     "axios": "^0.18.0",
     "bootstrap": "^4.1.1",
     "jquery": "^3.3.1",
@@ -32,6 +33,7 @@
     "reactstrap": "^6.4.0",
     "redux": "^3.7.0",
     "redux-logger": "^3.0.6",
+    "redux-mock-store": "^1.5.3",
     "redux-thunk": "2.2.0",
     "tether": "^1.4.4"
   },
