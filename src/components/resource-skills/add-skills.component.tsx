@@ -1,126 +1,141 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { Form, FormGroup, Col } from 'reactstrap';
+import { Form, FormGroup, Col, CustomInput } from 'reactstrap';
 import Row from 'reactstrap/lib/Row';
 import Label from 'reactstrap/lib/Label';
 import Input from 'reactstrap/lib/Input';
+import Button from 'reactstrap/lib/Button';
+import { IoMdAddCircleOutline } from 'react-icons/io';
 
 class AddSkillsComponent extends React.Component<any, {}> {
 
-    public render(){
+    public render() {
 
-        return(
-        <>
-            <Form>
-                <Row>
-                    <Col>
-                        <FormGroup row>
-                            <Label for="associateId">Associate Id</Label>
-                            <Col sm={5}>
-                                <Input type="text" name="associateId" id="" />
-                            </Col>
-                        </FormGroup>
-                        <FormGroup row>
-                            <Label for="associateName">Associate Name</Label>
-                            <Col sm={5}>
-                                <Input type="text" name="associateName" id=""/>
-                            </Col>
-                        </FormGroup>
-                        <FormGroup row>
-                            <Label for="">AOP Certified</Label>
-                            <Col sm={5} className="justify-content-right">   
-                                <div>
-                                <Input type="radio" name="certified" id="isCertified"/>
-                                <Label for="isCertified">YES</Label>
-                                </div>
-                                <div>
-                                <Input type="radio" name="certified" id="notCertified"/>
-                                <Label for="notCertified">NO</Label>
-                                </div>
-                            </Col>
-                        </FormGroup>
-                        <FormGroup row>
-                            <Label for="">Skills-Group</Label>
-                            <Col sm={5}>
-                                <Input type="checkbox" name="skillGroups" id=""/>
-                            </Col>
-                        </FormGroup>
-                        <FormGroup row>
-                            <Label for="">CERTIFICATIONS, IF ANY</Label>
-                            <Col sm={5}>
-                                <Input type="text" name="certifications" id=""/>
-                            </Col>
-                        </FormGroup>
-                    </Col>
-                    <Col>
-                        <FormGroup row>
-                            <Label for=""> CUSTOMER NAME</Label>
-                            <Col sm={5}>
-                                <Input type="text" name="customerName" id=""/>
-                            </Col>
-                        </FormGroup>
-                        <FormGroup row>
-                            <Label for="">PROJECT ID</Label>
-                            <Col sm={5}>
-                                <Input type="text" name="projectId" id="" />
-                            </Col>
-                        </FormGroup>
-                        <FormGroup row>
-                            <Label for=""> PROJECT NAME</Label>
-                            <Col sm={5}>
-                                <Input type="text" name="projectName" id=""/>
-                            </Col>
-                        </FormGroup>
-                        <FormGroup row>
-                            <Label for="">GRADE</Label>
-                            <Col sm={5}>
-                                <Input type="text" name="grade" id=""/>
-                            </Col>
-                        </FormGroup>
-                        <FormGroup row>
-                            <Label for="">COMPETENCY TAGGING</Label>
-                            <Col sm={5}>
-                                <Input type="select" name="competencyTagging" id=""/>
-                            </Col>
-                        </FormGroup>
-                        <FormGroup row>
-                            <Label for="">DURATION</Label>
-                            <Col sm={5}>
-                                <Input type="date" name="duration" id=""/> to <Input type="date" name="duration" id=""/>
-                            </Col>
-                        </FormGroup>
-                        <FormGroup row>
-                            <Label for="">HCM SUPERVISOR ID</Label>
-                            <Col sm={5}>
-                                <Input type="text" name="supervisorId" id=""/>
-                            </Col>
-                        </FormGroup>
-                        <FormGroup row>
-                            <Label for="">HCM SUPERVISOR NAME</Label>
-                            <Col sm={5}>
-                                <Input type="text" name="supervisorName" id=""/>
-                            </Col>
-                        </FormGroup>
-                        <FormGroup row>
-                            <Label for="">LOCATION</Label>
-                            <Col sm={5}>
-                                <Input type="text" name="location" id=""/>
-                            </Col>
-                        </FormGroup>
-                        <FormGroup row>
-                            <Label for="">ATTACHMENTS(RESUME)</Label>
-                            <Col sm={5}>
-                                <Input type="file" name="attachments" id=""/>
-                            </Col>
-                        </FormGroup>
-                    </Col>
+        return (
+            <>
+                <Form className="w-100">
+                    <Row>
+                        <Col className="border-col-right">
+                            <FormGroup row>
+                                <Label for="associateId" className="font-weight-bold" sm={4}>ASSOCIATE ID</Label>
+                                <Col sm={8}>
+                                    <Input type="text" name="associateId" id="" />
+                                </Col>
+                            </FormGroup>
+                            <FormGroup row>
+                                <Label for="associateName" className="font-weight-bold" sm={4}>ASSOCIATE NAME</Label>
+                                <Col sm={8}>
+                                    <Input type="text" name="associateName" id="" />
+                                </Col>
+                            </FormGroup>
+                            <FormGroup row>
+                                <Label for="" sm={4} className="font-weight-bold">AOP CERTIFIED</Label>
+                                <Col sm={8}>
+                                    <Row>
+                                        <CustomInput type="radio" id="aop-certified-yes" name="aopCertified" label="YES" required />
+                                        <CustomInput type="radio" id="aop-certified-no" name="aopCertified" label="NO" required />
+                                    </Row>
+                                </Col>
+                            </FormGroup>
+                            <FormGroup row>
+                                <Label for="" sm={4} className="font-weight-bold">SKILLS - GROUP</Label>
+                                <Col sm={8}>
+                                    <Row>
+                                        <CustomInput type="checkbox" id="skills-group-ui-dev" name="skillsGroup" label="UI/Dev" required />
+                                        <CustomInput type="checkbox" id="skills-group-mobility" name="sillsGroup" label="Mobility" required />
+                                        <CustomInput type="checkbox" id="skills-group-fullstack" name="skillsGroup" label="Fullstack" required />
+                                        <CustomInput type="checkbox" id="skills-group-wcm" name="sillsGroup" label="WCM" required />
+                                        <CustomInput type="checkbox" id="skills-group-design" name="skillsGroup" label="Design" required />
+                                        <CustomInput type="checkbox" id="skills-group-ecm-ccm" name="skillsGroup" label="ECM/CCM" required />
+                                    </Row>
+                                </Col>
+                            </FormGroup>
+                            <FormGroup row>
+                                <Label for="" sm={4} className="font-weight-bold">CERTIFICATIONS, IF ANY</Label>
+                                <Col sm={8}>
+                                    <Input type="text" name="certifications" id="" />
+                                </Col>
+                            </FormGroup>
+                        </Col>
+                        <Col>
+                            <FormGroup row>
+                                <Label for="" sm={4} className="font-weight-bold"> CUSTOMER NAME</Label>
+                                <Col sm={8}>
+                                    <Input type="text" name="customerName" id="" />
+                                </Col>
+                            </FormGroup>
+                            <FormGroup row>
+                                <Label for="" sm={4} className="font-weight-bold">PROJECT ID</Label>
+                                <Col sm={8}>
+                                    <Input type="text" name="projectId" id="" />
+                                </Col>
+                            </FormGroup>
+                            <FormGroup row>
+                                <Label for="" sm={4} className="font-weight-bold"> PROJECT NAME</Label>
+                                <Col sm={8}>
+                                    <Input type="text" name="projectName" id="" />
+                                </Col>
+                            </FormGroup>
+                            <FormGroup row>
+                                <Label for="" sm={4} className="font-weight-bold">GRADE</Label>
+                                <Col sm={8}>
+                                    <Input type="text" name="grade" id="" />
+                                </Col>
+                            </FormGroup>
+                            <FormGroup row>
+                                <Label for="" sm={4} className="font-weight-bold">COMPETENCY TAGGING</Label>
+                                <Col sm={8}>
+                                    <Input type="select" name="competencyTagging" id="" />
+                                </Col>
+                            </FormGroup>
+                            <FormGroup row>
+                                <Label for="" sm={4} className="font-weight-bold">DURATION</Label>
+                                <Col sm={8}>
+                                    <Row>
+                                        <Col sm={5}>
+                                            <Input type="date" name="duration" id="inputDateFrom" />
+                                        </Col>
+                                        <Col sm={2}>
+                                            <span className="px-2">To</span>
+                                        </Col>
+                                        <Col sm={5}>
+                                            <Input type="date" name="duration" id="inputDateTo" />
+                                        </Col>
+                                    </Row>
+                                </Col>
+                            </FormGroup>
+                            <FormGroup row>
+                                <Label for="" sm={4} className="font-weight-bold">HCM SUPERVISOR ID</Label>
+                                <Col sm={8}>
+                                    <Input type="text" name="supervisorId" id="" />
+                                </Col>
+                            </FormGroup>
+                            <FormGroup row>
+                                <Label for="" sm={4} className="font-weight-bold">HCM SUPERVISOR NAME</Label>
+                                <Col sm={8}>
+                                    <Input type="text" name="supervisorName" id="" />
+                                </Col>
+                            </FormGroup>
+                            <FormGroup row>
+                                <Label for="" sm={4} className="font-weight-bold">LOCATION</Label>
+                                <Col sm={8}>
+                                    <Input type="text" name="location" id="" />
+                                </Col>
+                            </FormGroup>
+                            <FormGroup row>
+                                <Label for="" sm={4} className="font-weight-bold">ATTACHMENTS(RESUME)</Label>
+                                <Col sm={8}>
+                                    <Input type="file" name="attachments" id="" />
+                                </Col>
+                            </FormGroup>
+                        </Col>
+                    </Row>
+                </Form>
+                <Row className="w-100">
+                    <Button color="secondary" className="ml-auto px-4" disabled><small>CANCEL</small></Button>
+                    <Button color="secondary" className="ml-4 px-3"><IoMdAddCircleOutline /><small className="ml-2">ADD USER</small></Button>
                 </Row>
-                <Row>
-                    <button type="reset" className="">Cancel</button>
-                    <button type="submit" className="">Add User</button>
-                </Row>
-            </Form>
-        </>
+            </>
         );
     }
 }
