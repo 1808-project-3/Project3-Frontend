@@ -107,12 +107,16 @@ export default class SkillDoughnut extends React.Component<any, any> {
                     <div className='card__title'>
                         <h5 className='bold-text'>Skills Doughnut</h5>
                     </div>
-                    <div>
-                        <Doughnut data={this.state.data} options={this.state.subOptions}/>
-                    </div>
-                    <div>
-                        <Doughnut data={this.state.subData} options={this.state.options} />
-                    </div>                        
+                        <Col>
+                            <div style={{ width: '50vh' }}>
+                              <Doughnut data={this.state.data} options={this.state.subOptions}/>
+                            </div>
+                        </Col>
+                        <Col>
+                            <div style={{ width: '40vh' }}>
+                              <Doughnut data={this.state.subData} options={this.state.options} />
+                            </div>
+                        </Col>
                   </Row>
                 
        
