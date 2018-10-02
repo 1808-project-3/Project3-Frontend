@@ -89,7 +89,7 @@ class AddSkillsComponent extends React.Component<any, {}> {
                                     </Col>
                                 </FormGroup>
                             </Col>
-                            <Col>
+                            <Col className="pl-5">
                                 <FormGroup row>
                                     <Label for="" lg={4} className="font-weight-bold"> CUSTOMER NAME</Label>
                                     <Col lg={8}>
@@ -128,12 +128,14 @@ class AddSkillsComponent extends React.Component<any, {}> {
                                                 onChange={this.onChange}
                                                 value={undefined}
                                                 calendarIcon={<IoMdCalendar />}
+                                                clearIcon={null as any}
                                             />
                                             <span>To</span>
                                             <DatePicker
                                                 onChange={this.onChange}
                                                 value={undefined}
                                                 calendarIcon={<IoMdCalendar />}
+                                                clearIcon={null as any}
                                             />
                                         </div>
                                     </Col>
