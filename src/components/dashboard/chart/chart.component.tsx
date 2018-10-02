@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Col, Container, Row, Button} from 'reactstrap';
+import {Col, Container, Row} from 'reactstrap';
 import SkillComponent from './skills/skills.component';
 import CertificationsComponent from './certifications/certifications.component';
 
@@ -14,7 +14,7 @@ export default class ChartComponent  extends React.Component {
                 <Container>
                     <Row>
                         <Col md={12}>
-                            <h3>Projects</h3>
+                            <h3>Chart Component</h3>
                         </Col>
                     </Row>
                     <Row>
@@ -24,7 +24,7 @@ export default class ChartComponent  extends React.Component {
                         
                     </Row>
                 </Container>
-                <Button>Add Profile</Button>
+                
             </div>
         )
     }

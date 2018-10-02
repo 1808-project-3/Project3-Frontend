@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {Card, CardBody, Col} from 'reactstrap';
 
 export default class ProjectsTile extends React.Component {
 
@@ -7,9 +8,15 @@ export default class ProjectsTile extends React.Component {
 
     public render() {
         return (
-            <div>
-                <p>projects</p>
-            </div>
+      
+                <Col md={12} xl={3} lg={6} xs={12}>
+                    <Card>
+                        <CardBody>
+                            <h5>Projects</h5>
+                        </CardBody>
+                    </Card>
+                </Col>
+      
         )
     }
 }

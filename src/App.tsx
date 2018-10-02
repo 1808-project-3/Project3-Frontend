@@ -7,6 +7,7 @@ import { HomeComponent } from './components/home/home.component';
 import SignInComponent from './components/sign-in/sign-in.component';
 import { Provider } from 'react-redux';
 import { store } from './Store';
+import TalentDashboard from './components/dashboard/talent-dashboard.component';
 
 class App extends React.Component {
   public render() {
@@ -19,6 +20,7 @@ class App extends React.Component {
               <Switch>
                 <Route path="/home" component={HomeComponent} />
                 <Route path="/sign-in" component={SignInComponent} />
+                <Route path="/dashboard" component={TalentDashboard}/>
                 <Route component={HomeComponent} />
               </Switch>
             </div>

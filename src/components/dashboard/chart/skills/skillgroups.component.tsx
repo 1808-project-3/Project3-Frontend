@@ -11,7 +11,7 @@ export default class SkillGroupComponent extends React.Component {
                 <Container>
                     <Row>
                         <Col md={12}>
-                            <h3>Projects</h3>
+                            <h3>Skill Group Component</h3>
                         </Col>
                     </Row>
                     

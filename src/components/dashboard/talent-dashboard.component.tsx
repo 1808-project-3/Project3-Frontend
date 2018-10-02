@@ -1,7 +1,10 @@
 import * as React from 'react';
-import { Col, Container, Row, Button } from 'reactstrap';
-import DashboardTilesContainer from './dashboard-tiles/dashboard-tiles.component';
+import { Col, Container, Row,Button } from 'reactstrap';
+// import DashboardTilesContainer from './dashboard-tiles/dashboard-tiles.component';
 import ChartComponent from './chart/chart.component';
+import AssociatesTile from './dashboard-tiles/dashboard-tile-associates';
+import CertifiedAssociatesTile from './dashboard-tiles/dashboard-tile-certified.component';
+import ProjectsTile from './dashboard-tiles/dashboard-tile-projects.component';
 
 export default class TalentDashboard extends React.Component {
 
@@ -10,16 +13,21 @@ export default class TalentDashboard extends React.Component {
             <Container>
                 <Row>
                     <Col md={12}>
-                        <h3>Projects</h3>
+                        <h3>DashBoard</h3>
                     </Col>
-                    <DashboardTilesContainer />
 
+                </Row>
+                <Row>
+                    <AssociatesTile/>
+                    <CertifiedAssociatesTile/>
+                    <ProjectsTile/>
+                    <Button>Add Profile</Button>
+                    {/* <DashboardTilesContainer /> */}
                 </Row>
                 <Row>
                     <ChartComponent />
 
                 </Row>
-                <Button>Add Profile</Button>
             </Container>
 
         )

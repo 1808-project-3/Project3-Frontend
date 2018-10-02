@@ -12,7 +12,7 @@ export default class SkillDoughnut extends React.Component {
                 <Container>
                     <Row>
                         <Col md={12}>
-                            <h3>Projects</h3>
+                            <h3>Skill Doughnut</h3>
                         </Col>
                     </Row>
                     
