@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { IoMdAddCircleOutline } from 'react-icons/io';
+import { IoMdAddCircleOutline, IoMdCalendar } from 'react-icons/io';
 import { connect } from 'react-redux';
 import { CardHeader, Col, CustomInput, Form, FormGroup, Container } from 'reactstrap';
 import Button from 'reactstrap/lib/Button';
@@ -127,11 +127,13 @@ class AddSkillsComponent extends React.Component<any, {}> {
                                             <DatePicker
                                                 onChange={this.onChange}
                                                 value={undefined}
+                                                calendarIcon={<IoMdCalendar />}
                                             />
                                             <span>To</span>
                                             <DatePicker
                                                 onChange={this.onChange}
                                                 value={undefined}
+                                                calendarIcon={<IoMdCalendar />}
                                             />
                                         </div>
                                     </Col>
