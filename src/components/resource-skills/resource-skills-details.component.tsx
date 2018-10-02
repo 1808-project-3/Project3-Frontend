@@ -89,8 +89,8 @@ export const ResourceSkillsDetail: React.StatelessComponent<IProps> = (props) =>
             </Card>
             <Row className="w-100">
                 <div className="ml-auto">
-                    <Button color="secondary" disabled>EDIT</Button>
-                    <Button color="secondary" className="ml-4"><IoMdAddCircleOutline />CONFIRM</Button>
+                    <Button color="secondary" className="px-5"disabled><small>EDIT</small></Button>
+                    <Button color="secondary" className="ml-4 px-4"><IoMdAddCircleOutline /><small className="ml-2">CONFIRM</small></Button>
                 </div>
             </Row>
         </>
