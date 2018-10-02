@@ -14,6 +14,7 @@
     "eject": "react-scripts-ts eject"
   },
   "dependencies": {
+    "@types/react-icons": "^2.2.6",
     "@types/reactstrap": "^6.4.0",
     "axios": "^0.18.0",
     "bootstrap": "^4.1.1",
@@ -23,6 +24,7 @@
     "popper.js": "^1.14.3",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
+    "react-icons": "^3.1.0",
     "react-redux": "^5.0.7",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
