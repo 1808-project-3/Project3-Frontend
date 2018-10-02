@@ -22,7 +22,7 @@ export class RegisterComponent extends React.Component {
                                     <Label>FIRST NAME</Label>
                                 </Col>
                                 <Col>
-                                    <Input type="text" placeholder="Name" />
+                                    <Input type="text" name="first name" placeholder="Name" />
                                 </Col>
                             </Row>
                         </FormGroup>
@@ -32,7 +32,7 @@ export class RegisterComponent extends React.Component {
                                     <Label>LAST NAME</Label>
                                 </Col>
                                 <Col>
-                                    <Input type="text" placeholder="Last Name" />
+                                    <Input type="text" name="last name" placeholder="Last Name" />
                                 </Col>
                             </Row>
                         </FormGroup>
@@ -42,7 +42,7 @@ export class RegisterComponent extends React.Component {
                                     <Label>EMAIL ADDRESS</Label>
                                 </Col>
                                 <Col>
-                                    <Input type="text" placeholder="username@portal.com" />
+                                    <Input type="text" name="email address" placeholder="username@portal.com" />
                                 </Col>
                             </Row>
                         </FormGroup>
@@ -52,7 +52,7 @@ export class RegisterComponent extends React.Component {
                                     <Label>ROLE PROFILE</Label>
                                 </Col>
                                 <Col>
-                                    <Input type="select" defaultValue='Select Role'>
+                                    <Input type="select" name="role profile" defaultValue='Select Role'>
                                         <option value='Select Role' disabled hidden>Select Role</option>
                                         <option value='2'>2</option>
                                         <option>3</option>
@@ -70,7 +70,7 @@ export class RegisterComponent extends React.Component {
                                     <Label>CREATE USER ID</Label>
                                 </Col>
                                 <Col>
-                                    <Input placeholder="User ID" />
+                                    <Input type="text" name="user id" placeholder="User ID" />
                                 </Col>
                             </Row>
                         </FormGroup>
@@ -80,7 +80,7 @@ export class RegisterComponent extends React.Component {
                                     <Label>PASSWORD</Label>
                                 </Col>
                                 <Col>
-                                    <Input type="password" placeholder="Enter Password" />
+                                    <Input type="password" name="password" placeholder="Enter Password" />
                                 </Col>
                             </Row>
                         </FormGroup>
@@ -90,14 +90,14 @@ export class RegisterComponent extends React.Component {
                                     <Label>CONFIRM PASSWORD</Label>
                                 </Col>
                                 <Col>
-                                    <Input type="password" placeholder="Register" />
+                                    <Input type="password" name="confirm password" placeholder="Register" />
                                 </Col>
                             </Row>
                         </FormGroup>
                     </Col>
                     <Button type="submit">REGISTER</Button>
                 </Row>
-            </Form >
+            </Form>
         );
     }
 }
