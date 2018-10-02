@@ -7,8 +7,15 @@ import Card from 'reactstrap/lib/Card';
 import Input from 'reactstrap/lib/Input';
 import Label from 'reactstrap/lib/Label';
 import Row from 'reactstrap/lib/Row';
+import DatePicker from 'react-date-picker';
 
 class AddSkillsComponent extends React.Component<any, {}> {
+
+    public state = {
+        date: new Date(),
+    }
+
+    public onChange = (date: Date) => this.setState({ date })
 
     public render() {
 
@@ -116,17 +123,17 @@ class AddSkillsComponent extends React.Component<any, {}> {
                                 <FormGroup row>
                                     <Label for="" lg={4} className="font-weight-bold">DURATION</Label>
                                     <Col lg={8}>
-                                        <Row>
-                                            <Col lg={5}>
-                                                <Input type="date" name="duration" id="inputDateFrom" />
-                                            </Col>
-                                            <Col lg={2}>
-                                                <span className="px-2">To</span>
-                                            </Col>
-                                            <Col lg={5}>
-                                                <Input type="date" name="duration" id="inputDateTo" />
-                                            </Col>
-                                        </Row>
+                                        <div className="d-flex justify-content-between stacked-buttons">
+                                            <DatePicker
+                                                onChange={this.onChange}
+                                                value={undefined}
+                                            />
+                                            <span>To</span>
+                                            <DatePicker
+                                                onChange={this.onChange}
+                                                value={undefined}
+                                            />
+                                        </div>
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
