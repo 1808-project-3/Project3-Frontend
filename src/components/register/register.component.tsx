@@ -1,11 +1,24 @@
 import * as React from 'react';
+import { IRegisterState, IState } from '../../reducers';
+import { connect } from 'react-redux';
+import { updateFields } from '../../actions/register/register.actions';
 import { Row, Col, Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { RouteComponentProps } from 'react-router';
 
-export class RegisterComponent extends React.Component {
+interface IProps extends RouteComponentProps<{}>, IRegisterState {
+    updateFields: (event: any) => any
+}
+
+export class RegisterComponent extends React.Component<IProps, {}> {
 
     public submit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         console.log('in submit');
+    }
+
+    public handleChange = (e: any) => {
+        console.log(e.target.name);
+        console.log(e.target.value);
     }
 
     public render() {
@@ -22,7 +35,9 @@ export class RegisterComponent extends React.Component {
                                     <Label>FIRST NAME</Label>
                                 </Col>
                                 <Col>
-                                    <Input type="text" name="first name" placeholder="Name" />
+                                    <Input onChange={(e) => { this.props.updateFields(e.target) }}
+                                        type="text" name="first name" placeholder="Name" value={this.props.firstName}/>
+                                   
                                 </Col>
                             </Row>
                         </FormGroup>
@@ -32,7 +47,9 @@ export class RegisterComponent extends React.Component {
                                     <Label>LAST NAME</Label>
                                 </Col>
                                 <Col>
-                                    <Input type="text" name="last name" placeholder="Last Name" />
+                                    <Input onChange={(e) => { this.props.updateFields(e.target) }}
+                                        type="text" name="last name" placeholder="Last Name" value={this.props.lastName}/>
+                                    
                                 </Col>
                             </Row>
                         </FormGroup>
@@ -42,7 +59,9 @@ export class RegisterComponent extends React.Component {
                                     <Label>EMAIL ADDRESS</Label>
                                 </Col>
                                 <Col>
-                                    <Input type="text" name="email address" placeholder="username@portal.com" />
+                                    <Input onChange={(e) => { this.props.updateFields(e.target) }}
+                                     type="text" name="email address" placeholder="username@portal.com" value={this.props.email}/>
+                                    
                                 </Col>
                             </Row>
                         </FormGroup>
@@ -52,12 +71,12 @@ export class RegisterComponent extends React.Component {
                                     <Label>ROLE PROFILE</Label>
                                 </Col>
                                 <Col>
-                                    <Input type="select" name="role profile" defaultValue='Select Role'>
+                                    <Input onChange={(e) => { this.props.updateFields(e.target) }} type="select" name="role profile" defaultValue='Select Role' value ={this.props.roleProfile}>
                                         <option value='Select Role' disabled hidden>Select Role</option>
-                                        <option value='2'>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        <option>5</option>
+                                        <option value='competency lead'>Competency Lead</option>
+                                        <option value='talent enablement lead'>Talent Enablement Lead</option>
+                                        <option value='supervisor'>Supervisor</option>
+                                        <option value='associate'>Associate</option>
                                     </Input>
                                 </Col>
                             </Row>
@@ -70,7 +89,9 @@ export class RegisterComponent extends React.Component {
                                     <Label>CREATE USER ID</Label>
                                 </Col>
                                 <Col>
-                                    <Input type="text" name="user id" placeholder="User ID" />
+                                    <Input onChange={(e) => { this.props.updateFields(e.target) }}
+                                     type="text" name="user id" placeholder="User ID" value={this.props.userID}/>
+                                     
                                 </Col>
                             </Row>
                         </FormGroup>
@@ -80,7 +101,9 @@ export class RegisterComponent extends React.Component {
                                     <Label>PASSWORD</Label>
                                 </Col>
                                 <Col>
-                                    <Input type="password" name="password" placeholder="Enter Password" />
+                                    <Input onChange={(e) => { this.props.updateFields(e.target) }}
+                                     type="password" name="password" placeholder="Enter Password" value={this.props.password}/>
+                                     
                                 </Col>
                             </Row>
                         </FormGroup>
@@ -90,14 +113,23 @@ export class RegisterComponent extends React.Component {
                                     <Label>CONFIRM PASSWORD</Label>
                                 </Col>
                                 <Col>
-                                    <Input type="password" name="confirm password" placeholder="Register" />
+                                    <Input onChange={(e) => { this.props.updateFields(e.target) }} 
+                                    type="password" name="confirm password" placeholder="Register" value={this.props.confirmPassword}/>
+                                    
                                 </Col>
                             </Row>
                         </FormGroup>
                     </Col>
-                    <Button type="submit">REGISTER</Button>
                 </Row>
+                <Button type="submit">REGISTER</Button>
             </Form>
         );
     }
 }
+
+const mapStateToProps = (state: IState) => (state.register);
+const mapDispatchToProps = {
+    updateFields
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(RegisterComponent);
