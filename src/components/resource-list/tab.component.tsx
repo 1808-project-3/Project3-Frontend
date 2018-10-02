@@ -3,10 +3,7 @@ import { TabContent, TabPane, Nav, NavItem, NavLink} from 'reactstrap';
 import classnames from 'classnames';
 import { connect } from "react-redux";
 import { IState } from "../../reducers";
-import UiTableComponent from "./ui-table/ui-table.component";
-import MobilityTableComponent from "./mobility-table/mobility-table.component";
-import CmTableComponent from "./cm-table/cm-table.component";
-import DesignTableComponent from "./design-table/design-table.component";
+import TablesComponent from "./tables/tables.component";
 
 interface IProps {
     exampleProp: string;
@@ -71,18 +68,16 @@ export class TabComponent extends React.Component<IProps, any> {
                 </Nav>
                 <TabContent activeTab={this.state.activeTab}>
                     <TabPane tabId="1">
-                        <UiTableComponent />
+                        <TablesComponent  tableType={"UI"}/>
                     </TabPane>
                     <TabPane tabId="2">
-                        <MobilityTableComponent />
+                        <TablesComponent tableType={"Mobility"}/>
                     </TabPane>
                     <TabPane tabId="3">
-                        <CmTableComponent />
-                        Hello!
+                        <TablesComponent tableType={"CM"}/>
                     </TabPane>
                     <TabPane tabId="4">
-                        <DesignTableComponent />
-                        World!
+                        <TablesComponent tableType={"Design"}/>
                     </TabPane>
                 </TabContent>
             </div>
