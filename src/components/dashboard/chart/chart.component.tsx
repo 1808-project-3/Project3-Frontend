@@ -1,8 +1,10 @@
 import * as React from 'react';
-import {Col, Container, Row,TabContent,TabPane,Nav,NavItem,NavLink} from 'reactstrap';
-import SkillComponent from './skills/skills.component';
-import CertificationsComponent from './certifications/certifications.component';
+import {Card, Container, Row,TabContent,TabPane,Nav,NavItem,NavLink} from 'reactstrap';
 import classnames from 'classnames';
+import SkillDoughnutComponent from './skills/skills-doughnut.component';
+import SkillGroupComponent from './skills/skillgroups.component';
+import SelectedCertificationTableComponent from './certifications/selected-certification-table.component';
+import CertificationsDoughnutComponent from './certifications/certifications-doughnut.component';
 
 
 
@@ -30,19 +32,8 @@ export default class ChartComponent  extends React.Component<any,any> {
 
     public render() {
         return (
-            <div>
-                <Container>
-                    <Row>
-                        <Col md={12}>
-                            <h3>Chart Component</h3>
-                        </Col>
-                    </Row>
-                    <Row>
-                        
-                        <SkillComponent/>
-                        <CertificationsComponent/>
-                        
-                    </Row>
+            <Container>
+                <Card>
                     <Row>
                     <Nav tabs>
                         <NavItem>
@@ -61,30 +52,33 @@ export default class ChartComponent  extends React.Component<any,any> {
                             Tab2
                             </NavLink>
                         </NavItem>
-                        </Nav>    
-                    <TabContent activeTab={this.state.activeTab}>
-                        <TabPane tabId="1">
-                            <Row>
-                                <Col sm={12}>
-                                    <h3>active tab 1</h3>
-                                </Col>
-                            </Row>
+                        </Nav>   
+                    </Row>
+                    <Row>
+                        <TabContent activeTab={this.state.activeTab}>
+                            <TabPane tabId="1">
+                                <Row md={12}>
+                                    <SkillDoughnutComponent />
+                                </Row>
+                                <Row>
+                                    <SkillGroupComponent/>
+                                </Row>
+                                
 
-                        </TabPane>
-                        <TabPane tabId="2">
-                            <Row>
-                                <Col sm={12}>
-                                    <h3>active tab2 </h3>
-                                </Col>
-                            </Row>
-                        
-                        </TabPane>
+                            </TabPane>
+                            <TabPane tabId="2">
+                                <Row md={12}>
+                                    <CertificationsDoughnutComponent/>                    
+                                </Row>
+                                <Row>
+                                    <SelectedCertificationTableComponent/>
+                                </Row>
+                            </TabPane>
 
-                    </TabContent>
-                </Row>
-                </Container>
-                
-            </div>
+                        </TabContent>                        
+                    </Row> 
+                </Card>
+            </Container>
         )
     }
 }

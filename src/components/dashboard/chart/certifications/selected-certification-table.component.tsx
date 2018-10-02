@@ -12,7 +12,8 @@ export default class SelectedCertificationTableComponent extends React.Component
                 <Container>
                     <Row>
                         <Col md={12}>
-                            <h3>selected</h3>
+                            <h3>Certifications Component
+                            </h3>
                         </Col>
                     </Row>
                     

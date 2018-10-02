@@ -64,11 +64,11 @@ export default class CertificationsDoughnutComponent extends React.Component<any
 
     public render() {
         return (
-            <Col md={12} lg={12} xl={6}>
-            <Card>
+            <Col md={12}>
+            <Card style={{width: '100vh'}}>
               <CardBody>
                 <div className='card__title'>
-                  <h5 className='bold-text'>DEMO</h5>
+                  <h5 className='bold-text'>Certifications Doughnut</h5>
                 </div>
                 <Doughnut data={this.state.data} />
               </CardBody>
