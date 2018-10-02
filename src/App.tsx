@@ -1,7 +1,7 @@
 import * as React from 'react';
 import './include/bootstrap';
 import './App.css';
-import AppNav from './components/nav/nav.component';
+// import AppNav from './components/nav/nav.component';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { HomeComponent } from './components/home/home.component';
 import SignInComponent from './components/sign-in/sign-in.component';
@@ -13,8 +13,8 @@ class App extends React.Component {
     return (
       <Provider store={store}>
         <BrowserRouter>
-          <div>
-             <AppNav /> 
+          <div id="within-root">
+             {/* <AppNav />  */}
             {/* need to make it so nav bar wont load on sign in screen */}
             <div id="main-content-container">
               <Switch>
@@ -22,6 +22,10 @@ class App extends React.Component {
                 <Route path="/sign-in" component={SignInComponent} />
                 <Route component={HomeComponent} />
               </Switch>
+            </div>
+            <div id="within-root2">
+              <hr id="line"></hr>
+              <p id="copyright-tag">© COGNIZENT</p>
             </div>
           </div>
         </BrowserRouter>

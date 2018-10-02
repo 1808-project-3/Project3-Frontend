@@ -32,45 +32,46 @@ class SignInComponent extends React.Component<IProps, {}> {
     const { errorMessage, credentials } = this.props;
 
     return (
-    <div id="sign-in-container"> 
-    
-      <h1 className="h1 mb-3 font-weight-normal" id="name-banner">TALENT PORTAL</h1>
-      <div id="sign-in-form">
-        <form className="form-signin" onSubmit={(e: React.FormEvent<HTMLFormElement>) => this.props.login(e, this.props.credentials)}>
-          
-          <h1 className="h3 mb-3 font-weight-normal" id="login-banner">LOGIN</h1>
-
-          <label htmlFor="inputUsername" className="sr-only">Cognizent ID</label>
-          <input
-            onChange={this.usernameChange}
-            value={credentials.username}
-            type="text"
-            id="inputUsername"
-            className="form-control"
-            placeholder="Cognizent ID"
-            required />
-
-          <label htmlFor="inputPassword" className="sr-only">PASSWORD</label>
-          <input
-            onChange={this.passwordChange}
-            value={credentials.password}
-            type="password"
-            id="inputPassword"
-            className="form-control"
-            placeholder="PASSWORD"
-            required />
-            <p id="new-user-link"><Link to="/password-reset">Forgot Password</Link></p>
-
-          <button className="btn btn-primary btn-block" id="sign-in-button" type="submit">LOGIN</button>
-          {errorMessage && <p id="error-message">{errorMessage}</p>}
-          <button className="btn btn-outline-secondary btn-block" id="register-button" type="button">Register</button>
-          
-        </form>
-      </div>
      
-          
+      <div id="sign-in-container"> 
       
-    </div>
+        <h1 className="h1 mb-3 font-weight-normal" id="name-banner">TALENT PORTAL</h1>
+        <div id="signin-form-container">
+          <form className="form-signin" id="signin-form" onSubmit={(e: React.FormEvent<HTMLFormElement>) => this.props.login(e, this.props.credentials)}>
+            
+            <h1 className="h3 mb-3 font-weight-normal" id="login-banner">LOGIN</h1>
+
+            <label htmlFor="inputUsername" className="sr-only">Cognizent ID</label>
+            <input
+              onChange={this.usernameChange}
+              value={credentials.username}
+              type="text"
+              id="inputUsername"
+              className="form-control"
+              placeholder="Cognizent ID"
+              required />
+
+            <label htmlFor="inputPassword" className="sr-only">PASSWORD</label>
+            <input
+              onChange={this.passwordChange}
+              value={credentials.password}
+              type="password"
+              id="inputPassword"
+              className="form-control"
+              placeholder="PASSWORD"
+              required />
+              <p id="new-user-link"><Link to="/password-reset">Forgot Password</Link></p>
+
+            <button className="btn btn-primary btn-block" id="sign-in-button" type="submit">LOGIN</button>
+            {errorMessage && <p id="error-message">{errorMessage}</p>}
+            <button className="btn btn-outline-secondary btn-block" id="register-button" type="button">Register</button>
+            
+          </form>
+        </div>
+      </div>
+            
+        
+    
     );
   }
 }
