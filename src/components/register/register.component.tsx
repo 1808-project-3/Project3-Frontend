@@ -79,7 +79,7 @@ export class RegisterComponent extends React.Component<IProps, {}> {
                                 </Col>
                                 <Col>
                                     <Input required onChange={(e) => { this.props.updateFields(e.target) }} type="select" name="roleProfile" value ={this.props.roleProfile}>
-                                        <option value={0} disabled hidden>Select Role</option>
+                                        <option value='' hidden>Select Role</option>
                                         <option value={1}>Competency Lead</option>
                                         <option value={2}>Talent Enablement Lead</option>
                                         <option value={3}>Supervisor</option>
