@@ -4,6 +4,6 @@ export class Skill{
     public groupId: number
 
     public constructor(init?: Partial<Skill>){
-        
+        Object.assign(this, init);
     }
 }

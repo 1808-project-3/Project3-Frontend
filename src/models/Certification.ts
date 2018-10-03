@@ -3,6 +3,6 @@ export class Certification{
     public name:string
 
     public constructor(init?:Partial<Certification>){
-        
+        Object.assign(this, init);
     }
 }

@@ -7,6 +7,6 @@ export class User {
     public roleId: number
 
     public constructor(init?: Partial<User>) {
-        
+        Object.assign(this, init);
     }
 }

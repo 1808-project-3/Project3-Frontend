@@ -3,6 +3,6 @@ export class Group{
     public name: string
 
     public constructor(init?: Partial<Group>){
-        
+        Object.assign(this, init);
     }
 }   
