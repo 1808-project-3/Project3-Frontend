@@ -19,7 +19,7 @@ export class ProjectListTableComponent extends React.Component<IProps, any> {
   }
 
   public render() {
-    const list = projectList;
+    const list = projectList || [];
     const listEntries: any[] = [];
     for (const l of list) {
       listEntries.push(
