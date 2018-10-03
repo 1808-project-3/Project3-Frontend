@@ -22,10 +22,7 @@ class App extends React.Component {
                 <Route component={this.wrappedRoutes} />
               </Switch>
             </div>
-            <div id="within-root2">
-              <hr id="line"></hr>
-              <p id="copyright-tag">© COGNIZENT</p>
-            </div>
+
           </div>
         </BrowserRouter>
       </Provider>

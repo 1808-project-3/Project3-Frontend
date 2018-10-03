@@ -68,6 +68,10 @@ class SignInComponent extends React.Component<IProps, {}> {
             
           </form>
         </div>
+        <div id="gray-banner">
+          <hr id="line"></hr>
+          <p id="copyright-tag">© COGNIZENT</p>
+        </div>
       </div>
             
         
