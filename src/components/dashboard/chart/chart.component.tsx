@@ -43,7 +43,7 @@ export default class ChartComponent  extends React.Component<any,any> {
                             className={classnames({ active: this.state.activeTab === '1' })}
                             onClick={() => { this.toggle('1'); }}
                             >
-                            Tab1
+                            SKILLS
                             </NavLink>
                         </NavItem>
                         <NavItem>
@@ -51,17 +51,18 @@ export default class ChartComponent  extends React.Component<any,any> {
                             className={classnames({ active: this.state.activeTab === '2' })}
                             onClick={() => { this.toggle('2'); }}
                             >
-                            Tab2
+                            CERTIFICATIONS
                             </NavLink>
                         </NavItem>
                     </Nav>   
                     </Col>
                     </Row>
 
+
                     <Row>
                         <Col>
-                        
                         <TabContent activeTab={this.state.activeTab}>
+
                             <TabPane tabId="1">
                                 <Row>
                                     <SkillDoughnutComponent />
@@ -72,12 +73,18 @@ export default class ChartComponent  extends React.Component<any,any> {
                                 
 
                             </TabPane>
+
+
                             <TabPane tabId="2">
-                                <Row md={12}>
-                                    <CertificationsDoughnutComponent/>                    
+                                <Row>
+                                    <Col md={12}>
+                                    <CertificationsDoughnutComponent/>
+                                    </Col>                    
                                 </Row>
                                 <Row>
+                                    <Col md={12}>
                                     <SelectedCertificationTableComponent/>
+                                    </Col>
                                 </Row>
                             </TabPane>
 
