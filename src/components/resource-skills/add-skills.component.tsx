@@ -60,26 +60,28 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                         </Row>
                                     </Col>
                                 </FormGroup>
-                                <FormGroup>
-                                    <Row>
-                                        <Col className="p-0" lg={{ size: 8, offset: 4 }}>
-                                            <Card>
-                                                <CardHeader className="p-3">
-                                                    <Row>
-                                                        {skills.map((skill: Skill) => {
-                                                            console.log(skill);
-                                                            return (
-                                                                <Col key={"skills-" + skill.skillId} lg={4}>
-                                                                    <CustomInput type="checkbox" id={"skills-" + skill.skillId} name="skills" className="pr-4" label={skill.name} required />
-                                                                </Col>
-                                                            )
-                                                        })}
-                                                    </Row>
-                                                </CardHeader>
-                                            </Card>
-                                        </Col>
-                                    </Row>
-                                </FormGroup>
+                                {skills.length > 0 &&
+                                    <FormGroup>
+                                        <Row>
+                                            <Col className="p-0" lg={{ size: 8, offset: 4 }}>
+                                                <Card>
+                                                    <CardHeader className="p-3">
+                                                        <Row>
+                                                            {skills.map((skill: Skill) => {
+                                                                console.log(skill);
+                                                                return (
+                                                                    <Col key={"skills-" + skill.skillId} lg={4}>
+                                                                        <CustomInput type="checkbox" id={"skills-" + skill.skillId} name="skills" className="pr-4" label={skill.name} required />
+                                                                    </Col>
+                                                                )
+                                                            })}
+                                                        </Row>
+                                                    </CardHeader>
+                                                </Card>
+                                            </Col>
+                                        </Row>
+                                    </FormGroup>
+                                }
                                 <FormGroup row>
                                     <Label for="inputCertifications" lg={4} className="font-weight-bold">CERTIFICATIONS, IF ANY</Label>
                                     <Col lg={8} className="my-auto">
