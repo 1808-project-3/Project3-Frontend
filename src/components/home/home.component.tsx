@@ -1,4 +1,5 @@
 import * as React from 'react';
+import TabComponent from "../resource-list/tab.component";
 
 export class HomeComponent extends React.Component {
 
@@ -6,6 +7,7 @@ export class HomeComponent extends React.Component {
     return (
       <div>
         home component updated
+        <TabComponent />
       </div>
     );
   }

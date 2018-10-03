@@ -11,12 +11,14 @@ export class Resource {
         lastName: string,
         id: number,
         certification: string,
-        projectDetails: string
+        projectDetails: string,
+        grade: string
     ) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.id = id;
         this.certification = certification;
         this.projectDetails = projectDetails;
+        this.grade = grade;
     }
 }

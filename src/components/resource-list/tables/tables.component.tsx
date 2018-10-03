@@ -1,14 +1,15 @@
 import * as React from "react";
-import UiDev from '../../../assets/ui-dev.json';
-import mobility from '../../../assets/mobility.json';
-import cm from '../../../assets/content-management.json';
-import design from '../../../assets/design.json';
 import { Table } from 'reactstrap';
 import { connect } from "react-redux";
+import { getResourceList, updateTableType } from "../../../actions/info/info.actions";
 import { IState } from "../../../reducers";
+import {Resource} from "../../../models/resource";
 
 interface IProps {
+    resourceList: Resource[];
     tableType: string;
+    getResourceList: (text: string) => any;
+    updateTableType: (text: string) => any;
 }
 
 /**
@@ -20,31 +21,25 @@ class TablesComponent extends React.Component<IProps, any> {
         super(props);
     }
 
+    public componentDidMount(){
+        this.props.getResourceList("UI");
+    }
+
     public render() {
-        let resources;
-        if(this.props.tableType === "UI"){
-            resources = UiDev;
-        }
-        else if(this.props.tableType === "Mobility"){
-            resources = mobility;
-        }
-        else if(this.props.tableType === "CM"){
-            resources = cm;
-        }
-        else {
-            resources = design;
-        }
+
         const resourceEntries: any[] = [];
-        for (const r of resources) {
-            resourceEntries.push(
-                <tr>
-                    <td>{r.first_name} {r.last_name}</td>
-                    <td>{r.user_id}</td>
-                    <td>{r.certifications.name}</td>
-                    <td>{r.project_name}</td>
-                    <td>{r.grade}</td>
-                </tr>
-            )
+        if(this.props.resourceList[0] !== null){
+            for (const r of this.props.resourceList) {
+                resourceEntries.push(
+                    <tr key={r.id}>
+                        <td>{r.firstName} {r.lastName}</td>
+                        <td>{r.id}</td>
+                        <td>{r.certification}</td>
+                        <td>{r.projectDetails}</td>
+                        <td>{r.grade}</td>
+                    </tr>
+                )
+            }
         }
         return (
             <Table>
@@ -66,10 +61,14 @@ class TablesComponent extends React.Component<IProps, any> {
 }
 const mapStateToProps = (state: IState) => {
     return {
+        resourceList: state.info.resourceList,
+        tableType: state.info.tableType,
     };
 };
 
 const mapDispatchToProps = {
+    getResourceList,
+    updateTableType,
 };
 
 export default connect(
