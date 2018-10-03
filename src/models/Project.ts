@@ -7,6 +7,7 @@ export class Project {
     public endDate: Date
     public supervisor: User
     public location: string
+    public customerName: string
 
     public constructor(init?: Partial<Project>) {
         Object.assign(this, init);
