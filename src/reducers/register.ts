@@ -14,11 +14,17 @@ const initialState: IRegisterState = {
 
 export const registerReducer = (state = initialState, action: any) => {
     switch (action.type) {
+
         case registerTypes.UPDATE_FIELDS:
             const newState = {...state};
             newState[action.payload.name] = action.payload.value;
-
             return newState;
+
+        case registerTypes.UPDATE_ERROR:
+        return {
+            ...state,
+            errorMessage: action.payload.errorMessage
+          }
     }
 
     return state;

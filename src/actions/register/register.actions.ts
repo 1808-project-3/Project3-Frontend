@@ -1,5 +1,6 @@
 export const registerTypes = {
-    UPDATE_FIELDS: 'UPDATE_FIELDS',
+    UPDATE_ERROR: 'UPDATE_ERROR',
+    UPDATE_FIELDS: 'UPDATE_FIELDS'
   }
 
 
@@ -10,5 +11,14 @@ export const updateFields = (event: any) => {
         value: event.value
       },
       type: registerTypes.UPDATE_FIELDS
+    }
+  }
+
+  export const updateError = (errorMessage: string) => {
+    return {
+      payload: {
+        errorMessage
+      },
+      type: registerTypes.UPDATE_ERROR
     }
   }
