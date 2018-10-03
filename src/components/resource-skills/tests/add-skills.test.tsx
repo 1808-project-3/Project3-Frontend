@@ -5,8 +5,6 @@ import {store} from '../../../Store';
 // import configureStore from 'redux-mock-store';
 // const mockStore = configureStore();
 
-
-
 describe( 'AddSkillsComponent', () => {
     it('Render a form', () => {
     const wrapper = shallow(<AddSkillsComponent store={store} />).dive();
