@@ -122,27 +122,60 @@ nav {
   color: red;
 }
 .skillgroup-cards-container {
+  width: 100%;
   display: flex;
   flex-flow: row wrap;
   justify-content: space-around;
 }
-.skillgroup-skill-card {
-  width: 200px;
-  height: 75px;
-}
-
 .skillgroup-skill-card-content {
   display: flex;
   flex-flow: row nowrap;
 }
 .skill-card-num-associates {
   font-weight: bold;
-  font-size: 3em;
-  padding-right: 20px;
+  font-size: 2em;
+  margin-top: 10%;
+  margin-right: 5%;
+  margin-left: 10%;
 }
 .skill-card-name {
   font-weight: bold;
   font-size: 1em;
-  margin-top: 20px;
-  margin-left: 10px;
+  margin-top: 10%;
+  margin-right: 10%;
+  margin-left: 5%;
+}
+
+/*****************************
+  PROJECT CARDS
+*****************************/
+
+.project-card-link{
+  text-align: right;
+  text-decoration: underline;
+}
+
+.project-card-li-gray{
+  background-color: lightgray;
+  display: block;
+  border: 0 none;
+}
+
+.project-card-li-white{
+  background-color: white;
+  border: 0 none;
+}
+
+.project-card-list{
+  display: flex;
+  width: 100%;
+}
+.project-card-header{
+  background-color: white;
+  font-weight: bold;
+}
+
+.project-card-resource-id{
+  font-weight: bold;
+  padding-right: 10%;
 }

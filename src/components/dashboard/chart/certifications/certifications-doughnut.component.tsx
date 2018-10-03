@@ -70,10 +70,8 @@ export default class CertificationsDoughnutComponent extends React.Component<any
 
     public render() {
         return (
-            <Col md={12}>
-            <div style={{width: '120vh'}}>
-                <Doughnut data={this.state.data} options={this.state.options}/>
-            </div>
+          <Col md={12}>
+              <Doughnut data={this.state.data} options={this.state.options}/>
           </Col>
         )
     }
