@@ -1,12 +1,15 @@
 import * as React from "react";
 import { TabContent, TabPane, Nav, NavItem, NavLink} from 'reactstrap';
+import {getResourceList, updateTableType} from "../../actions/info/info.actions";
 import classnames from 'classnames';
 import { connect } from "react-redux";
 import { IState } from "../../reducers";
 import TablesComponent from "./tables/tables.component";
 
 interface IProps {
-    exampleProp: string;
+    tableType: string;
+    getResourceList: (text: string) => any;
+    updateTableType: (text: string) => any;
 }
 
 /**
@@ -27,7 +30,24 @@ export class TabComponent extends React.Component<IProps, any> {
                 activeTab: tab
             });
         }
+        if(tab === "1") {
+            this.props.updateTableType("UI");
+        }
+        else if(tab === "2"){
+            this.props.updateTableType("Mobility");
+        }
+        else if(tab === "3"){
+            this.props.updateTableType("CM");
+        }
+        else if(tab === "4"){
+            this.props.updateTableType("Design");
+        }
     }
+
+    public componentWillUpdate(){
+        this.props.getResourceList(this.props.tableType);
+    }
+
 
     public render() {
         return (
@@ -68,16 +88,16 @@ export class TabComponent extends React.Component<IProps, any> {
                 </Nav>
                 <TabContent activeTab={this.state.activeTab}>
                     <TabPane tabId="1">
-                        <TablesComponent  tableType={"UI"}/>
+                        <TablesComponent />
                     </TabPane>
                     <TabPane tabId="2">
-                        <TablesComponent tableType={"Mobility"}/>
+                        <TablesComponent />
                     </TabPane>
                     <TabPane tabId="3">
-                        <TablesComponent tableType={"CM"}/>
+                        <TablesComponent />
                     </TabPane>
                     <TabPane tabId="4">
-                        <TablesComponent tableType={"Design"}/>
+                        <TablesComponent />
                     </TabPane>
                 </TabContent>
             </div>
@@ -86,10 +106,13 @@ export class TabComponent extends React.Component<IProps, any> {
 }
 const mapStateToProps = (state: IState) => {
     return {
+        tableType: state.info.tableType
     };
 };
 
 const mapDispatchToProps = {
+    getResourceList,
+    updateTableType
 };
 
 export default connect(
