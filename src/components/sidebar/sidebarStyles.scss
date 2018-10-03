@@ -2,3 +2,22 @@
     grid-area: sidebar;
     background-color: #5dc3f3;
 }
+
+.sidebarButton{
+    width: 100%;
+    height: 4em;
+    border: none;
+    background-color: inherit;
+    cursor: pointer;
+    color: white;
+    text-align: center;
+    line-height: 4em;
+}
+
+.sidebarButton:hover{
+    background-color: #33a4dc;
+}
+
+.sbimg{
+    max-width:100%;
+}

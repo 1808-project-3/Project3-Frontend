@@ -6,7 +6,7 @@ export class Breadcrumb extends React.Component
     public render()
     {
         return (
-            <div className="breadcrumb">
+            <div className="breadcrumbNav">
                 breadcrumb
             </div>
         )
