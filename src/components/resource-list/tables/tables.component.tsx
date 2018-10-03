@@ -3,10 +3,9 @@ import { Table } from 'reactstrap';
 import { connect } from "react-redux";
 import { getResourceList, updateTableType } from "../../../actions/info/info.actions";
 import { IState } from "../../../reducers";
-import {Resource} from "../../../models/resource";
 
 interface IProps {
-    resourceList: Resource[];
+    resourceList: any[];
     tableType: string;
     getResourceList: (text: string) => any;
     updateTableType: (text: string) => any;
@@ -26,16 +25,15 @@ class TablesComponent extends React.Component<IProps, any> {
     }
 
     public render() {
-
         const resourceEntries: any[] = [];
         if(this.props.resourceList[0] !== null){
             for (const r of this.props.resourceList) {
                 resourceEntries.push(
-                    <tr key={r.id}>
-                        <td>{r.firstName} {r.lastName}</td>
-                        <td>{r.id}</td>
-                        <td>{r.certification}</td>
-                        <td>{r.projectDetails}</td>
+                    <tr key={r.user_id}>
+                        <td>{r.first_name} {r.last_name}</td>
+                        <td>{r.user_id}</td>
+                        <td>{r.certifications.name}</td>
+                        <td>{r.project_name}</td>
                         <td>{r.grade}</td>
                     </tr>
                 )

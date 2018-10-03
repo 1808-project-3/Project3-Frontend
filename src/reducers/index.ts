@@ -1,7 +1,5 @@
 import { combineReducers } from "redux";
 import { signInReducer } from "./sign-in.reducer";
-import { Resource } from "../models/resource";
-import { Project } from "../models/project";
 import {infoReducer} from "./info.reducer";
 
 export interface ISignInState {
@@ -14,8 +12,9 @@ export interface ISignInState {
 
 export interface IInfoState {
     tableType: string
-    resourceList: Resource[]
-    projectList: Project[]
+    viewRow: number
+    resourceList: any[]
+    projectList: any[]
     errorMessage: string
 }
 

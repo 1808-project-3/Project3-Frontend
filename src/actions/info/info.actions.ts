@@ -1,32 +1,26 @@
 import { infoTypes } from "./info.types";
-import {Resource} from "../../models/resource";
-import {Project} from "../../models/project";
 import axios from "axios";
 
 export const getResourceList = (tableType: string) => (dispatch: any) => {
     let path = '';
     if(tableType === "UI"){
-        path = 'http://localhost:4000/ui'
+        path = 'https://my-json-server.typicode.com/avicuna/talent-portal-mock/ui'
     }
     else if(tableType === "Mobility"){
-        path = 'http://localhost:4000/mobility'
+        path = 'https://my-json-server.typicode.com/avicuna/talent-portal-mock/mobility'
     }
     else if(tableType === "CM"){
-        path = 'http://localhost:4000/cm'
+        path = 'https://my-json-server.typicode.com/avicuna/talent-portal-mock/cm'
     }
     else if(tableType === "Design"){
-        path = 'http://localhost:4000/design'
+        path = 'https://my-json-server.typicode.com/avicuna/talent-portal-mock/design'
     }
 
     axios.get(path)
         .then( response => {
-            const resourceEntries: Resource[] = [];
-            // resourceEntries.map( () => {
-            //     new Resource(;lakjsd;lfkj)
-            // })
+            const resourceEntries: any[] = [];
             for (const r of response.data){
-                console.log(r);
-                resourceEntries.push(new Resource(r.first_name, r.last_name, r.user_id, r.certifications.name, r.project_name, r.grade));
+                resourceEntries.push(r);
             }
             dispatch({
                 payload: {
@@ -50,7 +44,7 @@ export const getResourceList = (tableType: string) => (dispatch: any) => {
 export const getProjectList = () => (dispatch:any) => {
     axios.get("../../models/project")
         .then(response => {
-            const projectEntries: Project[] = [];
+            const projectEntries: any[] = [];
             projectEntries.map(() => {
                 return response.data
             })
@@ -89,5 +83,14 @@ export const updateError = (text: string) => {
         },
         type: infoTypes.UPDATE_ERROR
 
+    }
+}
+
+export const updateViewRow = (id: number) => {
+    return {
+        payload: {
+            viewRow: id
+        },
+        type: infoTypes.UPDATE_VIEW_ROW
     }
 }
