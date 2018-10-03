@@ -1,6 +1,5 @@
 import * as React from "react";
-import projectList from "../../../assets/project-list.json";
-import {updateViewRow} from "../../../actions/info/info.actions";
+import {getProjectList, updateViewRow} from "../../../actions/info/info.actions";
 import { connect } from "react-redux";
 import { IState } from "../../../reducers";
 import { Table } from "reactstrap";
@@ -8,7 +7,9 @@ import ProjectListExport from "./ProjectListExport";
 
 interface IProps {
   viewRow: number;
+  projectList: any[];
   updateViewRow: (id: number) => any;
+  getProjectList: () => any;
 }
 
 /**
@@ -22,17 +23,17 @@ export class ProjectListTableComponent extends React.Component<IProps, any> {
   }
 
   public chooseRow(e: any){
-      console.log("The id is: "+ e.currentTarget.dataset.id);
       this.props.updateViewRow(e.currentTarget.dataset.id);
+  }
+  public componentDidMount(){
+      this.props.getProjectList();
   }
 
   public render() {
-    const list = projectList || [];
+    // const list = this.props.projectList || [];
     const listEntries: any[] = [];
-    for (const l of list) {
-      console.log(this.props.viewRow);
+    for (const l of this.props.projectList) {
       if(+this.props.viewRow === +l.id){
-          console.log("here");
           listEntries.push(
               <tr data-id={l.id} key={l.id} onClick={this.chooseRow}>
                   <td>{l.project_name}</td>
@@ -85,11 +86,13 @@ export class ProjectListTableComponent extends React.Component<IProps, any> {
 }
 const mapStateToProps = (state: IState) => {
   return {
+      projectList: state.info.projectList,
       viewRow: state.info.viewRow
   };
 };
 
 const mapDispatchToProps = {
+    getProjectList,
     updateViewRow,
 };
 

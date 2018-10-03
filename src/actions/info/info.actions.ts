@@ -42,12 +42,12 @@ export const getResourceList = (tableType: string) => (dispatch: any) => {
 }
 
 export const getProjectList = () => (dispatch:any) => {
-    axios.get("../../models/project")
+    axios.get('https://my-json-server.typicode.com/avicuna/talent-portal-mock/projects')
         .then(response => {
             const projectEntries: any[] = [];
-            projectEntries.map(() => {
-                return response.data
-            })
+            for (const r of response.data) {
+                projectEntries.push(r);
+            }
             dispatch({
                 payload: {
                     projectList: projectEntries
