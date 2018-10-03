@@ -8,7 +8,7 @@ const initialState: IRegisterState = {
     firstName: '',
     lastName: '',
     password: '',
-    roleProfile: 'Select Role',
+    roleProfile: 0,
     userID: ''
 }
 

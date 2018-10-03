@@ -14,7 +14,7 @@ export interface IRegisterState {
   firstName: string,
   lastName: string,
   email: string,
-  roleProfile: string,
+  roleProfile: number,
   userID: string,
   password: string,
   confirmPassword: string,

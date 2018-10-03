@@ -14,6 +14,13 @@ export class RegisterComponent extends React.Component<IProps, {}> {
     public submit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         console.log('in submit');
+        // const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        // if(re.test(String(this.props.email).toLowerCase())){
+        //     console.log('valid email');
+        // }
+        // else {
+        //     console.log('invalid email');
+        // }
     }
 
     public handleChange = (e: any) => {
@@ -35,7 +42,7 @@ export class RegisterComponent extends React.Component<IProps, {}> {
                                     <Label>FIRST NAME</Label>
                                 </Col>
                                 <Col>
-                                    <Input onChange={(e) => { this.props.updateFields(e.target) }}
+                                    <Input required onChange={(e) => { this.props.updateFields(e.target) }}
                                         type="text" name="firstName" placeholder="Name" value={this.props.firstName}/>
                                    
                                 </Col>
@@ -47,7 +54,7 @@ export class RegisterComponent extends React.Component<IProps, {}> {
                                     <Label>LAST NAME</Label>
                                 </Col>
                                 <Col>
-                                    <Input onChange={(e) => { this.props.updateFields(e.target) }}
+                                    <Input required onChange={(e) => { this.props.updateFields(e.target) }}
                                         type="text" name="lastName" placeholder="Last Name" value={this.props.lastName}/>
                                     
                                 </Col>
@@ -59,8 +66,8 @@ export class RegisterComponent extends React.Component<IProps, {}> {
                                     <Label>EMAIL ADDRESS</Label>
                                 </Col>
                                 <Col>
-                                    <Input onChange={(e) => { this.props.updateFields(e.target) }}
-                                     type="text" name="email" placeholder="username@portal.com" value={this.props.email}/>
+                                    <Input required onChange={(e) => { this.props.updateFields(e.target) }}
+                                     type="email" name="email" placeholder="username@portal.com" value={this.props.email}/>
                                     
                                 </Col>
                             </Row>
@@ -71,7 +78,8 @@ export class RegisterComponent extends React.Component<IProps, {}> {
                                     <Label>ROLE PROFILE</Label>
                                 </Col>
                                 <Col>
-                                    <Input onChange={(e) => { this.props.updateFields(e.target) }} type="select" name="roleProfile" value ={this.props.roleProfile}>
+                                    <Input required onChange={(e) => { this.props.updateFields(e.target) }} type="select" name="roleProfile" value ={this.props.roleProfile}>
+                                        <option value={0} disabled hidden>Select Role</option>
                                         <option value={1}>Competency Lead</option>
                                         <option value={2}>Talent Enablement Lead</option>
                                         <option value={3}>Supervisor</option>
@@ -88,7 +96,7 @@ export class RegisterComponent extends React.Component<IProps, {}> {
                                     <Label>CREATE USER ID</Label>
                                 </Col>
                                 <Col>
-                                    <Input onChange={(e) => { this.props.updateFields(e.target) }}
+                                    <Input required onChange={(e) => { this.props.updateFields(e.target) }}
                                      type="text" name="userID" placeholder="User ID" value={this.props.userID}/>
                                      
                                 </Col>
@@ -100,7 +108,7 @@ export class RegisterComponent extends React.Component<IProps, {}> {
                                     <Label>PASSWORD</Label>
                                 </Col>
                                 <Col>
-                                    <Input onChange={(e) => { this.props.updateFields(e.target) }}
+                                    <Input required onChange={(e) => { this.props.updateFields(e.target) }}
                                      type="password" name="password" placeholder="Enter Password" value={this.props.password}/>
                                      
                                 </Col>
@@ -112,7 +120,7 @@ export class RegisterComponent extends React.Component<IProps, {}> {
                                     <Label>CONFIRM PASSWORD</Label>
                                 </Col>
                                 <Col>
-                                    <Input onChange={(e) => { this.props.updateFields(e.target) }} 
+                                    <Input required onChange={(e) => { this.props.updateFields(e.target) }} 
                                     type="password" name="confirmPassword" placeholder="Register" value={this.props.confirmPassword}/>
                                     
                                 </Col>
