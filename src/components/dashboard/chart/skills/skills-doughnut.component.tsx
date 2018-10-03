@@ -102,19 +102,29 @@ export default class SkillDoughnut extends React.Component<any, any> {
     }
     public render() {
         return (
-           
-                  <Row>
+                <div>
+                    <Row>
                         <Col>
                             <div style={{ width: '100vh' }}>
-                              <Doughnut data={this.state.data} options={this.state.subOptions}/>
+                            <Doughnut data={this.state.data} options={this.state.subOptions}/>                              
                             </div>
                         </Col>
                         <Col>
                             <div style={{ width: '55vh', paddingTop: '10vh'}}>
-                              <Doughnut data={this.state.subData} options={this.state.options} />
+                            <Doughnut data={this.state.subData} options={this.state.options} />                        
                             </div>
                         </Col>
-                  </Row>
+                    </Row>
+                    <Row style={{marginTop: "10px"}}>
+                        <Col md={6} style={{textAlign: "center"}}>
+                            <p>TOTAL ASSOCIATES</p>
+                        </Col>
+                        <Col style={{marginLeft: "200px"}}>
+                            <p>SELECTED SKILLGROUP</p>
+                        </Col>
+                    </Row>
+                </div>
+                  
                 
        
         )
