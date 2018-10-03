@@ -168,7 +168,7 @@ class AddSkillsComponent extends React.Component<any, {}> {
                                     <Label for="" lg={4} className="font-weight-bold">ATTACHMENTS (RESUME)</Label>
                                     <Col lg={8} className="my-auto">
                                         <Label className="btn btn-secondary mb-0">
-                                            <small>UPLOAD RESUME</small><Input type="file" name="attachments" id="" hidden />
+                                            <small>UPLOAD RESUME</small><Input type="file" accept=".doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.pdf" name="attachments" id="" hidden />
                                         </Label>
                                     </Col>
                                 </FormGroup>
