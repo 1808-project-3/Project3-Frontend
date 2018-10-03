@@ -1,9 +1,11 @@
-export class Skill{
-    public skillId:number
-    public name:string
-    public groupId: number
+import { Group } from "./Group";
 
-    public constructor(init?: Partial<Skill>){
+export class Skill {
+    public skillId: number
+    public name: string
+    public group: Group
+
+    public constructor(init?: Partial<Skill>) {
         Object.assign(this, init);
     }
 }
