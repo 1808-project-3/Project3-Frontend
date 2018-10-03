@@ -19,6 +19,7 @@ interface IProps extends RouteComponentProps<{}>, IAddSkillsState {
 
 class AddSkillsComponent extends React.Component<IProps, {}> {
     public render() {
+        const { resource } = this.props;
         return (
             <>
                 <Form className="pb-3">
@@ -28,20 +29,20 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                 <FormGroup row>
                                     <Label for="inputAssociateId" className="font-weight-bold" lg={4}>ASSOCIATE ID</Label>
                                     <Col lg={8} className="my-auto">
-                                        <Input onChange={(e) => this.props.updateResource(e.target)} type="text" name="associateId" id="inputAssociateId" />
+                                        <Input onChange={e => this.props.updateResource(e.target)} type="text" name="associateId" id="inputAssociateId" />
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
                                     <Label for="inputAssociateName" className="font-weight-bold" lg={4}>ASSOCIATE NAME</Label>
                                     <Col lg={8} className="my-auto">
-                                        <Input onChange={(e) => this.props.updateResource(e.target)} type="text" name="associateName" id="inputAssociateName"/>
+                                        <Input onChange={e => this.props.updateResource(e.target)} type="text" name="associateName" id="inputAssociateName" />
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
                                     <Label for="aopCertified" lg={4} className="font-weight-bold">AOP CERTIFIED</Label>
                                     <Col lg={8} className="my-auto">
-                                        <CustomInput type="radio" id="aop-certified-yes" name="aopCertified" className="d-inline-block pr-4" label="YES" required />
-                                        <CustomInput type="radio" id="aop-certified-no" name="aopCertified" className="d-inline-block" label="NO" required />
+                                        <CustomInput onChange={e => this.props.updateResource(e.target)} defaultChecked={resource.aupCertified} type="radio" id="aop-certified-yes" name="aopCertified" className="d-inline-block pr-4" label="YES" required />
+                                        <CustomInput onChange={e => this.props.updateResource(e.target)} defaultChecked={resource.aupCertified !== undefined && !resource.aupCertified} type="radio" id="aop-certified-no" name="aopCertified" className="d-inline-block" label="NO" required />
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>

@@ -23,6 +23,10 @@ export const addSkillsReducer = (state = initialState, action: any) => {
                     newResource.user = newNameUser;
                     newState.resource = newResource;
                     break;
+                case "aopCertified":
+                    newResource.aupCertified = action.payload.id === "aop-certified-yes";
+                    newState.resource = newResource;
+                    break;
             }
             return newState;
     }
