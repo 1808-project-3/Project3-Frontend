@@ -8,7 +8,7 @@ import SignInComponent from './components/sign-in/sign-in.component';
 import { Provider } from 'react-redux';
 import { store } from './Store';
 import AddSkillsComponent from './components/resource-skills/add-skills.component';
-import { ResourceSkillsDetail } from './components/resource-skills/resource-skills-details.component'
+import { ResourceSkillsDetail } from './components/resource-skills/resource-skills-detail.component'
 
 class App extends React.Component {
   public render() {
