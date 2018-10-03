@@ -1,5 +1,9 @@
 import * as React from 'react';
 import { Card,  Table, CardBody } from 'reactstrap';
+// import {MdCreate} from '@types/react-icons/lib/md/create';
+import {MdCreate} from 'react-icons/md/'
+
+
 
 
 
@@ -7,6 +11,12 @@ import { Card,  Table, CardBody } from 'reactstrap';
 
 
 export default class SelectedCertificationTableComponent extends React.Component {
+
+    public handleEdit =(event:any)=>{
+        event.preventDefault();
+        console.log("hello");
+
+    }
     public render() {
         return (
             
@@ -35,8 +45,7 @@ export default class SelectedCertificationTableComponent extends React.Component
                                 <td>Project Name</td>
                                 <td>M</td>
                                 <td>View Edit</td>
-                                <td>pencil</td>
-
+                                <td onClick={this.handleEdit}><MdCreate/></td>
                             </tr>
                         </tbody>
                     </Table>
