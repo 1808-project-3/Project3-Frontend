@@ -36,7 +36,7 @@ export class RegisterComponent extends React.Component<IProps, {}> {
                                 </Col>
                                 <Col>
                                     <Input onChange={(e) => { this.props.updateFields(e.target) }}
-                                        type="text" name="first name" placeholder="Name" value={this.props.firstName}/>
+                                        type="text" name="firstName" placeholder="Name" value={this.props.firstName}/>
                                    
                                 </Col>
                             </Row>
@@ -48,7 +48,7 @@ export class RegisterComponent extends React.Component<IProps, {}> {
                                 </Col>
                                 <Col>
                                     <Input onChange={(e) => { this.props.updateFields(e.target) }}
-                                        type="text" name="last name" placeholder="Last Name" value={this.props.lastName}/>
+                                        type="text" name="lastName" placeholder="Last Name" value={this.props.lastName}/>
                                     
                                 </Col>
                             </Row>
@@ -60,7 +60,7 @@ export class RegisterComponent extends React.Component<IProps, {}> {
                                 </Col>
                                 <Col>
                                     <Input onChange={(e) => { this.props.updateFields(e.target) }}
-                                     type="text" name="email address" placeholder="username@portal.com" value={this.props.email}/>
+                                     type="text" name="email" placeholder="username@portal.com" value={this.props.email}/>
                                     
                                 </Col>
                             </Row>
@@ -71,12 +71,11 @@ export class RegisterComponent extends React.Component<IProps, {}> {
                                     <Label>ROLE PROFILE</Label>
                                 </Col>
                                 <Col>
-                                    <Input onChange={(e) => { this.props.updateFields(e.target) }} type="select" name="role profile" defaultValue='Select Role' value ={this.props.roleProfile}>
-                                        <option value='Select Role' disabled hidden>Select Role</option>
-                                        <option value='competency lead'>Competency Lead</option>
-                                        <option value='talent enablement lead'>Talent Enablement Lead</option>
-                                        <option value='supervisor'>Supervisor</option>
-                                        <option value='associate'>Associate</option>
+                                    <Input onChange={(e) => { this.props.updateFields(e.target) }} type="select" name="roleProfile" value ={this.props.roleProfile}>
+                                        <option value={1}>Competency Lead</option>
+                                        <option value={2}>Talent Enablement Lead</option>
+                                        <option value={3}>Supervisor</option>
+                                        <option value={4}>Associate</option>
                                     </Input>
                                 </Col>
                             </Row>
@@ -90,7 +89,7 @@ export class RegisterComponent extends React.Component<IProps, {}> {
                                 </Col>
                                 <Col>
                                     <Input onChange={(e) => { this.props.updateFields(e.target) }}
-                                     type="text" name="user id" placeholder="User ID" value={this.props.userID}/>
+                                     type="text" name="userID" placeholder="User ID" value={this.props.userID}/>
                                      
                                 </Col>
                             </Row>
@@ -114,7 +113,7 @@ export class RegisterComponent extends React.Component<IProps, {}> {
                                 </Col>
                                 <Col>
                                     <Input onChange={(e) => { this.props.updateFields(e.target) }} 
-                                    type="password" name="confirm password" placeholder="Register" value={this.props.confirmPassword}/>
+                                    type="password" name="confirmPassword" placeholder="Register" value={this.props.confirmPassword}/>
                                     
                                 </Col>
                             </Row>
