@@ -25,7 +25,7 @@ class AddSkillsComponent extends React.Component<any, {}> {
                 <Form>
                     <Container>
                         <Row>
-                            <Col className="border-col-right pr-5 mr-5 mb-5">
+                            <Col className="border-col-right pr-5 mr-5 pb-5">
                                 <FormGroup row>
                                     <Label for="associateId" className="font-weight-bold" lg={4}>ASSOCIATE ID</Label>
                                     <Col lg={8} className="my-auto">
