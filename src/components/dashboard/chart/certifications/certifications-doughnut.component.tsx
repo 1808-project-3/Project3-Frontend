@@ -56,6 +56,10 @@ export default class CertificationsDoughnutComponent extends React.Component<any
           data: getState(),
           options: {
               legend: {
+                labels: {
+                    boxWidth: 10,
+                    padding: 80
+                },
                   position: 'right'
               }
           }

@@ -68,8 +68,8 @@ export default class ChartComponent  extends React.Component<any,any> {
                                     <SkillDoughnutComponent />
                                 </Row>
                                 <Row style={{ marginBottom: '2%'}}>
-                                    <SkillGroupComponent/>
-                                </Row>
+                                    <SkillGroupComponent />
+                                </Row>                                
                                 
 
                             </TabPane>
