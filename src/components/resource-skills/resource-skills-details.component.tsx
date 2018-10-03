@@ -21,68 +21,68 @@ export const ResourceSkillsDetail: React.StatelessComponent<IProps> = (props) =>
                 </CardHeader>
                 <CardBody>
                     <Row tag="dl">
-                        <Col md={6}>
+                        <Col xl={6}>
                             <Row>
-                                <Col tag="dt" md={4}>ASSOCIATE ID</Col>
-                                <Col tag="dd" md={8}>463967</Col>
+                                <Col tag="dt" xl={4}>ASSOCIATE ID</Col>
+                                <Col tag="dd" xl={8}>463967</Col>
                             </Row>
                             <Row>
-                                <Col tag="dt" md={4}>ASSOCIATE NAME</Col>
-                                <Col tag="dd" md={8}>JOHN MARK</Col>
+                                <Col tag="dt" xl={4}>ASSOCIATE NAME</Col>
+                                <Col tag="dd" xl={8}>JOHN MARK</Col>
                             </Row>
                             <Row>
-                                <Col tag="dt" md={4}>AOP CERTIFIED</Col>
-                                <Col tag="dd" md={8}>YES</Col>
+                                <Col tag="dt" xl={4}>AOP CERTIFIED</Col>
+                                <Col tag="dd" xl={8}>YES</Col>
                             </Row>
                             <Row>
-                                <Col tag="dt" md={4}>SKILLS - GROUP</Col>
-                                <Col tag="dd" md={8}>iOS, Android</Col>
+                                <Col tag="dt" xl={4}>SKILLS - GROUP</Col>
+                                <Col tag="dd" xl={8}>iOS, Android</Col>
                             </Row>
                             <Row>
-                                <Col tag="dt" md={4}>CERTIFICATIONS, IF ANY</Col>
-                                <Col tag="dd" md={8}>Certification Name</Col>
+                                <Col tag="dt" xl={4}>CERTIFICATIONS, IF ANY</Col>
+                                <Col tag="dd" xl={8}>Certification Name</Col>
                             </Row>
                             <Row>
-                                <Col tag="dt" md={4}>CUSTOMER NAME</Col>
-                                <Col tag="dd" md={8}>BANKING CUSTOMER</Col>
+                                <Col tag="dt" xl={4}>CUSTOMER NAME</Col>
+                                <Col tag="dd" xl={8}>BANKING CUSTOMER</Col>
                             </Row>
                             <Row>
-                                <Col tag="dt" md={4}>PROJECT ID</Col>
-                                <Col tag="dd" md={8}>0000234098221</Col>
+                                <Col tag="dt" xl={4}>PROJECT ID</Col>
+                                <Col tag="dd" xl={8}>0000234098221</Col>
                             </Row>
                             <Row>
-                                <Col tag="dt" md={4}>PROJECT NAME</Col>
-                                <Col tag="dd" md={8}>PAYMENT PORTAL</Col>
+                                <Col tag="dt" xl={4}>PROJECT NAME</Col>
+                                <Col tag="dd" xl={8}>PAYMENT PORTAL</Col>
                             </Row>
                         </Col>
-                        <Col md={6}>
+                        <Col xl={6}>
                             <Row>
-                                <Col tag="dt" md={4}>GRADE</Col>
-                                <Col tag="dd" md={8}>M</Col>
+                                <Col tag="dt" xl={4}>GRADE</Col>
+                                <Col tag="dd" xl={8}>M</Col>
                             </Row>
                             <Row>
-                                <Col tag="dt" md={4}>COMPETENCY TAGGING</Col>
-                                <Col tag="dd" md={8}>DIGITAL BUSINESS</Col>
+                                <Col tag="dt" xl={4}>COMPETENCY TAGGING</Col>
+                                <Col tag="dd" xl={8}>DIGITAL BUSINESS</Col>
                             </Row>
                             <Row>
-                                <Col tag="dt" md={4}>DATE OF JOINING</Col>
-                                <Col tag="dd" md={8}>24/08/2018</Col>
+                                <Col tag="dt" xl={4}>DATE OF JOINING</Col>
+                                <Col tag="dd" xl={8}>24/08/2018</Col>
                             </Row>
                             <Row>
-                                <Col tag="dt" md={4}>HCM SUPERVISOR ID</Col>
-                                <Col tag="dd" md={8}>219898</Col>
+                                <Col tag="dt" xl={4}>HCM SUPERVISOR ID</Col>
+                                <Col tag="dd" xl={8}>219898</Col>
                             </Row>
                             <Row>
-                                <Col tag="dt" md={4}>HCM SUPERVISOR NAME</Col>
-                                <Col tag="dd" md={8}>JOHN ANDERSON</Col>
+                                <Col tag="dt" xl={4}>HCM SUPERVISOR NAME</Col>
+                                <Col tag="dd" xl={8}>JOHN ANDERSON</Col>
                             </Row>
                             <Row>
-                                <Col tag="dt" md={4}>LOCATION</Col>
-                                <Col tag="dd" md={8}>ILLINOIS</Col>
+                                <Col tag="dt" xl={4}>LOCATION</Col>
+                                <Col tag="dd" xl={8}>ILLINOIS</Col>
                             </Row>
                             <Row>
-                                <Col tag="dt" md={4}>RESUME DOCUMENT</Col>
-                                <Col tag="dd" md={8}><span className="mr-3">RESUME DOCUMENT.DOCX</span><TiDownload /></Col>
+                                <Col tag="dt" xl={4}>RESUME DOCUMENT</Col>
+                                <Col tag="dd" xl={8}><span className="mr-3">RESUME DOCUMENT.DOCX</span><TiDownload /></Col>
                             </Row>
                         </Col>
                     </Row>
