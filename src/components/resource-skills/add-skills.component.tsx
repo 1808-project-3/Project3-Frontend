@@ -26,15 +26,15 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                         <Row>
                             <Col className="border-col-right pr-5 mr-5 pb-5">
                                 <FormGroup row>
-                                    <Label for="associateId" className="font-weight-bold" lg={4}>ASSOCIATE ID</Label>
+                                    <Label for="inputAssociateId" className="font-weight-bold" lg={4}>ASSOCIATE ID</Label>
                                     <Col lg={8} className="my-auto">
-                                        <Input onChange={(e) => this.props.updateResource(e.target)} type="text" name="associateId" id="" />
+                                        <Input onChange={(e) => this.props.updateResource(e.target)} type="text" name="associateId" id="inputAssociateId" />
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
-                                    <Label for="associateName" className="font-weight-bold" lg={4}>ASSOCIATE NAME</Label>
+                                    <Label for="inputAssociateName" className="font-weight-bold" lg={4}>ASSOCIATE NAME</Label>
                                     <Col lg={8} className="my-auto">
-                                        <Input type="text" name="associateName" id="" />
+                                        <Input onChange={(e) => this.props.updateResource(e.target)} type="text" name="associateName" id="inputAssociateName"/>
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>

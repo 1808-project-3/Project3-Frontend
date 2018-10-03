@@ -14,10 +14,15 @@ export const addSkillsReducer = (state = initialState, action: any) => {
             const newResource = new Resource({ ...state.resource });
             switch (action.payload.name) {
                 case "associateId":
-                    const newUser = new User({ ...state.resource.user })
-                    newUser.assocId = action.payload.value;
-                    newResource.user = newUser;
+                    const newIdUser = new User({ ...state.resource.user, assocId: action.payload.value })
+                    newResource.user = newIdUser;
                     newState.resource = newResource;
+                    break;
+                case "associateName":
+                    const newNameUser = new User({ ...state.resource.user, firstName: action.payload.value });
+                    newResource.user = newNameUser;
+                    newState.resource = newResource;
+                    break;
             }
             return newState;
     }
