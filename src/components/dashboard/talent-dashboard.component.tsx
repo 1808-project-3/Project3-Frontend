@@ -26,7 +26,6 @@ export default class TalentDashboard extends React.Component {
                 </Row>
                 <Row>
                     <ChartComponent />
-
                 </Row>
 
                 
