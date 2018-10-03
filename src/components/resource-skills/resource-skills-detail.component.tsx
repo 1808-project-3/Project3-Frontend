@@ -7,12 +7,24 @@ import Card from 'reactstrap/lib/Card';
 import CardHeader from 'reactstrap/lib/CardHeader';
 import Col from 'reactstrap/lib/Col';
 import Row from 'reactstrap/lib/Row';
+import { User } from '../../models/User';
+import { Project } from '../../models/Project';
+import { Resource } from '../../models/Resource';
+import { Certification } from '../../models/Certification';
+import { Skill } from '../../models/Skill';
 
 interface IProps {
-    filler: any
+    user: User
+    project: Project
+    resource: Resource
+    supervisor: User
+    resumes: string[]
+    certifications: Certification[]
+    skills: Skill[]
 }
 
 export const ResourceSkillsDetail: React.StatelessComponent<IProps> = (props) => {
+    const { user, project, resource, supervisor, resumes, certifications, skills } = props;
     return (
         <Container className="pb-3">
             <Card className="w-100 mb-4">
@@ -24,65 +36,72 @@ export const ResourceSkillsDetail: React.StatelessComponent<IProps> = (props) =>
                         <Col sm={6}>
                             <Row>
                                 <Col tag="dt" xl={4}>ASSOCIATE ID</Col>
-                                <Col tag="dd" xl={8}>463967</Col>
+                                <Col tag="dd" xl={8}>{user.assocId}</Col>
                             </Row>
                             <Row>
                                 <Col tag="dt" xl={4}>ASSOCIATE NAME</Col>
-                                <Col tag="dd" xl={8}>JOHN MARK</Col>
+                                <Col tag="dd" xl={8}>{`${user.firstName} ${user.lastName}`}</Col>
                             </Row>
                             <Row>
                                 <Col tag="dt" xl={4}>AOP CERTIFIED</Col>
-                                <Col tag="dd" xl={8}>YES</Col>
+                                <Col tag="dd" xl={8}>{resource.aupCertified ? "YES" : "NO"}</Col>
                             </Row>
                             <Row>
                                 <Col tag="dt" xl={4}>SKILLS - GROUP</Col>
-                                <Col tag="dd" xl={8}>iOS, Android</Col>
+                                {skills.map((skill: Skill) => {
+                                    return <Col key={skill.skillId} tag="dd" xl={8}>{skill.name}</Col>
+                                })}
                             </Row>
                             <Row>
                                 <Col tag="dt" xl={4}>CERTIFICATIONS, IF ANY</Col>
-                                <Col tag="dd" xl={8}>Certification Name</Col>
+                                {certifications.map((cert: Certification) => {
+                                    return <Col key={cert.certId} tag="dd" xl={8}>{cert.name}</Col>
+                                })}
                             </Row>
                             <Row>
                                 <Col tag="dt" xl={4}>CUSTOMER NAME</Col>
-                                <Col tag="dd" xl={8}>BANKING CUSTOMER</Col>
+                                <Col tag="dd" xl={8}>?</Col>
                             </Row>
                             <Row>
                                 <Col tag="dt" xl={4}>PROJECT ID</Col>
-                                <Col tag="dd" xl={8}>0000234098221</Col>
+                                <Col tag="dd" xl={8}>{project.pId}</Col>
                             </Row>
                             <Row>
                                 <Col tag="dt" xl={4}>PROJECT NAME</Col>
-                                <Col tag="dd" xl={8}>PAYMENT PORTAL</Col>
+                                <Col tag="dd" xl={8}>{project.name}</Col>
                             </Row>
                         </Col>
                         <Col sm={6}>
                             <Row>
                                 <Col tag="dt" xl={4}>GRADE</Col>
-                                <Col tag="dd" xl={8}>M</Col>
+                                <Col tag="dd" xl={8}>{resource.grade}</Col>
                             </Row>
                             <Row>
                                 <Col tag="dt" xl={4}>COMPETENCY TAGGING</Col>
-                                <Col tag="dd" xl={8}>DIGITAL BUSINESS</Col>
+                                <Col tag="dd" xl={8}>{resource.compentencyTagging}</Col>
                             </Row>
                             <Row>
                                 <Col tag="dt" xl={4}>DATE OF JOINING</Col>
-                                <Col tag="dd" xl={8}>24/08/2018</Col>
+                                <Col tag="dd" xl={8}>{resource.joinDate}</Col>
                             </Row>
                             <Row>
                                 <Col tag="dt" xl={4}>HCM SUPERVISOR ID</Col>
-                                <Col tag="dd" xl={8}>219898</Col>
+                                <Col tag="dd" xl={8}>{supervisor.assocId}</Col>
                             </Row>
                             <Row>
                                 <Col tag="dt" xl={4}>HCM SUPERVISOR NAME</Col>
-                                <Col tag="dd" xl={8}>JOHN ANDERSON</Col>
+                                <Col tag="dd" xl={8}>{`${supervisor.firstName} ${supervisor.lastName}`}</Col>
                             </Row>
                             <Row>
                                 <Col tag="dt" xl={4}>LOCATION</Col>
-                                <Col tag="dd" xl={8}>ILLINOIS</Col>
+                                <Col tag="dd" xl={8}>{project.location}</Col>
                             </Row>
                             <Row>
                                 <Col tag="dt" xl={4}>RESUME DOCUMENT</Col>
-                                <Col tag="dd" xl={8}><span className="mr-3">RESUME DOCUMENT.DOCX</span><TiDownload /></Col>
+                                {resumes.map((resume: string) => {
+                                    return <Col key={resume} tag="dd" xl={8}><span className="mr-3">{resume}</span><TiDownload /></Col>
+                                })
+                                }
                             </Row>
                         </Col>
                     </Row>
