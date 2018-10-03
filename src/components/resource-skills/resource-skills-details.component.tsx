@@ -21,7 +21,7 @@ export const ResourceSkillsDetail: React.StatelessComponent<IProps> = (props) =>
                 </CardHeader>
                 <CardBody>
                     <Row tag="dl">
-                        <Col xl={6}>
+                        <Col sm={6}>
                             <Row>
                                 <Col tag="dt" xl={4}>ASSOCIATE ID</Col>
                                 <Col tag="dd" xl={8}>463967</Col>
@@ -55,7 +55,7 @@ export const ResourceSkillsDetail: React.StatelessComponent<IProps> = (props) =>
                                 <Col tag="dd" xl={8}>PAYMENT PORTAL</Col>
                             </Row>
                         </Col>
-                        <Col xl={6}>
+                        <Col sm={6}>
                             <Row>
                                 <Col tag="dt" xl={4}>GRADE</Col>
                                 <Col tag="dd" xl={8}>M</Col>
