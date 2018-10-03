@@ -7,24 +7,17 @@ import Card from 'reactstrap/lib/Card';
 import CardHeader from 'reactstrap/lib/CardHeader';
 import Col from 'reactstrap/lib/Col';
 import Row from 'reactstrap/lib/Row';
-import { User } from '../../models/User';
-import { Project } from '../../models/Project';
 import { Resource } from '../../models/Resource';
 import { Certification } from '../../models/Certification';
 import { Skill } from '../../models/Skill';
+import { Resume } from '../../models/Resume';
 
 interface IProps {
-    user: User
-    project: Project
     resource: Resource
-    supervisor: User
-    resumes: string[]
-    certifications: Certification[]
-    skills: Skill[]
 }
 
 export const ResourceSkillsDetail: React.StatelessComponent<IProps> = (props) => {
-    const { user, project, resource, supervisor, resumes, certifications, skills } = props;
+    const { resource } = props;
     return (
         <Container className="pb-3">
             <Card className="w-100 mb-4">
@@ -36,11 +29,11 @@ export const ResourceSkillsDetail: React.StatelessComponent<IProps> = (props) =>
                         <Col sm={6}>
                             <Row>
                                 <Col tag="dt" xl={4}>ASSOCIATE ID</Col>
-                                <Col tag="dd" xl={8}>{user.assocId}</Col>
+                                <Col tag="dd" xl={8}>{resource.user.assocId}</Col>
                             </Row>
                             <Row>
                                 <Col tag="dt" xl={4}>ASSOCIATE NAME</Col>
-                                <Col tag="dd" xl={8}>{`${user.firstName} ${user.lastName}`}</Col>
+                                <Col tag="dd" xl={8}>{`${resource.user.firstName} ${resource.user.lastName}`}</Col>
                             </Row>
                             <Row>
                                 <Col tag="dt" xl={4}>AOP CERTIFIED</Col>
@@ -48,13 +41,13 @@ export const ResourceSkillsDetail: React.StatelessComponent<IProps> = (props) =>
                             </Row>
                             <Row>
                                 <Col tag="dt" xl={4}>SKILLS - GROUP</Col>
-                                {skills.map((skill: Skill) => {
+                                {resource.skills.map((skill: Skill) => {
                                     return <Col key={skill.skillId} tag="dd" xl={8}>{skill.name}</Col>
                                 })}
                             </Row>
                             <Row>
                                 <Col tag="dt" xl={4}>CERTIFICATIONS, IF ANY</Col>
-                                {certifications.map((cert: Certification) => {
+                                {resource.certifications.map((cert: Certification) => {
                                     return <Col key={cert.certId} tag="dd" xl={8}>{cert.name}</Col>
                                 })}
                             </Row>
@@ -64,11 +57,11 @@ export const ResourceSkillsDetail: React.StatelessComponent<IProps> = (props) =>
                             </Row>
                             <Row>
                                 <Col tag="dt" xl={4}>PROJECT ID</Col>
-                                <Col tag="dd" xl={8}>{project.pId}</Col>
+                                <Col tag="dd" xl={8}>{resource.project.pId}</Col>
                             </Row>
                             <Row>
                                 <Col tag="dt" xl={4}>PROJECT NAME</Col>
-                                <Col tag="dd" xl={8}>{project.name}</Col>
+                                <Col tag="dd" xl={8}>{resource.project.name}</Col>
                             </Row>
                         </Col>
                         <Col sm={6}>
@@ -86,20 +79,20 @@ export const ResourceSkillsDetail: React.StatelessComponent<IProps> = (props) =>
                             </Row>
                             <Row>
                                 <Col tag="dt" xl={4}>HCM SUPERVISOR ID</Col>
-                                <Col tag="dd" xl={8}>{supervisor.assocId}</Col>
+                                <Col tag="dd" xl={8}>{resource.project.supervisor.assocId}</Col>
                             </Row>
                             <Row>
                                 <Col tag="dt" xl={4}>HCM SUPERVISOR NAME</Col>
-                                <Col tag="dd" xl={8}>{`${supervisor.firstName} ${supervisor.lastName}`}</Col>
+                                <Col tag="dd" xl={8}>{`${resource.project.supervisor.firstName} ${resource.project.supervisor.lastName}`}</Col>
                             </Row>
                             <Row>
                                 <Col tag="dt" xl={4}>LOCATION</Col>
-                                <Col tag="dd" xl={8}>{project.location}</Col>
+                                <Col tag="dd" xl={8}>{resource.project.location}</Col>
                             </Row>
                             <Row>
                                 <Col tag="dt" xl={4}>RESUME DOCUMENT</Col>
-                                {resumes.map((resume: string) => {
-                                    return <Col key={resume} tag="dd" xl={8}><span className="mr-3">{resume}</span><TiDownload /></Col>
+                                {resource.resumes.map((resume: Resume) => {
+                                    return <Col key={resume.resumeId} tag="dd" xl={8}><span className="mr-3">{resume.fileName}</span><TiDownload /></Col>
                                 })
                                 }
                             </Row>
