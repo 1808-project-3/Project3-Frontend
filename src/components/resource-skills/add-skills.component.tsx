@@ -9,8 +9,9 @@ import Input from 'reactstrap/lib/Input';
 import Label from 'reactstrap/lib/Label';
 import Row from 'reactstrap/lib/Row';
 import { ClosablePill } from './closable-pill.component';
-import { IAddSkillsState } from '../../reducers';
+import { IAddSkillsState, IState } from '../../reducers';
 import { RouteComponentProps } from 'react-router';
+import * as addSkillsActions from '../../actions/resource-skills/add-skills.actions';
 
 interface IProps extends RouteComponentProps<{}>, IAddSkillsState {
     updateResource: (event: any) => void
@@ -27,7 +28,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                 <FormGroup row>
                                     <Label for="associateId" className="font-weight-bold" lg={4}>ASSOCIATE ID</Label>
                                     <Col lg={8} className="my-auto">
-                                        <Input onChange={this.props.updateResource} type="text" name="associateId" id="" />
+                                        <Input onChange={(e) => this.props.updateResource(e.target)} type="text" name="associateId" id="" />
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
@@ -129,14 +130,14 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                     <Col lg={8} className="my-auto">
                                         <div className="d-flex justify-content-between">
                                             <DatePicker
-                                                onChange={this.onChange}
+                                                onChange={() => null}
                                                 value={undefined}
                                                 calendarIcon={<IoMdCalendar />}
                                                 clearIcon={null as any}
                                             />
                                             <span>To</span>
                                             <DatePicker
-                                                onChange={this.onChange}
+                                                onChange={() => null}
                                                 value={undefined}
                                                 calendarIcon={<IoMdCalendar />}
                                                 clearIcon={null as any}
@@ -191,4 +192,10 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
     }
 }
 
-export default connect()(AddSkillsComponent);
+const mapStateToProps = (state: IState) => state.addSkills
+
+const mapDispatchToProps = {
+    updateResource: addSkillsActions.updateResource
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddSkillsComponent);
