@@ -121,6 +121,9 @@ nav {
 .red {
   color: red;
 }
+/*****************************
+ Skill Group in Dashboard
+*****************************/
 .skillgroup-cards-container {
   display: flex;
   flex-flow: row wrap;
@@ -145,4 +148,25 @@ nav {
   font-size: 1em;
   margin-top: 20px;
   margin-left: 10px;
+}
+
+/*****************************
+ three cards in Dashboard
+*****************************/
+
+.project-number-card {
+  font-weight: bold;
+  font-size: 4em;
+  color:#36A2EB;
+  margin-left: 5px;
+  margin-top:10px;
+
+}
+.project-name-card {
+  font-weight:bold;
+  font-size:1em;
+  margin-top:30px;
+  margin-left:24px;
+
+
 }
