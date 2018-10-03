@@ -1,12 +1,13 @@
 import * as React from 'react';
-import {Row, Col} from 'reactstrap';
+import {Row, Col, Container, Card} from 'reactstrap';
 import { Doughnut } from 'react-chartjs-2';
+import { Link } from 'react-router-dom';
 
 function getRandomInt(min:any, max:any) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
-  const getState = () => ({
+  const getSkillGroupState = () => ({
    
     datasets: [{
       data: [getRandomInt(1,100), getRandomInt(1,100), getRandomInt(1,100),getRandomInt(1,100),getRandomInt(1,100)],
@@ -30,8 +31,8 @@ function getRandomInt(min:any, max:any) {
     }],
       
       labels: [
-        'Under 19',
-        '20~30',
+        'Mobility',
+        'front-end',
         '31~45',
         '46~60',
         'Over 60'
@@ -39,7 +40,7 @@ function getRandomInt(min:any, max:any) {
     
   });
 
-  const getSubState = () => ({
+  const getSkillState = () => ({
    
     datasets: [{
       data: [getRandomInt(1,100), getRandomInt(1,100), getRandomInt(1,100),getRandomInt(1,100),getRandomInt(1,100)],
@@ -63,8 +64,8 @@ function getRandomInt(min:any, max:any) {
     }],
 
     labels: [
-        'Under 19',
-        '20~30',
+        'Mobility',
+        'front-end',
         '31~45',
         '46~60',
         'Over 60'
@@ -79,43 +80,74 @@ export default class SkillDoughnut extends React.Component<any, any> {
     constructor(props:any) {
         super(props);
         this.state = {
-          data: getState(),
-          options: {
-              legend: {
-                display: false,
-              }
-        },
-          subData: getSubState(),
-          subOptions: {
-            legend: {
-                labels: {
-                    boxWidth: 10,
-                    padding: 40
-                },
-                position: 'right'
-            }
-        }
+            selectedSkillGroup: 'Mobility',
+            skillChart: {
+                data: getSkillState(),
+                options: {
+                    legend: {
+                        display: false,
+                    }
+                }
+            },
+            skillGroupChart: {
+                data: getSkillGroupState(),
+                options: {
+                    legend: {
+                        labels: {
+                            boxWidth: 10,
+                            padding: 40
+                        },
+                        onClick: (e:any, legendItem:any) => {
+                            console.log(legendItem.text);
+                            this.setSkillChart(legendItem.text);
+                        },
+                        position: 'right'
+                    }
+                }
+            },
+            skillGroups: [{groupName: 'Mobility', numAssoc: 40, 
+                            skills:[{skillName: 'iOS', numAssoc: 24}, 
+                                    {skillName: 'Android', numAssoc: 16}]},
+                            {groupName: 'front-end', numAssoc: 20,
+                            skills: [{skillName: 'JavaScript', numAssoc: 10},
+                                    {skillName: 'React', numAssoc: 10}]}]
         };
       }
+
+    public setSkillChart(skillGroup: string) {
+        const skillState = getSkillState();
+        for (const group of this.state.skillGroups) {
+            if (skillGroup === group.groupName) {
+                skillState.datasets[0].data = [];
+                skillState.labels = [];
+                for (const skill of group.skills) {
+                    skillState.labels.push(skill.skillName);
+                    skillState.datasets[0].data.push(skill.numAssoc);
+                }
+            }
+        }
+        console.log(skillState);
+        this.setState({selectedSkillGroup: skillGroup});
+        this.setState({skillChart: {data: skillState}});
+    }
     
     public componentDidMount() {
-        setInterval(() => {
-            this.setState({ data: getState(), subData: getSubState() });
-          }, 4000);
+        this.setState({ skillGroupChart: {data: getSkillGroupState()}, skillChart: {data: getSkillState() }});
         
     }
     public render() {
         return (
+            <div>
                 <div>
                     <Row>
                         <Col>
                             <div style={{ width: '100vh' }}>
-                            <Doughnut data={this.state.data} options={this.state.subOptions}/>                              
+                            <Doughnut data={this.state.skillGroupChart.data} options={this.state.skillGroupChart.options}/>                              
                             </div>
                         </Col>
                         <Col>
                             <div style={{ width: '55vh', paddingTop: '12vh'}}>
-                            <Doughnut data={this.state.subData} options={this.state.options} />                        
+                            <Doughnut data={this.state.skillChart.data} options={this.state.skillChart.options} />                        
                             </div>
                         </Col>
                     </Row>                    
@@ -124,10 +156,95 @@ export default class SkillDoughnut extends React.Component<any, any> {
                             <p style={{color: '#7C7A7A'}}>TOTAL ASSOCIATES</p>
                         </Col>
                         <Col style={{marginLeft: "220px"}}>
-                            <p style={{fontWeight: 'bold'}}>SELECTED SKILLGROUP</p>
+                            <p style={{fontWeight: 'bold'}}>{this.state.selectedSkillGroup}</p>
                         </Col>
                     </Row>
-                </div>
+                </div>                
+                <div style={{marginTop: '10px'}}>
+                <Container>
+                    <div style={{borderBottom: '1px solid #E3E2E2'}}>
+                    </div>
+                    <Row>
+                        <Col md={6}>
+                            <h3 style={{marginLeft: "20px"}}>{this.state.selectedSkillGroup}</h3>
+                        </Col>
+                        <Col md={6} style={{display: "flex", justifyContent: "flex-end"}}>
+                            <Link to="" style={{marginRight: "30px"}}>View All</Link>
+                        </Col>
+                    </Row>
+                    <div className="skillgroup-cards-container">
+                        <Row>
+                            <Col sm="3">
+                                <Card className="skillgroup-skill-card">
+                                    <div className="skillgroup-skill-card-content">
+                                        <p className="skill-card-num-associates">12</p>
+                                        <p className="skill-card-name">Associates In <strong>Skill Name</strong></p>
+                                    </div>
+                                </Card>
+                            </Col>
+                            <Col sm="3">
+                                <Card className="skillgroup-skill-card">
+                                    <div className="skillgroup-skill-card-content">
+                                        <p className="skill-card-num-associates">13</p>
+                                        <p className="skill-card-name">Associates In <strong>Skill Name</strong></p>
+                                    </div>
+                                </Card>
+                            </Col>
+                            <Col sm="3">
+                                <Card className="skillgroup-skill-card">
+                                    <div className="skillgroup-skill-card-content">
+                                        <p className="skill-card-num-associates">14</p>
+                                        <p className="skill-card-name">Associates In <strong>Skill Name</strong></p>
+                                    </div>
+                                </Card>
+                            </Col>
+                            <Col sm="3">
+                                <Card className="skillgroup-skill-card">
+                                    <div className="skillgroup-skill-card-content">
+                                        <p className="skill-card-num-associates">15</p>
+                                        <p className="skill-card-name">Associates In <strong>Skill Name</strong></p>
+                                    </div>
+                                </Card>
+                            </Col>
+                        </Row>
+                        <Row style={{marginTop: "15px"}}>
+                            <Col sm="3">
+                                <Card className="skillgroup-skill-card">
+                                    <div className="skillgroup-skill-card-content">
+                                        <p className="skill-card-num-associates">12</p>
+                                        <p className="skill-card-name">Associates In <strong>Skill Name</strong></p>
+                                    </div>
+                                </Card>
+                            </Col>
+                            <Col sm="3">
+                                <Card className="skillgroup-skill-card">
+                                    <div className="skillgroup-skill-card-content">
+                                        <p className="skill-card-num-associates">13</p>
+                                        <p className="skill-card-name">Associates In <strong>Skill Name</strong></p>
+                                    </div>
+                                </Card>
+                            </Col>
+                            <Col sm="3">
+                                <Card className="skillgroup-skill-card">
+                                    <div className="skillgroup-skill-card-content">
+                                        <p className="skill-card-num-associates">14</p>
+                                        <p className="skill-card-name">Associates In <strong>Skill Name</strong></p>
+                                    </div>
+                                </Card>
+                            </Col>
+                            <Col sm="3">
+                                <Card className="skillgroup-skill-card">
+                                    <div className="skillgroup-skill-card-content">
+                                        <p className="skill-card-num-associates">15</p>
+                                        <p className="skill-card-name">Associates In <strong>Skill Name</strong></p>
+                                    </div>
+                                </Card>
+                            </Col>
+                        </Row>
+                    </div>                    
+                </Container>            
+            </div>
+            </div>
                   
                 
        
