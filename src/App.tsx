@@ -1,7 +1,7 @@
 import * as React from 'react';
 import './include/bootstrap';
 import './App.css';
-// import AppNav from './components/nav/nav.component';
+import {Layout} from './components/layout/layout.component';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { HomeComponent } from './components/home/home.component';
 import SignInComponent from './components/sign-in/sign-in.component';
@@ -18,9 +18,8 @@ class App extends React.Component {
             {/* need to make it so nav bar wont load on sign in screen */}
             <div id="main-content-container">
               <Switch>
-                <Route path="/home" component={HomeComponent} />
                 <Route path="/sign-in" component={SignInComponent} />
-                <Route component={HomeComponent} />
+                <Route component={this.wrappedRoutes} />
               </Switch>
             </div>
             <div id="within-root2">
@@ -32,6 +31,20 @@ class App extends React.Component {
       </Provider>
     );
   }
+
+  // these are the routes that include the nav/side bars.
+  public wrappedRoutes = () => (
+    <div>
+      <Layout>
+        <Switch>
+          <Route path="/home" component={HomeComponent} />
+          <Route component={HomeComponent}/>
+        </Switch>
+      </Layout>
+    </div>
+  )
 }
+
+
 
 export default App;
