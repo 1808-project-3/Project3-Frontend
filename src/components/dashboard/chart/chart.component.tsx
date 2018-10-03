@@ -43,7 +43,7 @@ export default class ChartComponent  extends React.Component<any,any> {
                             className={classnames({ active: this.state.activeTab === '1' })}
                             onClick={() => { this.toggle('1'); }}
                             >
-                            Tab1
+                            SKILLS
                             </NavLink>
                         </NavItem>
                         <NavItem>
@@ -51,7 +51,7 @@ export default class ChartComponent  extends React.Component<any,any> {
                             className={classnames({ active: this.state.activeTab === '2' })}
                             onClick={() => { this.toggle('2'); }}
                             >
-                            Tab2
+                            CERTIFICATIONS
                             </NavLink>
                         </NavItem>
                     </Nav>   
