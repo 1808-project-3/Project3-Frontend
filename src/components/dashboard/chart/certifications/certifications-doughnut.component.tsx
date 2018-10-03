@@ -1,9 +1,5 @@
 import * as React from 'react';
-<<<<<<< HEAD
-import {Col} from 'reactstrap';
-=======
 import {Card,CardBody} from 'reactstrap';
->>>>>>> a72917c5eda37ecd8a85534907a2519fe3b34e76
 import {Doughnut} from 'react-chartjs-2';
 
 
@@ -38,7 +34,6 @@ function getRandomInt(min:any, max:any) {
       ],
     }],
       
-<<<<<<< HEAD
       labels: [
         'Under 19',
         '20~30',
@@ -47,20 +42,6 @@ function getRandomInt(min:any, max:any) {
         'Over 60'
     ]
     
-=======
-    
-    
-   
-      
-    }],
-    labels: [
-      'Under 19',
-      '20~30',
-      '31~45',
-      '46~60',
-      'Over 60'
-  ],
->>>>>>> a72917c5eda37ecd8a85534907a2519fe3b34e76
   });
 
 
@@ -86,13 +67,6 @@ export default class CertificationsDoughnutComponent extends React.Component<any
 
     public render() {
         return (
-<<<<<<< HEAD
-            <Col md={12}>
-            <div style={{width: '120vh'}}>
-                <Doughnut data={this.state.data} options={this.state.options}/>
-            </div>
-          </Col>
-=======
             <Card>
               <CardBody>
                 <div className='card__title'>
@@ -101,7 +75,6 @@ export default class CertificationsDoughnutComponent extends React.Component<any
                 <Doughnut data={this.state.data} />
               </CardBody>
             </Card>
->>>>>>> a72917c5eda37ecd8a85534907a2519fe3b34e76
         )
     }
 
