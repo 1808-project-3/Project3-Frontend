@@ -9,17 +9,15 @@ import Input from 'reactstrap/lib/Input';
 import Label from 'reactstrap/lib/Label';
 import Row from 'reactstrap/lib/Row';
 import { ClosablePill } from './closable-pill.component';
+import { IAddSkillsState } from '../../reducers';
+import { RouteComponentProps } from 'react-router';
 
-class AddSkillsComponent extends React.Component<any, {}> {
+interface IProps extends RouteComponentProps<{}>, IAddSkillsState {
+    updateResource: (event: any) => void
+}
 
-    public state = {
-        date: new Date(),
-    }
-
-    public onChange = (date: Date) => this.setState({ date })
-
+class AddSkillsComponent extends React.Component<IProps, {}> {
     public render() {
-
         return (
             <>
                 <Form className="pb-3">
@@ -29,7 +27,7 @@ class AddSkillsComponent extends React.Component<any, {}> {
                                 <FormGroup row>
                                     <Label for="associateId" className="font-weight-bold" lg={4}>ASSOCIATE ID</Label>
                                     <Col lg={8} className="my-auto">
-                                        <Input type="text" name="associateId" id="" />
+                                        <Input onChange={this.props.updateResource} type="text" name="associateId" id="" />
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
@@ -174,7 +172,7 @@ class AddSkillsComponent extends React.Component<any, {}> {
                                 </FormGroup>
                                 <Row>
                                     <Col lg={{ size: 8, offset: 4 }}>
-                                        {["Doc Name 01", "Doc Name 02", "Doc Name 03"].map((text, index) =><ClosablePill className="mr-3 mt-2" key={index} text={text} color="secondary" onClose={() => console.log("CLOSED")} />)}
+                                        {["Doc Name 01", "Doc Name 02", "Doc Name 03"].map((text, index) => <ClosablePill className="mr-3 mt-2" key={index} text={text} color="secondary" onClose={() => console.log("CLOSED")} />)}
                                     </Col>
                                 </Row>
                             </Col>
