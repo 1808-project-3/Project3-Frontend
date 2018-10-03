@@ -12,14 +12,19 @@ import { ClosablePill } from './closable-pill.component';
 import { IAddSkillsState, IState } from '../../reducers';
 import { RouteComponentProps } from 'react-router';
 import * as addSkillsActions from '../../actions/resource-skills/add-skills.actions';
+import SkillGroups from '../../assets/skill-groups.json';
+import { Group } from '../../models/Group';
+import { Skill } from '../../models/Skill';
 
 interface IProps extends RouteComponentProps<{}>, IAddSkillsState {
     updateResource: (event: any) => void
+    toggleSkillGroup: (event: any) => void
 }
 
 class AddSkillsComponent extends React.Component<IProps, {}> {
     public render() {
-        const { resource } = this.props;
+        const { resource, skillGroupIds } = this.props;
+        const skills = SkillGroups.filter((group: Group) => skillGroupIds.indexOf(group.groupId) > -1).reduce((acc: any, val: any) => acc.concat(val.skills.map((skill: any) => new Skill(skill))), []);
         return (
             <>
                 <Form className="pb-3">
@@ -49,18 +54,9 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                     <Label for="skillsGroup" lg={4} className="font-weight-bold">SKILLS - GROUP</Label>
                                     <Col lg={8} className="my-auto">
                                         <Row>
-                                            <Col lg={4}>
-                                                <CustomInput type="checkbox" id="skills-group-ui-dev" name="skillsGroup" className="pr-4" label="UI/Dev" required />
-                                                <CustomInput type="checkbox" id="skills-group-wcm" name="skillsGroup" className="pr-4" label="WCM" required />
-                                            </Col>
-                                            <Col lg={4}>
-                                                <CustomInput type="checkbox" id="skills-group-mobility" name="skillsGroup" className="pr-4" label="Mobility" required />
-                                                <CustomInput type="checkbox" id="skills-group-design" name="skillsGroup" className="pr-4" label="Design" required />
-                                            </Col>
-                                            <Col lg={4}>
-                                                <CustomInput type="checkbox" id="skills-group-fullstack" name="skillsGroup" className="pr-4" label="Fullstack" required />
-                                                <CustomInput type="checkbox" id="skills-group-ecm-ccm" name="skillsGroup" className="" label="ECM/CCM" required />
-                                            </Col>
+                                            {SkillGroups.map((group: Group) => {
+                                                return <CustomInput onChange={e => this.props.toggleSkillGroup(e.target)} key={"group-" + group.groupId} type="checkbox" id={"skills-group-" + group.groupId} name="skillsGroup" className="pr-4" label={group.name} required />
+                                            })}
                                         </Row>
                                     </Col>
                                 </FormGroup>
@@ -70,10 +66,11 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                             <Card>
                                                 <CardHeader className="p-3">
                                                     <Row>
-                                                        {['iOS', 'Android', 'React Native'].map((each, index) => {
+                                                        {skills.map((skill: Skill) => {
+                                                            console.log(skill);
                                                             return (
-                                                                <Col key={index} lg={4}>
-                                                                    <CustomInput type="checkbox" id={"skills-group-fullstack" + each} name="skills" className="pr-4" label={each} required />
+                                                                <Col key={"skills-" + skill.skillId} lg={4}>
+                                                                    <CustomInput type="checkbox" id={"skills-" + skill.skillId} name="skills" className="pr-4" label={skill.name} required />
                                                                 </Col>
                                                             )
                                                         })}
@@ -196,6 +193,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
 const mapStateToProps = (state: IState) => state.addSkills
 
 const mapDispatchToProps = {
+    toggleSkillGroup: addSkillsActions.toggleSkillGroup,
     updateResource: addSkillsActions.updateResource
 }
 

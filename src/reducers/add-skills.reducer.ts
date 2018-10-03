@@ -1,11 +1,12 @@
-import { addSkillsTypes } from "../actions/resource-skills/add-skills.types";
 import { IAddSkillsState } from ".";
+import { addSkillsTypes } from "../actions/resource-skills/add-skills.types";
+import { Project } from "../models/Project";
 import { Resource } from "../models/Resource";
 import { User } from "../models/User";
-import { Project } from "../models/Project";
 
 const initialState: IAddSkillsState = {
-    resource: new Resource()
+    resource: new Resource(),
+    skillGroupIds: []
 }
 
 export const addSkillsReducer = (state = initialState, action: any) => {
@@ -78,6 +79,10 @@ export const addSkillsReducer = (state = initialState, action: any) => {
                     break;
             }
             return newState;
+        case addSkillsTypes.TOGGLE_SKILL_GROUP:
+            const currentlyToggledOn = state.skillGroupIds.indexOf(action.payload.groupId) > -1;
+            const newSkillGroups = currentlyToggledOn ? [...state.skillGroupIds].filter(groupId => groupId !== action.payload.groupId) : [...state.skillGroupIds, action.payload.groupId];
+            return { ...state, skillGroupIds: newSkillGroups };
     }
     return state;
 }

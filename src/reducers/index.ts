@@ -1,7 +1,7 @@
 import { combineReducers } from "redux";
-import { signInReducer } from "./sign-in.reducer";
 import { Resource } from "../models/Resource";
 import { addSkillsReducer } from "./add-skills.reducer";
+import { signInReducer } from "./sign-in.reducer";
 
 export interface ISignInState {
   credentials: {
@@ -12,7 +12,8 @@ export interface ISignInState {
 }
 
 export interface IAddSkillsState {
-  resource: Resource
+  resource: Resource,
+  skillGroupIds: number[]
 }
 
 export interface IState {
