@@ -65,15 +65,24 @@ body, html {
 #within-root2{
   height: 20%;
 
+
+
 }
 
+#error-message{
+  color: white;
+}
+
+
 #line{
+  position: relative;
+  top: 70px;
   border-top: 1px solid #8c8b8b;
-  margin-top: 80px;
+  //margin-top: 80px;
   margin-bottom: 0px;
   margin-left: 20px;
   margin-right: 20px;
-
+  
 }
 
 #copyright-tag{
@@ -129,6 +138,7 @@ body, html {
 
 #new-user-link{
   margin-left: 20px;
+  
 }
 
 
