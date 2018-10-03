@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { IoMdAddCircleOutline } from 'react-icons/io';
 import { TiDownload } from 'react-icons/ti';
-import { CardBody } from 'reactstrap';
+import { CardBody, Container } from 'reactstrap';
 import Button from 'reactstrap/lib/Button';
 import Card from 'reactstrap/lib/Card';
 import CardHeader from 'reactstrap/lib/CardHeader';
@@ -14,7 +14,7 @@ interface IProps {
 
 export const ResourceSkillsDetail: React.StatelessComponent<IProps> = (props) => {
     return (
-        <>
+        <Container>
             <Card className="w-100 mb-4">
                 <CardHeader className="font-weight-bold bg-white">
                     SKILL DETAILS
@@ -88,10 +88,14 @@ export const ResourceSkillsDetail: React.StatelessComponent<IProps> = (props) =>
                     </Row>
                 </CardBody>
             </Card>
-            <Row className="w-100">
-                <Button color="secondary" className="ml-auto px-5" disabled><small>EDIT</small></Button>
-                <Button color="secondary" className="ml-4 px-4"><IoMdAddCircleOutline /><small className="ml-2">CONFIRM</small></Button>
+            <Row>
+                <Col>
+                    <div className="d-flex justify-content-end">
+                        <Button color="secondary" className="ml-auto px-5" disabled><small>EDIT</small></Button>
+                        <Button color="secondary" className="ml-4 px-4"><IoMdAddCircleOutline /><small className="ml-2">CONFIRM</small></Button>
+                    </div>
+                </Col>
             </Row>
-        </>
+        </Container>
     );
 }
