@@ -94,7 +94,7 @@ export default class SkillDoughnut extends React.Component<any, any> {
                     legend: {
                         labels: {
                             boxWidth: 10,
-                            padding: 40
+                            padding: 10
                         },
                         onClick: (e:any, legendItem:any) => {
                             console.log(legendItem.text);
