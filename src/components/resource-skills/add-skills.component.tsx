@@ -28,26 +28,26 @@ class AddSkillsComponent extends React.Component<any, {}> {
                             <Col className="border-col-right pr-5">
                                 <FormGroup row>
                                     <Label for="associateId" className="font-weight-bold" lg={4}>ASSOCIATE ID</Label>
-                                    <Col lg={8}>
+                                    <Col lg={8} className="my-auto">
                                         <Input type="text" name="associateId" id="" />
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
                                     <Label for="associateName" className="font-weight-bold" lg={4}>ASSOCIATE NAME</Label>
-                                    <Col lg={8}>
+                                    <Col lg={8} className="my-auto">
                                         <Input type="text" name="associateName" id="" />
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
                                     <Label for="aopCertified" lg={4} className="font-weight-bold">AOP CERTIFIED</Label>
-                                    <Col lg={8}>
+                                    <Col lg={8} className="my-auto">
                                         <CustomInput type="radio" id="aop-certified-yes" name="aopCertified" className="d-inline-block pr-4" label="YES" required />
                                         <CustomInput type="radio" id="aop-certified-no" name="aopCertified" className="d-inline-block" label="NO" required />
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
                                     <Label for="skillsGroup" lg={4} className="font-weight-bold">SKILLS - GROUP</Label>
-                                    <Col lg={8}>
+                                    <Col lg={8} className="my-auto">
                                         <Row>
                                             <Col lg={4}>
                                                 <CustomInput type="checkbox" id="skills-group-ui-dev" name="skillsGroup" className="pr-4" label="UI/Dev" required />
@@ -85,7 +85,7 @@ class AddSkillsComponent extends React.Component<any, {}> {
                                 </FormGroup>
                                 <FormGroup row>
                                     <Label for="" lg={4} className="font-weight-bold">CERTIFICATIONS, IF ANY</Label>
-                                    <Col lg={8}>
+                                    <Col lg={8} className="my-auto">
                                         <Input type="text" name="certifications" id="" />
                                     </Col>
                                 </FormGroup>
@@ -98,37 +98,37 @@ class AddSkillsComponent extends React.Component<any, {}> {
                             <Col className="pl-5">
                                 <FormGroup row>
                                     <Label for="" lg={4} className="font-weight-bold"> CUSTOMER NAME</Label>
-                                    <Col lg={8}>
+                                    <Col lg={8} className="my-auto">
                                         <Input type="text" name="customerName" id="" />
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
                                     <Label for="" lg={4} className="font-weight-bold">PROJECT ID</Label>
-                                    <Col lg={8}>
+                                    <Col lg={8} className="my-auto">
                                         <Input type="text" name="projectId" id="" />
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
                                     <Label for="" lg={4} className="font-weight-bold"> PROJECT NAME</Label>
-                                    <Col lg={8}>
+                                    <Col lg={8} className="my-auto">
                                         <Input type="text" name="projectName" id="" />
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
                                     <Label for="" lg={4} className="font-weight-bold">GRADE</Label>
-                                    <Col lg={8}>
+                                    <Col lg={8} className="my-auto">
                                         <Input type="text" name="grade" id="" />
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
                                     <Label for="" lg={4} className="font-weight-bold">COMPETENCY TAGGING</Label>
-                                    <Col lg={8}>
+                                    <Col lg={8} className="my-auto">
                                         <Input type="select" name="competencyTagging" id="" />
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
                                     <Label for="" lg={4} className="font-weight-bold">DURATION</Label>
-                                    <Col lg={8}>
+                                    <Col lg={8} className="my-auto">
                                         <div className="d-flex justify-content-between">
                                             <DatePicker
                                                 onChange={this.onChange}
@@ -148,26 +148,28 @@ class AddSkillsComponent extends React.Component<any, {}> {
                                 </FormGroup>
                                 <FormGroup row>
                                     <Label for="" lg={4} className="font-weight-bold">HCM SUPERVISOR ID</Label>
-                                    <Col lg={8}>
+                                    <Col lg={8} className="my-auto">
                                         <Input type="text" name="supervisorId" id="" />
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
                                     <Label for="" lg={4} className="font-weight-bold">HCM SUPERVISOR NAME</Label>
-                                    <Col lg={8}>
+                                    <Col lg={8} className="my-auto">
                                         <Input type="text" name="supervisorName" id="" />
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
                                     <Label for="" lg={4} className="font-weight-bold">LOCATION</Label>
-                                    <Col lg={8}>
+                                    <Col lg={8} className="my-auto">
                                         <Input type="text" name="location" id="" />
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
                                     <Label for="" lg={4} className="font-weight-bold">ATTACHMENTS (RESUME)</Label>
-                                    <Col lg={8}>
-                                        <Input type="file" name="attachments" id="" />
+                                    <Col lg={8} className="my-auto">
+                                        <Label className="btn btn-secondary mb-0">
+                                            <small>UPLOAD RESUME</small><Input type="file" name="attachments" id="" hidden />
+                                        </Label>
                                     </Col>
                                 </FormGroup>
                                 <Row>
