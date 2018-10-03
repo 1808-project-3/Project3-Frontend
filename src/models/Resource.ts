@@ -10,7 +10,7 @@ export class Resource{
     public resumeId: number
 
     public constructor(init?: Partial<Resource>){
-        
+        Object.assign(this, init);
     }
 
 }
