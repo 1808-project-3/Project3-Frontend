@@ -22,7 +22,7 @@ class AddSkillsComponent extends React.Component<any, {}> {
 
         return (
             <>
-                <Form>
+                <Form className="pb-3">
                     <Container>
                         <Row>
                             <Col className="border-col-right pr-5 mr-5 pb-5">

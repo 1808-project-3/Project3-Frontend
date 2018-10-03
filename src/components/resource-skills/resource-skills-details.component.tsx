@@ -14,7 +14,7 @@ interface IProps {
 
 export const ResourceSkillsDetail: React.StatelessComponent<IProps> = (props) => {
     return (
-        <Container>
+        <Container className="pb-3">
             <Card className="w-100 mb-4">
                 <CardHeader className="font-weight-bold bg-white">
                     SKILL DETAILS
