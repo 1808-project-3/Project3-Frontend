@@ -174,7 +174,7 @@ class AddSkillsComponent extends React.Component<any, {}> {
                                 </FormGroup>
                                 <Row>
                                     <Col lg={{ size: 8, offset: 4 }}>
-                                        <ClosablePill text="Doc Name 01" color="secondary" onClose={() => console.log("CLICKED")} />
+                                        {["Doc Name 01", "Doc Name 02", "Doc Name 03"].map((text, index) =><ClosablePill className="mr-3 mt-2" key={index} text={text} color="secondary" onClose={() => console.log("CLOSED")} />)}
                                     </Col>
                                 </Row>
                             </Col>
