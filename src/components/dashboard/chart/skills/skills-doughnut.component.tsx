@@ -88,6 +88,10 @@ export default class SkillDoughnut extends React.Component<any, any> {
           subData: getSubState(),
           subOptions: {
             legend: {
+                labels: {
+                    boxWidth: 10,
+                    padding: 40
+                },
                 position: 'right'
             }
         }
@@ -110,17 +114,17 @@ export default class SkillDoughnut extends React.Component<any, any> {
                             </div>
                         </Col>
                         <Col>
-                            <div style={{ width: '55vh', paddingTop: '10vh'}}>
+                            <div style={{ width: '55vh', paddingTop: '12vh'}}>
                             <Doughnut data={this.state.subData} options={this.state.options} />                        
                             </div>
                         </Col>
-                    </Row>
+                    </Row>                    
                     <Row style={{marginTop: "10px"}}>
                         <Col md={6} style={{textAlign: "center"}}>
-                            <p>TOTAL ASSOCIATES</p>
+                            <p style={{color: '#7C7A7A'}}>TOTAL ASSOCIATES</p>
                         </Col>
-                        <Col style={{marginLeft: "200px"}}>
-                            <p>SELECTED SKILLGROUP</p>
+                        <Col style={{marginLeft: "220px"}}>
+                            <p style={{fontWeight: 'bold'}}>SELECTED SKILLGROUP</p>
                         </Col>
                     </Row>
                 </div>
