@@ -1,0 +1,19 @@
+
+.layoutPage{
+    width: 100%;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 4em auto;
+    grid-template-rows: 4em 4em auto 4em;
+    grid-template-areas:
+        "topbar topbar"
+        "sidebar breadcrumb"
+        "sidebar page"
+        "sidebar footer";
+}
+
+.pageContent{
+    grid-area: page;
+    padding: 1em 2em 0 2em;
+    overflow-y: scroll;
+}
