@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 export default class SkillGroupComponent extends React.Component {
     public render() {
         return (
-            <div>
+            <div style={{marginTop: '10px'}}>
                 <Container>
                     <Row>
                         <Col md={6}>
@@ -24,7 +24,7 @@ export default class SkillGroupComponent extends React.Component {
                                 <Card className="skillgroup-skill-card">
                                     <div className="skillgroup-skill-card-content">
                                         <p className="skill-card-num-associates">12</p>
-                                        <p className="skill-card-name">Skill Name</p>
+                                        <p className="skill-card-name">Associates In <strong>Skill Name</strong></p>
                                     </div>
                                 </Card>
                             </Col>
@@ -32,7 +32,7 @@ export default class SkillGroupComponent extends React.Component {
                                 <Card className="skillgroup-skill-card">
                                     <div className="skillgroup-skill-card-content">
                                         <p className="skill-card-num-associates">13</p>
-                                        <p className="skill-card-name">Skill Name</p>
+                                        <p className="skill-card-name">Associates In <strong>Skill Name</strong></p>
                                     </div>
                                 </Card>
                             </Col>
@@ -40,7 +40,7 @@ export default class SkillGroupComponent extends React.Component {
                                 <Card className="skillgroup-skill-card">
                                     <div className="skillgroup-skill-card-content">
                                         <p className="skill-card-num-associates">14</p>
-                                        <p className="skill-card-name">Skill Name</p>
+                                        <p className="skill-card-name">Associates In <strong>Skill Name</strong></p>
                                     </div>
                                 </Card>
                             </Col>
@@ -48,7 +48,7 @@ export default class SkillGroupComponent extends React.Component {
                                 <Card className="skillgroup-skill-card">
                                     <div className="skillgroup-skill-card-content">
                                         <p className="skill-card-num-associates">15</p>
-                                        <p className="skill-card-name">Skill Name</p>
+                                        <p className="skill-card-name">Associates In <strong>Skill Name</strong></p>
                                     </div>
                                 </Card>
                             </Col>
@@ -58,7 +58,7 @@ export default class SkillGroupComponent extends React.Component {
                                 <Card className="skillgroup-skill-card">
                                     <div className="skillgroup-skill-card-content">
                                         <p className="skill-card-num-associates">12</p>
-                                        <p className="skill-card-name">Skill Name</p>
+                                        <p className="skill-card-name">Associates In <strong>Skill Name</strong></p>
                                     </div>
                                 </Card>
                             </Col>
@@ -66,7 +66,7 @@ export default class SkillGroupComponent extends React.Component {
                                 <Card className="skillgroup-skill-card">
                                     <div className="skillgroup-skill-card-content">
                                         <p className="skill-card-num-associates">13</p>
-                                        <p className="skill-card-name">Skill Name</p>
+                                        <p className="skill-card-name">Associates In <strong>Skill Name</strong></p>
                                     </div>
                                 </Card>
                             </Col>
@@ -74,7 +74,7 @@ export default class SkillGroupComponent extends React.Component {
                                 <Card className="skillgroup-skill-card">
                                     <div className="skillgroup-skill-card-content">
                                         <p className="skill-card-num-associates">14</p>
-                                        <p className="skill-card-name">Skill Name</p>
+                                        <p className="skill-card-name">Associates In <strong>Skill Name</strong></p>
                                     </div>
                                 </Card>
                             </Col>
@@ -82,7 +82,7 @@ export default class SkillGroupComponent extends React.Component {
                                 <Card className="skillgroup-skill-card">
                                     <div className="skillgroup-skill-card-content">
                                         <p className="skill-card-num-associates">15</p>
-                                        <p className="skill-card-name">Skill Name</p>
+                                        <p className="skill-card-name">Associates In <strong>Skill Name</strong></p>
                                     </div>
                                 </Card>
                             </Col>

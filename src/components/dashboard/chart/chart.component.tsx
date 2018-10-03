@@ -67,6 +67,8 @@ export default class ChartComponent  extends React.Component<any,any> {
                                 <Row>
                                     <SkillDoughnutComponent />
                                 </Row>
+                                <div style={{borderBottom: '1px solid #E3E2E2'}}>
+                                </div>
                                 <Row>
                                     <SkillGroupComponent/>
                                 </Row>
