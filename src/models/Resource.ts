@@ -18,6 +18,8 @@ export class Resource {
     public certifications: Certification[]
 
     public constructor(init?: Partial<Resource>) {
+        this.user = new User();
+        this.project = new Project();
         Object.assign(this, init);
     }
 

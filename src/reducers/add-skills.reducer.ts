@@ -5,7 +5,7 @@ import { User } from "../models/User";
 import { Project } from "../models/Project";
 
 const initialState: IAddSkillsState = {
-    resource: new Resource
+    resource: new Resource()
 }
 
 export const addSkillsReducer = (state = initialState, action: any) => {

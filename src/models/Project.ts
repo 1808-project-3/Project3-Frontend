@@ -10,6 +10,7 @@ export class Project {
     public customerName: string
 
     public constructor(init?: Partial<Project>) {
+        this.supervisor = new User();
         Object.assign(this, init);
     }
 
