@@ -53,7 +53,7 @@ export const ResourceSkillsDetail: React.StatelessComponent<IProps> = (props) =>
                             </Row>
                             <Row>
                                 <Col tag="dt" xl={4}>CUSTOMER NAME</Col>
-                                <Col tag="dd" xl={8}>?</Col>
+                                <Col tag="dd" xl={8}>{resource.project.customerName}</Col>
                             </Row>
                             <Row>
                                 <Col tag="dt" xl={4}>PROJECT ID</Col>
