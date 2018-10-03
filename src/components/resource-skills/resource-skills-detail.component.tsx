@@ -7,12 +7,17 @@ import Card from 'reactstrap/lib/Card';
 import CardHeader from 'reactstrap/lib/CardHeader';
 import Col from 'reactstrap/lib/Col';
 import Row from 'reactstrap/lib/Row';
+import { Resource } from '../../models/Resource';
+import { Certification } from '../../models/Certification';
+import { Skill } from '../../models/Skill';
+import { Resume } from '../../models/Resume';
 
 interface IProps {
-    filler: any
+    resource: Resource
 }
 
 export const ResourceSkillsDetail: React.StatelessComponent<IProps> = (props) => {
+    const { resource } = props;
     return (
         <Container className="pb-3">
             <Card className="w-100 mb-4">
@@ -24,65 +29,72 @@ export const ResourceSkillsDetail: React.StatelessComponent<IProps> = (props) =>
                         <Col sm={6}>
                             <Row>
                                 <Col tag="dt" xl={4}>ASSOCIATE ID</Col>
-                                <Col tag="dd" xl={8}>463967</Col>
+                                <Col tag="dd" xl={8}>{resource.user.assocId}</Col>
                             </Row>
                             <Row>
                                 <Col tag="dt" xl={4}>ASSOCIATE NAME</Col>
-                                <Col tag="dd" xl={8}>JOHN MARK</Col>
+                                <Col tag="dd" xl={8}>{`${resource.user.firstName} ${resource.user.lastName}`}</Col>
                             </Row>
                             <Row>
                                 <Col tag="dt" xl={4}>AOP CERTIFIED</Col>
-                                <Col tag="dd" xl={8}>YES</Col>
+                                <Col tag="dd" xl={8}>{resource.aupCertified ? "YES" : "NO"}</Col>
                             </Row>
                             <Row>
                                 <Col tag="dt" xl={4}>SKILLS - GROUP</Col>
-                                <Col tag="dd" xl={8}>iOS, Android</Col>
+                                {resource.skills.map((skill: Skill) => {
+                                    return <Col key={skill.skillId} tag="dd" xl={8}>{skill.name}</Col>
+                                })}
                             </Row>
                             <Row>
                                 <Col tag="dt" xl={4}>CERTIFICATIONS, IF ANY</Col>
-                                <Col tag="dd" xl={8}>Certification Name</Col>
+                                {resource.certifications.map((cert: Certification) => {
+                                    return <Col key={cert.certId} tag="dd" xl={8}>{cert.name}</Col>
+                                })}
                             </Row>
                             <Row>
                                 <Col tag="dt" xl={4}>CUSTOMER NAME</Col>
-                                <Col tag="dd" xl={8}>BANKING CUSTOMER</Col>
+                                <Col tag="dd" xl={8}>{resource.project.customerName}</Col>
                             </Row>
                             <Row>
                                 <Col tag="dt" xl={4}>PROJECT ID</Col>
-                                <Col tag="dd" xl={8}>0000234098221</Col>
+                                <Col tag="dd" xl={8}>{resource.project.pId}</Col>
                             </Row>
                             <Row>
                                 <Col tag="dt" xl={4}>PROJECT NAME</Col>
-                                <Col tag="dd" xl={8}>PAYMENT PORTAL</Col>
+                                <Col tag="dd" xl={8}>{resource.project.name}</Col>
                             </Row>
                         </Col>
                         <Col sm={6}>
                             <Row>
                                 <Col tag="dt" xl={4}>GRADE</Col>
-                                <Col tag="dd" xl={8}>M</Col>
+                                <Col tag="dd" xl={8}>{resource.grade}</Col>
                             </Row>
                             <Row>
                                 <Col tag="dt" xl={4}>COMPETENCY TAGGING</Col>
-                                <Col tag="dd" xl={8}>DIGITAL BUSINESS</Col>
+                                <Col tag="dd" xl={8}>{resource.compentencyTagging}</Col>
                             </Row>
                             <Row>
                                 <Col tag="dt" xl={4}>DATE OF JOINING</Col>
-                                <Col tag="dd" xl={8}>24/08/2018</Col>
+                                <Col tag="dd" xl={8}>{resource.joinDate}</Col>
                             </Row>
                             <Row>
                                 <Col tag="dt" xl={4}>HCM SUPERVISOR ID</Col>
-                                <Col tag="dd" xl={8}>219898</Col>
+                                <Col tag="dd" xl={8}>{resource.project.supervisor.assocId}</Col>
                             </Row>
                             <Row>
                                 <Col tag="dt" xl={4}>HCM SUPERVISOR NAME</Col>
-                                <Col tag="dd" xl={8}>JOHN ANDERSON</Col>
+                                <Col tag="dd" xl={8}>{`${resource.project.supervisor.firstName} ${resource.project.supervisor.lastName}`}</Col>
                             </Row>
                             <Row>
                                 <Col tag="dt" xl={4}>LOCATION</Col>
-                                <Col tag="dd" xl={8}>ILLINOIS</Col>
+                                <Col tag="dd" xl={8}>{resource.project.location}</Col>
                             </Row>
                             <Row>
                                 <Col tag="dt" xl={4}>RESUME DOCUMENT</Col>
-                                <Col tag="dd" xl={8}><span className="mr-3">RESUME DOCUMENT.DOCX</span><TiDownload /></Col>
+                                {resource.resumes.map((resume: Resume) => {
+                                    return <Col key={resume.resumeId} tag="dd" xl={8}><span className="mr-3">{resume.fileName}</span><TiDownload /></Col>
+                                })
+                                }
                             </Row>
                         </Col>
                     </Row>
