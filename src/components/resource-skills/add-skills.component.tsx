@@ -179,7 +179,8 @@ class AddSkillsComponent extends React.Component<any, {}> {
                                 </Row>
                             </Col>
                         </Row>
-                        <Container className="my-4">
+                        <hr className="col-12" />
+                        <Container>
                             <Row>
                                 <Button color="secondary" className="ml-auto px-4" disabled><small>CANCEL</small></Button>
                                 <Button color="secondary" className="ml-4 px-3"><IoMdAddCircleOutline /><small className="ml-2">ADD USER</small></Button>
