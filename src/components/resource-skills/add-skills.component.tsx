@@ -1,13 +1,14 @@
 import * as React from 'react';
+import DatePicker from 'react-date-picker';
 import { IoMdAddCircleOutline, IoMdCalendar } from 'react-icons/io';
 import { connect } from 'react-redux';
-import { CardHeader, Col, CustomInput, Form, FormGroup, Container } from 'reactstrap';
+import { CardHeader, Col, Container, CustomInput, Form, FormGroup } from 'reactstrap';
 import Button from 'reactstrap/lib/Button';
 import Card from 'reactstrap/lib/Card';
 import Input from 'reactstrap/lib/Input';
 import Label from 'reactstrap/lib/Label';
 import Row from 'reactstrap/lib/Row';
-import DatePicker from 'react-date-picker';
+import { ClosablePill } from './closable-pill.component';
 
 class AddSkillsComponent extends React.Component<any, {}> {
 
@@ -88,6 +89,11 @@ class AddSkillsComponent extends React.Component<any, {}> {
                                         <Input type="text" name="certifications" id="" />
                                     </Col>
                                 </FormGroup>
+                                <Row>
+                                    <Col lg={{ size: 8, offset: 4 }}>
+                                        <ClosablePill text="Adobe Digital Learning" color="secondary" onClose={() => console.log("CLICKED")} />
+                                    </Col>
+                                </Row>
                             </Col>
                             <Col className="pl-5">
                                 <FormGroup row>
@@ -164,6 +170,11 @@ class AddSkillsComponent extends React.Component<any, {}> {
                                         <Input type="file" name="attachments" id="" />
                                     </Col>
                                 </FormGroup>
+                                <Row>
+                                    <Col lg={{ size: 8, offset: 4 }}>
+                                        <ClosablePill text="Doc Name 01" color="secondary" onClose={() => console.log("CLICKED")} />
+                                    </Col>
+                                </Row>
                             </Col>
                         </Row>
                         <Container className="my-4">
