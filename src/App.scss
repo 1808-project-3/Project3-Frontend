@@ -121,3 +121,28 @@ nav {
 .red {
   color: red;
 }
+.skillgroup-cards-container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+}
+.skillgroup-skill-card {
+  width: 200px;
+  height: 75px;
+}
+
+.skillgroup-skill-card-content {
+  display: flex;
+  flex-flow: row nowrap;
+}
+.skill-card-num-associates {
+  font-weight: bold;
+  font-size: 3em;
+  padding-right: 20px;
+}
+.skill-card-name {
+  font-weight: bold;
+  font-size: 1em;
+  margin-top: 20px;
+  margin-left: 10px;
+}
