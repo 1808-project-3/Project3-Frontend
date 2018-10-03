@@ -8,7 +8,7 @@ import {SearchBar} from './nav-search-bar.component';
 import {NavLink} from './nav-link.component';
 import {NavTitle} from './nav-title.component';
 
-export default class AppNav extends React.Component
+export class AppNav extends React.Component
 {
   public render()
   {

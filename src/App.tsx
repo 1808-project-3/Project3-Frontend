@@ -1,7 +1,7 @@
 import * as React from 'react';
 import './include/bootstrap';
 import './App.css';
-import AppNav from './components/nav/nav.component';
+import {Layout} from './components/layout/layout.component';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { HomeComponent } from './components/home/home.component';
 import SignInComponent from './components/sign-in/sign-in.component';
@@ -14,7 +14,6 @@ class App extends React.Component {
       <Provider store={store}>
         <BrowserRouter>
           <div>
-            {/* <AppNav /> */}
             <div>
               <Switch>
                 <Route path="/sign-in" component={SignInComponent} />
@@ -30,13 +29,12 @@ class App extends React.Component {
   // these are the routes that include the nav/side bars.
   public wrappedRoutes = () => (
     <div>
-      <AppNav />
-      <div id="main-content-container">
+      <Layout>
         <Switch>
           <Route path="/home" component={HomeComponent} />
           <Route component={HomeComponent}/>
         </Switch>
-      </div>
+      </Layout>
     </div>
   )
 }
