@@ -12,6 +12,7 @@ export interface ISignInState {
 
 export interface IInfoState {
     tableType: string
+    viewRow: number
     resourceList: any[]
     projectList: any[]
     errorMessage: string

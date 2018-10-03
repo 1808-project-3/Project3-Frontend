@@ -85,3 +85,12 @@ export const updateError = (text: string) => {
 
     }
 }
+
+export const updateViewRow = (id: number) => {
+    return {
+        payload: {
+            viewRow: id
+        },
+        type: infoTypes.UPDATE_VIEW_ROW
+    }
+}

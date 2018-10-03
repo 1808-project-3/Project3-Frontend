@@ -25,7 +25,6 @@ class TablesComponent extends React.Component<IProps, any> {
     }
 
     public render() {
-
         const resourceEntries: any[] = [];
         if(this.props.resourceList[0] !== null){
             for (const r of this.props.resourceList) {

@@ -6,6 +6,7 @@ const initialState: IInfoState = {
     projectList: [],
     resourceList: [],
     tableType: "",
+    viewRow: 0,
 };
 
 export const infoReducer = (state: IInfoState = initialState, action: any) => {
@@ -28,7 +29,12 @@ export const infoReducer = (state: IInfoState = initialState, action: any) => {
         case infoTypes.UPDATE_ERROR:
             return {
                 ...state,
-                tableType: action.payload.errorMessage
+                errorMessage: action.payload.errorMessage
+            }
+        case infoTypes.UPDATE_VIEW_ROW:
+            return {
+                ...state,
+                viewRow: action.payload.viewRow
             }
 
         default:
