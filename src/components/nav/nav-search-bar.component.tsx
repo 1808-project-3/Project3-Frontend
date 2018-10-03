@@ -8,7 +8,7 @@ export class SearchBar extends React.Component
         const purl = process.env.PUBLIC_URL;
 
         return(
-            <div className="searchBar">
+            <div className="searchContainer">
                 <input placeholder="Search, Project Details etc.." className="searchInput" type="text"/>
                 <img className="searchIcon" src={purl+"/images/search-icon.jpg"}/>
             </div>

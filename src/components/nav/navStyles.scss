@@ -12,6 +12,7 @@
     display: inline-block;
     text-align: right;
     margin-right: 1em;
+    place-self: center;
 }
 
 .profileName{
@@ -30,34 +31,40 @@
     background-color: grey;
     border-radius: 1em;
     margin-right: 2em;
+    place-self: center;
 }
 
 .title{
     display: inline-block;
     margin-left: 3em;
     font-weight: bold;
+    place-self: center start;
 }
 
 .navLabel{
     display: inline-block;
     margin-right: 1em;
+    place-self: center;
 }
 
 .navLink{
     display: inline-block;
     margin-right: 6em;
+    place-self: center;
 }
 
-.searchBar{
+.searchContainer{
     height: 60%;
     display: inline-block;
     border: solid 1px #DDD;
     border-radius: 5px;
     overflow: hidden;
     margin-right: 1em;
+    place-self: center;
 }
 
 .searchInput{
+    width: 20em;
     height: 100%;
     display: inline-block;
     border: none;
@@ -65,5 +72,5 @@
 }
 .searchIcon{
     display: inline-block;
-    height: 100%;
+    width: 1.5em;
 }
