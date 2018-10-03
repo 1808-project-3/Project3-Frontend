@@ -1,6 +1,7 @@
 import * as React from 'react';
-import {Col} from 'reactstrap';
+import {Col,Card,CardBody,Table} from 'reactstrap';
 import {Doughnut} from 'react-chartjs-2';
+import {MdCreate} from 'react-icons/md/'
 
 
 
@@ -61,6 +62,11 @@ export default class CertificationsDoughnutComponent extends React.Component<any
           }
         };
       }
+    public handleEdit =(event:any)=>{
+        event.preventDefault();
+        console.log("hello");
+
+    }
     
     public componentDidMount() {
         setInterval(() => {
@@ -70,11 +76,49 @@ export default class CertificationsDoughnutComponent extends React.Component<any
 
     public render() {
         return (
-            <Col md={12}>
-            <div style={{width: '120vh'}}>
-                <Doughnut data={this.state.data} options={this.state.options}/>
-            </div>
+          //   <Col md={12}>
+          //   <div style={{width: '120vh'}}>
+          //       <Doughnut data={this.state.data} options={this.state.options}/>
+          //   </div>
+          // </Col>
+          <div>
+          <Col md={8}>
+          <Doughnut data={this.state.data} options={this.state.options}/>
           </Col>
+          <Card>
+          <CardBody>
+              <div>
+                  <h4>Selected Certification Name</h4>
+              </div>
+          <Table>
+              <thead>
+                  <tr>
+                      <th>ASSOCIATE NAME</th>
+                      <th>ID</th>
+                      <th>CERTIFICATION</th>
+                      <th>PROJECT DETAILS</th>
+                      <th>GRADE</th>
+                      <th>DETAILS</th>
+                      <th></th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr>
+                      <td>James Rho</td>
+                      <td>1234</td>
+                      <td>Certification Details</td>
+                      <td>Project Name</td>
+                      <td>M</td>
+                      <td>View/Edit</td>
+                      <td onClick={this.handleEdit} style={{cursor:'pointer'}}><MdCreate/></td>
+                  </tr>
+              </tbody>
+          </Table>
+          </CardBody>
+      </Card>
+      </div>
+
+          
         )
     }
 

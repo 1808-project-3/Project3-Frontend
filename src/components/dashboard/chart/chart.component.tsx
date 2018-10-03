@@ -3,7 +3,7 @@ import {Card,Col, Container, Row,TabContent,TabPane,Nav,NavItem,NavLink} from 'r
 import classnames from 'classnames';
 import SkillDoughnutComponent from './skills/skills-doughnut.component';
 import SkillGroupComponent from './skills/skillgroups.component';
-import SelectedCertificationTableComponent from './certifications/selected-certification-table.component';
+// import SelectedCertificationTableComponent from './certifications/selected-certification-table.component';
 import CertificationsDoughnutComponent from './certifications/certifications-doughnut.component';
 
 
@@ -81,11 +81,11 @@ export default class ChartComponent  extends React.Component<any,any> {
                                     <CertificationsDoughnutComponent/>
                                     </Col>                    
                                 </Row>
-                                <Row>
+                                {/* <Row>
                                     <Col md={12}>
                                     <SelectedCertificationTableComponent/>
                                     </Col>
-                                </Row>
+                                </Row> */}
                             </TabPane>
 
                         </TabContent>
