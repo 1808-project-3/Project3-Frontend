@@ -3,7 +3,6 @@ import { Table } from 'reactstrap';
 import { connect } from "react-redux";
 import { getResourceList, updateTableType } from "../../../actions/info/info.actions";
 import { IState } from "../../../reducers";
-import { Resource } from "../../../models/resource";
 import ResourceListExport from "./resourceListExport";
 
 interface IProps {
