@@ -169,6 +169,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                                 calendarIcon={<IoMdCalendar />}
                                                 clearIcon={null as any}
                                                 maxDate={resource.project.endDate ? resource.project.endDate : undefined}
+                                                disabled={this.props.dateTbd}
                                                 required
                                             />
                                             <span>To</span>
@@ -178,6 +179,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                                 calendarIcon={<IoMdCalendar />}
                                                 clearIcon={null as any}
                                                 minDate={resource.project.startDate ? resource.project.startDate : undefined}
+                                                disabled={this.props.dateTbd}
                                                 required
                                             />
                                         </div>
