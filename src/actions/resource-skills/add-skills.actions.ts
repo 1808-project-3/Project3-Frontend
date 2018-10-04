@@ -1,4 +1,5 @@
 import { addSkillsTypes } from "./add-skills.types";
+import { Skill } from "../../models/Skill";
 
 export const updateResource = (event: any) => {
     return {
@@ -8,6 +9,15 @@ export const updateResource = (event: any) => {
             value: event.value
         },
         type: addSkillsTypes.UPDATE_RESOURCE
+    }
+}
+
+export const updateResourceSkills = (skill: Skill) => {
+    return {
+        payload: {
+            skill
+        },
+        type: addSkillsTypes.UPDATE_RESOURCE_SKILLS
     }
 }
 

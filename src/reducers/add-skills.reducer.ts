@@ -80,9 +80,17 @@ export const addSkillsReducer = (state = initialState, action: any) => {
             }
             return newState;
         case addSkillsTypes.TOGGLE_SKILL_GROUP:
-            const currentlyToggledOn = state.skillGroupIds.indexOf(action.payload.groupId) > -1;
-            const newSkillGroups = currentlyToggledOn ? [...state.skillGroupIds].filter(groupId => groupId !== action.payload.groupId) : [...state.skillGroupIds, action.payload.groupId];
+            const toggledGroupId = action.payload.groupId;
+            const currentlyToggledOn = state.skillGroupIds.indexOf(toggledGroupId) > -1;
+            const newSkillGroups = currentlyToggledOn ? [...state.skillGroupIds].filter(groupId => groupId !== toggledGroupId) : [...state.skillGroupIds, toggledGroupId];
             return { ...state, skillGroupIds: newSkillGroups };
+        case addSkillsTypes.UPDATE_RESOURCE_SKILLS:
+            const currentSkills = state.resource.skills;
+            const changedSkill = action.payload.skill;
+            const resourceHasSkill = currentSkills.indexOf(changedSkill) > -1;
+            const newSkills = resourceHasSkill ? [...currentSkills].filter(skill => skill !== changedSkill) : [...currentSkills, changedSkill];
+            const newSkillsResource = new Resource({ ...state.resource, skills: newSkills });
+            return { ...state, resource: newSkillsResource }
     }
     return state;
 }

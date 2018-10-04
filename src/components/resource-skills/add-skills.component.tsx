@@ -18,6 +18,7 @@ import { Skill } from '../../models/Skill';
 
 interface IProps extends RouteComponentProps<{}>, IAddSkillsState {
     updateResource: (event: any) => void
+    updateResourceSkills: (skill: Skill) => void
     toggleSkillGroup: (event: any) => void
 }
 
@@ -68,10 +69,9 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                                     <CardHeader className="p-3">
                                                         <Row>
                                                             {skills.map((skill: Skill) => {
-                                                                console.log(skill);
                                                                 return (
                                                                     <Col key={"skills-" + skill.skillId} lg={4}>
-                                                                        <CustomInput type="checkbox" id={"skills-" + skill.skillId} name="skills" className="pr-4" label={skill.name} required />
+                                                                        <CustomInput onChange={() => this.props.updateResourceSkills(skill)} type="checkbox" id={"skills-" + skill.skillId} name="skills" className="pr-4" label={skill.name} required />
                                                                     </Col>
                                                                 )
                                                             })}
@@ -196,7 +196,8 @@ const mapStateToProps = (state: IState) => state.addSkills
 
 const mapDispatchToProps = {
     toggleSkillGroup: addSkillsActions.toggleSkillGroup,
-    updateResource: addSkillsActions.updateResource
+    updateResource: addSkillsActions.updateResource,
+    updateResourceSkills: addSkillsActions.updateResourceSkills
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddSkillsComponent);
