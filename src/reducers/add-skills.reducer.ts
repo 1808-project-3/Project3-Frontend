@@ -5,6 +5,7 @@ import { Resource } from "../models/Resource";
 import { User } from "../models/User";
 
 const initialState: IAddSkillsState = {
+    dateTbd: false,
     listOfCompetencyTaggings: [],
     listOfGrades: [],
     listOfLocations: [],
@@ -79,6 +80,9 @@ export const addSkillsReducer = (state = initialState, action: any) => {
                     const newEndDateProject = new Project({ ...state.resource.project, endDate: action.payload.value });
                     newResource.project = newEndDateProject;
                     newState.resource = newResource;
+                    break;
+                case "date-tbd":
+                    newState.dateTbd = !state.dateTbd;
                     break;
             }
             return newState;
