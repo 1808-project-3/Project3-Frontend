@@ -9,15 +9,28 @@ import Input from 'reactstrap/lib/Input';
 import Label from 'reactstrap/lib/Label';
 import Row from 'reactstrap/lib/Row';
 import { ClosablePill } from './closable-pill.component';
-import { IAddSkillsState } from '../../reducers';
+import { IAddSkillsState, IState } from '../../reducers';
 import { RouteComponentProps } from 'react-router';
+import * as addSkillsActions from '../../actions/resource-skills/add-skills.actions';
+import SkillGroups from '../../assets/skill-groups.json';
+import { Group } from '../../models/Group';
+import { Skill } from '../../models/Skill';
+import Collapse from 'reactstrap/lib/Collapse';
 
 interface IProps extends RouteComponentProps<{}>, IAddSkillsState {
     updateResource: (event: any) => void
+    updateResourceSkills: (skill: Skill) => void
+    toggleSkillGroup: (event: any) => void
 }
 
 class AddSkillsComponent extends React.Component<IProps, {}> {
     public render() {
+        const { resource, skillGroupIds } = this.props;
+        const selectedGroups = SkillGroups.filter((group: Group) => skillGroupIds.indexOf(group.groupId) > -1);
+        const skills = selectedGroups.reduce((acc: any, val: any) => {
+            const groupSkills = val.skills.map((skill: any) => new Skill({ ...skill, group: new Group(val) }))
+            return acc.concat(groupSkills);
+        }, []);
         return (
             <>
                 <Form className="pb-3">
@@ -25,66 +38,61 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                         <Row>
                             <Col className="border-col-right pr-5 mr-5 pb-5">
                                 <FormGroup row>
-                                    <Label for="associateId" className="font-weight-bold" lg={4}>ASSOCIATE ID</Label>
+                                    <Label for="inputAssociateId" className="font-weight-bold" lg={4}>ASSOCIATE ID</Label>
                                     <Col lg={8} className="my-auto">
-                                        <Input onChange={this.props.updateResource} type="text" name="associateId" id="" />
+                                        <Input onChange={e => this.props.updateResource(e.target)} type="text" name="associateId" id="inputAssociateId" required />
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
-                                    <Label for="associateName" className="font-weight-bold" lg={4}>ASSOCIATE NAME</Label>
+                                    <Label for="inputAssociateName" className="font-weight-bold" lg={4}>ASSOCIATE NAME</Label>
                                     <Col lg={8} className="my-auto">
-                                        <Input type="text" name="associateName" id="" />
+                                        <Input onChange={e => this.props.updateResource(e.target)} type="text" name="associateName" id="inputAssociateName" required />
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
                                     <Label for="aopCertified" lg={4} className="font-weight-bold">AOP CERTIFIED</Label>
                                     <Col lg={8} className="my-auto">
-                                        <CustomInput type="radio" id="aop-certified-yes" name="aopCertified" className="d-inline-block pr-4" label="YES" required />
-                                        <CustomInput type="radio" id="aop-certified-no" name="aopCertified" className="d-inline-block" label="NO" required />
+                                        <CustomInput onChange={e => this.props.updateResource(e.target)} defaultChecked={resource.aupCertified} type="radio" id="aop-certified-yes" name="aopCertified" className="d-inline-block pr-4" label="YES" required />
+                                        <CustomInput onChange={e => this.props.updateResource(e.target)} defaultChecked={resource.aupCertified !== undefined && !resource.aupCertified} type="radio" id="aop-certified-no" name="aopCertified" className="d-inline-block" label="NO" required />
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
                                     <Label for="skillsGroup" lg={4} className="font-weight-bold">SKILLS - GROUP</Label>
                                     <Col lg={8} className="my-auto">
-                                        <Row>
-                                            <Col lg={4}>
-                                                <CustomInput type="checkbox" id="skills-group-ui-dev" name="skillsGroup" className="pr-4" label="UI/Dev" required />
-                                                <CustomInput type="checkbox" id="skills-group-wcm" name="skillsGroup" className="pr-4" label="WCM" required />
-                                            </Col>
-                                            <Col lg={4}>
-                                                <CustomInput type="checkbox" id="skills-group-mobility" name="skillsGroup" className="pr-4" label="Mobility" required />
-                                                <CustomInput type="checkbox" id="skills-group-design" name="skillsGroup" className="pr-4" label="Design" required />
-                                            </Col>
-                                            <Col lg={4}>
-                                                <CustomInput type="checkbox" id="skills-group-fullstack" name="skillsGroup" className="pr-4" label="Fullstack" required />
-                                                <CustomInput type="checkbox" id="skills-group-ecm-ccm" name="skillsGroup" className="" label="ECM/CCM" required />
-                                            </Col>
-                                        </Row>
+                                        <Container>
+                                            <Row>
+                                                {SkillGroups.map((group: Group) => {
+                                                    return <CustomInput onChange={e => this.props.toggleSkillGroup(e.target)} key={"group-" + group.groupId} type="checkbox" id={"skills-group-" + group.groupId} name="skillsGroup" className="pr-4" label={group.name} />
+                                                })}
+                                            </Row>
+                                        </Container>
                                     </Col>
                                 </FormGroup>
-                                <FormGroup>
-                                    <Row>
-                                        <Col className="p-0" lg={{ size: 8, offset: 4 }}>
-                                            <Card>
-                                                <CardHeader className="p-3">
-                                                    <Row>
-                                                        {['iOS', 'Android', 'React Native'].map((each, index) => {
-                                                            return (
-                                                                <Col key={index} lg={4}>
-                                                                    <CustomInput type="checkbox" id={"skills-group-fullstack" + each} name="skills" className="pr-4" label={each} required />
-                                                                </Col>
-                                                            )
-                                                        })}
-                                                    </Row>
-                                                </CardHeader>
-                                            </Card>
-                                        </Col>
-                                    </Row>
-                                </FormGroup>
+                                <Collapse isOpen={skills.length > 0}>
+                                    <FormGroup>
+                                        <Row>
+                                            <Col className="p-0" lg={{ size: 8, offset: 4 }}>
+                                                <Card>
+                                                    <CardHeader className="p-3">
+                                                        <Container>
+                                                            <Row>
+                                                                {skills.map((skill: Skill) => {
+                                                                    return (
+                                                                        <CustomInput key={"skills-" + skill.skillId} onChange={() => this.props.updateResourceSkills(skill)} type="checkbox" id={"skills-" + skill.skillId} name="skills" className="pr-4" label={skill.name} />
+                                                                    )
+                                                                })}
+                                                            </Row>
+                                                        </Container>
+                                                    </CardHeader>
+                                                </Card>
+                                            </Col>
+                                        </Row>
+                                    </FormGroup>
+                                </Collapse>
                                 <FormGroup row>
-                                    <Label for="" lg={4} className="font-weight-bold">CERTIFICATIONS, IF ANY</Label>
+                                    <Label for="inputCertifications" lg={4} className="font-weight-bold">CERTIFICATIONS, IF ANY</Label>
                                     <Col lg={8} className="my-auto">
-                                        <Input type="text" name="certifications" id="" />
+                                        <Input type="text" name="certifications" id="inputCertifications" />
                                     </Col>
                                 </FormGroup>
                                 <Row>
@@ -95,49 +103,49 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                             </Col>
                             <Col className="pl-0">
                                 <FormGroup row>
-                                    <Label for="" lg={4} className="font-weight-bold"> CUSTOMER NAME</Label>
+                                    <Label for="inputCustomerName" lg={4} className="font-weight-bold"> CUSTOMER NAME</Label>
                                     <Col lg={8} className="my-auto">
-                                        <Input type="text" name="customerName" id="" />
+                                        <Input onChange={e => this.props.updateResource(e.target)} type="text" name="customerName" id="inputCustomerName" required />
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
-                                    <Label for="" lg={4} className="font-weight-bold">PROJECT ID</Label>
+                                    <Label for="inputProjectId" lg={4} className="font-weight-bold">PROJECT ID</Label>
                                     <Col lg={8} className="my-auto">
-                                        <Input type="text" name="projectId" id="" />
+                                        <Input onChange={e => this.props.updateResource(e.target)} type="text" name="projectId" id="inputProjectId" required />
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
-                                    <Label for="" lg={4} className="font-weight-bold"> PROJECT NAME</Label>
+                                    <Label for="inputProjectName" lg={4} className="font-weight-bold">PROJECT NAME</Label>
                                     <Col lg={8} className="my-auto">
-                                        <Input type="text" name="projectName" id="" />
+                                        <Input onChange={e => this.props.updateResource(e.target)} type="text" name="projectName" id="inputProjectName" required />
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
-                                    <Label for="" lg={4} className="font-weight-bold">GRADE</Label>
+                                    <Label for="inputGrade" lg={4} className="font-weight-bold">GRADE</Label>
                                     <Col lg={8} className="my-auto">
-                                        <Input type="text" name="grade" id="" />
+                                        <Input onChange={e => this.props.updateResource(e.target)} type="text" name="grade" id="inputGrade" required />
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
-                                    <Label for="" lg={4} className="font-weight-bold">COMPETENCY TAGGING</Label>
+                                    <Label for="inputCompetencyTagging" lg={4} className="font-weight-bold">COMPETENCY TAGGING</Label>
                                     <Col lg={8} className="my-auto">
-                                        <Input type="select" name="competencyTagging" id="" />
+                                        <Input onChange={e => this.props.updateResource(e.target)} type="select" name="competencyTagging" id="inputCompetencyTagging" required />
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
-                                    <Label for="" lg={4} className="font-weight-bold">DURATION</Label>
+                                    <Label for="inputDate" lg={4} className="font-weight-bold">DURATION</Label>
                                     <Col lg={8} className="my-auto">
                                         <div className="d-flex justify-content-between">
                                             <DatePicker
-                                                onChange={this.onChange}
-                                                value={undefined}
+                                                onChange={(date) => this.props.updateResource({ name: "startDate", value: date })}
+                                                value={resource.project && resource.project.startDate}
                                                 calendarIcon={<IoMdCalendar />}
                                                 clearIcon={null as any}
                                             />
                                             <span>To</span>
                                             <DatePicker
-                                                onChange={this.onChange}
-                                                value={undefined}
+                                                onChange={(date) => this.props.updateResource({ name: "endDate", value: date })}
+                                                value={resource.project && resource.project.endDate}
                                                 calendarIcon={<IoMdCalendar />}
                                                 clearIcon={null as any}
                                             />
@@ -145,28 +153,28 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
-                                    <Label for="" lg={4} className="font-weight-bold">HCM SUPERVISOR ID</Label>
+                                    <Label for="inputSupervisorId" lg={4} className="font-weight-bold">HCM SUPERVISOR ID</Label>
                                     <Col lg={8} className="my-auto">
-                                        <Input type="text" name="supervisorId" id="" />
+                                        <Input onChange={e => this.props.updateResource(e.target)} type="text" name="supervisorId" id="inputSupervisorId" required />
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
-                                    <Label for="" lg={4} className="font-weight-bold">HCM SUPERVISOR NAME</Label>
+                                    <Label for="inputSupervisorName" lg={4} className="font-weight-bold">HCM SUPERVISOR NAME</Label>
                                     <Col lg={8} className="my-auto">
-                                        <Input type="text" name="supervisorName" id="" />
+                                        <Input onChange={e => this.props.updateResource(e.target)} type="text" name="supervisorName" id="inputSupervisorName" required />
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
-                                    <Label for="" lg={4} className="font-weight-bold">LOCATION</Label>
+                                    <Label for="inputLocation" lg={4} className="font-weight-bold">LOCATION</Label>
                                     <Col lg={8} className="my-auto">
-                                        <Input type="text" name="location" id="" />
+                                        <Input onChange={e => this.props.updateResource(e.target)} type="text" name="location" id="inputLocation" required />
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
-                                    <Label for="" lg={4} className="font-weight-bold">ATTACHMENTS (RESUME)</Label>
+                                    <Label for="inputResumes" lg={4} className="font-weight-bold">ATTACHMENTS (RESUME)</Label>
                                     <Col lg={8} className="my-auto">
                                         <Label className="btn btn-secondary mb-0">
-                                            <small>UPLOAD RESUME</small><Input type="file" accept=".doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.pdf" name="attachments" id="" hidden />
+                                            <small>UPLOAD RESUME</small><Input type="file" accept=".doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.pdf" name="resumes" id="inputResumes" hidden />
                                         </Label>
                                     </Col>
                                 </FormGroup>
@@ -191,4 +199,12 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
     }
 }
 
-export default connect()(AddSkillsComponent);
+const mapStateToProps = (state: IState) => state.addSkills
+
+const mapDispatchToProps = {
+    toggleSkillGroup: addSkillsActions.toggleSkillGroup,
+    updateResource: addSkillsActions.updateResource,
+    updateResourceSkills: addSkillsActions.updateResourceSkills
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddSkillsComponent);
