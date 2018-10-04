@@ -84,12 +84,14 @@ export default class CertificationsDoughnutComponent extends React.Component<any
           <Col md={12}>
               <Doughnut data={this.state.data} options={this.state.options}/>
           </Col>
+
+
           <Card>
           <CardBody>
               <div>
                   <h4>Selected Certification Name</h4>
               </div>
-          <Table>
+          <Table striped>
               <thead>
                   <tr>
                       <th>ASSOCIATE NAME</th>
@@ -103,7 +105,25 @@ export default class CertificationsDoughnutComponent extends React.Component<any
               </thead>
               <tbody>
                   <tr>
-                      <td>James Rho</td>
+                      <td>James</td>
+                      <td>1234</td>
+                      <td>Certification Details</td>
+                      <td>Project Name</td>
+                      <td>M</td>
+                      <td>View/Edit</td>
+                      <td onClick={this.handleEdit} style={{cursor:'pointer'}}><MdCreate/></td>
+                  </tr>
+                  <tr>
+                      <td>Chase</td>
+                      <td>1234</td>
+                      <td>Certification Details</td>
+                      <td>Project Name</td>
+                      <td>M</td>
+                      <td>View/Edit</td>
+                      <td onClick={this.handleEdit} style={{cursor:'pointer'}}><MdCreate/></td>
+                  </tr>
+                  <tr>
+                      <td>Maya</td>
                       <td>1234</td>
                       <td>Certification Details</td>
                       <td>Project Name</td>
