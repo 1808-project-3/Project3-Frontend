@@ -168,6 +168,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                                 value={resource.project && resource.project.startDate}
                                                 calendarIcon={<IoMdCalendar />}
                                                 clearIcon={null as any}
+                                                maxDate={resource.project.endDate ? resource.project.endDate : undefined}
                                                 required
                                             />
                                             <span>To</span>
