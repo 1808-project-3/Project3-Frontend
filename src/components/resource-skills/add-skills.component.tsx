@@ -58,11 +58,13 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                 <FormGroup row>
                                     <Label for="skillsGroup" lg={4} className="font-weight-bold">SKILLS - GROUP</Label>
                                     <Col lg={8} className="my-auto">
-                                        <Row>
-                                            {SkillGroups.map((group: Group) => {
-                                                return <CustomInput onChange={e => this.props.toggleSkillGroup(e.target)} key={"group-" + group.groupId} type="checkbox" id={"skills-group-" + group.groupId} name="skillsGroup" className="pr-4" label={group.name} required />
-                                            })}
-                                        </Row>
+                                        <Container>
+                                            <Row>
+                                                {SkillGroups.map((group: Group) => {
+                                                    return <CustomInput onChange={e => this.props.toggleSkillGroup(e.target)} key={"group-" + group.groupId} type="checkbox" id={"skills-group-" + group.groupId} name="skillsGroup" className="pr-4" label={group.name} required />
+                                                })}
+                                            </Row>
+                                        </Container>
                                     </Col>
                                 </FormGroup>
                                 {skills.length > 0 &&
