@@ -11,7 +11,7 @@ export default class ProjectsTile extends React.Component {
         return (
 
          
-            <Card>
+            <Card className="text-center">
                 <Row>
                 <Col md={2}>
                     <div className="skillgroup-skill-card-content">
@@ -19,14 +19,14 @@ export default class ProjectsTile extends React.Component {
 
                     </div>
                 </Col>
-                <Col md={5}>
+                <Col md={6}>
                     <p className="project-name-card">NUMBER OF PROJECTS</p>
                 </Col>
-                <Col md={3} >
-                    <p><MdLibraryBooks size={100} color={"#F0EEEE"} /></p>
+                <Col md={2} className="three-card-icons" >
+                    <p><MdLibraryBooks size={60} color={"#F0EEEE"} /></p>
                 </Col>
                 </Row>
-                <CardFooter>In Talent Portal</CardFooter>
+                <CardFooter className="three-card-footer">In Talent Portal</CardFooter>
             </Card>
         
 

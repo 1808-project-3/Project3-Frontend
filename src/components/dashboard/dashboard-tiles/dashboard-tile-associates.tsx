@@ -10,22 +10,22 @@ export default class AssociatesTile extends React.Component {
     public render() {
         return (
 
-            <Card>
+            <Card className="text-center">
                 <Row>
                 <Col md={2}>
                     <div className="skillgroup-skill-card-content">
-                        <p className="project-number-card">40</p>
+                        <p className="project-number-card">404</p>
 
                     </div>
                 </Col>
-                <Col md={5}>
+                <Col md={6}>
                     <p className="project-name-card">NUMBER OF RESOURCES</p>
                 </Col>
-                <Col md={3}>
-                    <p><MdGroup size={100} color={"#F0EEEE"} /></p>
+                <Col md={2} className="three-card-icons">
+                    <p><MdGroup size={60} color={"#F0EEEE"} /></p>
                 </Col>
                 </Row>
-                <CardFooter>Project (15)</CardFooter>
+                <CardFooter className="three-card-footer">Project (15)</CardFooter>
             </Card>
           
 

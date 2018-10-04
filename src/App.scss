@@ -163,18 +163,34 @@ nav {
 
 .project-number-card {
   font-weight: bold;
-  font-size: 4em;
+  font-size: 35px;
   color:#36A2EB;
-  margin-left: 5px;
-  margin-top:10px;
+  margin-top:24px;
+  margin-left:10px;
 
 }
 .project-name-card {
   font-weight:bold;
   font-size:1em;
-  margin-top:30px;
-  margin-left:24px;
+  margin-top:8%;
+  margin-left:2%;
 }
+.three-card-icons{
+  margin-top:8%;
+}
+.three-card-footer{
+  text-align: left;
+}
+.three-card-button-col{
+  text-align: center;
+  margin-top:40px;
+
+}
+.three-card-button{
+  width: 100%;
+  height:60%;
+}
+
 
 /*****************************
   PROJECT CARDS
@@ -197,7 +213,7 @@ nav {
 }
 .project-name-card {
   font-weight:bold;
-  font-size:1em;
+  font-size: 13px;
   margin-top:30px;
   margin-left:24px;
 }

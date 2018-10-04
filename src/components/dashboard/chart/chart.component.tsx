@@ -32,13 +32,10 @@ export default class ChartComponent  extends React.Component<any,any> {
 
     public render() {
         return (
-          
-           
                 <Card>
                     <Row>
-
                     <Col>
-                    <Nav tabs>
+                    <Nav tabs style={{backgroundColor:"#F0EEEE"}}>
                         <NavItem>
                             <NavLink
                             className={classnames({ active: this.state.activeTab === '1' })}
@@ -54,7 +51,7 @@ export default class ChartComponent  extends React.Component<any,any> {
                             className={classnames({ active: this.state.activeTab === '2' })}
                             onClick={() => { this.toggle('2'); }}
                             style={{cursor:'pointer'}}
-                            >x
+                            >
                             CERTIFICATIONS
                             </NavLink>
                         </NavItem>
@@ -89,11 +86,6 @@ export default class ChartComponent  extends React.Component<any,any> {
                                     <CertificationsDoughnutComponent/>
                                     </Col>                    
                                 </Row>
-                                {/* <Row>
-                                    <Col md={12}>
-                                    <SelectedCertificationTableComponent/>
-                                    </Col>
-                                </Row> */}
                             </TabPane>
 
                         </TabContent>

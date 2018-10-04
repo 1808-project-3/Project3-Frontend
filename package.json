@@ -32,6 +32,7 @@
     "react-chartjs-2": "^2.7.4",
     "react-dom": "^16.4.0",
     "react-icons": "^3.1.0",
+    "react-native-awesome-button": "^1.8.2",
     "react-redux": "^5.0.7",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
