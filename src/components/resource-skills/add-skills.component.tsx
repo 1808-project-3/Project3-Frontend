@@ -25,7 +25,11 @@ interface IProps extends RouteComponentProps<{}>, IAddSkillsState {
 class AddSkillsComponent extends React.Component<IProps, {}> {
     public render() {
         const { resource, skillGroupIds } = this.props;
-        const skills = SkillGroups.filter((group: Group) => skillGroupIds.indexOf(group.groupId) > -1).reduce((acc: any, val: any) => acc.concat(val.skills.map((skill: any) => new Skill(skill))), []);
+        const selectedGroups = SkillGroups.filter((group: Group) => skillGroupIds.indexOf(group.groupId) > -1);
+        const skills = selectedGroups.reduce((acc: any, val: any) => {
+            const groupSkills = val.skills.map((skill: any) => new Skill({ ...skill, group: new Group(val) }))
+            return acc.concat(groupSkills);
+        }, []);
         return (
             <>
                 <Form className="pb-3">

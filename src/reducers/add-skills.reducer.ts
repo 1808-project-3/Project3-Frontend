@@ -10,9 +10,9 @@ const initialState: IAddSkillsState = {
 }
 
 export const addSkillsReducer = (state = initialState, action: any) => {
+    const newState = { ...state };
     switch (action.type) {
         case addSkillsTypes.UPDATE_RESOURCE:
-            const newState = { ...state };
             const newResource = new Resource({ ...state.resource });
             switch (action.payload.name) {
                 case "associateId":
@@ -83,14 +83,19 @@ export const addSkillsReducer = (state = initialState, action: any) => {
             const toggledGroupId = action.payload.groupId;
             const currentlyToggledOn = state.skillGroupIds.indexOf(toggledGroupId) > -1;
             const newSkillGroups = currentlyToggledOn ? [...state.skillGroupIds].filter(groupId => groupId !== toggledGroupId) : [...state.skillGroupIds, toggledGroupId];
-            return { ...state, skillGroupIds: newSkillGroups };
+            newState.skillGroupIds = newSkillGroups;
+            if (currentlyToggledOn) {
+                newState.resource.skills = state.resource.skills.filter(skill => skill.group.groupId !== toggledGroupId);
+            }
+            return newState;
         case addSkillsTypes.UPDATE_RESOURCE_SKILLS:
             const currentSkills = state.resource.skills;
             const changedSkill = action.payload.skill;
-            const resourceHasSkill = currentSkills.indexOf(changedSkill) > -1;
-            const newSkills = resourceHasSkill ? [...currentSkills].filter(skill => skill !== changedSkill) : [...currentSkills, changedSkill];
+            const resourceHasSkill = currentSkills.some(skill => skill.skillId === changedSkill.skillId);
+            const newSkills = resourceHasSkill ? [...currentSkills].filter(skill => skill.skillId !== changedSkill.skillId) : [...currentSkills, changedSkill];
             const newSkillsResource = new Resource({ ...state.resource, skills: newSkills });
-            return { ...state, resource: newSkillsResource }
+            newState.resource = newSkillsResource;
+            return newState;
     }
     return state;
 }
