@@ -42,7 +42,7 @@ describe('sign-in actions', () => {
         expect(dispatch).toBeCalledWith(
             {
                 payload: {
-                    currentUser: JSON.parse(response),
+                    currentUser: response,
                     errorMessage: ''
                 },
                 type: signInTypes.LOGIN

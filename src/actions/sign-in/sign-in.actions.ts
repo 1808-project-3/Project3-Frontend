@@ -1,6 +1,7 @@
 import { signInTypes } from "./sign-in.types";
 import { environment } from '../../environment';
 import history from '../../history';
+import axios from 'axios';
 
 export const updatePassword = (password: string) => {
   return {
@@ -29,34 +30,32 @@ export const updateError = (errorMessage: string) => {
   }
 }
 
+export const loginSuccess = (data: any) => {
+  return{
+    
+    payload: {
+      currentUser: data.credentials,
+      errorMessage: ''
+    },
+    type: signInTypes.LOGIN
+  }
+}
+
 export const login = (e: React.FormEvent<HTMLFormElement>, credentials: any) => {
   return (dispatch: any) => {
     e.preventDefault();
-    return fetch(`${environment.context}users/login`, {
-      body: JSON.stringify(credentials),
+    return axios.post(`${environment.context}users/login`, {
+      body: credentials,
       headers: {
         'Content-Type': 'application/json'
       },
-      method: 'POST',
+      
     })
-      .then(resp => {
-        if (resp.status === 200) {
-          return resp.json().then(data => ({ status: resp.status, body: data }));
-        } else {
-          return resp.text().then(data => ({ status: resp.status, body: data }));
-        }
-      })
       .then(resp => {
         switch (resp.status) {
           case 200:
-            dispatch({
-              payload: {
-                currentUser: resp.body,
-                errorMessage: ''
-              },
-              type: signInTypes.LOGIN
-            });
-            history.push('/profile');
+            dispatch(loginSuccess(resp.data));
+            history.push('/home');
             break;
           case 401:
             dispatch({
