@@ -13,20 +13,31 @@ export class BreadcrumbBar extends React.Component<any>
     public render()
     {
         const bci = process.env.PUBLIC_URL + "/images/breadcrumb-divide-icon.png";
-
+        let brokenPath = this.props.location.pathname.split('/');
+        if(brokenPath[0] === "")
+        {
+            brokenPath = brokenPath.slice(1);
+        }
         const locations = this.formatPath(this.props.location.pathname);
-        console.log(locations);
+        console.log(`locations: ${locations}`);
+        console.log(`brokenPath: ${brokenPath}`);
         let crumbs:any = [];
 
         for(let i = 0; i < locations.length; i++)
         {
             if(i === locations.length-1)
             {
-                crumbs.push(<Breadcrumb active>{locations[i]}</Breadcrumb>)
+                crumbs.push(<Breadcrumb history={this.props.history} active>{locations[i]}</Breadcrumb>)
             }
             else
             {
-                crumbs.push(<Breadcrumb>{locations[i]}</Breadcrumb>)
+                let currentPath = "";
+                for(let c = 0; c <= i; c++)
+                {
+                    currentPath += "/"+brokenPath[c];
+                    console.log(currentPath);
+                }
+                crumbs.push(<Breadcrumb history={this.props.history} path={currentPath}>{locations[i]}</Breadcrumb>)
             }
             crumbs.push(<div className="breadcrumbDevider"><img className="bci" src={bci}/></div>)
         }

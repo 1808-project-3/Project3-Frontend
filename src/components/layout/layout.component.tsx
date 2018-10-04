@@ -25,7 +25,7 @@ export class Layout extends React.Component<any>
             <div className="layoutPage">
                 <AppNav/>
                 <Sidebar/>
-                <BreadcrumbBar location={this.props.location}/>
+                <BreadcrumbBar location={this.props.location} history={this.props.history}/>
                 <div className="pageContent">
                     {this.props.children}
                 </div>

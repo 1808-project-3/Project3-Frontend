@@ -10,7 +10,7 @@ export class Sidebar extends React.Component
         return(
             <div className="sidebar">
                 <SidebarButton icon={"/images/briefcase-custom-icon.png"} link="/home"/>
-                <SidebarButton icon={"/images/flag-custom-icon.png"} link="/home/mystery-page-1"/>
+                <SidebarButton icon={"/images/flag-custom-icon.png"} link="/home/mystery-page-1/used-for-path-testing/long-path-here"/>
                 <SidebarButton icon={"/images/resource-custom-icon.png"} link="/home/resources"/>
                 <SidebarButton icon={"/images/plus-custom-icon.png"} link="/home/add-user"/>
                 <SidebarButton icon={"/images/check-custom-icon.png"} link="/home/mystery-page-2"/>

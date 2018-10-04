@@ -27,7 +27,7 @@ class App extends React.Component {
 
   // these are the routes that include the nav/side bars.
   public wrappedRoutes = (props:any) => (
-    <Layout location={props.location}>
+    <Layout location={props.location} history={props.history}>
       <Switch>
         <Route path="/home"/>
       </Switch>
