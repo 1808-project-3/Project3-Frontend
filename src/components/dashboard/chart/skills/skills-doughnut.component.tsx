@@ -1,6 +1,7 @@
 import * as React from 'react';
-import {Row, Col, Container} from 'reactstrap';
+import {Row, Col, Container, Card} from 'reactstrap';
 import { Doughnut } from 'react-chartjs-2';
+import { Link } from 'react-router-dom';
 
 function getRandomInt(min:any, max:any) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -148,15 +149,94 @@ export default class SkillDoughnut extends React.Component<any, any> {
                             <Doughnut data={this.state.skillChart.data} options={this.state.skillChart.options} />                        
                             </div>
                         </Col>
-                    </Row>                    
-                    <Row style={{marginTop: "10px"}}>
+                    </Row>                                        
+                    <Row style={{marginTop: "10px", borderBottom: '1px solid #E3E2E2'}}>
                         <Col md={6} style={{paddingLeft:'12%'}}>
                             <p style={{color: '#7C7A7A'}}>TOTAL ASSOCIATES</p>
                         </Col>
                         <Col md={6} style={{paddingLeft: '6%', textAlign: "center"}}>
                             <p style={{fontWeight: 'bold'}}>{this.state.selectedSkillGroup}</p>
                         </Col>
-                    </Row>
+                    </Row>                                                            
+                    <Row style={{marginTop: "2%"}}>
+                        <Col md={6}>
+                            <p style={{marginLeft: "10px"}}>{this.state.selectedSkillGroup}</p>
+                        </Col>
+                        <Col md={6} style={{display: "flex", justifyContent: "flex-end"}}>
+                            <Link to="" style={{marginRight: "30px"}}>View All</Link>
+                        </Col>
+                    </Row>                    
+                    <div className="skillgroup-cards-container">
+
+                        <Row>
+                            <Col sm="3">
+                                <Card className="skillgroup-skill-card">
+                                    <div className="skillgroup-skill-card-content">
+                                        <p className="skill-card-num-associates">12</p>
+                                        <p className="skill-card-name">Associates In <strong>Skill Name</strong></p>
+                                    </div>
+                                </Card>
+                            </Col>
+                            <Col sm="3">
+                                <Card className="skillgroup-skill-card">
+                                    <div className="skillgroup-skill-card-content">
+                                        <p className="skill-card-num-associates">13</p>
+                                        <p className="skill-card-name">Associates In <strong>Skill Name</strong></p>
+                                    </div>
+                                </Card>
+                            </Col>
+                            <Col sm="3">
+                                <Card className="skillgroup-skill-card">
+                                    <div className="skillgroup-skill-card-content">
+                                        <p className="skill-card-num-associates">14</p>
+                                        <p className="skill-card-name">Associates In <strong>Skill Name</strong></p>
+                                    </div>
+                                </Card>
+                            </Col>
+                            <Col sm="3">
+                                <Card className="skillgroup-skill-card">
+                                    <div className="skillgroup-skill-card-content">
+                                        <p className="skill-card-num-associates">15</p>
+                                        <p className="skill-card-name">Associates In <strong>Skill Name</strong></p>
+                                    </div>
+                                </Card>
+                            </Col>
+                        </Row>
+                        <Row style={{marginTop: "0.1%"}}>
+                            <Col sm="3">
+                                <Card className="skillgroup-skill-card">
+                                    <div className="skillgroup-skill-card-content">
+                                        <p className="skill-card-num-associates">12</p>
+                                        <p className="skill-card-name">Associates In <strong>Skill Name</strong></p>
+                                    </div>
+                                </Card>
+                            </Col>
+                            <Col sm="3">
+                                <Card className="skillgroup-skill-card">
+                                    <div className="skillgroup-skill-card-content">
+                                        <p className="skill-card-num-associates">13</p>
+                                        <p className="skill-card-name">Associates In <strong>Skill Name</strong></p>
+                                    </div>
+                                </Card>
+                            </Col>
+                            <Col sm="3">
+                                <Card className="skillgroup-skill-card">
+                                    <div className="skillgroup-skill-card-content">
+                                        <p className="skill-card-num-associates">14</p>
+                                        <p className="skill-card-name">Associates In <strong>Skill Name</strong></p>
+                                    </div>
+                                </Card>
+                            </Col>
+                            <Col sm="3">
+                                <Card className="skillgroup-skill-card">
+                                    <div className="skillgroup-skill-card-content">
+                                        <p className="skill-card-num-associates">15</p>
+                                        <p className="skill-card-name">Associates In <strong>Skill Name</strong></p>
+                                    </div>
+                                </Card>
+                            </Col>
+                        </Row>
+                    </div>
                 </Container>
         )
     }
