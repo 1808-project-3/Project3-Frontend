@@ -71,15 +71,15 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                             <Col className="p-0" lg={{ size: 8, offset: 4 }}>
                                                 <Card>
                                                     <CardHeader className="p-3">
-                                                        <Row>
-                                                            {skills.map((skill: Skill) => {
-                                                                return (
-                                                                    <Col key={"skills-" + skill.skillId} lg={4}>
-                                                                        <CustomInput onChange={() => this.props.updateResourceSkills(skill)} type="checkbox" id={"skills-" + skill.skillId} name="skills" className="pr-4" label={skill.name} required />
-                                                                    </Col>
-                                                                )
-                                                            })}
-                                                        </Row>
+                                                        <Container>
+                                                            <Row>
+                                                                {skills.map((skill: Skill) => {
+                                                                    return (
+                                                                        <CustomInput key={"skills-" + skill.skillId} onChange={() => this.props.updateResourceSkills(skill)} type="checkbox" id={"skills-" + skill.skillId} name="skills" className="pr-4" label={skill.name} required />
+                                                                    )
+                                                                })}
+                                                            </Row>
+                                                        </Container>
                                                     </CardHeader>
                                                 </Card>
                                             </Col>
