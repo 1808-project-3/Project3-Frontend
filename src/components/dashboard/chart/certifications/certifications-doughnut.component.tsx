@@ -123,7 +123,7 @@ export default class CertificationsDoughnutComponent extends React.Component<any
                       <td onClick={this.handleEdit} style={{cursor:'pointer'}}><MdCreate/></td>
                   </tr>
                   <tr>
-                      <td>Maya</td>
+                      <td>Maja</td>
                       <td>1234</td>
                       <td>Certification Details</td>
                       <td>Project Name</td>
