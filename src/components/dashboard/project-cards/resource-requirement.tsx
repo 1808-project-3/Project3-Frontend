@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Container, Card, CardHeader, CardBody, ListGroup, ListGroupItem } from 'reactstrap';
+import {  Card, CardHeader, CardBody, ListGroup, ListGroupItem } from 'reactstrap';
 
 export default class ResourceRequirementComponent extends React.Component<any, any> {
 
@@ -32,8 +32,8 @@ export default class ResourceRequirementComponent extends React.Component<any, a
 
     public render(){
         return (
-            <Container className="project-card-container">
-                <Card>
+           
+                <Card className="project-card-container">
                     <CardHeader className="project-card-header"> RESOURCE REQUIREMENTS </CardHeader>
                     <CardBody>
                         <ListGroup style={{ width: '100%' }}>
@@ -48,7 +48,7 @@ export default class ResourceRequirementComponent extends React.Component<any, a
                         </ListGroup>
                     </CardBody>
                 </Card>
-            </Container>
+         
         )
     }
 }
