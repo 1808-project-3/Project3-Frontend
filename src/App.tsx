@@ -26,6 +26,8 @@ class App extends React.Component {
   }
 
   // these are the routes that include the nav/side bars.
+  // add the paths that the sidebar buttons will lead to in sidebar component; place paths in the link attribute starting with '/'
+  // the names used in the route paths below will be what is displayed in the breadcrumbs so keep that in mind when naming routes.
   public wrappedRoutes = (props:any) => (
     <Layout location={props.location} history={props.history}>
       <Switch>
