@@ -1,7 +1,8 @@
 import { addSkillsTypes } from "./add-skills.types";
 import { Skill } from "../../models/Skill";
+import { Resume } from "../../models/Resume";
 
-export const fetchCompetencyTaggingList = () => (dispatch:any) => {
+export const fetchCompetencyTaggingList = () => (dispatch: any) => {
     dispatch({
         payload: {
             listOfCompetencyTaggings: ['Tag1', 'Tag2', 'Tag3', 'Tag4']
@@ -24,7 +25,7 @@ export const fetchLocationList = () => (dispatch: any) => {
     // fetch needs to pull list of possible grades
     dispatch({
         payload: {
-            listOfLocations: ['Florida','Georgia','California','Texas']
+            listOfLocations: ['Florida', 'Georgia', 'California', 'Texas']
         },
         type: addSkillsTypes.FETCH_LOCATIONS
     })
@@ -56,5 +57,21 @@ export const toggleSkillGroup = (event: any) => {
             groupId: +event.id.slice(13)
         },
         type: addSkillsTypes.TOGGLE_SKILL_GROUP
+    }
+}
+
+export const addResumes = (files: FileList | null) => {
+    const newResumes: Resume[] = [];
+    if (files) {
+        for (let i = 0; i < files.length as any; i++) {
+            const fileName = files[i].name;
+            newResumes.push(new Resume({ fileName, url: `http://fakeURL.com/${fileName}` }));
+        }
+    }
+    return {
+        payload: {
+            newResumes
+        },
+        type: addSkillsTypes.ADD_RESUMES
     }
 }

@@ -108,6 +108,11 @@ export const addSkillsReducer = (state = initialState, action: any) => {
         case addSkillsTypes.FETCH_COMPETENCY_TAGGINGS:
             newState.listOfCompetencyTaggings = action.payload.listOfCompetencyTaggings;
             return newState;
+        case addSkillsTypes.ADD_RESUMES:
+            const newResumesResource = new Resource({ ...state.resource });
+            newResumesResource.resumes = [...state.resource.resumes, ...action.payload.newResumes];
+            newState.resource = newResumesResource;
+            return newState;
     }
     return state;
 }

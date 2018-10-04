@@ -24,6 +24,7 @@ interface IProps extends RouteComponentProps<{}>, IAddSkillsState {
     fetchLocationList: () => void
     updateResource: (event: any) => void
     updateResourceSkills: (skill: Skill) => void
+    addResumes: (files: FileList | null) => void
     toggleSkillGroup: (event: any) => void
 }
 
@@ -148,12 +149,12 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                     <Label for="inputCompetencyTagging" lg={4} className="font-weight-bold">COMPETENCY TAGGING</Label>
                                     <Col lg={8} className="my-auto">
                                         <Input onChange={e => this.props.updateResource(e.target)} type="select" name="competencyTagging" id="inputCompetencyTagging" required >
-                                        <option value="" hidden></option>
-                                        {this.props.listOfCompetencyTaggings.map((tag: string) => {
-                                            return (
-                                                <option value={tag} key={tag}>{tag}</option>
-                                            )
-                                        })}
+                                            <option value="" hidden></option>
+                                            {this.props.listOfCompetencyTaggings.map((tag: string) => {
+                                                return (
+                                                    <option value={tag} key={tag}>{tag}</option>
+                                                )
+                                            })}
                                         </Input>
                                     </Col>
                                 </FormGroup>
@@ -174,7 +175,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                                 value={resource.project && resource.project.endDate}
                                                 calendarIcon={<IoMdCalendar />}
                                                 clearIcon={null as any}
-                                                minDate={resource.project.startDate?resource.project.startDate:undefined}
+                                                minDate={resource.project.startDate ? resource.project.startDate : undefined}
                                                 required
                                             />
                                         </div>
@@ -196,12 +197,12 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                     <Label for="inputLocation" lg={4} className="font-weight-bold">LOCATION</Label>
                                     <Col lg={8} className="my-auto">
                                         <Input onChange={e => this.props.updateResource(e.target)} type="select" name="location" id="inputLocation" required>
-                                        <option value="" hidden></option>
-                                        {this.props.listOfLocations.map((location: string) => {
-                                            return (
-                                                <option value={location} key={location}>{location}</option>
-                                            )
-                                        })}
+                                            <option value="" hidden></option>
+                                            {this.props.listOfLocations.map((location: string) => {
+                                                return (
+                                                    <option value={location} key={location}>{location}</option>
+                                                )
+                                            })}
                                         </Input>
                                     </Col>
                                 </FormGroup>
@@ -209,13 +210,13 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                     <Label for="inputResumes" lg={4} className="font-weight-bold">ATTACHMENTS (RESUME)</Label>
                                     <Col lg={8} className="my-auto">
                                         <Label className="btn btn-secondary mb-0">
-                                            <small>UPLOAD RESUME</small><Input type="file" accept=".doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.pdf" name="resumes" id="inputResumes" hidden />
+                                            <small>UPLOAD RESUME</small><Input onChange={e => this.props.addResumes(e.target.files)} multiple type="file" accept=".doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.pdf" name="resumes" id="inputResumes" hidden />
                                         </Label>
                                     </Col>
                                 </FormGroup>
                                 <Row>
                                     <Col lg={{ size: 8, offset: 4 }}>
-                                        {["Doc Name 01", "Doc Name 02", "Doc Name 03"].map((text, index) => <ClosablePill className="mr-3 mt-2" key={index} text={text} color="secondary" onClose={() => console.log("CLOSED")} />)}
+                                        {resource.resumes.map((resume, index) => <ClosablePill className="mr-3 mt-2" key={index} text={resume.fileName} color="secondary" onClose={() => console.log("CLOSED")} />)}
                                     </Col>
                                 </Row>
                             </Col>
@@ -237,6 +238,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
 const mapStateToProps = (state: IState) => state.addSkills
 
 const mapDispatchToProps = {
+    addResumes: addSkillsActions.addResumes,
     fetchCompetencyTaggingList: addSkillsActions.fetchCompetencyTaggingList,
     fetchGradeList: addSkillsActions.fetchGradeList,
     fetchLocationList: addSkillsActions.fetchLocationList,
