@@ -15,6 +15,7 @@ import * as addSkillsActions from '../../actions/resource-skills/add-skills.acti
 import SkillGroups from '../../assets/skill-groups.json';
 import { Group } from '../../models/Group';
 import { Skill } from '../../models/Skill';
+import Collapse from 'reactstrap/lib/Collapse';
 
 interface IProps extends RouteComponentProps<{}>, IAddSkillsState {
     updateResource: (event: any) => void
@@ -67,7 +68,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                         </Container>
                                     </Col>
                                 </FormGroup>
-                                {skills.length > 0 &&
+                                <Collapse isOpen={skills.length > 0}>
                                     <FormGroup>
                                         <Row>
                                             <Col className="p-0" lg={{ size: 8, offset: 4 }}>
@@ -87,7 +88,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                             </Col>
                                         </Row>
                                     </FormGroup>
-                                }
+                                </Collapse>
                                 <FormGroup row>
                                     <Label for="inputCertifications" lg={4} className="font-weight-bold">CERTIFICATIONS, IF ANY</Label>
                                     <Col lg={8} className="my-auto">
