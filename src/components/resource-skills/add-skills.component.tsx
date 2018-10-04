@@ -166,6 +166,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                                 value={resource.project && resource.project.startDate}
                                                 calendarIcon={<IoMdCalendar />}
                                                 clearIcon={null as any}
+                                                required
                                             />
                                             <span>To</span>
                                             <DatePicker
@@ -173,6 +174,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                                 value={resource.project && resource.project.endDate}
                                                 calendarIcon={<IoMdCalendar />}
                                                 clearIcon={null as any}
+                                                required
                                             />
                                         </div>
                                     </Col>
