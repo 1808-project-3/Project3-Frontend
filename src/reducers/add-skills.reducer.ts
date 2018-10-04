@@ -82,6 +82,9 @@ export const addSkillsReducer = (state = initialState, action: any) => {
                     newState.resource = newResource;
                     break;
                 case "date-tbd":
+                    const newEmptyDateProject = new Project({ ...state.resource.project, startDate: undefined, endDate: undefined });
+                    newResource.project = newEmptyDateProject;
+                    newState.resource = newResource;
                     newState.dateTbd = !state.dateTbd;
                     break;
             }
