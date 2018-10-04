@@ -5,6 +5,7 @@ import { Resource } from "../models/Resource";
 import { User } from "../models/User";
 
 const initialState: IAddSkillsState = {
+    listOfGrades: [],
     resource: new Resource(),
     skillGroupIds: []
 }
@@ -95,6 +96,9 @@ export const addSkillsReducer = (state = initialState, action: any) => {
             const newSkills = resourceHasSkill ? [...currentSkills].filter(skill => skill.skillId !== changedSkill.skillId) : [...currentSkills, changedSkill];
             const newSkillsResource = new Resource({ ...state.resource, skills: newSkills });
             newState.resource = newSkillsResource;
+            return newState;
+        case addSkillsTypes.FETCH_GRADES:
+            newState.listOfGrades = action.payload.listOfGrades;
             return newState;
     }
     return state;

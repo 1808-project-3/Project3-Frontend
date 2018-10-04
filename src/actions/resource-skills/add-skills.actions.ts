@@ -1,6 +1,17 @@
 import { addSkillsTypes } from "./add-skills.types";
 import { Skill } from "../../models/Skill";
 
+export const fetchGradeList = () => (dispatch: any) => {
+    // Fetch needs to pull list of possible Grades
+    dispatch({
+        payload: {
+            listOfGrades: ['AU', 'A', 'D', 'AD', 'UA']
+        },
+        type: addSkillsTypes.FETCH_GRADES
+    })
+}
+
+
 export const updateResource = (event: any) => {
     return {
         payload: {

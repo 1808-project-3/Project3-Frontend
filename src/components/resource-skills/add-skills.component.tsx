@@ -2,28 +2,36 @@ import * as React from 'react';
 import DatePicker from 'react-date-picker';
 import { IoMdAddCircleOutline, IoMdCalendar } from 'react-icons/io';
 import { connect } from 'react-redux';
+import { RouteComponentProps } from 'react-router';
 import { CardHeader, Col, Container, CustomInput, Form, FormGroup } from 'reactstrap';
 import Button from 'reactstrap/lib/Button';
 import Card from 'reactstrap/lib/Card';
+import Collapse from 'reactstrap/lib/Collapse';
 import Input from 'reactstrap/lib/Input';
 import Label from 'reactstrap/lib/Label';
 import Row from 'reactstrap/lib/Row';
-import { ClosablePill } from './closable-pill.component';
-import { IAddSkillsState, IState } from '../../reducers';
-import { RouteComponentProps } from 'react-router';
 import * as addSkillsActions from '../../actions/resource-skills/add-skills.actions';
 import SkillGroups from '../../assets/skill-groups.json';
 import { Group } from '../../models/Group';
 import { Skill } from '../../models/Skill';
-import Collapse from 'reactstrap/lib/Collapse';
+import { IAddSkillsState, IState } from '../../reducers';
+import { ClosablePill } from './closable-pill.component';
+
 
 interface IProps extends RouteComponentProps<{}>, IAddSkillsState {
+    fetchGradeList: () => void
     updateResource: (event: any) => void
     updateResourceSkills: (skill: Skill) => void
     toggleSkillGroup: (event: any) => void
 }
 
 class AddSkillsComponent extends React.Component<IProps, {}> {
+    public constructor(props: any) {
+        super(props);
+        this.props.fetchGradeList();
+
+    }
+
     public render() {
         const { resource, skillGroupIds } = this.props;
         const selectedGroups = SkillGroups.filter((group: Group) => skillGroupIds.indexOf(group.groupId) > -1);
@@ -123,7 +131,13 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                 <FormGroup row>
                                     <Label for="inputGrade" lg={4} className="font-weight-bold">GRADE</Label>
                                     <Col lg={8} className="my-auto">
-                                        <Input onChange={e => this.props.updateResource(e.target)} type="text" name="grade" id="inputGrade" required />
+                                        <Input onChange={e => this.props.updateResource(e.target)} type="select" name="grade" id="inputGrade" required>
+                                        {this.props.listOfGrades.map((grade: string) => {
+                                            return (
+                                            <option value={grade} key={grade}>{grade}</option>
+                                        )
+                                        })}
+                                        </Input>
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
@@ -202,9 +216,11 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
 const mapStateToProps = (state: IState) => state.addSkills
 
 const mapDispatchToProps = {
+    fetchGradeList: addSkillsActions.fetchGradeList,
     toggleSkillGroup: addSkillsActions.toggleSkillGroup,
     updateResource: addSkillsActions.updateResource,
     updateResourceSkills: addSkillsActions.updateResourceSkills
+
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddSkillsComponent);

@@ -12,6 +12,7 @@ export interface ISignInState {
 }
 
 export interface IAddSkillsState {
+  listOfGrades: string[],
   resource: Resource,
   skillGroupIds: number[]
 }
