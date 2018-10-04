@@ -150,10 +150,10 @@ export default class SkillDoughnut extends React.Component<any, any> {
                         </Col>
                     </Row>                    
                     <Row style={{marginTop: "10px"}}>
-                        <Col md={6} style={{textAlign: "center"}}>
+                        <Col md={6} style={{paddingLeft:'12%'}}>
                             <p style={{color: '#7C7A7A'}}>TOTAL ASSOCIATES</p>
                         </Col>
-                        <Col style={{textAlign: "center"}}>
+                        <Col md={6} style={{paddingLeft: '6%', textAlign: "center"}}>
                             <p style={{fontWeight: 'bold'}}>{this.state.selectedSkillGroup}</p>
                         </Col>
                     </Row>
