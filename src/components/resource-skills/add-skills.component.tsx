@@ -42,6 +42,9 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
         const user = resource.user;
         const validAssociateName = user.firstName && user.lastName;
         const associateName = `${user.firstName} ${user.lastName}`
+        const supervisor = resource.project.supervisor;
+        const validSupervisorName = supervisor.firstName && supervisor.lastName;
+        const supervisorName = `${supervisor.firstName} ${supervisor.lastName}`
         const selectedGroups = SkillGroups.filter((group: Group) => skillGroupIds.indexOf(group.groupId) > -1);
         const skills = selectedGroups.reduce((acc: any, val: any) => {
             const groupSkills = val.skills.map((skill: any) => new Skill({ ...skill, group: new Group(val) }))
@@ -121,25 +124,25 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                 <FormGroup row>
                                     <Label for="inputCustomerName" lg={4} className="font-weight-bold"> CUSTOMER NAME</Label>
                                     <Col lg={8} className="my-auto">
-                                        <Input onChange={e => this.props.updateResource(e.target)} type="text" name="customerName" id="inputCustomerName" required />
+                                        <Input value={resource.project.customerName ? resource.project.customerName : ''} onChange={e => this.props.updateResource(e.target)} type="text" name="customerName" id="inputCustomerName" required />
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
                                     <Label for="inputProjectId" lg={4} className="font-weight-bold">PROJECT ID</Label>
                                     <Col lg={8} className="my-auto">
-                                        <Input onChange={e => this.props.updateResource(e.target)} type="text" name="projectId" id="inputProjectId" required />
+                                        <Input value={resource.project.pId ? resource.project.pId : ''} onChange={e => this.props.updateResource(e.target)} type="text" name="projectId" id="inputProjectId" required />
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
                                     <Label for="inputProjectName" lg={4} className="font-weight-bold">PROJECT NAME</Label>
                                     <Col lg={8} className="my-auto">
-                                        <Input onChange={e => this.props.updateResource(e.target)} type="text" name="projectName" id="inputProjectName" required />
+                                        <Input value={resource.project.name ? resource.project.name : ''} onChange={e => this.props.updateResource(e.target)} type="text" name="projectName" id="inputProjectName" required />
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
                                     <Label for="inputGrade" lg={4} className="font-weight-bold">GRADE</Label>
                                     <Col lg={8} className="my-auto">
-                                        <Input onChange={e => this.props.updateResource(e.target)} type="select" name="grade" id="inputGrade" required>
+                                        <Input value={resource.grade} onChange={e => this.props.updateResource(e.target)} type="select" name="grade" id="inputGrade" required>
                                             <option value="" hidden></option>
                                             {this.props.listOfGrades.map((grade: string) => {
                                                 return (
@@ -152,7 +155,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                 <FormGroup row>
                                     <Label for="inputCompetencyTagging" lg={4} className="font-weight-bold">COMPETENCY TAGGING</Label>
                                     <Col lg={8} className="my-auto">
-                                        <Input onChange={e => this.props.updateResource(e.target)} type="select" name="competencyTagging" id="inputCompetencyTagging" required >
+                                        <Input value={resource.compentencyTagging} onChange={e => this.props.updateResource(e.target)} type="select" name="competencyTagging" id="inputCompetencyTagging" required >
                                             <option value="" hidden></option>
                                             {this.props.listOfCompetencyTaggings.map((tag: string) => {
                                                 return (
@@ -196,19 +199,19 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                 <FormGroup row>
                                     <Label for="inputSupervisorId" lg={4} className="font-weight-bold">HCM SUPERVISOR ID</Label>
                                     <Col lg={8} className="my-auto">
-                                        <Input onChange={e => this.props.updateResource(e.target)} type="text" name="supervisorId" id="inputSupervisorId" required />
+                                        <Input value={supervisor.assocId ? supervisor.assocId : ''} onChange={e => this.props.updateResource(e.target)} type="text" name="supervisorId" id="inputSupervisorId" required />
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
                                     <Label for="inputSupervisorName" lg={4} className="font-weight-bold">HCM SUPERVISOR NAME</Label>
                                     <Col lg={8} className="my-auto">
-                                        <Input onChange={e => this.props.updateResource(e.target)} type="text" name="supervisorName" id="inputSupervisorName" required />
+                                        <Input value={validSupervisorName ? supervisorName : ''} onChange={e => this.props.updateResource(e.target)} type="text" name="supervisorName" id="inputSupervisorName" placeholder="Autofills with valid supervisor ID" disabled />
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
                                     <Label for="inputLocation" lg={4} className="font-weight-bold">LOCATION</Label>
                                     <Col lg={8} className="my-auto">
-                                        <Input onChange={e => this.props.updateResource(e.target)} type="select" name="location" id="inputLocation" required>
+                                        <Input value={resource.project.location} onChange={e => this.props.updateResource(e.target)} type="select" name="location" id="inputLocation" required>
                                             <option value="" hidden></option>
                                             {this.props.listOfLocations.map((location: string) => {
                                                 return (
