@@ -113,6 +113,11 @@ export const addSkillsReducer = (state = initialState, action: any) => {
             newResumesResource.resumes = [...state.resource.resumes, ...action.payload.newResumes];
             newState.resource = newResumesResource;
             return newState;
+        case addSkillsTypes.REMOVE_RESUME:
+            const newRemovedResumeResource = new Resource({ ...state.resource });
+            newRemovedResumeResource.resumes = state.resource.resumes.filter(resume => resume.resumeId !== action.payload.resumeId);
+            newState.resource = newRemovedResumeResource;
+            return newState;
     }
     return state;
 }

@@ -25,6 +25,7 @@ interface IProps extends RouteComponentProps<{}>, IAddSkillsState {
     updateResource: (event: any) => void
     updateResourceSkills: (skill: Skill) => void
     addResumes: (files: FileList | null) => void
+    removeResume: (resumeId: number) => void
     toggleSkillGroup: (event: any) => void
 }
 
@@ -216,7 +217,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                 </FormGroup>
                                 <Row>
                                     <Col lg={{ size: 8, offset: 4 }}>
-                                        {resource.resumes.map((resume, index) => <ClosablePill className="mr-3 mt-2" key={index} text={resume.fileName} color="secondary" onClose={() => console.log("CLOSED")} />)}
+                                        {resource.resumes.map((resume) => <ClosablePill className="mr-3 mt-2" key={resume.resumeId} text={resume.fileName} color="secondary" onClose={() => this.props.removeResume(resume.resumeId)} />)}
                                     </Col>
                                 </Row>
                             </Col>
@@ -242,6 +243,7 @@ const mapDispatchToProps = {
     fetchCompetencyTaggingList: addSkillsActions.fetchCompetencyTaggingList,
     fetchGradeList: addSkillsActions.fetchGradeList,
     fetchLocationList: addSkillsActions.fetchLocationList,
+    removeResume: addSkillsActions.removeResume,
     toggleSkillGroup: addSkillsActions.toggleSkillGroup,
     updateResource: addSkillsActions.updateResource,
     updateResourceSkills: addSkillsActions.updateResourceSkills

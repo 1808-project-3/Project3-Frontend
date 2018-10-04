@@ -75,3 +75,11 @@ export const addResumes = (files: FileList | null) => {
         type: addSkillsTypes.ADD_RESUMES
     }
 }
+export const removeResume = (resumeId: number) => {
+    return {
+        payload: {
+            resumeId
+        },
+        type: addSkillsTypes.REMOVE_RESUME
+    }
+}
