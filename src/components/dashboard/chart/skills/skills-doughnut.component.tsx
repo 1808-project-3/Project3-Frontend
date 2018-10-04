@@ -2,6 +2,7 @@ import * as React from 'react';
 import {Row, Col, Container, Card} from 'reactstrap';
 import { Doughnut } from 'react-chartjs-2';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 function getRandomInt(min:any, max:any) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -131,7 +132,52 @@ export default class SkillDoughnut extends React.Component<any, any> {
         this.setState({skillChart: {data: skillState}});
     }
     
-    public componentDidMount() {
+    public async componentDidMount() {
+        const list = [{
+            skill: [{
+                skillName: "",
+                totalSkill: 0
+            }],
+            skillGroupName: "",
+            totalSkillGroup: 0            
+        }]
+        const res = await axios.get('http://localhost:8080/users', {headers: {"JWT": 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2Vycy9Uek1Vb2NNRjRwIiwiZXhwIjo2MjUxNjM3OTYwMCwidXNlcmlkIjoxMjM0NTYsInNjb3BlIjoic2VsZiBncm91cHMvdXNlcnMifQ.nD9kCwmbAIpFj__Qq_e2_XOkbBCe6zhXu713DoBOCjY' }});
+        const res1 = await axios.get('http://localhost:5002/skills', {headers: {"JWT": 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2Vycy9Uek1Vb2NNRjRwIiwiZXhwIjo2MjUxNjM3OTYwMCwidXNlcmlkIjoxMjM0NTYsInNjb3BlIjoic2VsZiBncm91cHMvdXNlcnMifQ.nD9kCwmbAIpFj__Qq_e2_XOkbBCe6zhXu713DoBOCjY' }});
+        const res2 = await axios.get('http://localhost:5002/skill-group', {headers: {"JWT": 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2Vycy9Uek1Vb2NNRjRwIiwiZXhwIjo2MjUxNjM3OTYwMCwidXNlcmlkIjoxMjM0NTYsInNjb3BlIjoic2VsZiBncm91cHMvdXNlcnMifQ.nD9kCwmbAIpFj__Qq_e2_XOkbBCe6zhXu713DoBOCjY' }});
+        // loop through groups
+        res2.data.forEach((group:any, i:any) => {
+            // grabbing group name
+            list[i].skillGroupName = group.groupName;
+            // iterating through users
+            res.data.forEach((user:any) => {
+                let hasGroup = false;
+                // filter skills in group
+                const skillsInGroup = res1.data.filter((id:any) => 
+                    id.groupId === group.groupId
+                )
+                // iterating through skills in group
+                skillsInGroup.forEach((skill:any , k: any) => {
+                    // adding skill name
+                    list[i].skill[k].skillName = skill.skillName;
+                    // filtering skills
+                    const count = user.userSkills.filter((skillId:any) => 
+                        skillId.skillId === skill.skillId
+                    )
+                    // skill count
+                    list[i].skill[k].totalSkill += count.length;
+                    if (count.length > 0) {
+                        hasGroup = true;
+                    }
+                })
+                if (hasGroup) {
+                    // skillgroup count
+                    list[i].totalSkillGroup++;
+                }
+            })
+        }) 
+        console.log(list)
+        this.setState({skillGroups: list});
+        // console.log(this.state.skillGroups);
         this.setState({ skillGroupChart: {data: getSkillGroupState()}, skillChart: {data: getSkillState() }});
         
     }
@@ -168,7 +214,7 @@ export default class SkillDoughnut extends React.Component<any, any> {
                     </Row>                    
                     <div className="skillgroup-cards-container">
 
-                        <Row>
+                        <Row style={{overflowY: 'scroll', overflowX: 'hidden', height: '10%'}}>
                             <Col sm="3">
                                 <Card className="skillgroup-skill-card">
                                     <div className="skillgroup-skill-card-content">
@@ -201,8 +247,6 @@ export default class SkillDoughnut extends React.Component<any, any> {
                                     </div>
                                 </Card>
                             </Col>
-                        </Row>
-                        <Row style={{marginTop: "0.1%"}}>
                             <Col sm="3">
                                 <Card className="skillgroup-skill-card">
                                     <div className="skillgroup-skill-card-content">
@@ -235,6 +279,7 @@ export default class SkillDoughnut extends React.Component<any, any> {
                                     </div>
                                 </Card>
                             </Col>
+                            
                         </Row>
                     </div>
                 </Container>
