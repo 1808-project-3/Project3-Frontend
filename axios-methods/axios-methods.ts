@@ -19,6 +19,11 @@ exactly what you need so the backend can get it right.
               - skill name
               - total number of associates with that skill
               
+-Need 3 axios calls
+  -Number of Associates 
+  -Number of Projects
+  -Number of Certified Associates (I'm not sure about this one) 
+              
  =============================================================================================================================
  =============================================================================================================================
  import axios from 'axios';
