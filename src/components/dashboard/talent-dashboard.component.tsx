@@ -21,6 +21,7 @@ export default class TalentDashboard extends React.Component {
                     </Col>
 
                 </Row>
+                
                 <Row>
                     <Col md={4}>
                         <ProjectsTile />
@@ -31,20 +32,17 @@ export default class TalentDashboard extends React.Component {
                     <Col md={4}>
                         <CertifiedAssociatesTile />
                     </Col>
-                  
-                     
-                
-
                 </Row>
-                <Row>
+
+                <Row style={{marginTop:"35px"}}>
                     <Col md={4}>
                         <Row>
                             <Col md={12}>
                                 <RecentlyAddedProjectsComponent />
                             </Col>
                         </Row>
-                        <Row>
-                            <Col md={12}>
+                        <Row style={{marginTop:"25"}}>
+                            <Col md={12} >
                                 <ResourceRequirementComponent />
                             </Col>
                         </Row>
@@ -53,6 +51,7 @@ export default class TalentDashboard extends React.Component {
                         <ChartComponent />
                     </Col>
                 </Row>
+                
 
 
             </Container>

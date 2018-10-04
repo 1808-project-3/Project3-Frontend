@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Container, Card, CardHeader, CardBody, ListGroup, ListGroupItem, CardLink } from 'reactstrap';
+import { Card, CardHeader, CardBody, ListGroup, ListGroupItem, CardLink } from 'reactstrap';
 
 export default class RecentlyAddedProjectsComponent extends React.Component<any, any> {
 
@@ -36,8 +36,8 @@ export default class RecentlyAddedProjectsComponent extends React.Component<any,
 
     public render(){
         return (
-            <Container className="project-card-container">
-                <Card>
+          
+                <Card className="project-card-container">
                     <CardHeader className="project-card-header"> RECENTLY ADDED PROJECTS </CardHeader>
                     <CardBody>
                         <ListGroup className="project-card-list">
@@ -52,7 +52,7 @@ export default class RecentlyAddedProjectsComponent extends React.Component<any,
                         </div>
                     </CardBody>
                 </Card>
-            </Container>
+          
         )
     }
 }
