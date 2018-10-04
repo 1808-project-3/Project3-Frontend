@@ -1,8 +1,15 @@
 import { infoTypes } from "./info.types";
 import axios from "axios";
 
+/**
+ * This action uses axios make a GET request for all resources based on tableType
+ * @param tableType
+ * Determines which API endpoint is used for the GET request
+ */
+
 export const getResourceList = (tableType: string) => (dispatch: any) => {
     let path = '';
+    console.log("getResourceList params: " + tableType);
     if(tableType === "UI"){
         path = 'https://my-json-server.typicode.com/avicuna/talent-portal-mock/ui'
     }

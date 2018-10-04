@@ -13,7 +13,9 @@ interface IProps {
 }
 
 /**
- * This component displays the project list table
+ * This component displays the project list table with an onClick method on each row.
+ * This method will display the associate list component that will grab associates related
+ * to the project that was clicked.
  */
 
 export class ProjectListTableComponent extends React.Component<IProps, any> {
@@ -30,7 +32,6 @@ export class ProjectListTableComponent extends React.Component<IProps, any> {
   }
 
   public render() {
-    // const list = this.props.projectList || [];
     const listEntries: any[] = [];
     for (const l of this.props.projectList) {
       if(+this.props.viewRow === +l.id){
