@@ -14,6 +14,10 @@
     line-height: 4em;
 }
 
+.active{
+    background-color: #33a4dc;
+}
+
 .sidebarButton:hover{
     background-color: #33a4dc;
 }
@@ -21,3 +25,17 @@
 .sbimg{
     max-width:100%;
 }
+.btn{
+    background-color: #5dc3f3;
+    height: 4em;
+    border: none;
+}
+.btn:active{
+    background-color: black;
+}
+
+.btn:hover{
+    background-color: #33a4dc;
+    border-radius: 0;
+}
+

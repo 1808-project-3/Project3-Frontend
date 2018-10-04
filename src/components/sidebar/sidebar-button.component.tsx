@@ -1,5 +1,6 @@
 import * as React from 'react';
 import './sidebarStyles.css';
+import { Link } from 'react-router-dom';
 
 export class SidebarButton extends React.Component<any, any>
 {
@@ -12,7 +13,8 @@ export class SidebarButton extends React.Component<any, any>
     {
         const purl = process.env.PUBLIC_URL;
         return(
-            <div className="sidebarButton" onClick={() => this.props.clicked()}><img className="sbimg" src={purl+this.props.icon}/></div>
+            <Link to={this.props.link}><div className="sidebarButton"><img className="sbimg" src={purl+this.props.icon}/></div></Link>
         )
     }
 }
+
