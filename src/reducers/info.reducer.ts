@@ -2,6 +2,7 @@ import {IInfoState} from "./index";
 import {infoTypes} from "../actions/info/info.types";
 
 const initialState: IInfoState = {
+    associateList: [],
     errorMessage: "",
     projectList: [],
     resourceList: [],
@@ -11,6 +12,11 @@ const initialState: IInfoState = {
 
 export const infoReducer = (state: IInfoState = initialState, action: any) => {
     switch (action.type) {
+        case infoTypes.GET_ASSOCIATE_LIST:
+            return {
+                ...state,
+                associateList: action.payload.associateList
+            };
         case infoTypes.GET_RESOURCE_LIST:
             return {
                 ...state,

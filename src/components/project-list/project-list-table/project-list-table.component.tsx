@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { IState } from "../../../reducers";
 import { Table } from "reactstrap";
 import ProjectListExport from "./ProjectListExport";
+import ProjectListAssociatesComponent from "../project-list-associates/project-list-associates.component";
 
 interface IProps {
   viewRow: number;
@@ -45,13 +46,7 @@ export class ProjectListTableComponent extends React.Component<IProps, any> {
               </tr>
           );
           listEntries.push(
-              <tr data-id={l.id} key={0} onClick={this.chooseRow}>
-                  <td>HELLO</td>
-                  <td>HELLO</td>
-                  <td>HELLO</td>
-                  <td>HELLO</td>
-                  <td>HELLO</td>
-              </tr>
+              <ProjectListAssociatesComponent />
           );
       }
       else {

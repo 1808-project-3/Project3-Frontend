@@ -26,6 +26,7 @@ export interface IInfoState {
     viewRow: number
     resourceList: any[]
     projectList: any[]
+    associateList: any[]
     errorMessage: string
 }
 
