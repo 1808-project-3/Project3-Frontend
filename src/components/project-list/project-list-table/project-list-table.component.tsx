@@ -1,8 +1,8 @@
 import * as React from "react";
-import {getProjectList, updateViewRow} from "../../../actions/info/info.actions";
+import { getProjectList, updateViewRow } from "../../../actions/info/info.actions";
 import { connect } from "react-redux";
 import { IState } from "../../../reducers";
-import { Table } from "reactstrap";
+import { Table, Row, Container } from "reactstrap";
 import ProjectListExport from "./ProjectListExport";
 
 interface IProps {
@@ -24,78 +24,81 @@ export class ProjectListTableComponent extends React.Component<IProps, any> {
     this.chooseRow = this.chooseRow.bind(this);
   }
 
-  public chooseRow(e: any){
-      this.props.updateViewRow(e.currentTarget.dataset.id);
+  public chooseRow(e: any) {
+    this.props.updateViewRow(e.currentTarget.dataset.id);
   }
-  public componentDidMount(){
-      this.props.getProjectList();
+  public componentDidMount() {
+    this.props.getProjectList();
   }
 
   public render() {
     const listEntries: any[] = [];
     for (const l of this.props.projectList) {
-      if(+this.props.viewRow === +l.id){
-          listEntries.push(
-              <tr data-id={l.id} key={l.id} onClick={this.chooseRow}>
-                  <td>{l.project_name}</td>
-                  <td>{l.id}</td>
-                  <td>{l.start_date}</td>
-                  <td>{l.end_date}</td>
-                  <td>{l.project_details}</td>
-              </tr>
-          );
-          listEntries.push(
-              <tr data-id={l.id} key={0} onClick={this.chooseRow}>
-                  <td>HELLO</td>
-                  <td>HELLO</td>
-                  <td>HELLO</td>
-                  <td>HELLO</td>
-                  <td>HELLO</td>
-              </tr>
-          );
+      if (+this.props.viewRow === +l.id) {
+        listEntries.push(
+          <tr data-id={l.id} key={l.id} onClick={this.chooseRow}>
+            <td>{l.project_name}</td>
+            <td>{l.id}</td>
+            <td>{l.start_date}</td>
+            <td>{l.end_date}</td>
+            <td>{l.project_details}</td>
+          </tr>
+        );
+        listEntries.push(
+          <tr data-id={l.id} key={0} onClick={this.chooseRow}>
+            <td>HELLO</td>
+            <td>HELLO</td>
+            <td>HELLO</td>
+            <td>HELLO</td>
+            <td>HELLO</td>
+          </tr>
+        );
       }
       else {
-          listEntries.push(
-              <tr data-id={l.id} key={l.id} onClick={this.chooseRow}>
-                  <td>{l.project_name}</td>
-                  <td>{l.id}</td>
-                  <td>{l.start_date}</td>
-                  <td>{l.end_date}</td>
-                  <td>{l.project_details}</td>
-              </tr>
-          );
+        listEntries.push(
+          <tr data-id={l.id} key={l.id} onClick={this.chooseRow}>
+            <td>{l.project_name}</td>
+            <td>{l.id}</td>
+            <td>{l.start_date}</td>
+            <td>{l.end_date}</td>
+            <td>{l.project_details}</td>
+          </tr>
+        );
       }
     }
     return (
-      <div>
-        <ProjectListExport />
-        
-        <Table>
-          <thead>
-            <tr>
-              <th>Project Name</th>
-              <th>ID</th>
-              <th>Start Date</th>
-              <th>End Date</th>
-              <th>Project Details</th>
-            </tr>
-          </thead>
-          <tbody>{listEntries}</tbody>
-        </Table>
-      </div>
+      <Container fluid>
+        <Row>
+          <div className="col-md-7">
+            <ProjectListExport />
+            <Table hover>
+              <thead>
+                <tr>
+                  <th>PROJECT NAME</th>
+                  <th>ID</th>
+                  <th>START DATE</th>
+                  <th>END DATE</th>
+                  <th>CUSTOMER NAME</th>
+                </tr>
+              </thead>
+              <tbody>{listEntries}</tbody>
+            </Table>
+          </div>
+        </Row>
+      </Container>
     );
   }
 }
 const mapStateToProps = (state: IState) => {
   return {
-      projectList: state.info.projectList,
-      viewRow: state.info.viewRow
+    projectList: state.info.projectList,
+    viewRow: state.info.viewRow
   };
 };
 
 const mapDispatchToProps = {
-    getProjectList,
-    updateViewRow,
+  getProjectList,
+  updateViewRow,
 };
 
 export default connect(

@@ -1,10 +1,11 @@
 import * as React from "react";
-import { TabContent, TabPane, Nav, NavItem, NavLink} from 'reactstrap';
-import {getResourceList, updateTableType} from "../../actions/info/info.actions";
+import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Container } from 'reactstrap';
+import { getResourceList, updateTableType } from "../../actions/info/info.actions";
 import classnames from 'classnames';
 import { connect } from "react-redux";
 import { IState } from "../../reducers";
 import TablesComponent from "./tables/tables.component";
+import ResourceListExport from "./tables/resourceListExport";
 
 interface IProps {
     tableType: string;
@@ -30,21 +31,21 @@ export class TabComponent extends React.Component<IProps, any> {
                 activeTab: tab
             });
         }
-        if(tab === "1") {
+        if (tab === "1") {
             this.props.updateTableType("UI");
         }
-        else if(tab === "2"){
+        else if (tab === "2") {
             this.props.updateTableType("Mobility");
         }
-        else if(tab === "3"){
+        else if (tab === "3") {
             this.props.updateTableType("CM");
         }
-        else if(tab === "4"){
+        else if (tab === "4") {
             this.props.updateTableType("Design");
         }
     }
 
-    public componentDidUpdate(){
+    public componentDidUpdate() {
         console.log("The table type selected is: " + this.props.tableType);
         this.props.getResourceList(this.props.tableType);
     }
@@ -52,56 +53,68 @@ export class TabComponent extends React.Component<IProps, any> {
 
     public render() {
         return (
-            <div>
-                <Nav tabs>
-                    <NavItem>
-                        <NavLink
-                            className={classnames({ active: this.state.activeTab === '1' })}
-                            onClick={() => { this.toggle('1'); }}
-                        >
-                            UI/Dev
+            <Container fluid>
+                <Row>
+                    <div className="col-md-10">
+                        <Nav tabs>
+                            <NavItem>
+                                <NavLink
+                                    className={classnames({ active: this.state.activeTab === '1' })}
+                                    onClick={() => { this.toggle('1'); }}
+                                >
+                                    UI/Dev
                         </NavLink>
-                    </NavItem>
-                    <NavItem>
-                        <NavLink
-                            className={classnames({ active: this.state.activeTab === '2' })}
-                            onClick={() => { this.toggle('2'); }}
-                        >
-                            Mobility
+                            </NavItem>
+                            <NavItem>
+                                <NavLink
+                                    className={classnames({ active: this.state.activeTab === '2' })}
+                                    onClick={() => { this.toggle('2'); }}
+                                >
+                                    Mobility
                         </NavLink>
-                    </NavItem>
-                    <NavItem>
-                        <NavLink
-                            className={classnames({ active: this.state.activeTab === '3' })}
-                            onClick={() => { this.toggle('3'); }}
-                        >
-                            Content Management
+                            </NavItem>
+                            <NavItem>
+                                <NavLink
+                                    className={classnames({ active: this.state.activeTab === '3' })}
+                                    onClick={() => { this.toggle('3'); }}
+                                >
+                                    Content Management
                         </NavLink>
-                    </NavItem>
-                    <NavItem>
-                        <NavLink
-                            className={classnames({ active: this.state.activeTab === '4' })}
-                            onClick={() => { this.toggle('4'); }}
-                        >
-                            Design
+                            </NavItem>
+                            <NavItem>
+                                <NavLink
+                                    className={classnames({ active: this.state.activeTab === '4' })}
+                                    onClick={() => { this.toggle('4'); }}
+                                >
+                                    Design
                         </NavLink>
-                    </NavItem>
-                </Nav>
-                <TabContent activeTab={this.state.activeTab}>
-                    <TabPane tabId="1">
-                        <TablesComponent />
-                    </TabPane>
-                    <TabPane tabId="2">
-                        <TablesComponent />
-                    </TabPane>
-                    <TabPane tabId="3">
-                        <TablesComponent />
-                    </TabPane>
-                    <TabPane tabId="4">
-                        <TablesComponent />
-                    </TabPane>
-                </TabContent>
-            </div>
+                            </NavItem>
+                        </Nav>
+                    </div>
+                    <div className="col-md-2">
+                        <span className="pl-0"><ResourceListExport /></span>
+                    </div>
+                </Row>
+
+                <Row>
+                    <div className="col-md-12">
+                        <TabContent activeTab={this.state.activeTab}>
+                            <TabPane tabId="1">
+                                <TablesComponent />
+                            </TabPane>
+                            <TabPane tabId="2">
+                                <TablesComponent />
+                            </TabPane>
+                            <TabPane tabId="3">
+                                <TablesComponent />
+                            </TabPane>
+                            <TabPane tabId="4">
+                                <TablesComponent />
+                            </TabPane>
+                        </TabContent>
+                    </div>
+                </Row>
+            </Container>
         );
     }
 }

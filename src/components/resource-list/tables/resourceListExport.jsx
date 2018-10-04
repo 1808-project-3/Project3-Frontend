@@ -52,45 +52,42 @@ export default class ResourceListExport extends React.Component {
         const ExcelSheet = ReactExport.ExcelFile.ExcelSheet;
         const ExcelColumn = ReactExport.ExcelFile.ExcelColumn;
         return (
-            <div>
-                <ExcelFile
-                    element={
-                        <Button color="secondary" size="sm" block>
-                            Export All
+            <ExcelFile
+                element={
+                    <Button color="secondary" size="sm">
+                        EXPORT TO XLS
 						</Button>
-                    }
-                >
-                    <ExcelSheet data={this.state.ui} name="UI">
-                        <ExcelColumn label="ASSOCIATE NAME" value="associateName" />
-                        <ExcelColumn label="ID" value="id" />
-                        <ExcelColumn label="CERTIFICATION" value="certification" />
-                        <ExcelColumn label="PROJECT DETAILS" value="projectDetails" />
-                        <ExcelColumn label="GRADE" value="grade" />
-                    </ExcelSheet>
-                    <ExcelSheet data={this.state.mobility} name="Mobility">
-                        <ExcelColumn label="ASSOCIATE NAME" value="associateName" />
-                        <ExcelColumn label="ID" value="id" />
-                        <ExcelColumn label="CERTIFICATION" value="certification" />
-                        <ExcelColumn label="PROJECT DETAILS" value="projectDetails" />
-                        <ExcelColumn label="GRADE" value="grade" />
-                    </ExcelSheet>
-                    <ExcelSheet data={this.state.cm} name="CM">
-                        <ExcelColumn label="ASSOCIATE NAME" value="associateName" />
-                        <ExcelColumn label="ID" value="id" />
-                        <ExcelColumn label="CERTIFICATION" value="certification" />
-                        <ExcelColumn label="PROJECT DETAILS" value="projectDetails" />
-                        <ExcelColumn label="GRADE" value="grade" />
-                    </ExcelSheet>
-                    <ExcelSheet data={this.state.design} name="Design">
-                        <ExcelColumn label="ASSOCIATE NAME" value="associateName" />
-                        <ExcelColumn label="ID" value="id" />
-                        <ExcelColumn label="CERTIFICATION" value="certification" />
-                        <ExcelColumn label="PROJECT DETAILS" value="projectDetails" />
-                        <ExcelColumn label="GRADE" value="grade" />
-                    </ExcelSheet>
-
-                </ExcelFile>
-            </div>
+                }
+            >
+                <ExcelSheet data={this.state.ui} name="UI">
+                    <ExcelColumn label="ASSOCIATE NAME" value="associateName" />
+                    <ExcelColumn label="ID" value="id" />
+                    <ExcelColumn label="CERTIFICATION" value="certification" />
+                    <ExcelColumn label="PROJECT DETAILS" value="projectDetails" />
+                    <ExcelColumn label="GRADE" value="grade" />
+                </ExcelSheet>
+                <ExcelSheet data={this.state.mobility} name="Mobility">
+                    <ExcelColumn label="ASSOCIATE NAME" value="associateName" />
+                    <ExcelColumn label="ID" value="id" />
+                    <ExcelColumn label="CERTIFICATION" value="certification" />
+                    <ExcelColumn label="PROJECT DETAILS" value="projectDetails" />
+                    <ExcelColumn label="GRADE" value="grade" />
+                </ExcelSheet>
+                <ExcelSheet data={this.state.cm} name="CM">
+                    <ExcelColumn label="ASSOCIATE NAME" value="associateName" />
+                    <ExcelColumn label="ID" value="id" />
+                    <ExcelColumn label="CERTIFICATION" value="certification" />
+                    <ExcelColumn label="PROJECT DETAILS" value="projectDetails" />
+                    <ExcelColumn label="GRADE" value="grade" />
+                </ExcelSheet>
+                <ExcelSheet data={this.state.design} name="Design">
+                    <ExcelColumn label="ASSOCIATE NAME" value="associateName" />
+                    <ExcelColumn label="ID" value="id" />
+                    <ExcelColumn label="CERTIFICATION" value="certification" />
+                    <ExcelColumn label="PROJECT DETAILS" value="projectDetails" />
+                    <ExcelColumn label="GRADE" value="grade" />
+                </ExcelSheet>
+            </ExcelFile>
         );
     }
 }
