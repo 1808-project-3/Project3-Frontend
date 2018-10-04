@@ -111,13 +111,15 @@ nav {
   cursor: pointer;
 }
 
-/*****************************
-  Clicker
-*****************************/
-.blue {
-  color: blue;
+.border-col-right {
+  border-right: 1px solid #ccc;
 }
 
-.red {
-  color: red;
+.px-75{
+  padding-right: .75rem!important;
+  padding-left: .75rem!important
+}
+
+.clickable{
+  cursor: pointer;
 }
