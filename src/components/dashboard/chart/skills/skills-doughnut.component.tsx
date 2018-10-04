@@ -95,7 +95,7 @@ export default class SkillDoughnut extends React.Component<any, any> {
                     legend: {
                         labels: {
                             boxWidth: 10,
-                            padding: 40
+                            padding: 20
                         },
                         onClick: (e:any, legendItem:any) => {
                             console.log(legendItem.text);
@@ -140,13 +140,13 @@ export default class SkillDoughnut extends React.Component<any, any> {
             <div>
                 <div>
                     <Row>
-                        <Col>
-                            <div style={{ width: '100vh' }}>
+                        <Col md={7}>
+                            <div style={{ paddingLeft:'5%', paddingTop: '20%' }}>
                             <Doughnut data={this.state.skillGroupChart.data} options={this.state.skillGroupChart.options}/>                              
                             </div>
                         </Col>
-                        <Col>
-                            <div style={{ width: '55vh', paddingTop: '12vh'}}>
+                        <Col md={5}>
+                            <div style={{ paddingRight: '10%', paddingTop: '40%'}}>
                             <Doughnut data={this.state.skillChart.data} options={this.state.skillChart.options} />                        
                             </div>
                         </Col>
@@ -155,7 +155,7 @@ export default class SkillDoughnut extends React.Component<any, any> {
                         <Col md={6} style={{textAlign: "center"}}>
                             <p style={{color: '#7C7A7A'}}>TOTAL ASSOCIATES</p>
                         </Col>
-                        <Col style={{marginLeft: "220px"}}>
+                        <Col style={{textAlign: "center"}}>
                             <p style={{fontWeight: 'bold'}}>{this.state.selectedSkillGroup}</p>
                         </Col>
                     </Row>

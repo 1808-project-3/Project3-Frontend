@@ -5,6 +5,8 @@ import ChartComponent from './chart/chart.component';
 import AssociatesTile from './dashboard-tiles/dashboard-tile-associates';
 import CertifiedAssociatesTile from './dashboard-tiles/dashboard-tile-certified.component';
 import ProjectsTile from './dashboard-tiles/dashboard-tile-projects.component';
+import RecentlyAddedProjectsComponent from './project-cards/recently-added-projects';
+import ResourceRequirementComponent from './project-cards/resource-requirement';
 
 export default class TalentDashboard extends React.Component {
 
@@ -35,8 +37,21 @@ export default class TalentDashboard extends React.Component {
 
                 </Row>
                 <Row>
-                    <ChartComponent />
-
+                    <Col md={4}>
+                        <Row>
+                            <Col md={12}>
+                                <RecentlyAddedProjectsComponent />
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col md={12}>
+                                <ResourceRequirementComponent />
+                            </Col>
+                        </Row>
+                    </Col>
+                    <Col md={8}>
+                        <ChartComponent />
+                    </Col>
                 </Row>
 
 

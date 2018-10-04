@@ -65,7 +65,9 @@ export default class ChartComponent  extends React.Component<any,any> {
 
                             <TabPane tabId="1">
                                 <Row>
-                                    <SkillDoughnutComponent />
+                                    <Col md={12}>
+                                        <SkillDoughnutComponent />
+                                    </Col>
                                 </Row>                                
                                 {/* <Row>
                                     <SkillGroupComponent/>
