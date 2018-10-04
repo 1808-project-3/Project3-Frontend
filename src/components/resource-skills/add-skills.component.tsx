@@ -78,7 +78,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                         <Container>
                                             <Row>
                                                 {SkillGroups.map((group: Group) => {
-                                                    return <CustomInput onChange={e => this.props.toggleSkillGroup(e.target)} key={"group-" + group.groupId} type="checkbox" id={"skills-group-" + group.groupId} name="skillsGroup" className="pr-4" label={group.name} />
+                                                    return <CustomInput defaultChecked={this.props.skillGroupIds.indexOf(group.groupId) > -1} onChange={e => this.props.toggleSkillGroup(e.target)} key={"group-" + group.groupId} type="checkbox" id={"skills-group-" + group.groupId} name="skillsGroup" className="pr-4" label={group.name} />
                                                 })}
                                             </Row>
                                         </Container>
@@ -94,7 +94,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                                             <Row>
                                                                 {skills.map((skill: Skill) => {
                                                                     return (
-                                                                        <CustomInput key={"skills-" + skill.skillId} onChange={() => this.props.updateResourceSkills(skill)} type="checkbox" id={"skills-" + skill.skillId} name="skills" className="pr-4" label={skill.name} />
+                                                                        <CustomInput defaultChecked={resource.skills.some(selectedSkill => selectedSkill.skillId === skill.skillId)} key={"skills-" + skill.skillId} onChange={() => this.props.updateResourceSkills(skill)} type="checkbox" id={"skills-" + skill.skillId} name="skills" className="pr-4" label={skill.name} />
                                                                     )
                                                                 })}
                                                             </Row>
