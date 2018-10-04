@@ -20,6 +20,7 @@ import { ClosablePill } from './closable-pill.component';
 
 interface IProps extends RouteComponentProps<{}>, IAddSkillsState {
     fetchGradeList: () => void
+    fetchLocationList: () => void
     updateResource: (event: any) => void
     updateResourceSkills: (skill: Skill) => void
     toggleSkillGroup: (event: any) => void
@@ -29,7 +30,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
     public constructor(props: any) {
         super(props);
         this.props.fetchGradeList();
-
+        this.props.fetchLocationList();
     }
 
     public render() {
@@ -132,11 +133,11 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                     <Label for="inputGrade" lg={4} className="font-weight-bold">GRADE</Label>
                                     <Col lg={8} className="my-auto">
                                         <Input onChange={e => this.props.updateResource(e.target)} type="select" name="grade" id="inputGrade" required>
-                                        {this.props.listOfGrades.map((grade: string) => {
-                                            return (
-                                            <option value={grade} key={grade}>{grade}</option>
-                                        )
-                                        })}
+                                            {this.props.listOfGrades.map((grade: string) => {
+                                                return (
+                                                    <option value={grade} key={grade}>{grade}</option>
+                                                )
+                                            })}
                                         </Input>
                                     </Col>
                                 </FormGroup>
@@ -181,7 +182,14 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                 <FormGroup row>
                                     <Label for="inputLocation" lg={4} className="font-weight-bold">LOCATION</Label>
                                     <Col lg={8} className="my-auto">
-                                        <Input onChange={e => this.props.updateResource(e.target)} type="text" name="location" id="inputLocation" required />
+                                        <Input onChange={e => this.props.updateResource(e.target)} type="select" name="location" id="inputLocation" required>
+                                        <option value="" hidden></option>
+                                        {this.props.listOfLocations.map((location: string) => {
+                                            return (
+                                                <option value={location} key={location}>{location}</option>
+                                            )
+                                        })}
+                                        </Input>
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
@@ -217,6 +225,7 @@ const mapStateToProps = (state: IState) => state.addSkills
 
 const mapDispatchToProps = {
     fetchGradeList: addSkillsActions.fetchGradeList,
+    fetchLocationList: addSkillsActions.fetchLocationList,
     toggleSkillGroup: addSkillsActions.toggleSkillGroup,
     updateResource: addSkillsActions.updateResource,
     updateResourceSkills: addSkillsActions.updateResourceSkills

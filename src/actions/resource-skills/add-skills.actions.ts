@@ -11,6 +11,15 @@ export const fetchGradeList = () => (dispatch: any) => {
     })
 }
 
+export const fetchLocationList = () => (dispatch: any) => {
+    // fetch needs to pull list of possible grades
+    dispatch({
+        payload: {
+            listOfLocations: ['Florida','Georgia','California','Texas']
+        },
+        type: addSkillsTypes.FETCH_LOCATIONS
+    })
+}
 
 export const updateResource = (event: any) => {
     return {

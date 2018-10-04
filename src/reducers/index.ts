@@ -13,6 +13,7 @@ export interface ISignInState {
 
 export interface IAddSkillsState {
   listOfGrades: string[],
+  listOfLocations: string[],
   resource: Resource,
   skillGroupIds: number[]
 }
