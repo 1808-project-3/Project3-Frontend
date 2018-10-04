@@ -12,7 +12,7 @@ export default class SkillGroupComponent extends React.Component {
                 <Container>
                     <Row>
                         <Col md={6}>
-                            <h3 style={{marginLeft: "20px"}}>Skill Group</h3>
+                            <p style={{marginLeft: "10px"}}>Skill Group</p>
                         </Col>
                         <Col md={6} style={{display: "flex", justifyContent: "flex-end"}}>
                             <Link to="" style={{marginRight: "30px"}}>View All</Link>
@@ -53,7 +53,7 @@ export default class SkillGroupComponent extends React.Component {
                                 </Card>
                             </Col>
                         </Row>
-                        <Row style={{marginTop: "15px"}}>
+                        <Row style={{marginTop: "0.1%"}}>
                             <Col sm="3">
                                 <Card className="skillgroup-skill-card">
                                     <div className="skillgroup-skill-card-content">

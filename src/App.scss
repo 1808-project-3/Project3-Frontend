@@ -130,24 +130,28 @@ nav {
   flex-flow: row wrap;
   justify-content: space-around;
 }
+.skillgroup-skill-card {
+  height: 65%;
+}
 .skillgroup-skill-card-content {
   display: flex;
   flex-flow: row nowrap;
   justify-content: left;
+  align-items: center;
 }
 .skill-card-num-associates {
   font-weight: bold;
   font-size: 2em;
-  margin-top: 10%;
+  margin-top: 15%;
   margin-right: 4%;
   margin-left: 3%;
 }
 .skill-card-name {
   text-align: left;
-  font-weight: bold;
-  font-size: 1em;
+  // font-weight: bold;
+  font-size: 0.7em;
   color: #7C7A7A;
-  margin-top: 10%;
+  margin-top: 15%;
   margin-right: 15%;
   margin-left: 3%;
 }
