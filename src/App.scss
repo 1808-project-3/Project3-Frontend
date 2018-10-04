@@ -125,11 +125,11 @@ nav {
  Skill Group in Dashboard
 *****************************/
 .skillgroup-cards-container {
+  width: 100%;
   display: flex;
   flex-flow: row wrap;
   justify-content: space-around;
 }
-
 .skillgroup-skill-card-content {
   display: flex;
   flex-flow: row nowrap;
@@ -139,16 +139,17 @@ nav {
   font-weight: bold;
   font-size: 2em;
   margin-top: 10%;
-  margin-right: 5%;
-  margin-left: 10%;
+  margin-right: 4%;
+  margin-left: 3%;
 }
 .skill-card-name {
+  text-align: left;
   font-weight: bold;
   font-size: 1em;
   color: #7C7A7A;
   margin-top: 10%;
-  margin-right: 10%;
-  margin-left: 5%;
+  margin-right: 15%;
+  margin-left: 3%;
 }
 
 /*****************************
@@ -162,6 +163,32 @@ nav {
   margin-left: 5px;
   margin-top:10px;
 
+}
+.project-name-card {
+  font-weight:bold;
+  font-size:1em;
+  margin-top:30px;
+  margin-left:24px;
+}
+
+/*****************************
+  PROJECT CARDS
+*****************************/
+
+.project-card-link{
+  text-align: right;
+  text-decoration: underline;
+}
+
+.project-card-li-gray{
+  background-color: lightgray;
+  display: block;
+  border: 0 none;
+}
+
+.project-card-li-white{
+  background-color: white;
+  border: 0 none;
 }
 .project-name-card {
   font-weight:bold;

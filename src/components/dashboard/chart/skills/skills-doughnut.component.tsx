@@ -1,7 +1,6 @@
 import * as React from 'react';
-import {Row, Col, Container, Card} from 'reactstrap';
+import {Row, Col, Container} from 'reactstrap';
 import { Doughnut } from 'react-chartjs-2';
-import { Link } from 'react-router-dom';
 
 function getRandomInt(min:any, max:any) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -137,8 +136,7 @@ export default class SkillDoughnut extends React.Component<any, any> {
     }
     public render() {
         return (
-            <div>
-                <div>
+                <Container>
                     <Row>
                         <Col md={7}>
                             <div style={{ paddingLeft:'5%', paddingTop: '20%' }}>
@@ -159,95 +157,7 @@ export default class SkillDoughnut extends React.Component<any, any> {
                             <p style={{fontWeight: 'bold'}}>{this.state.selectedSkillGroup}</p>
                         </Col>
                     </Row>
-                </div>                
-                <div style={{marginTop: '10px'}}>
-                <Container>
-                    <div style={{borderBottom: '1px solid #E3E2E2'}}>
-                    </div>
-                    <Row>
-                        <Col md={6}>
-                            <h3 style={{marginLeft: "20px"}}>{this.state.selectedSkillGroup}</h3>
-                        </Col>
-                        <Col md={6} style={{display: "flex", justifyContent: "flex-end"}}>
-                            <Link to="" style={{marginRight: "30px"}}>View All</Link>
-                        </Col>
-                    </Row>
-                    <div className="skillgroup-cards-container">
-                        <Row>
-                            <Col sm="3">
-                                <Card className="skillgroup-skill-card">
-                                    <div className="skillgroup-skill-card-content">
-                                        <p className="skill-card-num-associates">12</p>
-                                        <p className="skill-card-name">Associates In <strong>Skill Name</strong></p>
-                                    </div>
-                                </Card>
-                            </Col>
-                            <Col sm="3">
-                                <Card className="skillgroup-skill-card">
-                                    <div className="skillgroup-skill-card-content">
-                                        <p className="skill-card-num-associates">13</p>
-                                        <p className="skill-card-name">Associates In <strong>Skill Name</strong></p>
-                                    </div>
-                                </Card>
-                            </Col>
-                            <Col sm="3">
-                                <Card className="skillgroup-skill-card">
-                                    <div className="skillgroup-skill-card-content">
-                                        <p className="skill-card-num-associates">14</p>
-                                        <p className="skill-card-name">Associates In <strong>Skill Name</strong></p>
-                                    </div>
-                                </Card>
-                            </Col>
-                            <Col sm="3">
-                                <Card className="skillgroup-skill-card">
-                                    <div className="skillgroup-skill-card-content">
-                                        <p className="skill-card-num-associates">15</p>
-                                        <p className="skill-card-name">Associates In <strong>Skill Name</strong></p>
-                                    </div>
-                                </Card>
-                            </Col>
-                        </Row>
-                        <Row style={{marginTop: "15px"}}>
-                            <Col sm="3">
-                                <Card className="skillgroup-skill-card">
-                                    <div className="skillgroup-skill-card-content">
-                                        <p className="skill-card-num-associates">12</p>
-                                        <p className="skill-card-name">Associates In <strong>Skill Name</strong></p>
-                                    </div>
-                                </Card>
-                            </Col>
-                            <Col sm="3">
-                                <Card className="skillgroup-skill-card">
-                                    <div className="skillgroup-skill-card-content">
-                                        <p className="skill-card-num-associates">13</p>
-                                        <p className="skill-card-name">Associates In <strong>Skill Name</strong></p>
-                                    </div>
-                                </Card>
-                            </Col>
-                            <Col sm="3">
-                                <Card className="skillgroup-skill-card">
-                                    <div className="skillgroup-skill-card-content">
-                                        <p className="skill-card-num-associates">14</p>
-                                        <p className="skill-card-name">Associates In <strong>Skill Name</strong></p>
-                                    </div>
-                                </Card>
-                            </Col>
-                            <Col sm="3">
-                                <Card className="skillgroup-skill-card">
-                                    <div className="skillgroup-skill-card-content">
-                                        <p className="skill-card-num-associates">15</p>
-                                        <p className="skill-card-name">Associates In <strong>Skill Name</strong></p>
-                                    </div>
-                                </Card>
-                            </Col>
-                        </Row>
-                    </div>                    
-                </Container>            
-            </div>
-            </div>
-                  
-                
-       
+                </Container>
         )
     }
 
