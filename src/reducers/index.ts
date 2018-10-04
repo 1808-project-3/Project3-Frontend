@@ -3,8 +3,8 @@ import { signInReducer } from "./sign-in.reducer";
 
 export interface ISignInState {
   credentials: {
-    password: string,
-    username: string
+    pass: string,
+    userId: string
   },
   errorMessage: string
 }

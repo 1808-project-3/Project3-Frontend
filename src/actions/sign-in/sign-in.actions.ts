@@ -1,21 +1,21 @@
 import { signInTypes } from "./sign-in.types";
-import { environment } from '../../environment';
+// import { environment } from '../../environment';
 import history from '../../history';
 import axios from 'axios';
 
-export const updatePassword = (password: string) => {
+export const updatePassword = (pass: string) => {
   return {
     payload: {
-      password
+      pass
     },
     type: signInTypes.UPDATE_PASSWORD
   }
 }
 
-export const updateUsername = (username: string) => {
+export const updateUsername = (userId: string) => {
   return {
     payload: {
-      username
+      userId
     },
     type: signInTypes.UPDATE_USERNAME
   }
@@ -53,13 +53,11 @@ export const loginInvalid = (data: any) => {
 export const login = (e: React.FormEvent<HTMLFormElement>, credentials: any) => {
   return (dispatch: any) => {
     e.preventDefault();
-    return axios.post(`${environment.context}users/login`, {
-      body: credentials,
-      headers: {
-        'Content-Type': 'application/json'
-      },
+    return axios.post(`http://localhost:8080/users/login`, 
+      credentials
+
       
-    })
+    )
       .then(resp => {
         switch (resp.status) {
           case 200:

@@ -4,25 +4,25 @@ import { mockResponse } from "../../test-helper"
 
 describe('sign-in actions', () => {
     it('should create an action to update username', () => {
-        const username = 'username123';
+        const userId = 'username123';
         const expectedAction = {
             payload: {
-                username
+                userId
             },
             type: signInTypes.UPDATE_USERNAME
         }
-        expect(signInActions.updateUsername(username)).toEqual(expectedAction);
+        expect(signInActions.updateUsername(userId)).toEqual(expectedAction);
     });
 
     it('should create an action to update password', () => {
-        const password = 'pass';
+        const pass = 'pass';
         const expectedAction = {
             payload: {
-                password
+                pass
             },
             type: signInTypes.UPDATE_PASSWORD
         }
-        expect(signInActions.updatePassword(password)).toEqual(expectedAction);
+        expect(signInActions.updatePassword(pass)).toEqual(expectedAction);
     });
 
     it("should create an action to login user successfully", async () => {
@@ -37,7 +37,7 @@ describe('sign-in actions', () => {
         window.fetch = jest.fn().mockImplementation(() =>
             Promise.resolve(mockResponse(200, "OK", response)));
         const event: any = { preventDefault: () => null };
-        const credentials: any = { credentials: { password: 'pass', username: 'user123' } }
+        const credentials: any = { credentials: { pass: 'pass', userId: 'user123' } }
         await signInActions.login(event, credentials)(dispatch);
         expect(dispatch).toBeCalledWith(
             {
@@ -56,7 +56,7 @@ describe('sign-in actions', () => {
         window.fetch = jest.fn().mockImplementation(() =>
             Promise.resolve(mockResponse(401, "Unauthorized", response)));
         const event: any = { preventDefault: () => null };
-        const credentials: any = { credentials: { password: 'pass', username: 'user123' } }
+        const credentials: any = { credentials: { pass: 'pass', userId: 'user123' } }
         await signInActions.login(event, credentials)(dispatch);
         expect(dispatch).toBeCalledWith(
             {
@@ -75,7 +75,7 @@ describe('sign-in actions', () => {
         window.fetch = jest.fn().mockImplementation(() =>
             Promise.resolve(mockResponse(500, "Internal Server Error", response)));
         const event: any = { preventDefault: () => null };
-        const credentials: any = { credentials: { password: 'pass', username: 'user123' } }
+        const credentials: any = { credentials: { pass: 'pass', userId: 'user123' } }
         await signInActions.login(event, credentials)(dispatch);
         expect(dispatch).toBeCalledWith(
             {
