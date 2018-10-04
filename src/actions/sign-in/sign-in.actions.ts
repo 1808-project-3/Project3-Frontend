@@ -31,11 +31,20 @@ export const updateError = (errorMessage: string) => {
 }
 
 export const loginSuccess = (data: any) => {
-  return{
-    
+  return{ 
     payload: {
       currentUser: data.credentials,
       errorMessage: ''
+    },
+    type: signInTypes.LOGIN
+  }
+}
+
+export const loginInvalid = (data: any) => {
+  return{
+    payload:{
+      currentUser: null,
+      errorMessage: "Invalid Username or Password"
     },
     type: signInTypes.LOGIN
   }
@@ -58,13 +67,7 @@ export const login = (e: React.FormEvent<HTMLFormElement>, credentials: any) => 
             history.push('/home');
             break;
           case 401:
-            dispatch({
-              payload: {
-                currentUser: null,
-                errorMessage: 'Invalid username or password'
-              },
-              type: signInTypes.LOGIN
-            });
+            dispatch(loginInvalid(resp.data));
             break;
           default:
             throw new Error("Failed to login at this time");
