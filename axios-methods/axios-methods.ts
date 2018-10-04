@@ -33,7 +33,7 @@ let list = [{
 }]
 
 const res = axios.get('http://localhost:8080/users');
-const res1 = axios.get('http://localhost:5002/skill');
+const res1 = axios.get('http://localhost:5002/skills');
 const res2 = axios.get('http://localhost:5002/skill-group');
 
 //loop through groups
@@ -87,5 +87,69 @@ res2.data.forEach((group, i) => {
           - project details
           - grade
           ^ this info is exactly what is being displayed in the resources list table
+         
+ ====================================================================================================================================
+ ====================================================================================================================================
+          
+  import axios from 'axios';
+
+let certification = [{
+    certName: "",
+    user: [{
+        associateName: "",
+        associateId: 0,
+        certName: "",
+        projectDetails: "",
+        grade: ""
+    }]
+}]
+
+const res = axios.get('http://localhost:5002/certifications');
+const res1 = axios.get('http://localhost:8080/users');
+const res2 = axios.get('http://localhost:8888/projects');
+
+//go through certs
+res.data.forEach((certName, i) => {
+
+    //keep cert name
+    certification[i].certName = certName.certificationName;
+
+    //go through projects
+    res2.data.forEach((proj) => {
+
+        //going through users
+        res1.data.forEach((user, j) => {
+
+            //filter if user has cert
+            let userHasCert = user.userCerts.filter((cert) => {
+
+                cert === certName.id;
+
+            })
+
+            // filter for resources with cert
+            let filter = user.resources.filter((resc) => {
+                resource.projectId === proj.projectId;
+            })
+
+            //if both then assign values
+            if (userHasCert.length > 0 && filter.length > 0) {
+                cerification[i].user[j].associateName = user.firstName + " " + user.lastName;
+                cerification[i].user[j].associateId = user.associateId;
+                cerification[i].user[j].certName = certName.certificationName;
+                certification[i].user[j].projectDetails = proj.name;
+                certification[i].user[j].grade = user.resource.grade;
+
+
+            }
+
+        })
+
+    });
+});
+          
+          
+===================================================================================================================================
+===================================================================================================================================
 
 */
