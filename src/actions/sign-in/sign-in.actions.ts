@@ -53,11 +53,8 @@ export const loginInvalid = (data: any) => {
 export const login = (e: React.FormEvent<HTMLFormElement>, credentials: any) => {
   return (dispatch: any) => {
     e.preventDefault();
-    return axios.post(`http://localhost:8080/users/login`, 
-      credentials
-
-      
-    )
+    console.log(credentials)
+    return axios.post(`http://localhost:8080/users/login`, credentials)
       .then(resp => {
         switch (resp.status) {
           case 200:
