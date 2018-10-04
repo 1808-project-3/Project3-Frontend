@@ -5,6 +5,7 @@ import { Resource } from "../models/Resource";
 import { User } from "../models/User";
 
 const initialState: IAddSkillsState = {
+    listOfCompetencyTaggings: [],
     listOfGrades: [],
     listOfLocations: [],
     resource: new Resource(),
@@ -103,6 +104,9 @@ export const addSkillsReducer = (state = initialState, action: any) => {
             return newState;
         case addSkillsTypes.FETCH_LOCATIONS:
             newState.listOfLocations = action.payload.listOfLocations;
+            return newState;
+        case addSkillsTypes.FETCH_COMPETENCY_TAGGINGS:
+            newState.listOfCompetencyTaggings = action.payload.listOfCompetencyTaggings;
             return newState;
     }
     return state;

@@ -19,6 +19,7 @@ import { ClosablePill } from './closable-pill.component';
 
 
 interface IProps extends RouteComponentProps<{}>, IAddSkillsState {
+    fetchCompetencyTaggingList: () => void
     fetchGradeList: () => void
     fetchLocationList: () => void
     updateResource: (event: any) => void
@@ -29,6 +30,7 @@ interface IProps extends RouteComponentProps<{}>, IAddSkillsState {
 class AddSkillsComponent extends React.Component<IProps, {}> {
     public constructor(props: any) {
         super(props);
+        this.props.fetchCompetencyTaggingList();
         this.props.fetchGradeList();
         this.props.fetchLocationList();
     }
@@ -133,6 +135,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                     <Label for="inputGrade" lg={4} className="font-weight-bold">GRADE</Label>
                                     <Col lg={8} className="my-auto">
                                         <Input onChange={e => this.props.updateResource(e.target)} type="select" name="grade" id="inputGrade" required>
+                                            <option value="" hidden></option>
                                             {this.props.listOfGrades.map((grade: string) => {
                                                 return (
                                                     <option value={grade} key={grade}>{grade}</option>
@@ -144,7 +147,14 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                 <FormGroup row>
                                     <Label for="inputCompetencyTagging" lg={4} className="font-weight-bold">COMPETENCY TAGGING</Label>
                                     <Col lg={8} className="my-auto">
-                                        <Input onChange={e => this.props.updateResource(e.target)} type="select" name="competencyTagging" id="inputCompetencyTagging" required />
+                                        <Input onChange={e => this.props.updateResource(e.target)} type="select" name="competencyTagging" id="inputCompetencyTagging" required >
+                                        <option value="" hidden></option>
+                                        {this.props.listOfCompetencyTaggings.map((tag: string) => {
+                                            return (
+                                                <option value={tag} key={tag}>{tag}</option>
+                                            )
+                                        })}
+                                        </Input>
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
@@ -224,6 +234,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
 const mapStateToProps = (state: IState) => state.addSkills
 
 const mapDispatchToProps = {
+    fetchCompetencyTaggingList: addSkillsActions.fetchCompetencyTaggingList,
     fetchGradeList: addSkillsActions.fetchGradeList,
     fetchLocationList: addSkillsActions.fetchLocationList,
     toggleSkillGroup: addSkillsActions.toggleSkillGroup,

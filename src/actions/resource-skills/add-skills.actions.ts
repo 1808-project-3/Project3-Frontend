@@ -1,6 +1,15 @@
 import { addSkillsTypes } from "./add-skills.types";
 import { Skill } from "../../models/Skill";
 
+export const fetchCompetencyTaggingList = () => (dispatch:any) => {
+    dispatch({
+        payload: {
+            listOfCompetencyTaggings: ['Tag1', 'Tag2', 'Tag3', 'Tag4']
+        },
+        type: addSkillsTypes.FETCH_COMPETENCY_TAGGINGS
+    })
+}
+
 export const fetchGradeList = () => (dispatch: any) => {
     // Fetch needs to pull list of possible Grades
     dispatch({
