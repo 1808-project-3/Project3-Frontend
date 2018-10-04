@@ -39,6 +39,9 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
 
     public render() {
         const { resource, skillGroupIds } = this.props;
+        const user = resource.user;
+        const validAssociateName = user.firstName && user.lastName;
+        const associateName = `${user.firstName} ${user.lastName}`
         const selectedGroups = SkillGroups.filter((group: Group) => skillGroupIds.indexOf(group.groupId) > -1);
         const skills = selectedGroups.reduce((acc: any, val: any) => {
             const groupSkills = val.skills.map((skill: any) => new Skill({ ...skill, group: new Group(val) }))
@@ -53,13 +56,13 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                 <FormGroup row>
                                     <Label for="inputAssociateId" className="font-weight-bold" lg={4}>ASSOCIATE ID</Label>
                                     <Col lg={8} className="my-auto">
-                                        <Input onChange={e => this.props.updateResource(e.target)} type="text" name="associateId" id="inputAssociateId" required />
+                                        <Input value={resource.user.assocId ? resource.user.assocId : ''} onChange={e => this.props.updateResource(e.target)} type="text" name="associateId" id="inputAssociateId" required />
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
                                     <Label for="inputAssociateName" className="font-weight-bold" lg={4}>ASSOCIATE NAME</Label>
                                     <Col lg={8} className="my-auto">
-                                        <Input onChange={e => this.props.updateResource(e.target)} type="text" name="associateName" id="inputAssociateName" required />
+                                        <Input value={validAssociateName ? associateName : ''} onChange={e => this.props.updateResource(e.target)} type="text" name="associateName" id="inputAssociateName" placeholder="Autofills with valid Associate ID" disabled />
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
