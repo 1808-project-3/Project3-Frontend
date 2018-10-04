@@ -44,7 +44,8 @@ export class TabComponent extends React.Component<IProps, any> {
         }
     }
 
-    public componentWillUpdate(){
+    public componentDidUpdate(){
+        console.log("The table type selected is: " + this.props.tableType);
         this.props.getResourceList(this.props.tableType);
     }
 
