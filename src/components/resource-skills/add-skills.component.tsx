@@ -190,7 +190,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                 </FormGroup>
                                 <FormGroup row>
                                     <Col lg={{ size: 8, offset: 4 }}>
-                                        <CustomInput onChange={e => this.props.updateResource(e.target)} type="checkbox" id={"date-tbd"} name="date-tbd" label={"To be decided"} />
+                                        <CustomInput defaultChecked={this.props.dateTbd} onChange={e => this.props.updateResource(e.target)} type="checkbox" id={"date-tbd"} name="date-tbd" label={"To be decided"} />
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
