@@ -63,9 +63,9 @@ export const toggleSkillGroup = (event: any) => {
 export const addResumes = (files: FileList | null) => {
     const newResumes: Resume[] = [];
     if (files) {
-        for (let i = 0; i < files.length as any; i++) {
+        for (let i = 0; i < files.length; i++) {
             const fileName = files[i].name;
-            newResumes.push(new Resume({ fileName, url: `http://fakeURL.com/${fileName}` }));
+            newResumes.push(new Resume({ fileName, url: `http://fakeURL.com/${fileName}`, resumeId: i }));
         }
     }
     return {
