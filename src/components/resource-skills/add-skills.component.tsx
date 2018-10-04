@@ -39,13 +39,13 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                 <FormGroup row>
                                     <Label for="inputAssociateId" className="font-weight-bold" lg={4}>ASSOCIATE ID</Label>
                                     <Col lg={8} className="my-auto">
-                                        <Input onChange={e => this.props.updateResource(e.target)} type="text" name="associateId" id="inputAssociateId" />
+                                        <Input onChange={e => this.props.updateResource(e.target)} type="text" name="associateId" id="inputAssociateId" required />
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
                                     <Label for="inputAssociateName" className="font-weight-bold" lg={4}>ASSOCIATE NAME</Label>
                                     <Col lg={8} className="my-auto">
-                                        <Input onChange={e => this.props.updateResource(e.target)} type="text" name="associateName" id="inputAssociateName" />
+                                        <Input onChange={e => this.props.updateResource(e.target)} type="text" name="associateName" id="inputAssociateName" required />
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
@@ -61,7 +61,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                         <Container>
                                             <Row>
                                                 {SkillGroups.map((group: Group) => {
-                                                    return <CustomInput onChange={e => this.props.toggleSkillGroup(e.target)} key={"group-" + group.groupId} type="checkbox" id={"skills-group-" + group.groupId} name="skillsGroup" className="pr-4" label={group.name} required />
+                                                    return <CustomInput onChange={e => this.props.toggleSkillGroup(e.target)} key={"group-" + group.groupId} type="checkbox" id={"skills-group-" + group.groupId} name="skillsGroup" className="pr-4" label={group.name} />
                                                 })}
                                             </Row>
                                         </Container>
@@ -77,7 +77,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                                             <Row>
                                                                 {skills.map((skill: Skill) => {
                                                                     return (
-                                                                        <CustomInput key={"skills-" + skill.skillId} onChange={() => this.props.updateResourceSkills(skill)} type="checkbox" id={"skills-" + skill.skillId} name="skills" className="pr-4" label={skill.name} required />
+                                                                        <CustomInput key={"skills-" + skill.skillId} onChange={() => this.props.updateResourceSkills(skill)} type="checkbox" id={"skills-" + skill.skillId} name="skills" className="pr-4" label={skill.name} />
                                                                     )
                                                                 })}
                                                             </Row>
@@ -104,31 +104,31 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                 <FormGroup row>
                                     <Label for="inputCustomerName" lg={4} className="font-weight-bold"> CUSTOMER NAME</Label>
                                     <Col lg={8} className="my-auto">
-                                        <Input onChange={e => this.props.updateResource(e.target)} type="text" name="customerName" id="inputCustomerName" />
+                                        <Input onChange={e => this.props.updateResource(e.target)} type="text" name="customerName" id="inputCustomerName" required />
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
                                     <Label for="inputProjectId" lg={4} className="font-weight-bold">PROJECT ID</Label>
                                     <Col lg={8} className="my-auto">
-                                        <Input onChange={e => this.props.updateResource(e.target)} type="text" name="projectId" id="inputProjectId" />
+                                        <Input onChange={e => this.props.updateResource(e.target)} type="text" name="projectId" id="inputProjectId" required />
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
                                     <Label for="inputProjectName" lg={4} className="font-weight-bold">PROJECT NAME</Label>
                                     <Col lg={8} className="my-auto">
-                                        <Input onChange={e => this.props.updateResource(e.target)} type="text" name="projectName" id="inputProjectName" />
+                                        <Input onChange={e => this.props.updateResource(e.target)} type="text" name="projectName" id="inputProjectName" required />
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
                                     <Label for="inputGrade" lg={4} className="font-weight-bold">GRADE</Label>
                                     <Col lg={8} className="my-auto">
-                                        <Input onChange={e => this.props.updateResource(e.target)} type="text" name="grade" id="inputGrade" />
+                                        <Input onChange={e => this.props.updateResource(e.target)} type="text" name="grade" id="inputGrade" required />
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
                                     <Label for="inputCompetencyTagging" lg={4} className="font-weight-bold">COMPETENCY TAGGING</Label>
                                     <Col lg={8} className="my-auto">
-                                        <Input onChange={e => this.props.updateResource(e.target)} type="select" name="competencyTagging" id="inputCompetencyTagging" />
+                                        <Input onChange={e => this.props.updateResource(e.target)} type="select" name="competencyTagging" id="inputCompetencyTagging" required />
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
@@ -154,19 +154,19 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                 <FormGroup row>
                                     <Label for="inputSupervisorId" lg={4} className="font-weight-bold">HCM SUPERVISOR ID</Label>
                                     <Col lg={8} className="my-auto">
-                                        <Input onChange={e => this.props.updateResource(e.target)} type="text" name="supervisorId" id="inputSupervisorId" />
+                                        <Input onChange={e => this.props.updateResource(e.target)} type="text" name="supervisorId" id="inputSupervisorId" required />
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
                                     <Label for="inputSupervisorName" lg={4} className="font-weight-bold">HCM SUPERVISOR NAME</Label>
                                     <Col lg={8} className="my-auto">
-                                        <Input onChange={e => this.props.updateResource(e.target)} type="text" name="supervisorName" id="inputSupervisorName" />
+                                        <Input onChange={e => this.props.updateResource(e.target)} type="text" name="supervisorName" id="inputSupervisorName" required />
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
                                     <Label for="inputLocation" lg={4} className="font-weight-bold">LOCATION</Label>
                                     <Col lg={8} className="my-auto">
-                                        <Input onChange={e => this.props.updateResource(e.target)} type="text" name="location" id="inputLocation" />
+                                        <Input onChange={e => this.props.updateResource(e.target)} type="text" name="location" id="inputLocation" required />
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
