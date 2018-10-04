@@ -111,7 +111,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                 <FormGroup row>
                                     <Label for="inputCertifications" lg={4} className="font-weight-bold">CERTIFICATIONS, IF ANY</Label>
                                     <Col lg={8} className="my-auto">
-                                        <Input type="text" name="certifications" id="inputCertifications" />
+                                        <Input type="text" name="certifications" id="inputCertifications" placeholder="Search Certifications here..." />
                                     </Col>
                                 </FormGroup>
                                 <Row>
