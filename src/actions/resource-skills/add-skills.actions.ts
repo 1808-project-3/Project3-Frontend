@@ -9,6 +9,17 @@ import { CompetencyTag } from "../../models/CompetencyTag";
 import Grades from '../../assets/grades.json';
 import Locations from '../../assets/locations.json';
 import CompetencyTags from '../../assets/competency-tags.json';
+import Certifications from '../../assets/certifications.json';
+import { Certification } from "../../models/Certification";
+
+export const fetchCertificationList = (search: string) => (dispatch: any) => {
+    dispatch({
+        payload: {
+            listOfCertifications: Certifications.map((cert: any) => new Certification(cert))
+        },
+        type: addSkillsTypes.FETCH_CERTIFICATIONS
+    })
+}
 
 export const fetchCompetencyTaggingList = () => (dispatch: any) => {
     dispatch({

@@ -22,12 +22,14 @@ import Alert from 'reactstrap/lib/Alert';
 import { Grade } from '../../models/Grade';
 import { CompetencyTag } from '../../models/CompetencyTag';
 import { Location } from '../../models/Location';
+import * as Autocomplete from 'react-autocomplete'
 
 
 interface IProps extends RouteComponentProps<{}>, IAddSkillsState {
     fetchCompetencyTaggingList: () => void
     fetchGradeList: () => void
     fetchLocationList: () => void
+    fetchCertificationList: (search: string) => void
     updateResource: (event: any) => void
     updateResourceSkills: (skill: Skill) => void
     addResumes: (files: FileList | null) => void
@@ -137,6 +139,18 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                 <FormGroup row>
                                     <Label for="inputCertifications" lg={4} className="font-weight-bold">CERTIFICATIONS, IF ANY</Label>
                                     <Col lg={8} className="my-auto">
+                                        <Autocomplete
+                                            getItemValue={cert => cert.certId}
+                                            items={this.props.listOfCertifications}
+                                            renderItem={(cert, isHighlighted) =>
+                                                <div key={cert.certId} style={{ background: isHighlighted ? 'lightgray' : 'white' }}>
+                                                    {cert.name}
+                                                </div>
+                                            }
+                                            value={""}
+                                            onChange={(e) => this.props.fetchCertificationList(e.target.value)}
+                                            onSelect={(val) => null} // TODO
+                                        />
                                         <Input type="text" name="certifications" id="inputCertifications" placeholder="Search Certifications here..." />
                                     </Col>
                                 </FormGroup>
@@ -291,6 +305,7 @@ const mapStateToProps = (state: IState) => state.addSkills
 const mapDispatchToProps = {
     addResumes: addSkillsActions.addResumes,
     cancelResource: addSkillsActions.cancelResource,
+    fetchCertificationList: addSkillsActions.fetchCertificationList,
     fetchCompetencyTaggingList: addSkillsActions.fetchCompetencyTaggingList,
     fetchGradeList: addSkillsActions.fetchGradeList,
     fetchLocationList: addSkillsActions.fetchLocationList,

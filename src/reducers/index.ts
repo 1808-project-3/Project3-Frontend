@@ -5,6 +5,7 @@ import { signInReducer } from "./sign-in.reducer";
 import { Grade } from "../models/Grade";
 import { Location } from "../models/Location";
 import { CompetencyTag } from "../models/CompetencyTag";
+import { Certification } from "../models/Certification";
 
 export interface ISignInState {
   credentials: {
@@ -16,6 +17,7 @@ export interface ISignInState {
 
 export interface IAddSkillsState {
   dateTbd: boolean,
+  listOfCertifications: Certification[],
   listOfCompetencyTaggings: CompetencyTag[],
   listOfGrades: Grade[],
   listOfLocations: Location[],

@@ -9,6 +9,7 @@ import { Location } from "../models/Location";
 
 const initialState: IAddSkillsState = {
     dateTbd: false,
+    listOfCertifications: [],
     listOfCompetencyTaggings: [],
     listOfGrades: [],
     listOfLocations: [],
@@ -134,6 +135,8 @@ export const addSkillsReducer = (state = initialState, action: any) => {
             return { ...initialState, listOfGrades: [...state.listOfGrades], listOfCompetencyTaggings: [...state.listOfCompetencyTaggings], listOfLocations: [...state.listOfLocations] };
         case addSkillsTypes.SUBMIT_RESOURCE:
             return { ...state, submitted: action.payload.submitted };
+        case addSkillsTypes.FETCH_CERTIFICATIONS:
+            return { ...state, listOfCertifications: action.payload.listOfCertifications };
     }
     return state;
 }
