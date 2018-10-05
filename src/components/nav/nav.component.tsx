@@ -16,7 +16,7 @@ export class AppNav extends React.Component
         <NavTitle>TALENT PORTAL</NavTitle>
         <NavLabel>Search</NavLabel>
         <SearchBar/>
-        <NavLink>Advanced Search</NavLink>
+        <NavLink path="/home/advanced-search">Advanced Search</NavLink>
         <NavProfileText/>
         <NavProfileImage/>
       </div >
