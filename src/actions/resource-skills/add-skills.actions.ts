@@ -15,18 +15,26 @@ import { Certification } from "../../models/Certification";
 import { User } from "../../models/User";
 
 export const fetchAssociate = (assocId: number) => (dispatch: any) => {
+    let associate = new User();
+    if (assocId) {
+        associate = new User(MockUser);
+    }
     dispatch({
         payload: {
-            associate: new User(MockUser)
+            associate
         },
         type: addSkillsTypes.FETCH_ASSOCIATE
     })
 }
 
 export const fetchSupervisor = (supId: number) => (dispatch: any) => {
+    let supervisor = new User();
+    if (supId) {
+        supervisor = new User(MockUser);
+    }
     dispatch({
         payload: {
-            supervisor: new User(MockUser)
+            supervisor
         },
         type: addSkillsTypes.FETCH_SUPERVISOR
     })
