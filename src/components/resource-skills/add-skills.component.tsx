@@ -41,6 +41,7 @@ interface IProps extends RouteComponentProps<{}>, IAddSkillsState {
     addResumes: (files: FileList | null) => void
     removeResume: (resumeId: number) => void
     toggleSkillGroup: (event: any) => void
+    showOrHideProject: (newOrExisting: string) => void
     cancelResource: () => void
     submitResource: (resource: Resource) => void
 }
@@ -199,10 +200,10 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                             <Col>
                                 <Row>
                                     <Col className="text-center">
-                                        <Button className="my-2 mx-2">
+                                        <Button onClick={() => this.props.showOrHideProject("existing")} className="my-2 mx-2">
                                             <span>Select Existing Project</span>
                                         </Button>
-                                        <Button className="my-2 mx-2">
+                                        <Button onClick={() => this.props.showOrHideProject("new")} className="my-2 mx-2">
                                             <IoMdAddCircleOutline /><span className="ml-2">Create New Project</span>
                                         </Button>
                                     </Col>
@@ -360,6 +361,7 @@ const mapDispatchToProps = {
     fetchSupervisor: addSkillsActions.fetchSupervisor,
     removeCertification: addSkillsActions.removeCertification,
     removeResume: addSkillsActions.removeResume,
+    showOrHideProject: addSkillsActions.showOrHideProject,
     submitResource: addSkillsActions.submitResource,
     toggleSkillGroup: addSkillsActions.toggleSkillGroup,
     updateCertificationSearch: addSkillsActions.updateCertificationSearch,

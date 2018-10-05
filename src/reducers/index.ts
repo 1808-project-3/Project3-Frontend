@@ -23,6 +23,7 @@ export interface IAddSkillsState {
   listOfCompetencyTaggings: CompetencyTag[],
   listOfGrades: Grade[],
   listOfLocations: Location[],
+  newOrExistingProject: string,
   resource: Resource,
   skillGroupIds: number[],
   submitted: boolean,

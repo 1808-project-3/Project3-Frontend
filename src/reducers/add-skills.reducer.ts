@@ -15,6 +15,7 @@ const initialState: IAddSkillsState = {
     listOfCompetencyTaggings: [],
     listOfGrades: [],
     listOfLocations: [],
+    newOrExistingProject: 'none',
     resource: new Resource(),
     skillGroupIds: [],
     submitted: false,
@@ -163,6 +164,8 @@ export const addSkillsReducer = (state = initialState, action: any) => {
             newRemovedCertificationResource.certifications = state.resource.certifications.filter(cert => cert.certId !== action.payload.certId);
             newState.resource = newRemovedCertificationResource;
             return newState;
+        case addSkillsTypes.SHOW_OR_HIDE_PROJECT:
+            return { ...state, newOrExistingProject: action.payload.newOrExisting };
     }
     return state;
 }

@@ -98,22 +98,31 @@ export const updateResourceSkills = (skill: Skill) => {
     }
 }
 
-export const updateCertificationSearch = (search: string) => (dispatch: any) => {
-    dispatch({
+export const updateCertificationSearch = (search: string) => {
+    return {
         payload: {
             certificationSearch: search
         },
         type: addSkillsTypes.UPDATE_CERTIFICATION_SEARCH
-    })
+    }
 }
 
-export const addCertification = (certification: Certification) => (dispatch: any) => {
-    dispatch({
+export const showOrHideProject = (newOrExisting: string) => {
+    return {
+        payload: {
+            newOrExisting
+        },
+        type: addSkillsTypes.SHOW_OR_HIDE_PROJECT
+    }
+}
+
+export const addCertification = (certification: Certification) => {
+    return {
         payload: {
             certification
         },
         type: addSkillsTypes.ADD_CERTIFICATION
-    })
+    }
 }
 
 export const removeCertification = (certId: number) => {
