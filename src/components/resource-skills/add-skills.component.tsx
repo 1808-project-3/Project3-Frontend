@@ -48,6 +48,12 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
         this.props.fetchLocationList();
     }
 
+    public componentDidUpdate(prevProps: IProps) {
+        if (this.props.certificationSearch && this.props.certificationSearch !== prevProps.certificationSearch) {
+            this.props.fetchCertificationList(this.props.certificationSearch);
+        }
+    }
+
     public render() {
         const { resource, skillGroupIds, submitted } = this.props;
         const user = resource.user;
@@ -141,7 +147,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                     <Label for="inputCertifications" lg={4} className="font-weight-bold">CERTIFICATIONS, IF ANY</Label>
                                     <Col lg={8} className="my-auto">
                                         <Autocomplete
-                                            getItemValue={cert => cert.certId}
+                                            getItemValue={cert => '' + cert.certId}
                                             items={this.props.listOfCertifications}
                                             renderItem={(cert, isHighlighted) =>
                                                 <div key={cert.certId} style={{ background: isHighlighted ? 'lightgray' : 'white' }}>
