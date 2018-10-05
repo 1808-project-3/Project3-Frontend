@@ -153,7 +153,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                             getItemValue={cert => '' + cert.certId}
                                             items={this.props.listOfCertifications.filter(cert => resource.certifications.every(addedCert => addedCert.certId !== cert.certId))}
                                             renderItem={(cert, isHighlighted) =>
-                                                <div key={cert.certId} style={{ background: isHighlighted ? 'lightgray' : 'white' }}>
+                                                <div className="px-4" key={cert.certId} style={{ background: isHighlighted ? 'lightgray' : 'white' }}>
                                                     {cert.name}
                                                 </div>
                                             }
