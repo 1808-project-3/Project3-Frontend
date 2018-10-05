@@ -22,19 +22,19 @@ class ResourceListExport extends React.Component {
     }
 
     componentDidMount = async () => {
-        let ui = await axios.get('http://localhost:4000/ui');
+        let ui = await axios.get('https://my-json-server.typicode.com/avicuna/talent-portal-mock/ui');
         ui = this.formatData(ui);
         this.props.getResourceUIList(ui);
 
-        let mobility = await axios.get('http://localhost:4000/mobility');
+        let mobility = await axios.get('https://my-json-server.typicode.com/avicuna/talent-portal-mock/mobility');
         mobility = this.formatData(mobility);
         this.props.getResourceMobilityList(mobility);
 
-        let cm = await axios.get('http://localhost:4000/cm');
+        let cm = await axios.get('https://my-json-server.typicode.com/avicuna/talent-portal-mock/cm');
         cm = this.formatData(cm);
         this.props.getResourceCMList(cm);
 
-        let design = await axios.get('http://localhost:4000/design');
+        let design = await axios.get('https://my-json-server.typicode.com/avicuna/talent-portal-mock/design');
         design = this.formatData(design);
         this.props.getResourceDesignList(design);
     }
