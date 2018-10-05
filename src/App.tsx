@@ -35,6 +35,7 @@ class App extends React.Component {
   public wrappedRoutes = (props: any) => (
     <Layout location={props.location} history={props.history}>
       <Switch>
+        <Route path="/home/resources/search-results" />
         <Route path="/home" />
       </Switch>
     </Layout>
