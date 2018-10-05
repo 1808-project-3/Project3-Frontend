@@ -36,6 +36,7 @@ class App extends React.Component {
     <Layout location={props.location} history={props.history}>
       <Switch>
         <Route path="/home" />
+        <Route path="/home/resources/search-result"/>
       </Switch>
     </Layout>
   )
