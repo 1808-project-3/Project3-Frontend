@@ -143,7 +143,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                 <FormGroup row>
                                     <Label for="inputGrade" lg={4} className="font-weight-bold">GRADE</Label>
                                     <Col lg={8} className="my-auto">
-                                        <Input value={resource.grade} onChange={e => this.props.updateResource(e.target)} type="select" name="grade" id="inputGrade" required>
+                                        <Input value={resource.grade ? resource.grade : ""} onChange={e => this.props.updateResource(e.target)} type="select" name="grade" id="inputGrade" required>
                                             <option value="" hidden></option>
                                             {this.props.listOfGrades.map((grade: string) => {
                                                 return (
@@ -156,7 +156,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                 <FormGroup row>
                                     <Label for="inputCompetencyTagging" lg={4} className="font-weight-bold">COMPETENCY TAGGING</Label>
                                     <Col lg={8} className="my-auto">
-                                        <Input value={resource.compentencyTagging} onChange={e => this.props.updateResource(e.target)} type="select" name="competencyTagging" id="inputCompetencyTagging" required >
+                                        <Input value={resource.compentencyTagging ? resource.compentencyTagging : ""} onChange={e => this.props.updateResource(e.target)} type="select" name="competencyTagging" id="inputCompetencyTagging" required >
                                             <option value="" hidden></option>
                                             {this.props.listOfCompetencyTaggings.map((tag: string) => {
                                                 return (
@@ -212,7 +212,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                 <FormGroup row>
                                     <Label for="inputLocation" lg={4} className="font-weight-bold">LOCATION</Label>
                                     <Col lg={8} className="my-auto">
-                                        <Input value={resource.project.location} onChange={e => this.props.updateResource(e.target)} type="select" name="location" id="inputLocation" required>
+                                        <Input value={resource.project.location ? resource.project.location : ""} onChange={e => this.props.updateResource(e.target)} type="select" name="location" id="inputLocation" required>
                                             <option value="" hidden></option>
                                             {this.props.listOfLocations.map((location: string) => {
                                                 return (
