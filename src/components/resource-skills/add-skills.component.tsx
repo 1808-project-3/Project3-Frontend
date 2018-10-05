@@ -52,7 +52,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
         }, []);
         return (
             <>
-                <Form className="pb-3">
+                <Form>
                     <Container>
                         <Row>
                             <Col className="border-col-right pr-5 mr-5 pb-5">
@@ -236,13 +236,15 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                 </Row>
                             </Col>
                         </Row>
-                        <hr className="col-12" />
-                        <Container>
-                            <Row>
-                                <Button color="secondary" className="ml-auto px-4" disabled><small>CANCEL</small></Button>
-                                <Button color="secondary" className="ml-4 px-3"><IoMdAddCircleOutline /><small className="ml-2">ADD USER</small></Button>
-                            </Row>
-                        </Container>
+                        <div className="fixed-bottom position-sticky bg-white pb-4">
+                            <Container>
+                                <hr className="col-md-12" />
+                                <Row>
+                                    <Button color="secondary" className="ml-auto px-4" disabled><small>CANCEL</small></Button>
+                                    <Button color="secondary" className="ml-4 px-3"><IoMdAddCircleOutline /><small className="ml-2">ADD USER</small></Button>
+                                </Row>
+                            </Container>
+                        </div>
                     </Container>
                 </Form>
             </>
