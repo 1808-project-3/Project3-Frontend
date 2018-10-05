@@ -110,13 +110,14 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                                             <Row>
                                                                 {skills.map((skill: Skill) => {
                                                                     return (
-                                                                        <CustomInput checked={resource.skills.some(selectedSkill => selectedSkill.skillId === skill.skillId)} key={"skills-" + skill.skillId} onChange={() => this.props.updateResourceSkills(skill)} type="checkbox" id={"skills-" + skill.skillId} name="skills" className="pr-4" label={skill.name} />
+                                                                        <CustomInput invalid={submitted && resource.skills.length === 0} checked={resource.skills.some(selectedSkill => selectedSkill.skillId === skill.skillId)} key={"skills-" + skill.skillId} onChange={() => this.props.updateResourceSkills(skill)} type="checkbox" id={"skills-" + skill.skillId} name="skills" className="pr-4" label={skill.name} />
                                                                     )
                                                                 })}
                                                             </Row>
                                                         </Container>
                                                     </CardHeader>
                                                 </Card>
+                                                {submitted && this.props.skillGroupIds.length !== 0 && resource.skills.length === 0 && <FormFeedback className="d-inline-block">Please choose at least one skill</FormFeedback>}
                                             </Col>
                                         </Row>
                                     </FormGroup>
