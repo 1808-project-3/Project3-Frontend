@@ -208,127 +208,129 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                         </Button>
                                     </Col>
                                 </Row>
-                                <FormGroup row>
-                                    <Label for="inputCustomerName" lg={4} className="font-weight-bold">CUSTOMER NAME</Label>
-                                    <Col lg={8} className="my-auto">
-                                        <Input invalid={submitted && !resource.project.customerName} value={resource.project.customerName ? resource.project.customerName : ''} onChange={e => this.props.updateResource(e.target)} type="text" name="customerName" id="inputCustomerName" required />
-                                        <FormFeedback>Please enter a customer name</FormFeedback>
-                                    </Col>
-                                </FormGroup>
-                                <FormGroup row>
-                                    <Label for="inputProjectId" lg={4} className="font-weight-bold">PROJECT ID</Label>
-                                    <Col lg={8} className="my-auto">
-                                        <Input invalid={submitted && !resource.project.pId} value={resource.project.pId ? resource.project.pId : ''} onChange={e => this.props.updateResource(e.target)} type="text" name="projectId" id="inputProjectId" required />
-                                        <FormFeedback>Please enter a project ID</FormFeedback>
-                                    </Col>
-                                </FormGroup>
-                                <FormGroup row>
-                                    <Label for="inputProjectName" lg={4} className="font-weight-bold">PROJECT NAME</Label>
-                                    <Col lg={8} className="my-auto">
-                                        <Input invalid={submitted && !resource.project.name} value={resource.project.name ? resource.project.name : ''} onChange={e => this.props.updateResource(e.target)} type="text" name="projectName" id="inputProjectName" required />
-                                        <FormFeedback>Please enter a project name</FormFeedback>
-                                    </Col>
-                                </FormGroup>
-                                <FormGroup row>
-                                    <Label for="inputGrade" lg={4} className="font-weight-bold">GRADE</Label>
-                                    <Col lg={8} className="my-auto">
-                                        <Input invalid={submitted && !resource.grade.gradeId} value={resource.grade.gradeId ? resource.grade.gradeId : ''} onChange={e => this.props.updateResource(e.target)} type="select" name="grade" id="inputGrade" required>
-                                            <option value="" hidden></option>
-                                            {this.props.listOfGrades.map((grade: Grade) => {
-                                                return (
-                                                    <option value={grade.gradeId} key={grade.gradeId}>{grade.name}</option>
-                                                )
-                                            })}
-                                        </Input>
-                                        <FormFeedback>Please choose a grade</FormFeedback>
-                                    </Col>
-                                </FormGroup>
-                                <FormGroup row>
-                                    <Label for="inputCompetencyTagging" lg={4} className="font-weight-bold">COMPETENCY TAGGING</Label>
-                                    <Col lg={8} className="my-auto">
-                                        <Input invalid={submitted && !resource.compentencyTagging.tagId} value={resource.compentencyTagging.tagId ? resource.compentencyTagging.tagId : ""} onChange={e => this.props.updateResource(e.target)} type="select" name="competencyTagging" id="inputCompetencyTagging" required >
-                                            <option value="" hidden></option>
-                                            {this.props.listOfCompetencyTaggings.map((tag: CompetencyTag) => {
-                                                return (
-                                                    <option value={tag.tagId} key={tag.tagId}>{tag.name}</option>
-                                                )
-                                            })}
-                                        </Input>
-                                        <FormFeedback>Please choose a competency tagging</FormFeedback>
-                                    </Col>
-                                </FormGroup>
-                                <FormGroup row>
-                                    <Label for="inputDate" lg={4} className="font-weight-bold">DURATION</Label>
-                                    <Col lg={8} className="my-auto">
-                                        <div className="d-flex justify-content-between">
-                                            <DatePicker
-                                                onChange={(date) => this.props.updateResource({ name: "startDate", value: date })}
-                                                value={resource.project && resource.project.startDate}
-                                                calendarIcon={<IoMdCalendar />}
-                                                clearIcon={null as any}
-                                                maxDate={resource.project.endDate ? resource.project.endDate : undefined}
-                                                disabled={this.props.dateTbd}
-                                                required
-                                            />
-                                            <span className="my-auto">To</span>
-                                            <DatePicker
-                                                onChange={(date) => this.props.updateResource({ name: "endDate", value: date })}
-                                                value={resource.project && resource.project.endDate}
-                                                calendarIcon={<IoMdCalendar />}
-                                                clearIcon={null as any}
-                                                minDate={resource.project.startDate ? resource.project.startDate : undefined}
-                                                disabled={this.props.dateTbd}
-                                                required
-                                            />
-                                        </div>
-                                    </Col>
-                                </FormGroup>
-                                <FormGroup row>
-                                    <Col lg={{ size: 8, offset: 4 }}>
-                                        <CustomInput invalid={showDateError} checked={this.props.dateTbd} onChange={e => this.props.updateResource(e.target)} type="checkbox" id={"date-tbd"} name="date-tbd" label={"To be decided"} />
-                                        {showDateError && <FormFeedback className="d-inline-block">{dateErrorMessage}</FormFeedback>}
-                                    </Col>
-                                </FormGroup>
-                                <FormGroup row>
-                                    <Label for="inputSupervisorId" lg={4} className="font-weight-bold">HCM SUPERVISOR ID</Label>
-                                    <Col lg={8} className="my-auto">
-                                        <Input invalid={submitted && !supervisor.assocId} value={this.props.supervisorIdInput ? this.props.supervisorIdInput : ''} onChange={e => this.props.updateResource(e.target)} type="text" name="supervisorId" id="inputSupervisorId" required />
-                                        <FormFeedback>Could not find supervisor with this ID</FormFeedback>
-                                    </Col>
-                                </FormGroup>
-                                <FormGroup row>
-                                    <Label for="inputSupervisorName" lg={4} className="font-weight-bold">HCM SUPERVISOR NAME</Label>
-                                    <Col lg={8} className="my-auto">
-                                        <Input value={validSupervisorName ? supervisorName : ''} onChange={e => this.props.updateResource(e.target)} type="text" name="supervisorName" id="inputSupervisorName" placeholder="Autofills with valid supervisor ID" readOnly />
-                                    </Col>
-                                </FormGroup>
-                                <FormGroup row>
-                                    <Label for="inputLocation" lg={4} className="font-weight-bold">LOCATION</Label>
-                                    <Col lg={8} className="my-auto">
-                                        <Input invalid={submitted && !resource.project.location.locationId} value={resource.project.location.locationId ? resource.project.location.locationId : ""} onChange={e => this.props.updateResource(e.target)} type="select" name="location" id="inputLocation" required>
-                                            <option value="" hidden></option>
-                                            {this.props.listOfLocations.map((location: Location) => {
-                                                return (
-                                                    <option value={location.locationId} key={location.locationId}>{location.name}</option>
-                                                )
-                                            })}
-                                        </Input>
-                                        <FormFeedback>Please choose a project location</FormFeedback>
-                                    </Col>
-                                </FormGroup>
-                                <FormGroup row>
-                                    <Label for="inputResumes" lg={4} className="font-weight-bold">ATTACHMENTS (RESUME)</Label>
-                                    <Col lg={8} className="my-auto">
-                                        <Label className="btn btn-secondary mb-0">
-                                            <small>UPLOAD RESUME</small><Input onChange={e => this.props.addResumes(e.target.files)} multiple type="file" accept=".doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.pdf" name="resumes" id="inputResumes" hidden />
-                                        </Label>
-                                    </Col>
-                                </FormGroup>
-                                <Row>
-                                    <Col lg={{ size: 8, offset: 4 }}>
-                                        {resource.resumes.map((resume) => <ClosablePill className="mr-3 mt-2" key={resume.resumeId} text={resume.fileName} color="secondary" onClose={() => this.props.removeResume(resume.resumeId)} />)}
-                                    </Col>
-                                </Row>
+                                <Collapse isOpen={this.props.newOrExistingProject !== 'none'}>
+                                    <FormGroup row>
+                                        <Label for="inputCustomerName" lg={4} className="font-weight-bold">CUSTOMER NAME</Label>
+                                        <Col lg={8} className="my-auto">
+                                            <Input invalid={submitted && !resource.project.customerName} value={resource.project.customerName ? resource.project.customerName : ''} onChange={e => this.props.updateResource(e.target)} type="text" name="customerName" id="inputCustomerName" required />
+                                            <FormFeedback>Please enter a customer name</FormFeedback>
+                                        </Col>
+                                    </FormGroup>
+                                    <FormGroup row>
+                                        <Label for="inputProjectId" lg={4} className="font-weight-bold">PROJECT ID</Label>
+                                        <Col lg={8} className="my-auto">
+                                            <Input invalid={submitted && !resource.project.pId} value={resource.project.pId ? resource.project.pId : ''} onChange={e => this.props.updateResource(e.target)} type="text" name="projectId" id="inputProjectId" required />
+                                            <FormFeedback>Please enter a project ID</FormFeedback>
+                                        </Col>
+                                    </FormGroup>
+                                    <FormGroup row>
+                                        <Label for="inputProjectName" lg={4} className="font-weight-bold">PROJECT NAME</Label>
+                                        <Col lg={8} className="my-auto">
+                                            <Input invalid={submitted && !resource.project.name} value={resource.project.name ? resource.project.name : ''} onChange={e => this.props.updateResource(e.target)} type="text" name="projectName" id="inputProjectName" required />
+                                            <FormFeedback>Please enter a project name</FormFeedback>
+                                        </Col>
+                                    </FormGroup>
+                                    <FormGroup row>
+                                        <Label for="inputGrade" lg={4} className="font-weight-bold">GRADE</Label>
+                                        <Col lg={8} className="my-auto">
+                                            <Input invalid={submitted && !resource.grade.gradeId} value={resource.grade.gradeId ? resource.grade.gradeId : ''} onChange={e => this.props.updateResource(e.target)} type="select" name="grade" id="inputGrade" required>
+                                                <option value="" hidden></option>
+                                                {this.props.listOfGrades.map((grade: Grade) => {
+                                                    return (
+                                                        <option value={grade.gradeId} key={grade.gradeId}>{grade.name}</option>
+                                                    )
+                                                })}
+                                            </Input>
+                                            <FormFeedback>Please choose a grade</FormFeedback>
+                                        </Col>
+                                    </FormGroup>
+                                    <FormGroup row>
+                                        <Label for="inputCompetencyTagging" lg={4} className="font-weight-bold">COMPETENCY TAGGING</Label>
+                                        <Col lg={8} className="my-auto">
+                                            <Input invalid={submitted && !resource.compentencyTagging.tagId} value={resource.compentencyTagging.tagId ? resource.compentencyTagging.tagId : ""} onChange={e => this.props.updateResource(e.target)} type="select" name="competencyTagging" id="inputCompetencyTagging" required >
+                                                <option value="" hidden></option>
+                                                {this.props.listOfCompetencyTaggings.map((tag: CompetencyTag) => {
+                                                    return (
+                                                        <option value={tag.tagId} key={tag.tagId}>{tag.name}</option>
+                                                    )
+                                                })}
+                                            </Input>
+                                            <FormFeedback>Please choose a competency tagging</FormFeedback>
+                                        </Col>
+                                    </FormGroup>
+                                    <FormGroup row>
+                                        <Label for="inputDate" lg={4} className="font-weight-bold">DURATION</Label>
+                                        <Col lg={8} className="my-auto">
+                                            <div className="d-flex justify-content-between">
+                                                <DatePicker
+                                                    onChange={(date) => this.props.updateResource({ name: "startDate", value: date })}
+                                                    value={resource.project && resource.project.startDate}
+                                                    calendarIcon={<IoMdCalendar />}
+                                                    clearIcon={null as any}
+                                                    maxDate={resource.project.endDate ? resource.project.endDate : undefined}
+                                                    disabled={this.props.dateTbd}
+                                                    required
+                                                />
+                                                <span className="my-auto">To</span>
+                                                <DatePicker
+                                                    onChange={(date) => this.props.updateResource({ name: "endDate", value: date })}
+                                                    value={resource.project && resource.project.endDate}
+                                                    calendarIcon={<IoMdCalendar />}
+                                                    clearIcon={null as any}
+                                                    minDate={resource.project.startDate ? resource.project.startDate : undefined}
+                                                    disabled={this.props.dateTbd}
+                                                    required
+                                                />
+                                            </div>
+                                        </Col>
+                                    </FormGroup>
+                                    <FormGroup row>
+                                        <Col lg={{ size: 8, offset: 4 }}>
+                                            <CustomInput invalid={showDateError} checked={this.props.dateTbd} onChange={e => this.props.updateResource(e.target)} type="checkbox" id={"date-tbd"} name="date-tbd" label={"To be decided"} />
+                                            {showDateError && <FormFeedback className="d-inline-block">{dateErrorMessage}</FormFeedback>}
+                                        </Col>
+                                    </FormGroup>
+                                    <FormGroup row>
+                                        <Label for="inputSupervisorId" lg={4} className="font-weight-bold">HCM SUPERVISOR ID</Label>
+                                        <Col lg={8} className="my-auto">
+                                            <Input invalid={submitted && !supervisor.assocId} value={this.props.supervisorIdInput ? this.props.supervisorIdInput : ''} onChange={e => this.props.updateResource(e.target)} type="text" name="supervisorId" id="inputSupervisorId" required />
+                                            <FormFeedback>Could not find supervisor with this ID</FormFeedback>
+                                        </Col>
+                                    </FormGroup>
+                                    <FormGroup row>
+                                        <Label for="inputSupervisorName" lg={4} className="font-weight-bold">HCM SUPERVISOR NAME</Label>
+                                        <Col lg={8} className="my-auto">
+                                            <Input value={validSupervisorName ? supervisorName : ''} onChange={e => this.props.updateResource(e.target)} type="text" name="supervisorName" id="inputSupervisorName" placeholder="Autofills with valid supervisor ID" readOnly />
+                                        </Col>
+                                    </FormGroup>
+                                    <FormGroup row>
+                                        <Label for="inputLocation" lg={4} className="font-weight-bold">LOCATION</Label>
+                                        <Col lg={8} className="my-auto">
+                                            <Input invalid={submitted && !resource.project.location.locationId} value={resource.project.location.locationId ? resource.project.location.locationId : ""} onChange={e => this.props.updateResource(e.target)} type="select" name="location" id="inputLocation" required>
+                                                <option value="" hidden></option>
+                                                {this.props.listOfLocations.map((location: Location) => {
+                                                    return (
+                                                        <option value={location.locationId} key={location.locationId}>{location.name}</option>
+                                                    )
+                                                })}
+                                            </Input>
+                                            <FormFeedback>Please choose a project location</FormFeedback>
+                                        </Col>
+                                    </FormGroup>
+                                    <FormGroup row>
+                                        <Label for="inputResumes" lg={4} className="font-weight-bold">ATTACHMENTS (RESUME)</Label>
+                                        <Col lg={8} className="my-auto">
+                                            <Label className="btn btn-secondary mb-0">
+                                                <small>UPLOAD RESUME</small><Input onChange={e => this.props.addResumes(e.target.files)} multiple type="file" accept=".doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.pdf" name="resumes" id="inputResumes" hidden />
+                                            </Label>
+                                        </Col>
+                                    </FormGroup>
+                                    <Row>
+                                        <Col lg={{ size: 8, offset: 4 }}>
+                                            {resource.resumes.map((resume) => <ClosablePill className="mr-3 mt-2" key={resume.resumeId} text={resume.fileName} color="secondary" onClose={() => this.props.removeResume(resume.resumeId)} />)}
+                                        </Col>
+                                    </Row>
+                                </Collapse>
                             </Col>
                         </Row>
                         <div className="fixed-bottom position-sticky bg-white pb-4">
