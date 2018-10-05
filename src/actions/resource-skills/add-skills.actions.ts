@@ -6,15 +6,14 @@ import { Resource } from "../../models/Resource";
 import { Location } from "../../models/Location";
 import { Grade } from "../../models/Grade";
 import { CompetencyTag } from "../../models/CompetencyTag";
+import Grades from '../../assets/grades.json';
+import Locations from '../../assets/locations.json';
+import CompetencyTags from '../../assets/competency-tags.json';
 
 export const fetchCompetencyTaggingList = () => (dispatch: any) => {
     dispatch({
         payload: {
-            listOfCompetencyTaggings: [new CompetencyTag({ tagId: 1, name: "Business" }),
-            new CompetencyTag({ tagId: 2, name: "Process" }),
-            new CompetencyTag({ tagId: 3, name: "Operations and IT Consulting" }),
-            new CompetencyTag({ tagId: 4, name: "Application Development and System Integration" }),
-            new CompetencyTag({ tagId: 5, name: "Enterprise Information Management" })]
+            listOfCompetencyTaggings: CompetencyTags.map((tag: any) => new CompetencyTag(tag))
         },
         type: addSkillsTypes.FETCH_COMPETENCY_TAGGINGS
     })
@@ -24,11 +23,7 @@ export const fetchGradeList = () => (dispatch: any) => {
     // Fetch needs to pull list of possible Grades
     dispatch({
         payload: {
-            listOfGrades: [new Grade({ gradeId: 1, name: 'AU' }),
-            new Grade({ gradeId: 2, name: 'A' }),
-            new Grade({ gradeId: 3, name: 'D' }),
-            new Grade({ gradeId: 4, name: 'AD' }),
-            new Grade({ gradeId: 5, name: 'UA' })]
+            listOfGrades: Grades.map((grade: any) => new Grade(grade))
         },
         type: addSkillsTypes.FETCH_GRADES
     })
@@ -38,10 +33,7 @@ export const fetchLocationList = () => (dispatch: any) => {
     // fetch needs to pull list of possible grades
     dispatch({
         payload: {
-            listOfLocations: [new Location({ locationId: 1, name: "Location1" }),
-            new Location({ locationId: 2, name: "Location2" }),
-            new Location({ locationId: 3, name: "Location3" }),
-            new Location({ locationId: 4, name: "Location4" })]
+            listOfLocations: Locations.map((location: any) => new Location(location))
         },
         type: addSkillsTypes.FETCH_LOCATIONS
     })
