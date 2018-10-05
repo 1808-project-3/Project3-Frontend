@@ -167,6 +167,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                                     this.props.addCertification(newCertification);
                                                 }
                                             }}
+                                            sortItems={(cert1, cert2) => cert1.name < cert2.name ? -1 : 1}
                                         />
                                     </Col>
                                 </FormGroup>
