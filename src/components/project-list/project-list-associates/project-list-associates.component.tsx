@@ -1,13 +1,10 @@
 import * as React from "react";
+import Slider from "react-slick";
+
 import {getAssociateList} from "../../../actions/info/info.actions";
 import { connect } from "react-redux";
 import { IState } from "../../../reducers";
-import {
-    Carousel,
-    CarouselItem,
-    CarouselControl,
-    CarouselCaption
-} from 'reactstrap';
+
 
 
 interface IProps {
@@ -17,40 +14,8 @@ interface IProps {
 }
 
 export class ProjectListAssociatesComponent extends React.Component<IProps, any> {
-    private animating = false;
     constructor(props: any) {
         super(props);
-        this.state = { activeIndex: 0 };
-        this.next = this.next.bind(this);
-        this.previous = this.previous.bind(this);
-        this.goToIndex = this.goToIndex.bind(this);
-        this.onExiting = this.onExiting.bind(this);
-        this.onExited = this.onExited.bind(this);
-    }
-
-    public onExiting() {
-        this.animating = true;
-    }
-
-    public onExited() {
-        this.animating = false;
-    }
-
-    public next() {
-        if (this.animating){return;}
-        const nextIndex = this.state.activeIndex === this.props.associateList.length - 1 ? 0 : this.state.activeIndex + 1;
-        this.setState({ activeIndex: nextIndex });
-    }
-
-    public previous() {
-        if (this.animating) {return;}
-        const nextIndex = this.state.activeIndex === 0 ? this.props.associateList.length - 1 : this.state.activeIndex - 1;
-        this.setState({ activeIndex: nextIndex });
-    }
-
-    public goToIndex(newIndex: any) {
-        if (this.animating) {return;}
-        this.setState({ activeIndex: newIndex });
     }
 
     public componentDidMount(){
@@ -58,44 +23,48 @@ export class ProjectListAssociatesComponent extends React.Component<IProps, any>
     }
 
     public render() {
-        const { activeIndex } = this.state;
+        const entries: any[] = [];
+        const settings = {
+            dots: true,
+            infinite: false,
+            slidesToShow: 3,
+            speed: 500,
+        };
 
-        const slides = this.props.associateList.map((item) => {
+        if(entries === undefined){
             return (
-                <CarouselItem
-                    className="custom-tag"
-                    tag="div"
-                    key={item.user_id}
-                    onExiting={this.onExiting}
-                    onExited={this.onExited}
-                >
-
-                    <CarouselCaption className="text-danger" captionText={item.last_name} captionHeader={item.first_name} />
-                </CarouselItem>
+                <div>
+                    There is nothing to show!
+                </div>
             );
-        });
-
+        }
+        else {
         return (
-            <div>
-                <style>
-                    {
-                        `.custom-tag {
-                max-width: 100%;
-                height: 200px;
-                background: black;
-              }`
-                    }
-                </style>
-                <Carousel
-                    activeIndex={activeIndex}
-                    next={this.next}
-                    previous={this.previous}
-                >
-                    {slides}
-                    <CarouselControl direction="next" directionText="Next" onClickHandler={this.next} />
-                </Carousel>
+            <div style={{width: "500px"}}>
+                <Slider {...settings}>
+                    <div>
+                        <h3>Hey there. Notice me Senpai. 1</h3>
+                    </div>
+                    <div>
+                        <h3>Hey there. Notice me Senpai. 2</h3>
+                    </div>
+                    <div>
+                        <h3>Hey there. Notice me Senpai. 3</h3>
+                    </div>
+                    <div>
+                        <h3>Hey there. Notice me Senpai. 4</h3>
+                    </div>
+                    <div>
+                        <h3>Hey there. Notice me Senpai. 5</h3>
+                    </div>
+                    <div>
+                        <h3>Hey there. Notice me Senpai. 6</h3>
+                    </div>
+                </Slider>
             </div>
         );
+        }
+
     }
 }
 const mapStateToProps = (state: IState) => {

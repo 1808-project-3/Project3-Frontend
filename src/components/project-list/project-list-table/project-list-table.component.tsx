@@ -46,7 +46,9 @@ export class ProjectListTableComponent extends React.Component<IProps, any> {
               </tr>
           );
           listEntries.push(
-              <ProjectListAssociatesComponent />
+              <div>
+                <ProjectListAssociatesComponent />
+              </div>
           );
       }
       else {
