@@ -93,10 +93,11 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                         <Container>
                                             <Row>
                                                 {SkillGroups.map((group: Group) => {
-                                                    return <CustomInput checked={this.props.skillGroupIds.indexOf(group.groupId) > -1} onChange={e => this.props.toggleSkillGroup(e.target)} key={"group-" + group.groupId} type="checkbox" id={"skills-group-" + group.groupId} name="skillsGroup" className="pr-4" label={group.name} />
+                                                    return <CustomInput invalid={submitted && this.props.skillGroupIds.length === 0} checked={this.props.skillGroupIds.indexOf(group.groupId) > -1} onChange={e => this.props.toggleSkillGroup(e.target)} key={"group-" + group.groupId} type="checkbox" id={"skills-group-" + group.groupId} name="skillsGroup" className="pr-4" label={group.name} />
                                                 })}
                                             </Row>
                                         </Container>
+                                        {submitted && this.props.skillGroupIds.length === 0 && <FormFeedback className="d-inline-block">Please choose at least one skill group and skill</FormFeedback>}
                                     </Col>
                                 </FormGroup>
                                 <Collapse isOpen={skills.length > 0}>
