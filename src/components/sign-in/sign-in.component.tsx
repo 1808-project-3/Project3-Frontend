@@ -8,8 +8,8 @@ import { Link } from 'react-router-dom';
 
 interface IProps extends RouteComponentProps<{}>, ISignInState {
   updateError: (message: string) => any
-  updatePassword: (password: string) => any,
-  updateUsername: (username: string) => any,
+  updatePassword: (pass: string) => any,
+  updateUsername: (userId: string) => any,
   login: (e: React.FormEvent<HTMLFormElement>, credentials: any) => void
 }
 
@@ -44,7 +44,7 @@ class SignInComponent extends React.Component<IProps, {}> {
             <label htmlFor="inputUsername" className="sr-only">Cognizent ID</label>
             <input
               onChange={this.usernameChange}
-              value={credentials.username}
+              value={credentials.userId}
               type="text"
               id="inputUsername"
               className="form-control"
@@ -54,7 +54,7 @@ class SignInComponent extends React.Component<IProps, {}> {
             <label htmlFor="inputPassword" className="sr-only">PASSWORD</label>
             <input
               onChange={this.passwordChange}
-              value={credentials.password}
+              value={credentials.pass}
               type="password"
               id="inputPassword"
               className="form-control"

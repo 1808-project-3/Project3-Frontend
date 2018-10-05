@@ -1,20 +1,21 @@
 import { signInTypes } from "./sign-in.types";
-import { environment } from '../../environment';
+// import { environment } from '../../environment';
 import history from '../../history';
+import axios from 'axios';
 
-export const updatePassword = (password: string) => {
+export const updatePassword = (pass: string) => {
   return {
     payload: {
-      password
+      pass
     },
     type: signInTypes.UPDATE_PASSWORD
   }
 }
 
-export const updateUsername = (username: string) => {
+export const updateUsername = (userId: string) => {
   return {
     payload: {
-      username
+      userId
     },
     type: signInTypes.UPDATE_USERNAME
   }
@@ -29,43 +30,39 @@ export const updateError = (errorMessage: string) => {
   }
 }
 
+export const loginSuccess = (data: any) => {
+  return{ 
+    payload: {
+      currentUser: data.credentials,
+      errorMessage: ''
+    },
+    type: signInTypes.LOGIN
+  }
+}
+
+export const loginInvalid = (data: any) => {
+  return{
+    payload:{
+      currentUser: null,
+      errorMessage: "Invalid Username or Password"
+    },
+    type: signInTypes.LOGIN
+  }
+}
+
 export const login = (e: React.FormEvent<HTMLFormElement>, credentials: any) => {
   return (dispatch: any) => {
     e.preventDefault();
-    return fetch(`${environment.context}users/login`, {
-      body: JSON.stringify(credentials),
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      method: 'POST',
-    })
-      .then(resp => {
-        if (resp.status === 200) {
-          return resp.json().then(data => ({ status: resp.status, body: data }));
-        } else {
-          return resp.text().then(data => ({ status: resp.status, body: data }));
-        }
-      })
+    console.log(credentials)
+    return axios.post(`http://localhost:8080/users/login`, credentials)
       .then(resp => {
         switch (resp.status) {
           case 200:
-            dispatch({
-              payload: {
-                currentUser: resp.body,
-                errorMessage: ''
-              },
-              type: signInTypes.LOGIN
-            });
-            history.push('/profile');
+            dispatch(loginSuccess(resp.data));
+            history.push('/home');
             break;
           case 401:
-            dispatch({
-              payload: {
-                currentUser: null,
-                errorMessage: 'Invalid username or password'
-              },
-              type: signInTypes.LOGIN
-            });
+            dispatch(loginInvalid(resp.data));
             break;
           default:
             throw new Error("Failed to login at this time");

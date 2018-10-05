@@ -3,8 +3,8 @@ import { ISignInState } from ".";
 
 const initialState: ISignInState = {
   credentials : {
-    password: '',
-    username: ''
+    pass: '',
+    userId: ''
   },
   errorMessage: ''
 }
@@ -21,7 +21,7 @@ export const signInReducer = (state = initialState, action: any) => {
         ...state,
         credentials: {
           ...state.credentials,
-          password: action.payload.password
+          pass: action.payload.pass
         }
       }
     case signInTypes.UPDATE_USERNAME:
@@ -29,7 +29,7 @@ export const signInReducer = (state = initialState, action: any) => {
         ...state,
         credentials: {
           ...state.credentials,
-          username: action.payload.username
+          userId: action.payload.userId
         }
       }
 
@@ -41,8 +41,8 @@ export const signInReducer = (state = initialState, action: any) => {
       }
       if (!errorMessage) {
         newState.credentials = {
-          password: '',
-          username: ''
+          pass: '',
+          userId: ''
         }
       }
       return newState;
