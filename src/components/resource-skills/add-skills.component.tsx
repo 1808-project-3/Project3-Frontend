@@ -197,6 +197,16 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                 </Row>
                             </Col>
                             <Col>
+                                <Row>
+                                    <Col className="text-center">
+                                        <Button className="my-2 mx-2">
+                                            <span>Select Existing Project</span>
+                                        </Button>
+                                        <Button className="my-2 mx-2">
+                                            <IoMdAddCircleOutline /><span className="ml-2">Create New Project</span>
+                                        </Button>
+                                    </Col>
+                                </Row>
                                 <FormGroup row>
                                     <Label for="inputCustomerName" lg={4} className="font-weight-bold">CUSTOMER NAME</Label>
                                     <Col lg={8} className="my-auto">
@@ -259,7 +269,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                                 disabled={this.props.dateTbd}
                                                 required
                                             />
-                                            <span>To</span>
+                                            <span className="my-auto">To</span>
                                             <DatePicker
                                                 onChange={(date) => this.props.updateResource({ name: "endDate", value: date })}
                                                 value={resource.project && resource.project.endDate}
