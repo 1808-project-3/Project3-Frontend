@@ -136,27 +136,30 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                             </Col>
                             <Col>
                                 <FormGroup row>
-                                    <Label for="inputCustomerName" lg={4} className="font-weight-bold"> CUSTOMER NAME</Label>
+                                    <Label for="inputCustomerName" lg={4} className="font-weight-bold">CUSTOMER NAME</Label>
                                     <Col lg={8} className="my-auto">
-                                        <Input value={resource.project.customerName ? resource.project.customerName : ''} onChange={e => this.props.updateResource(e.target)} type="text" name="customerName" id="inputCustomerName" required />
+                                        <Input invalid={submitted && !resource.project.customerName} value={resource.project.customerName ? resource.project.customerName : ''} onChange={e => this.props.updateResource(e.target)} type="text" name="customerName" id="inputCustomerName" required />
+                                        <FormFeedback>Customer name cannot be blank</FormFeedback>
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
                                     <Label for="inputProjectId" lg={4} className="font-weight-bold">PROJECT ID</Label>
                                     <Col lg={8} className="my-auto">
-                                        <Input value={resource.project.pId ? resource.project.pId : ''} onChange={e => this.props.updateResource(e.target)} type="text" name="projectId" id="inputProjectId" required />
+                                        <Input invalid={submitted && !resource.project.pId} value={resource.project.pId ? resource.project.pId : ''} onChange={e => this.props.updateResource(e.target)} type="text" name="projectId" id="inputProjectId" required />
+                                        <FormFeedback>Project ID cannot be blank</FormFeedback>
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
                                     <Label for="inputProjectName" lg={4} className="font-weight-bold">PROJECT NAME</Label>
                                     <Col lg={8} className="my-auto">
-                                        <Input value={resource.project.name ? resource.project.name : ''} onChange={e => this.props.updateResource(e.target)} type="text" name="projectName" id="inputProjectName" required />
+                                        <Input invalid={submitted && !resource.project.name} value={resource.project.name ? resource.project.name : ''} onChange={e => this.props.updateResource(e.target)} type="text" name="projectName" id="inputProjectName" required />
+                                        <FormFeedback>Project name cannot be blank</FormFeedback>
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
                                     <Label for="inputGrade" lg={4} className="font-weight-bold">GRADE</Label>
                                     <Col lg={8} className="my-auto">
-                                        <Input value={resource.grade ? resource.grade : ""} onChange={e => this.props.updateResource(e.target)} type="select" name="grade" id="inputGrade" required>
+                                        <Input value={resource.grade ? resource.grade : ''} onChange={e => this.props.updateResource(e.target)} type="select" name="grade" id="inputGrade" required>
                                             <option value="" hidden></option>
                                             {this.props.listOfGrades.map((grade: string) => {
                                                 return (
@@ -213,7 +216,8 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                 <FormGroup row>
                                     <Label for="inputSupervisorId" lg={4} className="font-weight-bold">HCM SUPERVISOR ID</Label>
                                     <Col lg={8} className="my-auto">
-                                        <Input value={supervisor.assocId ? supervisor.assocId : ''} onChange={e => this.props.updateResource(e.target)} type="text" name="supervisorId" id="inputSupervisorId" required />
+                                        <Input invalid={submitted && !supervisor.assocId} value={supervisor.assocId ? supervisor.assocId : ''} onChange={e => this.props.updateResource(e.target)} type="text" name="supervisorId" id="inputSupervisorId" required />
+                                        <FormFeedback>Supervisor ID cannot be blank</FormFeedback>
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
