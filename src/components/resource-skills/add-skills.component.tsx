@@ -150,7 +150,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                     <Col lg={8} className="my-auto">
                                         <Autocomplete
                                             getItemValue={cert => '' + cert.certId}
-                                            items={this.props.listOfCertifications}
+                                            items={this.props.listOfCertifications.filter(cert => resource.certifications.every(addedCert => addedCert.certId !== cert.certId))}
                                             renderItem={(cert, isHighlighted) =>
                                                 <div key={cert.certId} style={{ background: isHighlighted ? 'lightgray' : 'white' }}>
                                                     {cert.name}
