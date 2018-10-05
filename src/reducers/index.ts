@@ -42,5 +42,5 @@ export interface IState {
 export const state = combineReducers<IState>({
     info: infoReducer,
     signIn: signInReducer,
-})
+});
 
