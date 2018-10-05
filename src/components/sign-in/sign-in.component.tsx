@@ -40,6 +40,9 @@ class SignInComponent extends React.Component<IProps, {}> {
           <form className="form-signin" id="signin-form" 
           onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
             this.props.login(e, this.props.credentials);
+            // if(){
+
+            // }
             this.props.history.push('home');
           }}>
             
@@ -68,7 +71,7 @@ class SignInComponent extends React.Component<IProps, {}> {
 
             <button className="btn btn-secondary btn-block" id="sign-in-button" type="submit">LOGIN</button>
             {errorMessage && <p id="error-message">{errorMessage}</p>}
-            <button onClick={()=>{this.props.history.push('register')}} className="btn btn-outline-secondary btn-block" id="register-button" type="button">Register</button>
+            <button onClick={()=>{this.props.history.push('register')}} className="btn btn-outline-secondary btn-block" id="register-button" type="button">REGISTER</button>
             
           </form>
         </div>
