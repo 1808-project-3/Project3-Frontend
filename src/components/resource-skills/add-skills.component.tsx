@@ -223,6 +223,12 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                                 <Badge className="clickable" onClick={() => this.props.showOrHideProject("none")} color="light">Undo</Badge>
                                             </>
                                         }
+                                        {submitted && this.props.newOrExistingProject === 'none' &&
+                                            <>
+                                                <span className="form-control is-invalid d-none" />
+                                                <FormFeedback>You must choose an existing project or create a new one.</FormFeedback>
+                                            </>
+                                        }
                                     </Col>
                                 </Row>
                                 <Collapse isOpen={this.props.newOrExistingProject === 'new'}>
