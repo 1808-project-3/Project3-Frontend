@@ -7,21 +7,21 @@ import SignInComponent from './components/sign-in/sign-in.component';
 import { Provider } from 'react-redux';
 import { store } from './Store';
 import RegisterComponent from './components/register/register.component';
+import SearchResultComponent from './components/search-result/search-result.component';
 
 class App extends React.Component {
+
   public render() {
     return (
       <Provider store={store}>
         <BrowserRouter>
-          <div id="within-root">
-            <div id="main-content-container">
-              <Switch>
-                <Route path="/sign-in" component={SignInComponent} />
-                <Route path="/register" component={RegisterComponent} />
-                <Route path="/home" component={this.wrappedRoutes} />
-                <Route component={SignInComponent} />
-              </Switch>
-            </div>
+          <div id="main-content-container">
+            <Switch>
+              <Route path="/sign-in" component={SignInComponent} />
+              <Route path="/register" component={RegisterComponent} />
+              <Route path="/home" component={this.wrappedRoutes} />
+              <Route component={SignInComponent} />
+            </Switch>
           </div>
 
         </BrowserRouter>
@@ -35,9 +35,8 @@ class App extends React.Component {
   public wrappedRoutes = (props: any) => (
     <Layout location={props.location} history={props.history}>
       <Switch>
-        <Route path="/home/resources/search-results" />
+        <Route path="/home/resouces/search-results" component={SearchResultComponent} />
         <Route path="/home" />
-        <Route path="/home/resources/search-result"/>
       </Switch>
     </Layout>
   )

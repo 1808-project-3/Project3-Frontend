@@ -5,14 +5,38 @@ import { registerTypes } from "../../actions/register/register.actions";
 describe('sign-in actions', () => {
 
     it('should dispatch proper payload for update fields', () => {
-        const userId = 'username123';
+        const event = {
+            name: 'FirstName',
+            value: 'justin'
+        };
         const expectedAction = {
             payload: {
-                userId
+                name: event.name,
+                value: event.value
             },
             type: registerTypes.UPDATE_FIELDS
         }
-        expect(registerActions.updateFields(userId)).toEqual(expectedAction);
+        expect(registerActions.updateFields(event)).toEqual(expectedAction);
+    });
+
+    it('should dispatch proper payload for update error', () => {
+        const errorMessage = 'invalid password';
+        const expectedAction = {
+            payload: {
+                errorMessage
+            },
+            type: registerTypes.UPDATE_ERROR
+        }
+        expect(registerActions.updateError(errorMessage)).toEqual(expectedAction);
+    });
+
+    it('should dispatch proper payload for clear fields', () => {
+        const expectedAction = {
+            payload: {
+            },
+            type: registerTypes.CLEAR_FIELDS
+        }
+        expect(registerActions.clearFields()).toEqual(expectedAction);
     });
 
 

@@ -2,7 +2,7 @@ import * as React from 'react';
 import './navStyles.css';
 import { Link } from 'react-router-dom';
 
-export class NavLink extends React.Component<any>
+export class NavLink extends React.Component<any, any>
 {
     public render()
     {
