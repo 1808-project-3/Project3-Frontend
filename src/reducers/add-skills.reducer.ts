@@ -140,6 +140,12 @@ export const addSkillsReducer = (state = initialState, action: any) => {
             return { ...state, certificationSearch: action.payload.certificationSearch };
         case addSkillsTypes.FETCH_CERTIFICATIONS:
             return { ...state, listOfCertifications: action.payload.listOfCertifications };
+        case addSkillsTypes.ADD_CERTIFICATION:
+            const newCertificationResource = new Resource({ ...state.resource });
+            newCertificationResource.certifications = [...state.resource.certifications, action.payload.certification];
+            newState.resource = newCertificationResource;
+            newState.certificationSearch = '';
+            return newState;
     }
     return state;
 }

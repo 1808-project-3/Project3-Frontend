@@ -23,6 +23,7 @@ import { Grade } from '../../models/Grade';
 import { CompetencyTag } from '../../models/CompetencyTag';
 import { Location } from '../../models/Location';
 import * as Autocomplete from 'react-autocomplete'
+import { Certification } from '../../models/Certification';
 
 
 interface IProps extends RouteComponentProps<{}>, IAddSkillsState {
@@ -31,6 +32,7 @@ interface IProps extends RouteComponentProps<{}>, IAddSkillsState {
     fetchLocationList: () => void
     fetchCertificationList: (search: string) => void
     updateCertificationSearch: (search: string) => void
+    addCertification: (cert: Certification) => void
     updateResource: (event: any) => void
     updateResourceSkills: (skill: Skill) => void
     addResumes: (files: FileList | null) => void
@@ -156,7 +158,12 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                             }
                                             value={this.props.certificationSearch}
                                             onChange={(e) => this.props.updateCertificationSearch(e.target.value)}
-                                            onSelect={(val) => null} // TODO
+                                            onSelect={(val) => {
+                                                const newCertification = this.props.listOfCertifications.find(cert => cert.certId === +val);
+                                                if (newCertification) {
+                                                    this.props.addCertification(newCertification);
+                                                }
+                                            }}
                                         />
                                         <Input type="text" name="certifications" id="inputCertifications" placeholder="Search Certifications here..." />
                                     </Col>
@@ -310,6 +317,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
 const mapStateToProps = (state: IState) => state.addSkills
 
 const mapDispatchToProps = {
+    addCertification: addSkillsActions.addCertification,
     addResumes: addSkillsActions.addResumes,
     cancelResource: addSkillsActions.cancelResource,
     fetchCertificationList: addSkillsActions.fetchCertificationList,

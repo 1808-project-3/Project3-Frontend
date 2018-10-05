@@ -79,6 +79,15 @@ export const updateCertificationSearch = (search: string) => (dispatch: any) => 
     })
 }
 
+export const addCertification = (certification: Certification) => (dispatch: any) => {
+    dispatch({
+        payload: {
+            certification
+        },
+        type: addSkillsTypes.ADD_CERTIFICATION
+    })
+}
+
 export const toggleSkillGroup = (event: any) => {
     return {
         payload: {
