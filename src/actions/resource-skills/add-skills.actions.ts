@@ -1,6 +1,7 @@
 import { addSkillsTypes } from "./add-skills.types";
 import { Skill } from "../../models/Skill";
 import { Resume } from "../../models/Resume";
+import history from '../../history';
 
 export const fetchCompetencyTaggingList = () => (dispatch: any) => {
     dispatch({
@@ -85,6 +86,7 @@ export const removeResume = (resumeId: number) => {
 }
 
 export const cancelResource = () => {
+    history.push('/dashboard')
     return {
         payload: {},
         type: addSkillsTypes.CANCEL_RESOURCE
