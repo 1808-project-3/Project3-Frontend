@@ -28,6 +28,7 @@ import { Certification } from '../../models/Certification';
 
 interface IProps extends RouteComponentProps<{}>, IAddSkillsState {
     fetchAssociate: (assocId: number) => void
+    fetchSupervisor: (supId: number) => void
     fetchCompetencyTaggingList: () => void
     fetchGradeList: () => void
     fetchLocationList: () => void
@@ -58,6 +59,9 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
         }
         if (this.props.associateIdInput !== prevProps.associateIdInput) {
             this.props.fetchAssociate(+this.props.associateIdInput);
+        }
+        if (this.props.supervisorIdInput !== prevProps.supervisorIdInput) {
+            this.props.fetchSupervisor(+this.props.supervisorIdInput);
         }
     }
 
@@ -277,7 +281,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                 <FormGroup row>
                                     <Label for="inputSupervisorId" lg={4} className="font-weight-bold">HCM SUPERVISOR ID</Label>
                                     <Col lg={8} className="my-auto">
-                                        <Input invalid={submitted && !supervisor.assocId} value={supervisor.assocId ? supervisor.assocId : ''} onChange={e => this.props.updateResource(e.target)} type="text" name="supervisorId" id="inputSupervisorId" required />
+                                        <Input invalid={submitted && !supervisor.assocId} value={this.props.supervisorIdInput ? this.props.supervisorIdInput : ''} onChange={e => this.props.updateResource(e.target)} type="text" name="supervisorId" id="inputSupervisorId" required />
                                         <FormFeedback>Could not find supervisor with this ID</FormFeedback>
                                     </Col>
                                 </FormGroup>
@@ -343,6 +347,7 @@ const mapDispatchToProps = {
     fetchCompetencyTaggingList: addSkillsActions.fetchCompetencyTaggingList,
     fetchGradeList: addSkillsActions.fetchGradeList,
     fetchLocationList: addSkillsActions.fetchLocationList,
+    fetchSupervisor: addSkillsActions.fetchSupervisor,
     removeCertification: addSkillsActions.removeCertification,
     removeResume: addSkillsActions.removeResume,
     submitResource: addSkillsActions.submitResource,

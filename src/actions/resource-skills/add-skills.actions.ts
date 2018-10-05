@@ -23,6 +23,15 @@ export const fetchAssociate = (assocId: number) => (dispatch: any) => {
     })
 }
 
+export const fetchSupervisor = (supId: number) => (dispatch: any) => {
+    dispatch({
+        payload: {
+            supervisor: new User(MockUser)
+        },
+        type: addSkillsTypes.FETCH_SUPERVISOR
+    })
+}
+
 export const fetchCertificationList = (search: string) => (dispatch: any) => {
     dispatch({
         payload: {

@@ -63,9 +63,7 @@ export const addSkillsReducer = (state = initialState, action: any) => {
                     newState.resource = newResource;
                     break;
                 case "supervisorId":
-                    const newSupervisorIdProject = new Project({ ...state.resource.project, supervisor: new User({ ...state.resource.project.supervisor, assocId: action.payload.value }) });
-                    newResource.project = newSupervisorIdProject;
-                    newState.resource = newResource;
+                    newState.supervisorIdInput = action.payload.value;
                     break;
                 case "supervisorName":
                     const newSupervisorNameProject = new Project({ ...state.resource.project, supervisor: new User({ ...state.resource.project.supervisor, firstName: action.payload.value }) });
@@ -144,6 +142,13 @@ export const addSkillsReducer = (state = initialState, action: any) => {
             const newAssociateResource = new Resource({ ...state.resource });
             newAssociateResource.user = action.payload.associate;
             newState.resource = newAssociateResource;
+            return newState;
+        case addSkillsTypes.FETCH_SUPERVISOR:
+            const newSupervisorResource = new Resource({ ...state.resource });
+            const newSupervisorProject = new Project({ ...state.resource.project, supervisor: action.payload.supervisor });
+            newSupervisorProject.supervisor = action.payload.supervisor;
+            newSupervisorResource.project = newSupervisorProject;
+            newState.resource = newSupervisorResource;
             return newState;
         case addSkillsTypes.ADD_CERTIFICATION:
             const newCertificationResource = new Resource({ ...state.resource });
