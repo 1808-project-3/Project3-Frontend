@@ -229,7 +229,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                     <Label for="inputSupervisorId" lg={4} className="font-weight-bold">HCM SUPERVISOR ID</Label>
                                     <Col lg={8} className="my-auto">
                                         <Input invalid={submitted && !supervisor.assocId} value={supervisor.assocId ? supervisor.assocId : ''} onChange={e => this.props.updateResource(e.target)} type="text" name="supervisorId" id="inputSupervisorId" required />
-                                        <FormFeedback>Please enter a supervisor ID</FormFeedback>
+                                        <FormFeedback>Could not find supervisor with this ID</FormFeedback>
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
