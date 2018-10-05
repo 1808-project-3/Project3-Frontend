@@ -70,6 +70,15 @@ export const updateResourceSkills = (skill: Skill) => {
     }
 }
 
+export const updateCertificationSearch = (search: string) => (dispatch: any) => {
+    dispatch({
+        payload: {
+            certificationSearch: search
+        },
+        type: addSkillsTypes.UPDATE_CERTIFICATION_SEARCH
+    })
+}
+
 export const toggleSkillGroup = (event: any) => {
     return {
         payload: {

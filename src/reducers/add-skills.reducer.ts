@@ -8,6 +8,7 @@ import { CompetencyTag } from "../models/CompetencyTag";
 import { Location } from "../models/Location";
 
 const initialState: IAddSkillsState = {
+    certificationSearch: '',
     dateTbd: false,
     listOfCertifications: [],
     listOfCompetencyTaggings: [],
@@ -135,6 +136,8 @@ export const addSkillsReducer = (state = initialState, action: any) => {
             return { ...initialState, listOfGrades: [...state.listOfGrades], listOfCompetencyTaggings: [...state.listOfCompetencyTaggings], listOfLocations: [...state.listOfLocations] };
         case addSkillsTypes.SUBMIT_RESOURCE:
             return { ...state, submitted: action.payload.submitted };
+        case addSkillsTypes.UPDATE_CERTIFICATION_SEARCH:
+            return { ...state, certificationSearch: action.payload.certificationSearch };
         case addSkillsTypes.FETCH_CERTIFICATIONS:
             return { ...state, listOfCertifications: action.payload.listOfCertifications };
     }

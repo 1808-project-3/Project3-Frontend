@@ -16,6 +16,7 @@ export interface ISignInState {
 }
 
 export interface IAddSkillsState {
+  certificationSearch: string,
   dateTbd: boolean,
   listOfCertifications: Certification[],
   listOfCompetencyTaggings: CompetencyTag[],

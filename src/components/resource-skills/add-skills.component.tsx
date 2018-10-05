@@ -30,6 +30,7 @@ interface IProps extends RouteComponentProps<{}>, IAddSkillsState {
     fetchGradeList: () => void
     fetchLocationList: () => void
     fetchCertificationList: (search: string) => void
+    updateCertificationSearch: (search: string) => void
     updateResource: (event: any) => void
     updateResourceSkills: (skill: Skill) => void
     addResumes: (files: FileList | null) => void
@@ -147,8 +148,8 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                                     {cert.name}
                                                 </div>
                                             }
-                                            value={""}
-                                            onChange={(e) => this.props.fetchCertificationList(e.target.value)}
+                                            value={this.props.certificationSearch}
+                                            onChange={(e) => this.props.updateCertificationSearch(e.target.value)}
                                             onSelect={(val) => null} // TODO
                                         />
                                         <Input type="text" name="certifications" id="inputCertifications" placeholder="Search Certifications here..." />
@@ -312,6 +313,7 @@ const mapDispatchToProps = {
     removeResume: addSkillsActions.removeResume,
     submitResource: addSkillsActions.submitResource,
     toggleSkillGroup: addSkillsActions.toggleSkillGroup,
+    updateCertificationSearch: addSkillsActions.updateCertificationSearch,
     updateResource: addSkillsActions.updateResource,
     updateResourceSkills: addSkillsActions.updateResourceSkills
 
