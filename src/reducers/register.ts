@@ -9,7 +9,7 @@ const initialState: IRegisterState = {
     lastName: '',
     password: '',
     roleProfile: 0,
-    userID: NaN
+    userID: 0
 }
 
 export const registerReducer = (state = initialState, action: any) => {
