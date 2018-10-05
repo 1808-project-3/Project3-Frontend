@@ -3,6 +3,9 @@ import { addSkillsTypes } from "../actions/resource-skills/add-skills.types";
 import { Project } from "../models/Project";
 import { Resource } from "../models/Resource";
 import { User } from "../models/User";
+import { Grade } from "../models/Grade";
+import { CompetencyTag } from "../models/CompetencyTag";
+import { Location } from "../models/Location";
 
 const initialState: IAddSkillsState = {
     dateTbd: false,
@@ -50,11 +53,11 @@ export const addSkillsReducer = (state = initialState, action: any) => {
                     newState.resource = newResource;
                     break;
                 case "grade":
-                    newResource.grade = action.payload.value;
+                    newResource.grade = new Grade(state.listOfGrades.find(grade => grade.gradeId === +action.payload.value));
                     newState.resource = newResource;
                     break;
                 case "competencyTagging":
-                    newResource.compentencyTagging = action.payload.value;
+                    newResource.compentencyTagging = new CompetencyTag(state.listOfCompetencyTaggings.find(tag => tag.tagId === +action.payload.value));
                     newState.resource = newResource;
                     break;
                 case "supervisorId":
@@ -68,7 +71,8 @@ export const addSkillsReducer = (state = initialState, action: any) => {
                     newState.resource = newResource;
                     break;
                 case "location":
-                    const newLocationProject = new Project({ ...state.resource.project, location: action.payload.value });
+                    const newLocation = new Location(state.listOfLocations.find(location => location.locationId === +action.payload.value));
+                    const newLocationProject = new Project({ ...state.resource.project, location: newLocation });
                     newResource.project = newLocationProject;
                     newState.resource = newResource;
                     break;

@@ -67,11 +67,11 @@ export const ResourceSkillsDetail: React.StatelessComponent<IProps> = (props) =>
                         <Col sm={6}>
                             <Row>
                                 <Col tag="dt" xl={4}>GRADE</Col>
-                                <Col tag="dd" xl={8}>{resource.grade}</Col>
+                                <Col tag="dd" xl={8}>{resource.grade.name}</Col>
                             </Row>
                             <Row>
                                 <Col tag="dt" xl={4}>COMPETENCY TAGGING</Col>
-                                <Col tag="dd" xl={8}>{resource.compentencyTagging}</Col>
+                                <Col tag="dd" xl={8}>{resource.compentencyTagging.name}</Col>
                             </Row>
                             <Row>
                                 <Col tag="dt" xl={4}>DATE OF JOINING</Col>
@@ -87,7 +87,7 @@ export const ResourceSkillsDetail: React.StatelessComponent<IProps> = (props) =>
                             </Row>
                             <Row>
                                 <Col tag="dt" xl={4}>LOCATION</Col>
-                                <Col tag="dd" xl={8}>{resource.project.location}</Col>
+                                <Col tag="dd" xl={8}>{resource.project.location.name}</Col>
                             </Row>
                             <Row>
                                 <Col tag="dt" xl={4}>RESUME DOCUMENT</Col>

@@ -2,6 +2,9 @@ import { combineReducers } from "redux";
 import { Resource } from "../models/Resource";
 import { addSkillsReducer } from "./add-skills.reducer";
 import { signInReducer } from "./sign-in.reducer";
+import { Grade } from "../models/Grade";
+import { Location } from "../models/Location";
+import { CompetencyTag } from "../models/CompetencyTag";
 
 export interface ISignInState {
   credentials: {
@@ -13,9 +16,9 @@ export interface ISignInState {
 
 export interface IAddSkillsState {
   dateTbd: boolean,
-  listOfCompetencyTaggings: string[],
-  listOfGrades: string[],
-  listOfLocations: string[],
+  listOfCompetencyTaggings: CompetencyTag[],
+  listOfGrades: Grade[],
+  listOfLocations: Location[],
   resource: Resource,
   skillGroupIds: number[],
   submitted: boolean

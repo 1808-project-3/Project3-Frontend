@@ -19,6 +19,9 @@ import { ClosablePill } from './closable-pill.component';
 import FormFeedback from 'reactstrap/lib/FormFeedback';
 import { Resource } from '../../models/Resource';
 import Alert from 'reactstrap/lib/Alert';
+import { Grade } from '../../models/Grade';
+import { CompetencyTag } from '../../models/CompetencyTag';
+import { Location } from '../../models/Location';
 
 
 interface IProps extends RouteComponentProps<{}>, IAddSkillsState {
@@ -168,11 +171,11 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                 <FormGroup row>
                                     <Label for="inputGrade" lg={4} className="font-weight-bold">GRADE</Label>
                                     <Col lg={8} className="my-auto">
-                                        <Input invalid={submitted && !resource.grade} value={resource.grade ? resource.grade : ''} onChange={e => this.props.updateResource(e.target)} type="select" name="grade" id="inputGrade" required>
+                                        <Input invalid={submitted && !resource.grade.gradeId} value={resource.grade.gradeId ? resource.grade.gradeId : ''} onChange={e => this.props.updateResource(e.target)} type="select" name="grade" id="inputGrade" required>
                                             <option value="" hidden></option>
-                                            {this.props.listOfGrades.map((grade: string) => {
+                                            {this.props.listOfGrades.map((grade: Grade) => {
                                                 return (
-                                                    <option value={grade} key={grade}>{grade}</option>
+                                                    <option value={grade.gradeId} key={grade.gradeId}>{grade.name}</option>
                                                 )
                                             })}
                                         </Input>
@@ -182,11 +185,11 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                 <FormGroup row>
                                     <Label for="inputCompetencyTagging" lg={4} className="font-weight-bold">COMPETENCY TAGGING</Label>
                                     <Col lg={8} className="my-auto">
-                                        <Input invalid={submitted && !resource.compentencyTagging} value={resource.compentencyTagging ? resource.compentencyTagging : ""} onChange={e => this.props.updateResource(e.target)} type="select" name="competencyTagging" id="inputCompetencyTagging" required >
+                                        <Input invalid={submitted && !resource.compentencyTagging.tagId} value={resource.compentencyTagging.tagId ? resource.compentencyTagging.tagId : ""} onChange={e => this.props.updateResource(e.target)} type="select" name="competencyTagging" id="inputCompetencyTagging" required >
                                             <option value="" hidden></option>
-                                            {this.props.listOfCompetencyTaggings.map((tag: string) => {
+                                            {this.props.listOfCompetencyTaggings.map((tag: CompetencyTag) => {
                                                 return (
-                                                    <option value={tag} key={tag}>{tag}</option>
+                                                    <option value={tag.tagId} key={tag.tagId}>{tag.name}</option>
                                                 )
                                             })}
                                         </Input>
@@ -241,11 +244,11 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                 <FormGroup row>
                                     <Label for="inputLocation" lg={4} className="font-weight-bold">LOCATION</Label>
                                     <Col lg={8} className="my-auto">
-                                        <Input invalid={submitted && !resource.project.location} value={resource.project.location ? resource.project.location : ""} onChange={e => this.props.updateResource(e.target)} type="select" name="location" id="inputLocation" required>
+                                        <Input invalid={submitted && !resource.project.location.locationId} value={resource.project.location.locationId ? resource.project.location.locationId : ""} onChange={e => this.props.updateResource(e.target)} type="select" name="location" id="inputLocation" required>
                                             <option value="" hidden></option>
-                                            {this.props.listOfLocations.map((location: string) => {
+                                            {this.props.listOfLocations.map((location: Location) => {
                                                 return (
-                                                    <option value={location} key={location}>{location}</option>
+                                                    <option value={location.locationId} key={location.locationId}>{location.name}</option>
                                                 )
                                             })}
                                         </Input>
