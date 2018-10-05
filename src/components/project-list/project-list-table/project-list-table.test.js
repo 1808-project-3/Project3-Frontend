@@ -1,6 +1,6 @@
 import React from 'react';
 import { ProjectListTableComponent } from './project-list-table.component';
-import { ProjectListExport } from './ProjectListExport';
+import { ProjectListExport } from './Project-list-export';
 import {Table} from 'reactstrap';
 import { shallow } from 'enzyme';
 

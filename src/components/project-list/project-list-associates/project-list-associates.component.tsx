@@ -11,6 +11,7 @@ import CardTitle from "reactstrap/lib/CardTitle";
 interface IProps {
     exampleProp: string;
     associateList: any[];
+    projectName: string;
     getAssociateList: () => any;
 }
 
@@ -32,6 +33,7 @@ export class ProjectListAssociatesComponent extends React.Component<IProps, any>
     public render() {
         const entries: any[] = [];
         for(const e of this.props.associateList){
+            if(e.project_name === this.props.projectName) {
             entries.push(
                 <Col sm="4">
                     <Card body className="mt-4">
@@ -50,7 +52,7 @@ export class ProjectListAssociatesComponent extends React.Component<IProps, any>
                         </Row>
                     </Card>
                 </Col>
-            )
+            )}
         }
 
         if(entries === undefined){
@@ -75,7 +77,8 @@ export class ProjectListAssociatesComponent extends React.Component<IProps, any>
 }
 const mapStateToProps = (state: IState) => {
     return {
-        associateList: state.info.associateList
+        associateList: state.info.associateList,
+        projectName: state.info.projectName
     };
 };
 

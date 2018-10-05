@@ -48,6 +48,16 @@ export const getResourceList = (tableType: string) => (dispatch: any) => {
         })
 }
 
+export const getProjectName = (data: any) => {
+    return {
+        payload: {
+            data
+        },
+        type: infoTypes.GET_PROJECT_NAME
+    }
+}
+
+
 // get individual resource list for each tab
 
 export const getResourceUIList = (data: any) => {

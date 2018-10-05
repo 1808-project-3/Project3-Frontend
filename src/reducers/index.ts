@@ -30,6 +30,7 @@ export interface IInfoState {
     resourceMobilityList: any[]
     resourceUIList: any[]
     projectList: any[]
+    projectName: string
     associateList: any[]
     errorMessage: string
 }

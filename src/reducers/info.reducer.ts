@@ -5,6 +5,7 @@ const initialState: IInfoState = {
     associateList: [],
     errorMessage: "",
     projectList: [],
+    projectName: "",
     resourceCMList: [],
     resourceDesignList: [],
     resourceList: [],
@@ -20,6 +21,11 @@ export const infoReducer = (state: IInfoState = initialState, action: any) => {
             return {
                 ...state,
                 associateList: action.payload.associateList
+            };
+        case infoTypes.GET_PROJECT_NAME:
+            return {
+                ...state,
+                projectName: action.payload.data
             };
         case infoTypes.GET_RESOURCE_LIST:
             return {
