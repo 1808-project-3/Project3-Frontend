@@ -37,7 +37,11 @@ class SignInComponent extends React.Component<IProps, {}> {
       
         <h1 className="h1 mb-3 font-weight-normal" id="name-banner">TALENT PORTAL</h1>
         <div id="signin-form-container">
-          <form className="form-signin" id="signin-form" onSubmit={(e: React.FormEvent<HTMLFormElement>) => this.props.login(e, this.props.credentials)}>
+          <form className="form-signin" id="signin-form" 
+          onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
+            this.props.login(e, this.props.credentials);
+            this.props.history.push('home');
+          }}>
             
             <h1 className="h3 mb-3 font-weight-normal" id="login-banner">LOGIN</h1>
 
