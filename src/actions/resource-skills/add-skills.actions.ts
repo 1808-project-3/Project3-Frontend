@@ -83,3 +83,10 @@ export const removeResume = (resumeId: number) => {
         type: addSkillsTypes.REMOVE_RESUME
     }
 }
+
+export const cancelResource = () => {
+    return {
+        payload: {},
+        type: addSkillsTypes.CANCEL_RESOURCE
+    }
+}

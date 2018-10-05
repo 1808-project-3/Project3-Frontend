@@ -27,6 +27,7 @@ interface IProps extends RouteComponentProps<{}>, IAddSkillsState {
     addResumes: (files: FileList | null) => void
     removeResume: (resumeId: number) => void
     toggleSkillGroup: (event: any) => void
+    cancelResource(): () => void
 }
 
 class AddSkillsComponent extends React.Component<IProps, {}> {
@@ -59,7 +60,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                 <FormGroup row>
                                     <Label for="inputAssociateId" className="font-weight-bold" lg={4}>ASSOCIATE ID</Label>
                                     <Col lg={8} className="my-auto">
-                                        <Input value={resource.user.assocId ? resource.user.assocId : ''} onChange={e => this.props.updateResource(e.target)} type="text" name="associateId" id="inputAssociateId" required />
+                                        <Input value={resource.user.assocId ? resource.user.assocId : ''} onChange={e => this.props.updateResource(e.target)} type="text" name="associateId" id="inputAssociateId" required autoFocus />
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
@@ -71,8 +72,8 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                 <FormGroup row>
                                     <Label for="aopCertified" lg={4} className="font-weight-bold">AOP CERTIFIED</Label>
                                     <Col lg={8} className="my-auto">
-                                        <CustomInput onChange={e => this.props.updateResource(e.target)} defaultChecked={resource.aupCertified} type="radio" id="aop-certified-yes" name="aopCertified" className="d-inline-block pr-4" label="YES" required />
-                                        <CustomInput onChange={e => this.props.updateResource(e.target)} defaultChecked={resource.aupCertified !== undefined && !resource.aupCertified} type="radio" id="aop-certified-no" name="aopCertified" className="d-inline-block" label="NO" required />
+                                        <CustomInput onChange={e => this.props.updateResource(e.target)} checked={resource.aupCertified} type="radio" id="aop-certified-yes" name="aopCertified" className="d-inline-block pr-4" label="YES" required />
+                                        <CustomInput onChange={e => this.props.updateResource(e.target)} checked={resource.aupCertified !== undefined && !resource.aupCertified} type="radio" id="aop-certified-no" name="aopCertified" className="d-inline-block" label="NO" required />
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
@@ -81,7 +82,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                         <Container>
                                             <Row>
                                                 {SkillGroups.map((group: Group) => {
-                                                    return <CustomInput defaultChecked={this.props.skillGroupIds.indexOf(group.groupId) > -1} onChange={e => this.props.toggleSkillGroup(e.target)} key={"group-" + group.groupId} type="checkbox" id={"skills-group-" + group.groupId} name="skillsGroup" className="pr-4" label={group.name} />
+                                                    return <CustomInput checked={this.props.skillGroupIds.indexOf(group.groupId) > -1} onChange={e => this.props.toggleSkillGroup(e.target)} key={"group-" + group.groupId} type="checkbox" id={"skills-group-" + group.groupId} name="skillsGroup" className="pr-4" label={group.name} />
                                                 })}
                                             </Row>
                                         </Container>
@@ -97,7 +98,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                                             <Row>
                                                                 {skills.map((skill: Skill) => {
                                                                     return (
-                                                                        <CustomInput defaultChecked={resource.skills.some(selectedSkill => selectedSkill.skillId === skill.skillId)} key={"skills-" + skill.skillId} onChange={() => this.props.updateResourceSkills(skill)} type="checkbox" id={"skills-" + skill.skillId} name="skills" className="pr-4" label={skill.name} />
+                                                                        <CustomInput checked={resource.skills.some(selectedSkill => selectedSkill.skillId === skill.skillId)} key={"skills-" + skill.skillId} onChange={() => this.props.updateResourceSkills(skill)} type="checkbox" id={"skills-" + skill.skillId} name="skills" className="pr-4" label={skill.name} />
                                                                     )
                                                                 })}
                                                             </Row>
@@ -193,7 +194,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                 </FormGroup>
                                 <FormGroup row>
                                     <Col lg={{ size: 8, offset: 4 }}>
-                                        <CustomInput defaultChecked={this.props.dateTbd} onChange={e => this.props.updateResource(e.target)} type="checkbox" id={"date-tbd"} name="date-tbd" label={"To be decided"} />
+                                        <CustomInput checked={this.props.dateTbd} onChange={e => this.props.updateResource(e.target)} type="checkbox" id={"date-tbd"} name="date-tbd" label={"To be decided"} />
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
@@ -240,7 +241,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                             <hr />
                             <Container>
                                 <Row>
-                                    <Button color="secondary" className="ml-auto px-4" disabled><small>CANCEL</small></Button>
+                                    <Button onClick={this.props.cancelResource} color="secondary" className="ml-auto px-4"><small>CANCEL</small></Button>
                                     <Button color="secondary" className="ml-4 px-3"><IoMdAddCircleOutline /><small className="ml-2">ADD USER</small></Button>
                                 </Row>
                             </Container>
@@ -256,6 +257,7 @@ const mapStateToProps = (state: IState) => state.addSkills
 
 const mapDispatchToProps = {
     addResumes: addSkillsActions.addResumes,
+    cancelResource: addSkillsActions.cancelResource,
     fetchCompetencyTaggingList: addSkillsActions.fetchCompetencyTaggingList,
     fetchGradeList: addSkillsActions.fetchGradeList,
     fetchLocationList: addSkillsActions.fetchLocationList,
