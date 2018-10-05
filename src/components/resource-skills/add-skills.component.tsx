@@ -16,6 +16,8 @@ import { Group } from '../../models/Group';
 import { Skill } from '../../models/Skill';
 import { IAddSkillsState, IState } from '../../reducers';
 import { ClosablePill } from './closable-pill.component';
+import FormFeedback from 'reactstrap/lib/FormFeedback';
+import { Resource } from '../../models/Resource';
 
 
 interface IProps extends RouteComponentProps<{}>, IAddSkillsState {
@@ -27,7 +29,8 @@ interface IProps extends RouteComponentProps<{}>, IAddSkillsState {
     addResumes: (files: FileList | null) => void
     removeResume: (resumeId: number) => void
     toggleSkillGroup: (event: any) => void
-    cancelResource(): () => void
+    cancelResource: () => void
+    submitResource: (resource: Resource) => void
 }
 
 class AddSkillsComponent extends React.Component<IProps, {}> {
@@ -39,7 +42,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
     }
 
     public render() {
-        const { resource, skillGroupIds } = this.props;
+        const { resource, skillGroupIds, submitted } = this.props;
         const user = resource.user;
         const validAssociateName = user.firstName && user.lastName;
         const associateName = `${user.firstName} ${user.lastName}`
@@ -60,13 +63,14 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                 <FormGroup row>
                                     <Label for="inputAssociateId" className="font-weight-bold" lg={4}>ASSOCIATE ID</Label>
                                     <Col lg={8} className="my-auto">
-                                        <Input value={resource.user.assocId ? resource.user.assocId : ''} onChange={e => this.props.updateResource(e.target)} type="text" name="associateId" id="inputAssociateId" required autoFocus />
+                                        <Input invalid={submitted && !resource.user.assocId} value={resource.user.assocId ? resource.user.assocId : ''} onChange={e => this.props.updateResource(e.target)} type="text" name="associateId" id="inputAssociateId" required autoFocus />
+                                        <FormFeedback>Could not find user with this Associate ID</FormFeedback>
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
                                     <Label for="inputAssociateName" className="font-weight-bold" lg={4}>ASSOCIATE NAME</Label>
                                     <Col lg={8} className="my-auto">
-                                        <Input value={validAssociateName ? associateName : ''} onChange={e => this.props.updateResource(e.target)} type="text" name="associateName" id="inputAssociateName" placeholder="Autofills with valid Associate ID" disabled />
+                                        <Input value={validAssociateName ? associateName : ''} onChange={e => this.props.updateResource(e.target)} type="text" name="associateName" id="inputAssociateName" placeholder="Autofills with valid Associate ID" readOnly />
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
@@ -206,7 +210,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                 <FormGroup row>
                                     <Label for="inputSupervisorName" lg={4} className="font-weight-bold">HCM SUPERVISOR NAME</Label>
                                     <Col lg={8} className="my-auto">
-                                        <Input value={validSupervisorName ? supervisorName : ''} onChange={e => this.props.updateResource(e.target)} type="text" name="supervisorName" id="inputSupervisorName" placeholder="Autofills with valid supervisor ID" disabled />
+                                        <Input value={validSupervisorName ? supervisorName : ''} onChange={e => this.props.updateResource(e.target)} type="text" name="supervisorName" id="inputSupervisorName" placeholder="Autofills with valid supervisor ID" readOnly />
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
@@ -242,7 +246,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                             <Container>
                                 <Row>
                                     <Button onClick={this.props.cancelResource} color="secondary" className="ml-auto px-4"><small>CANCEL</small></Button>
-                                    <Button color="secondary" className="ml-4 px-3"><IoMdAddCircleOutline /><small className="ml-2">ADD USER</small></Button>
+                                    <Button onClick={() => this.props.submitResource(resource)} color="secondary" className="ml-4 px-3"><IoMdAddCircleOutline /><small className="ml-2">ADD USER</small></Button>
                                 </Row>
                             </Container>
                         </div>
@@ -262,6 +266,7 @@ const mapDispatchToProps = {
     fetchGradeList: addSkillsActions.fetchGradeList,
     fetchLocationList: addSkillsActions.fetchLocationList,
     removeResume: addSkillsActions.removeResume,
+    submitResource: addSkillsActions.submitResource,
     toggleSkillGroup: addSkillsActions.toggleSkillGroup,
     updateResource: addSkillsActions.updateResource,
     updateResourceSkills: addSkillsActions.updateResourceSkills

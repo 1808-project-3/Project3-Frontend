@@ -10,7 +10,8 @@ const initialState: IAddSkillsState = {
     listOfGrades: [],
     listOfLocations: [],
     resource: new Resource(),
-    skillGroupIds: []
+    skillGroupIds: [],
+    submitted: false
 }
 
 export const addSkillsReducer = (state = initialState, action: any) => {
@@ -127,6 +128,8 @@ export const addSkillsReducer = (state = initialState, action: any) => {
             return newState;
         case addSkillsTypes.CANCEL_RESOURCE:
             return { ...initialState, listOfGrades: [...state.listOfGrades], listOfCompetencyTaggings: [...state.listOfCompetencyTaggings], listOfLocations: [...state.listOfLocations] };
+        case addSkillsTypes.SUBMIT_RESOURCE:
+            return { ...state, submitted: action.payload.submitted };
     }
     return state;
 }

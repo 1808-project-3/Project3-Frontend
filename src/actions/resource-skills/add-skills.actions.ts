@@ -2,6 +2,7 @@ import { addSkillsTypes } from "./add-skills.types";
 import { Skill } from "../../models/Skill";
 import { Resume } from "../../models/Resume";
 import history from '../../history';
+import { Resource } from "../../models/Resource";
 
 export const fetchCompetencyTaggingList = () => (dispatch: any) => {
     dispatch({
@@ -91,4 +92,13 @@ export const cancelResource = () => {
         payload: {},
         type: addSkillsTypes.CANCEL_RESOURCE
     }
+}
+
+export const submitResource = (resource: Resource) => (dispatch: any) => {
+    dispatch({
+        payload: {
+            submitted: true
+        },
+        type: addSkillsTypes.SUBMIT_RESOURCE
+    })
 }

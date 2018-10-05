@@ -17,7 +17,8 @@ export interface IAddSkillsState {
   listOfGrades: string[],
   listOfLocations: string[],
   resource: Resource,
-  skillGroupIds: number[]
+  skillGroupIds: number[],
+  submitted: boolean
 }
 
 export interface IState {
