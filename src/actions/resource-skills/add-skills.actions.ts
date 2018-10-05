@@ -88,6 +88,15 @@ export const addCertification = (certification: Certification) => (dispatch: any
     })
 }
 
+export const removeCertification = (certId: number) => {
+    return {
+        payload: {
+            certId
+        },
+        type: addSkillsTypes.REMOVE_CERTIFICATION
+    }
+}
+
 export const toggleSkillGroup = (event: any) => {
     return {
         payload: {

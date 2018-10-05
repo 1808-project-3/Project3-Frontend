@@ -148,6 +148,11 @@ export const addSkillsReducer = (state = initialState, action: any) => {
             newState.resource = newCertificationResource;
             newState.certificationSearch = '';
             return newState;
+        case addSkillsTypes.REMOVE_CERTIFICATION:
+            const newRemovedCertificationResource = new Resource({ ...state.resource });
+            newRemovedCertificationResource.certifications = state.resource.certifications.filter(cert => cert.certId !== action.payload.certId);
+            newState.resource = newRemovedCertificationResource;
+            return newState;
     }
     return state;
 }

@@ -33,6 +33,7 @@ interface IProps extends RouteComponentProps<{}>, IAddSkillsState {
     fetchCertificationList: (search: string) => void
     updateCertificationSearch: (search: string) => void
     addCertification: (cert: Certification) => void
+    removeCertification: (certId: number) => void
     updateResource: (event: any) => void
     updateResourceSkills: (skill: Skill) => void
     addResumes: (files: FileList | null) => void
@@ -170,7 +171,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                 </FormGroup>
                                 <Row>
                                     <Col lg={{ size: 8, offset: 4 }}>
-                                        {resource.certifications.map((cert) => <ClosablePill className="mr-3 mt-2" key={cert.certId} text={cert.name} color="secondary" onClose={() => console.log("CLICKED")} />)}
+                                        {resource.certifications.map((cert) => <ClosablePill className="mr-3 mt-2" key={cert.certId} text={cert.name} color="secondary" onClose={() => this.props.removeCertification(cert.certId)} />)}
                                     </Col>
                                 </Row>
                             </Col>
@@ -324,6 +325,7 @@ const mapDispatchToProps = {
     fetchCompetencyTaggingList: addSkillsActions.fetchCompetencyTaggingList,
     fetchGradeList: addSkillsActions.fetchGradeList,
     fetchLocationList: addSkillsActions.fetchLocationList,
+    removeCertification: addSkillsActions.removeCertification,
     removeResume: addSkillsActions.removeResume,
     submitResource: addSkillsActions.submitResource,
     toggleSkillGroup: addSkillsActions.toggleSkillGroup,
