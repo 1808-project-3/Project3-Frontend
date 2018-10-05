@@ -18,6 +18,7 @@ import { IAddSkillsState, IState } from '../../reducers';
 import { ClosablePill } from './closable-pill.component';
 import FormFeedback from 'reactstrap/lib/FormFeedback';
 import { Resource } from '../../models/Resource';
+import Alert from 'reactstrap/lib/Alert';
 
 
 interface IProps extends RouteComponentProps<{}>, IAddSkillsState {
@@ -56,6 +57,11 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
         }, []);
         return (
             <>
+                {submitted &&
+                    <Alert className="mx-4" color="danger">
+                        <span>There was a problem submitting the resource. You'll find more details highlighted below.</span>
+                    </Alert>
+                }
                 <Form>
                     <Container>
                         <Row>
