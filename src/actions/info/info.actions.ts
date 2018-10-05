@@ -105,7 +105,7 @@ export const getProjectList = () => (dispatch: any) => {
                     projectList: projectEntries
                 },
                 type: infoTypes.GET_PROJECT_LIST
-            })
+            });
             return response;
         })
         .catch((e: any) => {
@@ -117,6 +117,33 @@ export const getProjectList = () => (dispatch: any) => {
                 type: infoTypes.UPDATE_ERROR
             })
         })
+}
+
+export const getAssociateList = () => (dispatch: any) => {
+    axios.get('https://my-json-server.typicode.com/JoshAlen/talen-portal-mock-db2/project-associates')
+        .then(response => {
+            const associateEntries: any[] = [];
+            for (const r of response.data) {
+                associateEntries.push(r);
+            }
+            dispatch({
+                payload: {
+                    associateList: associateEntries
+                },
+                type: infoTypes.GET_ASSOCIATE_LIST
+            });
+            return response;
+        })
+        .catch((e: any) => {
+            const error = e.toString();
+            dispatch({
+                payload: {
+                    errorMessage: error
+                },
+                type: infoTypes.UPDATE_ERROR
+            })
+        });
+
 }
 
 /**

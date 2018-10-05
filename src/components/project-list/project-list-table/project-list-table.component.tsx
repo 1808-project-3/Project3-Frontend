@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 import { IState } from "../../../reducers";
 import { Table, Row, Container } from "reactstrap";
 import ProjectListExport from "./ProjectListExport";
+import ProjectListAssociatesComponent from "../project-list-associates/project-list-associates.component";
+import Container from "reactstrap/lib/Container";
 
 interface IProps {
   viewRow: number;
@@ -34,25 +36,23 @@ export class ProjectListTableComponent extends React.Component<IProps, any> {
   public render() {
     const listEntries: any[] = [];
     for (const l of this.props.projectList) {
-      if (+this.props.viewRow === +l.id) {
-        listEntries.push(
-          <tr data-id={l.id} key={l.id} onClick={this.chooseRow}>
-            <td>{l.project_name}</td>
-            <td>{l.id}</td>
-            <td>{l.start_date}</td>
-            <td>{l.end_date}</td>
-            <td>{l.project_details}</td>
-          </tr>
-        );
-        listEntries.push(
-          <tr data-id={l.id} key={0} onClick={this.chooseRow}>
-            <td>HELLO</td>
-            <td>HELLO</td>
-            <td>HELLO</td>
-            <td>HELLO</td>
-            <td>HELLO</td>
-          </tr>
-        );
+      if(+this.props.viewRow === +l.id){
+          listEntries.push(
+              <tr data-id={l.id} key={l.id} onClick={this.chooseRow}>
+                  <td>{l.project_name}</td>
+                  <td>{l.id}</td>
+                  <td>{l.start_date}</td>
+                  <td>{l.end_date}</td>
+                  <td>{l.project_details}</td>
+              </tr>
+          );
+          listEntries.push(
+              <tr>
+                  <td colSpan={5}>
+                    <ProjectListAssociatesComponent />
+                  </td>
+              </tr>
+          );
       }
       else {
         listEntries.push(
@@ -68,23 +68,19 @@ export class ProjectListTableComponent extends React.Component<IProps, any> {
     }
     return (
       <Container fluid>
-        <Row>
-          <div className="col-md-7">
-            <ProjectListExport />
-            <Table hover>
-              <thead>
-                <tr>
-                  <th>PROJECT NAME</th>
-                  <th>ID</th>
-                  <th>START DATE</th>
-                  <th>END DATE</th>
-                  <th>CUSTOMER NAME</th>
-                </tr>
-              </thead>
-              <tbody>{listEntries}</tbody>
-            </Table>
-          </div>
-        </Row>
+        <ProjectListExport />
+        <Table>
+          <thead>
+            <tr>
+              <th>Project Name</th>
+              <th>ID</th>
+              <th>Start Date</th>
+              <th>End Date</th>
+              <th>Project Details</th>
+            </tr>
+          </thead>
+          <tbody>{listEntries}</tbody>
+        </Table>
       </Container>
     );
   }
