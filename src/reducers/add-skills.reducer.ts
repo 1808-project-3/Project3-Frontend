@@ -28,7 +28,7 @@ export const addSkillsReducer = (state = initialState, action: any) => {
             const newResource = new Resource({ ...state.resource });
             switch (action.payload.name) {
                 case "associateId":
-                    newState.associateIdInput = action.payload.value;
+                    newState.associateIdInput = action.payload.value.replace(/[^\d]/, '');
                     break;
                 case "associateName":
                     const newNameUser = new User({ ...state.resource.user, firstName: action.payload.value });
@@ -45,7 +45,7 @@ export const addSkillsReducer = (state = initialState, action: any) => {
                     newState.resource = newResource;
                     break;
                 case "projectId":
-                    const newIdProject = new Project({ ...state.resource.project, pId: action.payload.value });
+                    const newIdProject = new Project({ ...state.resource.project, pId: action.payload.value.replace(/[^\d]/, '') });
                     newResource.project = newIdProject;
                     newState.resource = newResource;
                     break;
@@ -63,7 +63,7 @@ export const addSkillsReducer = (state = initialState, action: any) => {
                     newState.resource = newResource;
                     break;
                 case "supervisorId":
-                    newState.supervisorIdInput = action.payload.value;
+                    newState.supervisorIdInput = action.payload.value.replace(/[^\d]/, '');
                     break;
                 case "supervisorName":
                     const newSupervisorNameProject = new Project({ ...state.resource.project, supervisor: new User({ ...state.resource.project.supervisor, firstName: action.payload.value }) });
