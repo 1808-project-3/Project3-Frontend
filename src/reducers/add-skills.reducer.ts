@@ -8,6 +8,7 @@ import { CompetencyTag } from "../models/CompetencyTag";
 import { Location } from "../models/Location";
 
 const initialState: IAddSkillsState = {
+    associateIdInput: '',
     certificationSearch: '',
     dateTbd: false,
     listOfCertifications: [],
@@ -16,7 +17,8 @@ const initialState: IAddSkillsState = {
     listOfLocations: [],
     resource: new Resource(),
     skillGroupIds: [],
-    submitted: false
+    submitted: false,
+    supervisorIdInput: ''
 }
 
 export const addSkillsReducer = (state = initialState, action: any) => {
@@ -26,9 +28,7 @@ export const addSkillsReducer = (state = initialState, action: any) => {
             const newResource = new Resource({ ...state.resource });
             switch (action.payload.name) {
                 case "associateId":
-                    const newIdUser = new User({ ...state.resource.user, assocId: action.payload.value })
-                    newResource.user = newIdUser;
-                    newState.resource = newResource;
+                    newState.associateIdInput = action.payload.value;
                     break;
                 case "associateName":
                     const newNameUser = new User({ ...state.resource.user, firstName: action.payload.value });
@@ -140,6 +140,11 @@ export const addSkillsReducer = (state = initialState, action: any) => {
             return { ...state, certificationSearch: action.payload.certificationSearch };
         case addSkillsTypes.FETCH_CERTIFICATIONS:
             return { ...state, listOfCertifications: action.payload.listOfCertifications };
+        case addSkillsTypes.FETCH_ASSOCIATE:
+            const newAssociateResource = new Resource({ ...state.resource });
+            newAssociateResource.user = action.payload.associate;
+            newState.resource = newAssociateResource;
+            return newState;
         case addSkillsTypes.ADD_CERTIFICATION:
             const newCertificationResource = new Resource({ ...state.resource });
             if (!state.resource.certifications.some(cert => cert.certId === action.payload.certification.certId)) {

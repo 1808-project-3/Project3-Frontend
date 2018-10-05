@@ -27,6 +27,7 @@ import { Certification } from '../../models/Certification';
 
 
 interface IProps extends RouteComponentProps<{}>, IAddSkillsState {
+    fetchAssociate: (assocId: number) => void
     fetchCompetencyTaggingList: () => void
     fetchGradeList: () => void
     fetchLocationList: () => void
@@ -54,6 +55,9 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
     public componentDidUpdate(prevProps: IProps) {
         if (this.props.certificationSearch && this.props.certificationSearch !== prevProps.certificationSearch) {
             this.props.fetchCertificationList(this.props.certificationSearch);
+        }
+        if (this.props.associateIdInput !== prevProps.associateIdInput) {
+            this.props.fetchAssociate(+this.props.associateIdInput);
         }
     }
 
@@ -93,7 +97,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                 <FormGroup row>
                                     <Label for="inputAssociateId" className="font-weight-bold" lg={4}>ASSOCIATE ID</Label>
                                     <Col lg={8} className="my-auto">
-                                        <Input invalid={submitted && !resource.user.assocId} value={resource.user.assocId ? resource.user.assocId : ''} onChange={e => this.props.updateResource(e.target)} type="text" name="associateId" id="inputAssociateId" required autoFocus />
+                                        <Input invalid={submitted && !resource.user.assocId} value={this.props.associateIdInput ? this.props.associateIdInput : ''} onChange={e => this.props.updateResource(e.target)} type="text" name="associateId" id="inputAssociateId" required autoFocus />
                                         <FormFeedback>Could not find user with this Associate ID</FormFeedback>
                                     </Col>
                                 </FormGroup>
@@ -334,6 +338,7 @@ const mapDispatchToProps = {
     addCertification: addSkillsActions.addCertification,
     addResumes: addSkillsActions.addResumes,
     cancelResource: addSkillsActions.cancelResource,
+    fetchAssociate: addSkillsActions.fetchAssociate,
     fetchCertificationList: addSkillsActions.fetchCertificationList,
     fetchCompetencyTaggingList: addSkillsActions.fetchCompetencyTaggingList,
     fetchGradeList: addSkillsActions.fetchGradeList,

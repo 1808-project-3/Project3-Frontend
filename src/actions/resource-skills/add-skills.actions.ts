@@ -6,16 +6,27 @@ import { Resource } from "../../models/Resource";
 import { Location } from "../../models/Location";
 import { Grade } from "../../models/Grade";
 import { CompetencyTag } from "../../models/CompetencyTag";
-import Grades from '../../assets/grades.json';
-import Locations from '../../assets/locations.json';
-import CompetencyTags from '../../assets/competency-tags.json';
-import Certifications from '../../assets/certifications.json';
+import MockGrades from '../../assets/grades.json';
+import MockLocations from '../../assets/locations.json';
+import MockCompetencyTags from '../../assets/competency-tags.json';
+import MockCertifications from '../../assets/certifications.json';
+import MockUser from '../../assets/user.json';
 import { Certification } from "../../models/Certification";
+import { User } from "../../models/User";
+
+export const fetchAssociate = (assocId: number) => (dispatch: any) => {
+    dispatch({
+        payload: {
+            associate: new User(MockUser)
+        },
+        type: addSkillsTypes.FETCH_ASSOCIATE
+    })
+}
 
 export const fetchCertificationList = (search: string) => (dispatch: any) => {
     dispatch({
         payload: {
-            listOfCertifications: Certifications.map((cert: any) => new Certification(cert))
+            listOfCertifications: MockCertifications.map((cert: any) => new Certification(cert))
         },
         type: addSkillsTypes.FETCH_CERTIFICATIONS
     })
@@ -24,7 +35,7 @@ export const fetchCertificationList = (search: string) => (dispatch: any) => {
 export const fetchCompetencyTaggingList = () => (dispatch: any) => {
     dispatch({
         payload: {
-            listOfCompetencyTaggings: CompetencyTags.map((tag: any) => new CompetencyTag(tag))
+            listOfCompetencyTaggings: MockCompetencyTags.map((tag: any) => new CompetencyTag(tag))
         },
         type: addSkillsTypes.FETCH_COMPETENCY_TAGGINGS
     })
@@ -34,7 +45,7 @@ export const fetchGradeList = () => (dispatch: any) => {
     // Fetch needs to pull list of possible Grades
     dispatch({
         payload: {
-            listOfGrades: Grades.map((grade: any) => new Grade(grade))
+            listOfGrades: MockGrades.map((grade: any) => new Grade(grade))
         },
         type: addSkillsTypes.FETCH_GRADES
     })
@@ -44,7 +55,7 @@ export const fetchLocationList = () => (dispatch: any) => {
     // fetch needs to pull list of possible grades
     dispatch({
         payload: {
-            listOfLocations: Locations.map((location: any) => new Location(location))
+            listOfLocations: MockLocations.map((location: any) => new Location(location))
         },
         type: addSkillsTypes.FETCH_LOCATIONS
     })

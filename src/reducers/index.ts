@@ -16,6 +16,7 @@ export interface ISignInState {
 }
 
 export interface IAddSkillsState {
+  associateIdInput: string,
   certificationSearch: string,
   dateTbd: boolean,
   listOfCertifications: Certification[],
@@ -24,7 +25,8 @@ export interface IAddSkillsState {
   listOfLocations: Location[],
   resource: Resource,
   skillGroupIds: number[],
-  submitted: boolean
+  submitted: boolean,
+  supervisorIdInput: string
 }
 
 export interface IState {
