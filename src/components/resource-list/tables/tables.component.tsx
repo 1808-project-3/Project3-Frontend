@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Table } from 'reactstrap';
 import { connect } from "react-redux";
-import { getResourceList, updateTableType } from "../../../actions/info/info.actions";
+import { getResourceList, updateTableType, getResourceUIList, getResourceMobilityList, getResourceCMList, getResourceDesignList} from "../../../actions/info/info.actions";
 import { IState } from "../../../reducers";
 
 interface IProps {
@@ -59,13 +59,21 @@ class TablesComponent extends React.Component<IProps, any> {
 }
 const mapStateToProps = (state: IState) => {
     return {
+        resourceCMList: state.info.resourceCMList,
+        resourceDesignList: state.info.resourceDesignList,
         resourceList: state.info.resourceList,
+        resourceMobilityList: state.info.resourceMobilityList,
+        resourceUIList: state.info.resourceUIList,
         tableType: state.info.tableType,
     };
 };
 
 const mapDispatchToProps = {
+    getResourceCMList,
+    getResourceDesignList,
     getResourceList,
+    getResourceMobilityList,
+    getResourceUIList,
     updateTableType,
 };
 

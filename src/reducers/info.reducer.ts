@@ -4,7 +4,11 @@ import {infoTypes} from "../actions/info/info.types";
 const initialState: IInfoState = {
     errorMessage: "",
     projectList: [],
+    resourceCMList: [],
+    resourceDesignList: [],
     resourceList: [],
+    resourceMobilityList: [],
+    resourceUIList: [],
     tableType: "",
     viewRow: 0,
 };
@@ -15,6 +19,26 @@ export const infoReducer = (state: IInfoState = initialState, action: any) => {
             return {
                 ...state,
                 resourceList: action.payload.resourceList
+            };
+        case infoTypes.GET_RESOURCE_UI_LIST:
+            return {
+                ...state,
+                resourceUIList: action.payload.data
+            };
+        case infoTypes.GET_RESOURCE_MOBILITY_LIST:
+            return {
+                ...state,
+                resourceMobilityList: action.payload.data
+            };
+        case infoTypes.GET_RESOURCE_CM_LIST:
+            return {
+                ...state,
+                resourceCMList: action.payload.data
+            };
+        case infoTypes.GET_RESOURCE_DESIGN_LIST:
+            return {
+                ...state,
+                resourceDesignList: action.payload.data
             };
         case infoTypes.GET_PROJECT_LIST:
             return {

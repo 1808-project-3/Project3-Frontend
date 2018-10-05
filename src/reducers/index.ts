@@ -24,7 +24,11 @@ export interface ISignInState {
 export interface IInfoState {
     tableType: string
     viewRow: number
+    resourceCMList: any[]
+    resourceDesignList: any[]
     resourceList: any[]
+    resourceMobilityList: any[]
+    resourceUIList: any[]
     projectList: any[]
     errorMessage: string
 }
@@ -38,3 +42,4 @@ export const state = combineReducers<IState>({
     info: infoReducer,
     signIn: signInReducer,
 })
+
