@@ -139,27 +139,27 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                     <Label for="inputCustomerName" lg={4} className="font-weight-bold">CUSTOMER NAME</Label>
                                     <Col lg={8} className="my-auto">
                                         <Input invalid={submitted && !resource.project.customerName} value={resource.project.customerName ? resource.project.customerName : ''} onChange={e => this.props.updateResource(e.target)} type="text" name="customerName" id="inputCustomerName" required />
-                                        <FormFeedback>Customer name cannot be blank</FormFeedback>
+                                        <FormFeedback>Please enter a customer name</FormFeedback>
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
                                     <Label for="inputProjectId" lg={4} className="font-weight-bold">PROJECT ID</Label>
                                     <Col lg={8} className="my-auto">
                                         <Input invalid={submitted && !resource.project.pId} value={resource.project.pId ? resource.project.pId : ''} onChange={e => this.props.updateResource(e.target)} type="text" name="projectId" id="inputProjectId" required />
-                                        <FormFeedback>Project ID cannot be blank</FormFeedback>
+                                        <FormFeedback>Please enter a project ID</FormFeedback>
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
                                     <Label for="inputProjectName" lg={4} className="font-weight-bold">PROJECT NAME</Label>
                                     <Col lg={8} className="my-auto">
                                         <Input invalid={submitted && !resource.project.name} value={resource.project.name ? resource.project.name : ''} onChange={e => this.props.updateResource(e.target)} type="text" name="projectName" id="inputProjectName" required />
-                                        <FormFeedback>Project name cannot be blank</FormFeedback>
+                                        <FormFeedback>Please enter a project name</FormFeedback>
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
                                     <Label for="inputGrade" lg={4} className="font-weight-bold">GRADE</Label>
                                     <Col lg={8} className="my-auto">
-                                        <Input value={resource.grade ? resource.grade : ''} onChange={e => this.props.updateResource(e.target)} type="select" name="grade" id="inputGrade" required>
+                                        <Input invalid={submitted && !resource.grade} value={resource.grade ? resource.grade : ''} onChange={e => this.props.updateResource(e.target)} type="select" name="grade" id="inputGrade" required>
                                             <option value="" hidden></option>
                                             {this.props.listOfGrades.map((grade: string) => {
                                                 return (
@@ -167,12 +167,13 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                                 )
                                             })}
                                         </Input>
+                                        <FormFeedback>Please choose a grade</FormFeedback>
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
                                     <Label for="inputCompetencyTagging" lg={4} className="font-weight-bold">COMPETENCY TAGGING</Label>
                                     <Col lg={8} className="my-auto">
-                                        <Input value={resource.compentencyTagging ? resource.compentencyTagging : ""} onChange={e => this.props.updateResource(e.target)} type="select" name="competencyTagging" id="inputCompetencyTagging" required >
+                                        <Input invalid={submitted && !resource.compentencyTagging} value={resource.compentencyTagging ? resource.compentencyTagging : ""} onChange={e => this.props.updateResource(e.target)} type="select" name="competencyTagging" id="inputCompetencyTagging" required >
                                             <option value="" hidden></option>
                                             {this.props.listOfCompetencyTaggings.map((tag: string) => {
                                                 return (
@@ -180,6 +181,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                                 )
                                             })}
                                         </Input>
+                                        <FormFeedback>Please choose a competency tagging</FormFeedback>
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
@@ -217,7 +219,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                     <Label for="inputSupervisorId" lg={4} className="font-weight-bold">HCM SUPERVISOR ID</Label>
                                     <Col lg={8} className="my-auto">
                                         <Input invalid={submitted && !supervisor.assocId} value={supervisor.assocId ? supervisor.assocId : ''} onChange={e => this.props.updateResource(e.target)} type="text" name="supervisorId" id="inputSupervisorId" required />
-                                        <FormFeedback>Supervisor ID cannot be blank</FormFeedback>
+                                        <FormFeedback>Please enter a supervisor ID</FormFeedback>
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
@@ -229,7 +231,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                 <FormGroup row>
                                     <Label for="inputLocation" lg={4} className="font-weight-bold">LOCATION</Label>
                                     <Col lg={8} className="my-auto">
-                                        <Input value={resource.project.location ? resource.project.location : ""} onChange={e => this.props.updateResource(e.target)} type="select" name="location" id="inputLocation" required>
+                                        <Input invalid={submitted && !resource.project.location} value={resource.project.location ? resource.project.location : ""} onChange={e => this.props.updateResource(e.target)} type="select" name="location" id="inputLocation" required>
                                             <option value="" hidden></option>
                                             {this.props.listOfLocations.map((location: string) => {
                                                 return (
@@ -237,6 +239,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                                 )
                                             })}
                                         </Input>
+                                        <FormFeedback>Please choose a project location</FormFeedback>
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
