@@ -52,6 +52,7 @@ export class RegisterComponent extends React.Component<IProps, {}> {
                     const res = await axios.post('http://localhost:8080/users', payload)
                     console.log(res.data);
                     this.props.clearFields();
+                    this.props.history.push('dashboard');
 
                 }
                 else {
