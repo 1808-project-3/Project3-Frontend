@@ -237,8 +237,8 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                             </Col>
                         </Row>
                         <div className="fixed-bottom position-sticky bg-white pb-4">
+                            <hr />
                             <Container>
-                                <hr className="col-md-12" />
                                 <Row>
                                     <Button color="secondary" className="ml-auto px-4" disabled><small>CANCEL</small></Button>
                                     <Button color="secondary" className="ml-4 px-3"><IoMdAddCircleOutline /><small className="ml-2">ADD USER</small></Button>
