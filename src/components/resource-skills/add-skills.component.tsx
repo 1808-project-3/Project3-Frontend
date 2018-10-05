@@ -157,6 +157,8 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                                     {cert.name}
                                                 </div>
                                             }
+                                            inputProps={{ className: 'form-control', name: "certifications", id: "inputCertifications", placeholder: "Search Certifications here..." }}
+                                            wrapperProps={{ className: 'd-block' }}
                                             value={this.props.certificationSearch}
                                             onChange={(e) => this.props.updateCertificationSearch(e.target.value)}
                                             onSelect={(val) => {
@@ -166,7 +168,6 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                                 }
                                             }}
                                         />
-                                        <Input type="text" name="certifications" id="inputCertifications" placeholder="Search Certifications here..." />
                                     </Col>
                                 </FormGroup>
                                 <Row>
