@@ -146,7 +146,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                         </Row>
                                     </FormGroup>
                                 </Collapse>
-                                <FormGroup row>
+                                <FormGroup className="mb-0" row>
                                     <Label for="inputCertifications" lg={4} className="font-weight-bold">CERTIFICATIONS, IF ANY</Label>
                                     <Col lg={8} className="my-auto">
                                         <Autocomplete
@@ -157,6 +157,17 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                                     {cert.name}
                                                 </div>
                                             }
+                                            menuStyle={{
+                                                background: 'rgba(255, 255, 255, 0.9)',
+                                                borderRadius: '3px',
+                                                boxShadow: '0 2px 12px rgba(0, 0, 0, 0.1)',
+                                                fontSize: '90%',
+                                                maxHeight: '50%',
+                                                overflow: 'auto',
+                                                padding: '2px 0',
+                                                position: 'fixed',
+                                                zIndex: 998
+                                            }}
                                             inputProps={{ className: 'form-control', name: "certifications", id: "inputCertifications", placeholder: "Search Certifications here..." }}
                                             wrapperProps={{ className: 'd-block' }}
                                             value={this.props.certificationSearch}
