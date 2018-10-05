@@ -1,9 +1,12 @@
 import * as React from "react";
-import Slider from "react-slick";
 
 import {getAssociateList} from "../../../actions/info/info.actions";
 import { connect } from "react-redux";
 import { IState } from "../../../reducers";
+import {Col, Row} from "reactstrap";
+import Card from "reactstrap/lib/Card";
+import CardText from "reactstrap/lib/CardText";
+import CardTitle from "reactstrap/lib/CardTitle";
 
 
 
@@ -24,12 +27,27 @@ export class ProjectListAssociatesComponent extends React.Component<IProps, any>
 
     public render() {
         const entries: any[] = [];
-        const settings = {
-            dots: true,
-            infinite: false,
-            slidesToShow: 3,
-            speed: 500,
-        };
+        for(const e of this.props.associateList){
+            entries.push(
+                <Col sm="4">
+                    <Card body className="mt-4">
+                        <Row>
+                            <Col sm="6">
+                                <CardTitle><strong>{e.first_name} {e.last_name}</strong></CardTitle>
+                            <CardText>({e.user_id})</CardText>
+                            <br/>
+                            <CardText>AUP CERTIFIED: </CardText>
+                                <CardText>DATE OF JOINING: </CardText>
+                                <CardText>HCM SUPERVISOR: </CardText>
+                            </Col>
+                            <Col sm="6">
+                                <CardTitle>{e.grade}</CardTitle>
+                            </Col>
+                        </Row>
+                    </Card>
+                </Col>
+            )
+        }
 
         if(entries === undefined){
             return (
@@ -40,27 +58,11 @@ export class ProjectListAssociatesComponent extends React.Component<IProps, any>
         }
         else {
         return (
-            <div style={{width: "500px"}}>
-                <Slider {...settings}>
-                    <div>
-                        <h3>Hey there. Notice me Senpai. 1</h3>
-                    </div>
-                    <div>
-                        <h3>Hey there. Notice me Senpai. 2</h3>
-                    </div>
-                    <div>
-                        <h3>Hey there. Notice me Senpai. 3</h3>
-                    </div>
-                    <div>
-                        <h3>Hey there. Notice me Senpai. 4</h3>
-                    </div>
-                    <div>
-                        <h3>Hey there. Notice me Senpai. 5</h3>
-                    </div>
-                    <div>
-                        <h3>Hey there. Notice me Senpai. 6</h3>
-                    </div>
-                </Slider>
+            <div>
+                <h3>Associate List</h3>
+                <Row>
+                    {entries}
+                </Row>
             </div>
         );
         }

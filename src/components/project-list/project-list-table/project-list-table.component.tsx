@@ -5,6 +5,7 @@ import { IState } from "../../../reducers";
 import { Table } from "reactstrap";
 import ProjectListExport from "./ProjectListExport";
 import ProjectListAssociatesComponent from "../project-list-associates/project-list-associates.component";
+import Container from "reactstrap/lib/Container";
 
 interface IProps {
   viewRow: number;
@@ -46,9 +47,11 @@ export class ProjectListTableComponent extends React.Component<IProps, any> {
               </tr>
           );
           listEntries.push(
-              <div>
-                <ProjectListAssociatesComponent />
-              </div>
+              <tr>
+                  <td colSpan={5}>
+                    <ProjectListAssociatesComponent />
+                  </td>
+              </tr>
           );
       }
       else {
@@ -64,9 +67,8 @@ export class ProjectListTableComponent extends React.Component<IProps, any> {
       }
     }
     return (
-      <div>
+      <Container fluid>
         <ProjectListExport />
-        
         <Table>
           <thead>
             <tr>
@@ -79,7 +81,7 @@ export class ProjectListTableComponent extends React.Component<IProps, any> {
           </thead>
           <tbody>{listEntries}</tbody>
         </Table>
-      </div>
+      </Container>
     );
   }
 }

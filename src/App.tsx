@@ -16,7 +16,7 @@ class App extends React.Component {
         <BrowserRouter>
           <div>
             <AppNav />
-            <div id="main-content-container">
+            <div>
               <Switch>
                 <Route path="/home" component={HomeComponent} />
                 <Route path="/sign-in" component={SignInComponent} />
