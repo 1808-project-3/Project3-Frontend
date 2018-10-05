@@ -170,7 +170,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                 </FormGroup>
                                 <Row>
                                     <Col lg={{ size: 8, offset: 4 }}>
-                                        <ClosablePill text="Adobe Digital Learning" color="secondary" onClose={() => console.log("CLICKED")} />
+                                        {resource.certifications.map((cert) => <ClosablePill className="mr-3 mt-2" key={cert.certId} text={cert.name} color="secondary" onClose={() => console.log("CLICKED")} />)}
                                     </Col>
                                 </Row>
                             </Col>
