@@ -50,6 +50,15 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
         const supervisor = resource.project.supervisor;
         const validSupervisorName = supervisor.firstName && supervisor.lastName;
         const supervisorName = `${supervisor.firstName} ${supervisor.lastName}`
+        const showDateError = submitted && !((resource.project.startDate && resource.project.endDate) || this.props.dateTbd);
+        let dateErrorMessage = 'Please select a project start and end date or press to be decided';
+        if (showDateError) {
+            if (resource.project.startDate) {
+                dateErrorMessage = 'Please select a project end date or press to be decided';
+            } else if (resource.project.endDate) {
+                dateErrorMessage = 'Please select a project start date or press to be decided';
+            }
+        }
         const selectedGroups = SkillGroups.filter((group: Group) => skillGroupIds.indexOf(group.groupId) > -1);
         const skills = selectedGroups.reduce((acc: any, val: any) => {
             const groupSkills = val.skills.map((skill: any) => new Skill({ ...skill, group: new Group(val) }))
@@ -212,7 +221,8 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                 </FormGroup>
                                 <FormGroup row>
                                     <Col lg={{ size: 8, offset: 4 }}>
-                                        <CustomInput checked={this.props.dateTbd} onChange={e => this.props.updateResource(e.target)} type="checkbox" id={"date-tbd"} name="date-tbd" label={"To be decided"} />
+                                        <CustomInput invalid={showDateError} checked={this.props.dateTbd} onChange={e => this.props.updateResource(e.target)} type="checkbox" id={"date-tbd"} name="date-tbd" label={"To be decided"} />
+                                        {showDateError && <FormFeedback className="d-inline-block">{dateErrorMessage}</FormFeedback>}
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
