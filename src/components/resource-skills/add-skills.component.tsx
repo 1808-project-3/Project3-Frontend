@@ -208,7 +208,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                         </Button>
                                     </Col>
                                 </Row>
-                                <Collapse isOpen={this.props.newOrExistingProject !== 'none'}>
+                                <Collapse isOpen={this.props.newOrExistingProject === 'new'}>
                                     <FormGroup row>
                                         <Label for="inputCustomerName" lg={4} className="font-weight-bold">CUSTOMER NAME</Label>
                                         <Col lg={8} className="my-auto">
@@ -216,6 +216,8 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                             <FormFeedback>Please enter a customer name</FormFeedback>
                                         </Col>
                                     </FormGroup>
+                                </Collapse>
+                                <Collapse isOpen={this.props.newOrExistingProject !== 'none'}>
                                     <FormGroup row>
                                         <Label for="inputProjectId" lg={4} className="font-weight-bold">PROJECT ID</Label>
                                         <Col lg={8} className="my-auto">
@@ -223,6 +225,8 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                             <FormFeedback>Please enter a project ID</FormFeedback>
                                         </Col>
                                     </FormGroup>
+                                </Collapse>
+                                <Collapse isOpen={this.props.newOrExistingProject === 'new'}>
                                     <FormGroup row>
                                         <Label for="inputProjectName" lg={4} className="font-weight-bold">PROJECT NAME</Label>
                                         <Col lg={8} className="my-auto">
