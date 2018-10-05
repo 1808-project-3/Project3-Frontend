@@ -8,13 +8,17 @@ import Card from "reactstrap/lib/Card";
 import CardText from "reactstrap/lib/CardText";
 import CardTitle from "reactstrap/lib/CardTitle";
 
-
-
 interface IProps {
     exampleProp: string;
     associateList: any[];
     getAssociateList: () => any;
 }
+
+/**
+ * This component displays rows of associates organized within rows of three reactstrap cards.
+ *
+ * @author
+ */
 
 export class ProjectListAssociatesComponent extends React.Component<IProps, any> {
     constructor(props: any) {

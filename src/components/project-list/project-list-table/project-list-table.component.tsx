@@ -2,10 +2,9 @@ import * as React from "react";
 import { getProjectList, updateViewRow } from "../../../actions/info/info.actions";
 import { connect } from "react-redux";
 import { IState } from "../../../reducers";
-import { Table, Row, Container } from "reactstrap";
+import { Table, Container } from "reactstrap";
 import ProjectListExport from "./ProjectListExport";
 import ProjectListAssociatesComponent from "../project-list-associates/project-list-associates.component";
-import Container from "reactstrap/lib/Container";
 
 interface IProps {
   viewRow: number;
