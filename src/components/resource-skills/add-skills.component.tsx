@@ -24,6 +24,7 @@ import { CompetencyTag } from '../../models/CompetencyTag';
 import { Location } from '../../models/Location';
 import * as Autocomplete from 'react-autocomplete'
 import { Certification } from '../../models/Certification';
+import Badge from 'reactstrap/lib/Badge';
 
 
 interface IProps extends RouteComponentProps<{}>, IAddSkillsState {
@@ -199,13 +200,29 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                             </Col>
                             <Col>
                                 <Row>
-                                    <Col className="text-center">
-                                        <Button onClick={() => this.props.showOrHideProject("existing")} className="my-2 mx-2">
-                                            <span>Select Existing Project</span>
-                                        </Button>
-                                        <Button onClick={() => this.props.showOrHideProject("new")} className="my-2 mx-2">
-                                            <IoMdAddCircleOutline /><span className="ml-2">Create New Project</span>
-                                        </Button>
+                                    <Col className="text-center mb-2">
+                                        {this.props.newOrExistingProject === 'none' &&
+                                            <>
+                                                <Button onClick={() => this.props.showOrHideProject("existing")} className="my-2 mx-2">
+                                                    <span>Select Existing Project</span>
+                                                </Button>
+                                                <Button onClick={() => this.props.showOrHideProject("new")} className="my-2 mx-2">
+                                                    <IoMdAddCircleOutline /><span className="ml-2">Create New Project</span>
+                                                </Button>
+                                            </>
+                                        }
+                                        {this.props.newOrExistingProject === 'new' &&
+                                            <>
+                                                <h3 className="mb-0"><Badge color="secondary">New Project</Badge></h3>
+                                                <Badge className="clickable" onClick={() => this.props.showOrHideProject("none")} color="light">Undo</Badge>
+                                            </>
+                                        }
+                                        {this.props.newOrExistingProject === 'existing' &&
+                                            <>
+                                                <h3 className="mb-0"><Badge color="secondary">Existing Project</Badge></h3>
+                                                <Badge className="clickable" onClick={() => this.props.showOrHideProject("none")} color="light">Undo</Badge>
+                                            </>
+                                        }
                                     </Col>
                                 </Row>
                                 <Collapse isOpen={this.props.newOrExistingProject === 'new'}>
