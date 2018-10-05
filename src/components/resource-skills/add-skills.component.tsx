@@ -55,7 +55,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                 <Form>
                     <Container>
                         <Row>
-                            <Col className="border-col-right pr-5 mr-5 pb-5">
+                            <Col className="border-col-right pr-5 mr-5-sm pb-5">
                                 <FormGroup row>
                                     <Label for="inputAssociateId" className="font-weight-bold" lg={4}>ASSOCIATE ID</Label>
                                     <Col lg={8} className="my-auto">
@@ -120,7 +120,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                     </Col>
                                 </Row>
                             </Col>
-                            <Col className="pl-0">
+                            <Col>
                                 <FormGroup row>
                                     <Label for="inputCustomerName" lg={4} className="font-weight-bold"> CUSTOMER NAME</Label>
                                     <Col lg={8} className="my-auto">
