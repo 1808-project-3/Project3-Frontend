@@ -1,9 +1,8 @@
 import * as React from "react";
 import { Table } from 'reactstrap';
 import { connect } from "react-redux";
-import { getResourceList, updateTableType } from "../../../actions/info/info.actions";
+import { getResourceList, updateTableType, getResourceUIList, getResourceMobilityList, getResourceCMList, getResourceDesignList} from "../../../actions/info/info.actions";
 import { IState } from "../../../reducers";
-import ResourceListExport from "./resourceListExport";
 
 interface IProps {
     resourceList: any[];
@@ -41,36 +40,40 @@ class TablesComponent extends React.Component<IProps, any> {
             }
         }
         return (
-            <div>
-                <ResourceListExport/>
-                <Table>
-                    <thead>
-                        <tr>
-                            <th>Associate Name</th>
-                            <th>ID</th>
-                            <th>Certification</th>
-                            <th>Project Details</th>
-                            <th>Grade</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {resourceEntries}
-                    </tbody>
-                </Table>
-            </div>
-
+            <Table>
+                <thead>
+                    <tr>
+                        <th>Associate Name</th>
+                        <th>ID</th>
+                        <th>Certification</th>
+                        <th>Project Details</th>
+                        <th>Grade</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {resourceEntries}
+                </tbody>
+            </Table>
         );
     }
 }
 const mapStateToProps = (state: IState) => {
     return {
+        resourceCMList: state.info.resourceCMList,
+        resourceDesignList: state.info.resourceDesignList,
         resourceList: state.info.resourceList,
+        resourceMobilityList: state.info.resourceMobilityList,
+        resourceUIList: state.info.resourceUIList,
         tableType: state.info.tableType,
     };
 };
 
 const mapDispatchToProps = {
+    getResourceCMList,
+    getResourceDesignList,
     getResourceList,
+    getResourceMobilityList,
+    getResourceUIList,
     updateTableType,
 };
 

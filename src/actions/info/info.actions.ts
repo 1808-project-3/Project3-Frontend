@@ -10,23 +10,23 @@ import axios from "axios";
 export const getResourceList = (tableType: string) => (dispatch: any) => {
     let path = '';
     console.log("getResourceList params: " + tableType);
-    if(tableType === "UI"){
+    if (tableType === "UI") {
         path = 'https://my-json-server.typicode.com/avicuna/talent-portal-mock/ui'
     }
-    else if(tableType === "Mobility"){
+    else if (tableType === "Mobility") {
         path = 'https://my-json-server.typicode.com/avicuna/talent-portal-mock/mobility'
     }
-    else if(tableType === "CM"){
+    else if (tableType === "CM") {
         path = 'https://my-json-server.typicode.com/avicuna/talent-portal-mock/cm'
     }
-    else if(tableType === "Design"){
+    else if (tableType === "Design") {
         path = 'https://my-json-server.typicode.com/avicuna/talent-portal-mock/design'
     }
 
     axios.get(path)
-        .then( response => {
+        .then(response => {
             const resourceEntries: any[] = [];
-            for (const r of response.data){
+            for (const r of response.data) {
                 resourceEntries.push(r);
             }
             dispatch({
@@ -48,12 +48,52 @@ export const getResourceList = (tableType: string) => (dispatch: any) => {
         })
 }
 
+// get individual resource list for each tab
+
+export const getResourceUIList = (data: any) => {
+    return {
+        payload: {
+            data
+        },
+        type: infoTypes.GET_RESOURCE_UI_LIST
+    }
+}
+
+export const getResourceMobilityList = (data: any) => {
+    return {
+        payload: {
+            data
+        },
+        type: infoTypes.GET_RESOURCE_MOBILITY_LIST
+    }
+}
+
+
+export const getResourceCMList = (data: any) => {
+    return {
+        payload: {
+            data
+        },
+        type: infoTypes.GET_RESOURCE_CM_LIST
+    }
+}
+
+export const getResourceDesignList = (data: any) => {
+    return {
+        payload: {
+            data
+        },
+        type: infoTypes.GET_RESOURCE_DESIGN_LIST
+    }
+}
+
+
 /**
  * This action will make a GET request for the list of projects that will be displayed on the
  * project list table.
  */
 
-export const getProjectList = () => (dispatch:any) => {
+export const getProjectList = () => (dispatch: any) => {
     axios.get('https://my-json-server.typicode.com/avicuna/talent-portal-mock/projects')
         .then(response => {
             const projectEntries: any[] = [];
@@ -112,7 +152,7 @@ export const getAssociateList = () => (dispatch: any) => {
  * This signifies the passed in tableType.
  */
 
-export const updateTableType = (text: string) =>  {
+export const updateTableType = (text: string) => {
     return {
         payload: {
             tableType: text
