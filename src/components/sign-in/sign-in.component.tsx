@@ -40,6 +40,9 @@ class SignInComponent extends React.Component<IProps, {}> {
           <form className="form-signin" id="signin-form" 
           onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
             this.props.login(e, this.props.credentials);
+            // if(){
+
+            // }
             this.props.history.push('home');
           }}>
             
