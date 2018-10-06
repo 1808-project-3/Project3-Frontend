@@ -183,7 +183,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                                 overflow: 'auto',
                                                 padding: '2px 0',
                                                 position: 'fixed',
-                                                zIndex: 998
+                                                zIndex: 1031
                                             }}
                                             inputProps={{ className: 'form-control', name: "certifications", id: "inputCertifications", placeholder: "Search Certifications here..." }}
                                             wrapperProps={{ className: 'd-block' }}
