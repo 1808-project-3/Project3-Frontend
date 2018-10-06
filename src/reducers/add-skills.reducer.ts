@@ -169,7 +169,17 @@ export const addSkillsReducer = (state = initialState, action: any) => {
             newState.resource = newRemovedCertificationResource;
             return newState;
         case addSkillsTypes.SHOW_OR_HIDE_PROJECT:
-            return { ...state, newOrExistingProject: action.payload.newOrExisting };
+            if (action.payload.newOrExisting === 'none') {
+                const clearProjectResource = new Resource({ ...state.resource });
+                clearProjectResource.project = new Project();
+                clearProjectResource.grade = new Grade();
+                clearProjectResource.compentencyTagging = new CompetencyTag();
+                newState.supervisorIdInput = '';
+                newState.projectIdInput = '';
+                newState.resource = clearProjectResource;
+            }
+            newState.newOrExistingProject = action.payload.newOrExisting;
+            return newState;
     }
     return state;
 }
