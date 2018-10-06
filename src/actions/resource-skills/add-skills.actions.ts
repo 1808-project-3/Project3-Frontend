@@ -22,8 +22,12 @@ export const fetchProject = (projectId: number) => (dispatch: any) => {
         project = new Project(MockProject);
         project.supervisor = new User(project.supervisor);
         project.location = new Location(project.location);
-        project.startDate = new Date(project.startDate);
-        project.endDate = new Date(project.endDate);
+        if (project.startDate) {
+            project.startDate = new Date(project.startDate);
+        }
+        if (project.endDate) {
+            project.endDate = new Date(project.endDate);
+        }
     }
     dispatch({
         payload: {
