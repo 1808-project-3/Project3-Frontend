@@ -80,6 +80,9 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
         const validSupervisorName = supervisor.firstName && supervisor.lastName;
         const supervisorName = `${supervisor.firstName} ${supervisor.lastName}`
         const showDateError = submitted && !((resource.project.startDate && resource.project.endDate) || this.props.dateTbd);
+        const newProject = this.props.newOrExistingProject === 'new'
+        const existingProject = this.props.newOrExistingProject === 'existing';
+        const noProject = this.props.newOrExistingProject === 'none';
         let dateErrorMessage = 'Please select a project start and end date or press to be decided';
         if (showDateError) {
             if (resource.project.startDate) {
@@ -205,7 +208,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                             <Col>
                                 <Row>
                                     <Col className="text-center mb-2">
-                                        {this.props.newOrExistingProject === 'none' &&
+                                        {noProject &&
                                             <>
                                                 <Button onClick={() => this.props.showOrHideProject("existing")} className="my-2 mx-2">
                                                     <span>Select Existing Project</span>
@@ -215,19 +218,19 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                                 </Button>
                                             </>
                                         }
-                                        {this.props.newOrExistingProject === 'new' &&
+                                        {newProject &&
                                             <>
                                                 <h3 className="mb-0"><Badge color="secondary">New Project</Badge></h3>
                                                 <Badge className="clickable" onClick={() => this.props.showOrHideProject("none")} color="light">Undo</Badge>
                                             </>
                                         }
-                                        {this.props.newOrExistingProject === 'existing' &&
+                                        {existingProject &&
                                             <>
                                                 <h3 className="mb-0"><Badge color="secondary">Existing Project</Badge></h3>
                                                 <Badge className="clickable" onClick={() => this.props.showOrHideProject("none")} color="light">Undo</Badge>
                                             </>
                                         }
-                                        {submitted && this.props.newOrExistingProject === 'none' &&
+                                        {submitted && noProject &&
                                             <>
                                                 <span className="form-control is-invalid d-none" />
                                                 <FormFeedback>You must choose an existing project or create a new one.</FormFeedback>
@@ -235,7 +238,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                         }
                                     </Col>
                                 </Row>
-                                <Collapse isOpen={this.props.newOrExistingProject === 'new' || (this.props.newOrExistingProject === 'existing' && resource.project.pId > 0)}>
+                                <Collapse isOpen={newProject || (existingProject && resource.project.pId > 0)}>
                                     <FormGroup row>
                                         <Label for="inputCustomerName" lg={4} className="font-weight-bold">CUSTOMER NAME</Label>
                                         <Col lg={8} className="my-auto">
@@ -244,16 +247,16 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                         </Col>
                                     </FormGroup>
                                 </Collapse>
-                                <Collapse isOpen={this.props.newOrExistingProject !== 'none'}>
+                                <Collapse isOpen={!noProject}>
                                     <FormGroup row>
                                         <Label for="inputProjectId" lg={4} className="font-weight-bold">PROJECT ID</Label>
                                         <Col lg={8} className="my-auto">
                                             <Input invalid={submitted && !resource.project.pId} value={this.props.projectIdInput ? this.props.projectIdInput : ''} onChange={e => this.props.updateResource(e.target)} type="text" name="projectId" id="inputProjectId" required />
-                                            <FormFeedback>{this.props.newOrExistingProject === 'new' ? "Please enter a project ID" : "Could not find project with this ID"}</FormFeedback>
+                                            <FormFeedback>{newProject ? "Please enter a project ID" : "Could not find project with this ID"}</FormFeedback>
                                         </Col>
                                     </FormGroup>
                                 </Collapse>
-                                <Collapse isOpen={this.props.newOrExistingProject === 'new' || (this.props.newOrExistingProject === 'existing' && resource.project.pId > 0)}>
+                                <Collapse isOpen={newProject || (existingProject && resource.project.pId > 0)}>
                                     <FormGroup row>
                                         <Label for="inputProjectName" lg={4} className="font-weight-bold">PROJECT NAME</Label>
                                         <Col lg={8} className="my-auto">
@@ -289,6 +292,8 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                             <FormFeedback>Please choose a competency tagging</FormFeedback>
                                         </Col>
                                     </FormGroup>
+                                </Collapse>
+                                {(newProject || (existingProject && resource.project.pId > 0)) && // Visual DatePicker bug if this is included in Collapse (date gets cut off when it first appears after entering valid project id for existing project)
                                     <FormGroup row>
                                         <Label for="inputDate" lg={4} className="font-weight-bold">DURATION</Label>
                                         <Col lg={8} className="my-auto">
@@ -315,6 +320,8 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                             </div>
                                         </Col>
                                     </FormGroup>
+                                }
+                                <Collapse isOpen={newProject || (existingProject && resource.project.pId > 0)}>
                                     <FormGroup row>
                                         <Col lg={{ size: 8, offset: 4 }}>
                                             <CustomInput invalid={showDateError} checked={this.props.dateTbd} onChange={e => this.props.updateResource(e.target)} type="checkbox" id={"date-tbd"} name="date-tbd" label={"To be decided"} />

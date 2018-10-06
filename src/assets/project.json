@@ -1,8 +1,8 @@
 {
     "pId": 12,
     "name": "My Project",
-    "startDate": "2018/08/01 00:00:00",
-    "endDate": "2018/08/08 00:00:00",
+    "startDate": "2018/08/01",
+    "endDate": "2018/08/08",
     "supervisor": {
         "uId": 23,
         "assocId": 324645787545643,
