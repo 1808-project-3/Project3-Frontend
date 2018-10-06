@@ -49,6 +49,8 @@ interface IProps extends RouteComponentProps<{}>, IAddSkillsState {
 }
 
 class AddSkillsComponent extends React.Component<IProps, {}> {
+    private customerNameInput: HTMLInputElement | null;
+    private projectIdInput: HTMLInputElement | null;
     public constructor(props: any) {
         super(props);
         this.props.fetchCompetencyTaggingList();
@@ -238,20 +240,30 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                         }
                                     </Col>
                                 </Row>
-                                <Collapse isOpen={newProject || (existingProject && resource.project.pId > 0)}>
+                                <Collapse isOpen={newProject || (existingProject && resource.project.pId > 0)}
+                                    onEntered={() => {
+                                        if (newProject && this.customerNameInput) {
+                                            this.customerNameInput.focus();
+                                        }
+                                    }}>
                                     <FormGroup row>
                                         <Label for="inputCustomerName" lg={4} className="font-weight-bold">CUSTOMER NAME</Label>
                                         <Col lg={8} className="my-auto">
-                                            <Input autoFocus={newProject} readOnly={existingProject} invalid={submitted && !resource.project.customerName} value={resource.project.customerName ? resource.project.customerName : ''} onChange={e => this.props.updateResource(e.target)} type="text" name="customerName" id="inputCustomerName" required />
+                                            <Input innerRef={input => this.customerNameInput = input} readOnly={existingProject} invalid={submitted && !resource.project.customerName} value={resource.project.customerName ? resource.project.customerName : ''} onChange={e => this.props.updateResource(e.target)} type="text" name="customerName" id="inputCustomerName" required />
                                             <FormFeedback>Please enter a customer name</FormFeedback>
                                         </Col>
                                     </FormGroup>
                                 </Collapse>
-                                <Collapse isOpen={!noProject}>
+                                <Collapse isOpen={!noProject}
+                                    onEntered={() => {
+                                        if (existingProject && this.projectIdInput) {
+                                            this.projectIdInput.focus();
+                                        }
+                                    }}>
                                     <FormGroup row>
                                         <Label for="inputProjectId" lg={4} className="font-weight-bold">PROJECT ID</Label>
                                         <Col lg={8} className="my-auto">
-                                            <Input autoFocus={existingProject} invalid={submitted && !resource.project.pId} value={this.props.projectIdInput ? this.props.projectIdInput : ''} onChange={e => this.props.updateResource(e.target)} type="text" name="projectId" id="inputProjectId" required />
+                                            <Input innerRef={input => this.projectIdInput = input} invalid={submitted && !resource.project.pId} value={this.props.projectIdInput ? this.props.projectIdInput : ''} onChange={e => this.props.updateResource(e.target)} type="text" name="projectId" id="inputProjectId" required />
                                             <FormFeedback>{newProject ? "Please enter a project ID" : "Could not find project with this ID"}</FormFeedback>
                                         </Col>
                                     </FormGroup>
