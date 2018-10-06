@@ -16,6 +16,7 @@ const initialState: IAddSkillsState = {
     listOfGrades: [],
     listOfLocations: [],
     newOrExistingProject: 'none',
+    projectIdInput: '',
     resource: new Resource(),
     skillGroupIds: [],
     submitted: false,
@@ -46,9 +47,7 @@ export const addSkillsReducer = (state = initialState, action: any) => {
                     newState.resource = newResource;
                     break;
                 case "projectId":
-                    const newIdProject = new Project({ ...state.resource.project, pId: action.payload.value.replace(/[^\d]/, '') });
-                    newResource.project = newIdProject;
-                    newState.resource = newResource;
+                    newState.projectIdInput = action.payload.value.replace(/[^\d]/, '');
                     break;
                 case "projectName":
                     const newNameProject = new Project({ ...state.resource.project, name: action.payload.value });
@@ -150,6 +149,11 @@ export const addSkillsReducer = (state = initialState, action: any) => {
             newSupervisorProject.supervisor = action.payload.supervisor;
             newSupervisorResource.project = newSupervisorProject;
             newState.resource = newSupervisorResource;
+            return newState;
+        case addSkillsTypes.FETCH_PROJECT:
+            const newProjectResource = new Resource({ ...state.resource });
+            newProjectResource.project = action.payload.project;
+            newState.resource = newProjectResource;
             return newState;
         case addSkillsTypes.ADD_CERTIFICATION:
             const newCertificationResource = new Resource({ ...state.resource });

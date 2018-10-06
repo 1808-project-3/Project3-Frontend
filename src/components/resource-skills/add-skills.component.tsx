@@ -30,6 +30,7 @@ import Badge from 'reactstrap/lib/Badge';
 interface IProps extends RouteComponentProps<{}>, IAddSkillsState {
     fetchAssociate: (assocId: number) => void
     fetchSupervisor: (supId: number) => void
+    fetchProject: (projectId: number) => void
     fetchCompetencyTaggingList: () => void
     fetchGradeList: () => void
     fetchLocationList: () => void
@@ -64,6 +65,9 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
         }
         if (this.props.supervisorIdInput !== prevProps.supervisorIdInput) {
             this.props.fetchSupervisor(+this.props.supervisorIdInput);
+        }
+        if (this.props.projectIdInput !== prevProps.projectIdInput) {
+            this.props.fetchProject(+this.props.projectIdInput);
         }
     }
 
@@ -231,7 +235,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                         }
                                     </Col>
                                 </Row>
-                                <Collapse isOpen={this.props.newOrExistingProject === 'new'}>
+                                <Collapse isOpen={this.props.newOrExistingProject === 'new' || (this.props.newOrExistingProject === 'existing' && resource.project.pId > 0)}>
                                     <FormGroup row>
                                         <Label for="inputCustomerName" lg={4} className="font-weight-bold">CUSTOMER NAME</Label>
                                         <Col lg={8} className="my-auto">
@@ -244,12 +248,12 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                     <FormGroup row>
                                         <Label for="inputProjectId" lg={4} className="font-weight-bold">PROJECT ID</Label>
                                         <Col lg={8} className="my-auto">
-                                            <Input invalid={submitted && !resource.project.pId} value={resource.project.pId ? resource.project.pId : ''} onChange={e => this.props.updateResource(e.target)} type="text" name="projectId" id="inputProjectId" required />
+                                            <Input invalid={submitted && !resource.project.pId} value={this.props.projectIdInput ? this.props.projectIdInput : ''} onChange={e => this.props.updateResource(e.target)} type="text" name="projectId" id="inputProjectId" required />
                                             <FormFeedback>Please enter a project ID</FormFeedback>
                                         </Col>
                                     </FormGroup>
                                 </Collapse>
-                                <Collapse isOpen={this.props.newOrExistingProject === 'new'}>
+                                <Collapse isOpen={this.props.newOrExistingProject === 'new' || (this.props.newOrExistingProject === 'existing' && resource.project.pId > 0)}>
                                     <FormGroup row>
                                         <Label for="inputProjectName" lg={4} className="font-weight-bold">PROJECT NAME</Label>
                                         <Col lg={8} className="my-auto">
@@ -387,6 +391,7 @@ const mapDispatchToProps = {
     fetchCompetencyTaggingList: addSkillsActions.fetchCompetencyTaggingList,
     fetchGradeList: addSkillsActions.fetchGradeList,
     fetchLocationList: addSkillsActions.fetchLocationList,
+    fetchProject: addSkillsActions.fetchProject,
     fetchSupervisor: addSkillsActions.fetchSupervisor,
     removeCertification: addSkillsActions.removeCertification,
     removeResume: addSkillsActions.removeResume,

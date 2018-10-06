@@ -24,6 +24,7 @@ export interface IAddSkillsState {
   listOfGrades: Grade[],
   listOfLocations: Location[],
   newOrExistingProject: string,
+  projectIdInput: string,
   resource: Resource,
   skillGroupIds: number[],
   submitted: boolean,

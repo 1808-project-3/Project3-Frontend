@@ -11,8 +11,27 @@ import MockLocations from '../../assets/locations.json';
 import MockCompetencyTags from '../../assets/competency-tags.json';
 import MockCertifications from '../../assets/certifications.json';
 import MockUser from '../../assets/user.json';
+import MockProject from '../../assets/project.json';
 import { Certification } from "../../models/Certification";
 import { User } from "../../models/User";
+import { Project } from "../../models/Project";
+
+export const fetchProject = (projectId: number) => (dispatch: any) => {
+    let project = new Project();
+    if (projectId) {
+        project = new Project(MockProject);
+        project.supervisor = new User(project.supervisor);
+        project.location = new Location(project.location);
+        project.startDate = new Date(project.startDate);
+        project.endDate = new Date(project.endDate);
+    }
+    dispatch({
+        payload: {
+            project
+        },
+        type: addSkillsTypes.FETCH_PROJECT
+    })
+}
 
 export const fetchAssociate = (assocId: number) => (dispatch: any) => {
     let associate = new User();
