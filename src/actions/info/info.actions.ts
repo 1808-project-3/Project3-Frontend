@@ -1,4 +1,5 @@
 import { infoTypes } from "./info.types";
+import {mock} from "../../mock/mock";
 import axios from "axios";
 
 /**
@@ -11,16 +12,16 @@ export const getResourceList = (tableType: string) => (dispatch: any) => {
     let path = '';
     console.log("getResourceList params: " + tableType);
     if (tableType === "UI") {
-        path = 'https://my-json-server.typicode.com/avicuna/talent-portal-mock/ui'
+        path = mock.ui;
     }
     else if (tableType === "Mobility") {
-        path = 'https://my-json-server.typicode.com/avicuna/talent-portal-mock/mobility'
+        path = mock.mobility;
     }
     else if (tableType === "CM") {
-        path = 'https://my-json-server.typicode.com/avicuna/talent-portal-mock/cm'
+        path = mock.cm;
     }
     else if (tableType === "Design") {
-        path = 'https://my-json-server.typicode.com/avicuna/talent-portal-mock/design'
+        path = mock.design;
     }
 
     axios.get(path)
@@ -104,7 +105,7 @@ export const getResourceDesignList = (data: any) => {
  */
 
 export const getProjectList = () => (dispatch: any) => {
-    axios.get('https://my-json-server.typicode.com/avicuna/talent-portal-mock/projects')
+    axios.get(mock.projects)
         .then(response => {
             const projectEntries: any[] = [];
             for (const r of response.data) {
@@ -130,7 +131,7 @@ export const getProjectList = () => (dispatch: any) => {
 }
 
 export const getAssociateList = () => (dispatch: any) => {
-    axios.get('https://my-json-server.typicode.com/JoshAlen/talen-portal-mock-db2/project-associates')
+    axios.get(mock.projectAssociates)
         .then(response => {
             const associateEntries: any[] = [];
             for (const r of response.data) {
