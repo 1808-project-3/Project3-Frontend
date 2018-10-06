@@ -242,7 +242,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                     <FormGroup row>
                                         <Label for="inputCustomerName" lg={4} className="font-weight-bold">CUSTOMER NAME</Label>
                                         <Col lg={8} className="my-auto">
-                                            <Input readOnly={existingProject} invalid={submitted && !resource.project.customerName} value={resource.project.customerName ? resource.project.customerName : ''} onChange={e => this.props.updateResource(e.target)} type="text" name="customerName" id="inputCustomerName" required />
+                                            <Input autoFocus={newProject} readOnly={existingProject} invalid={submitted && !resource.project.customerName} value={resource.project.customerName ? resource.project.customerName : ''} onChange={e => this.props.updateResource(e.target)} type="text" name="customerName" id="inputCustomerName" required />
                                             <FormFeedback>Please enter a customer name</FormFeedback>
                                         </Col>
                                     </FormGroup>
@@ -251,7 +251,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                     <FormGroup row>
                                         <Label for="inputProjectId" lg={4} className="font-weight-bold">PROJECT ID</Label>
                                         <Col lg={8} className="my-auto">
-                                            <Input invalid={submitted && !resource.project.pId} value={this.props.projectIdInput ? this.props.projectIdInput : ''} onChange={e => this.props.updateResource(e.target)} type="text" name="projectId" id="inputProjectId" required />
+                                            <Input autoFocus={existingProject} invalid={submitted && !resource.project.pId} value={this.props.projectIdInput ? this.props.projectIdInput : ''} onChange={e => this.props.updateResource(e.target)} type="text" name="projectId" id="inputProjectId" required />
                                             <FormFeedback>{newProject ? "Please enter a project ID" : "Could not find project with this ID"}</FormFeedback>
                                         </Col>
                                     </FormGroup>
