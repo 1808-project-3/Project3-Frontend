@@ -119,7 +119,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                 <FormGroup row>
                                     <Label for="inputAssociateName" className="font-weight-bold" lg={4}>ASSOCIATE NAME</Label>
                                     <Col lg={8} className="my-auto">
-                                        <Input value={validAssociateName ? associateName : ''} onChange={e => this.props.updateResource(e.target)} type="text" name="associateName" id="inputAssociateName" placeholder="Autofills with valid Associate ID" readOnly />
+                                        <Input value={validAssociateName ? associateName : ''} onChange={e => this.props.updateResource(e.target)} type="text" name="associateName" id="inputAssociateName" placeholder="Autofills with valid Associate ID" readOnly tabIndex={-1} />
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
@@ -249,7 +249,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                     <FormGroup row>
                                         <Label for="inputCustomerName" lg={4} className="font-weight-bold">CUSTOMER NAME</Label>
                                         <Col lg={8} className="my-auto">
-                                            <Input innerRef={input => this.customerNameInput = input} readOnly={existingProject} invalid={submitted && !resource.project.customerName} value={resource.project.customerName ? resource.project.customerName : ''} onChange={e => this.props.updateResource(e.target)} type="text" name="customerName" id="inputCustomerName" required />
+                                            <Input innerRef={input => this.customerNameInput = input} readOnly={existingProject} tabIndex={existingProject ? -1 : 0} invalid={submitted && !resource.project.customerName} value={resource.project.customerName ? resource.project.customerName : ''} onChange={e => this.props.updateResource(e.target)} type="text" name="customerName" id="inputCustomerName" required />
                                             <FormFeedback>Please enter a customer name</FormFeedback>
                                         </Col>
                                     </FormGroup>
@@ -270,9 +270,9 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                 </Collapse>
                                 <Collapse isOpen={newProject || (existingProject && resource.project.pId > 0)}>
                                     <FormGroup row>
-                                        <Label readOnly={existingProject} for="inputProjectName" lg={4} className="font-weight-bold">PROJECT NAME</Label>
+                                        <Label for="inputProjectName" lg={4} className="font-weight-bold">PROJECT NAME</Label>
                                         <Col lg={8} className="my-auto">
-                                            <Input readOnly={existingProject} invalid={submitted && !resource.project.name} value={resource.project.name ? resource.project.name : ''} onChange={e => this.props.updateResource(e.target)} type="text" name="projectName" id="inputProjectName" required />
+                                            <Input readOnly={existingProject} tabIndex={existingProject ? -1 : 0} invalid={submitted && !resource.project.name} value={resource.project.name ? resource.project.name : ''} onChange={e => this.props.updateResource(e.target)} type="text" name="projectName" id="inputProjectName" required />
                                             <FormFeedback>Please enter a project name</FormFeedback>
                                         </Col>
                                     </FormGroup>
@@ -343,22 +343,22 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                     <FormGroup row>
                                         <Label for="inputSupervisorId" lg={4} className="font-weight-bold">HCM SUPERVISOR ID</Label>
                                         <Col lg={8} className="my-auto">
-                                            <Input readOnly={existingProject} invalid={submitted && !supervisor.assocId} value={existingProject ? supervisor.assocId ? supervisor.assocId : '' : this.props.supervisorIdInput} onChange={e => this.props.updateResource(e.target)} type="text" name="supervisorId" id="inputSupervisorId" required />
+                                            <Input readOnly={existingProject} tabIndex={existingProject ? -1 : 0} invalid={submitted && !supervisor.assocId} value={existingProject ? supervisor.assocId ? supervisor.assocId : '' : this.props.supervisorIdInput} onChange={e => this.props.updateResource(e.target)} type="text" name="supervisorId" id="inputSupervisorId" required />
                                             <FormFeedback>Could not find supervisor with this ID</FormFeedback>
                                         </Col>
                                     </FormGroup>
                                     <FormGroup row>
                                         <Label for="inputSupervisorName" lg={4} className="font-weight-bold">HCM SUPERVISOR NAME</Label>
                                         <Col lg={8} className="my-auto">
-                                            <Input value={validSupervisorName ? supervisorName : ''} onChange={e => this.props.updateResource(e.target)} type="text" name="supervisorName" id="inputSupervisorName" placeholder="Autofills with valid supervisor ID" readOnly />
+                                            <Input value={validSupervisorName ? supervisorName : ''} onChange={e => this.props.updateResource(e.target)} type="text" name="supervisorName" id="inputSupervisorName" placeholder="Autofills with valid supervisor ID" readOnly tabIndex={-1} />
                                         </Col>
                                     </FormGroup>
                                     <FormGroup row>
                                         <Label for="inputLocation" lg={4} className="font-weight-bold">LOCATION</Label>
                                         <Col lg={8} className="my-auto">
                                             {existingProject ?
-                                                <Input readOnly={existingProject} invalid={submitted && !resource.project.location.locationId} value={resource.project.location.locationId ? resource.project.location.name : ""} onChange={e => this.props.updateResource(e.target)} type="text" name="location" id="inputLocation" required />
-                                                : <Input readOnly={existingProject} invalid={submitted && !resource.project.location.locationId} value={resource.project.location.locationId ? resource.project.location.locationId : ""} onChange={e => this.props.updateResource(e.target)} type="select" name="location" id="inputLocation" required >
+                                                <Input readOnly={existingProject} tabIndex={existingProject ? -1 : 0} invalid={submitted && !resource.project.location.locationId} value={resource.project.location.locationId ? resource.project.location.name : ""} onChange={e => this.props.updateResource(e.target)} type="text" name="location" id="inputLocation" required />
+                                                : <Input readOnly={existingProject} tabIndex={existingProject ? -1 : 0} invalid={submitted && !resource.project.location.locationId} value={resource.project.location.locationId ? resource.project.location.locationId : ""} onChange={e => this.props.updateResource(e.target)} type="select" name="location" id="inputLocation" required >
                                                     <option value="" hidden></option>
                                                     {this.props.listOfLocations.map((location: Location) => {
                                                         return (
