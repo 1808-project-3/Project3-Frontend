@@ -249,7 +249,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                         <Label for="inputProjectId" lg={4} className="font-weight-bold">PROJECT ID</Label>
                                         <Col lg={8} className="my-auto">
                                             <Input invalid={submitted && !resource.project.pId} value={this.props.projectIdInput ? this.props.projectIdInput : ''} onChange={e => this.props.updateResource(e.target)} type="text" name="projectId" id="inputProjectId" required />
-                                            <FormFeedback>Please enter a project ID</FormFeedback>
+                                            <FormFeedback>{this.props.newOrExistingProject === 'new' ? "Please enter a project ID" : "Could not find project with this ID"}</FormFeedback>
                                         </Col>
                                     </FormGroup>
                                 </Collapse>
