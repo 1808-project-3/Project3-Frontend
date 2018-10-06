@@ -22,7 +22,7 @@ import Alert from 'reactstrap/lib/Alert';
 import { Grade } from '../../models/Grade';
 import { CompetencyTag } from '../../models/CompetencyTag';
 import { Location } from '../../models/Location';
-import * as Autocomplete from 'react-autocomplete'
+import * as Autocomplete from 'react-autocomplete';
 import { Certification } from '../../models/Certification';
 import Badge from 'reactstrap/lib/Badge';
 
@@ -344,15 +344,16 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                     <FormGroup row>
                                         <Label for="inputLocation" lg={4} className="font-weight-bold">LOCATION</Label>
                                         <Col lg={8} className="my-auto">
-                                            <Input readOnly={existingProject} invalid={submitted && !resource.project.location.locationId} value={resource.project.location.locationId ? newProject ? resource.project.location.locationId : resource.project.location.name : ""} onChange={e => this.props.updateResource(e.target)} type={newProject ? "select" : "text"} name="location" id="inputLocation" required>
-                                                {newProject && <option value="" hidden></option>}
-                                                {newProject &&
-                                                    this.props.listOfLocations.map((location: Location) => {
+                                            {existingProject ?
+                                                <Input readOnly={existingProject} invalid={submitted && !resource.project.location.locationId} value={resource.project.location.locationId ? resource.project.location.name : ""} onChange={e => this.props.updateResource(e.target)} type="text" name="location" id="inputLocation" required />
+                                                : <Input readOnly={existingProject} invalid={submitted && !resource.project.location.locationId} value={resource.project.location.locationId ? resource.project.location.locationId : ""} onChange={e => this.props.updateResource(e.target)} type="select" name="location" id="inputLocation" required >
+                                                    <option value="" hidden></option>
+                                                    {this.props.listOfLocations.map((location: Location) => {
                                                         return (
                                                             <option value={location.locationId} key={location.locationId}>{location.name}</option>
                                                         )
                                                     })}
-                                            </Input>
+                                                </Input>}
                                             <FormFeedback>Please choose a project location</FormFeedback>
                                         </Col>
                                     </FormGroup>
