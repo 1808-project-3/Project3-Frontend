@@ -176,6 +176,7 @@ export const addSkillsReducer = (state = initialState, action: any) => {
                 clearProjectResource.compentencyTagging = new CompetencyTag();
                 newState.supervisorIdInput = '';
                 newState.projectIdInput = '';
+                newState.dateTbd = false;
                 newState.resource = clearProjectResource;
             }
             newState.newOrExistingProject = action.payload.newOrExisting;
