@@ -66,7 +66,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
         if (this.props.supervisorIdInput !== prevProps.supervisorIdInput) {
             this.props.fetchSupervisor(+this.props.supervisorIdInput);
         }
-        if (this.props.projectIdInput !== prevProps.projectIdInput) {
+        if (this.props.projectIdInput !== prevProps.projectIdInput && this.props.newOrExistingProject === 'existing') {
             this.props.fetchProject(+this.props.projectIdInput);
         }
     }
