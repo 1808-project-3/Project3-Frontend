@@ -93,7 +93,8 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                 dateErrorMessage = 'Please select a project start date or press to be decided';
             }
         }
-        const selectedGroups = SkillGroups.filter((group: Group) => skillGroupIds.indexOf(group.groupId) > -1);
+        const orderedSkillGroups = SkillGroups.sort((sg1: Group, sg2: Group) => sg1.name < sg2.name ? -1 : 1);
+        const selectedGroups = orderedSkillGroups.filter((group: Group) => skillGroupIds.indexOf(group.groupId) > -1);
         const skills = selectedGroups.reduce((acc: any, val: any) => {
             const groupSkills = val.skills.map((skill: any) => new Skill({ ...skill, group: new Group(val) }))
             return acc.concat(groupSkills);
@@ -135,7 +136,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                     <Col lg={8} className="my-auto">
                                         <Container>
                                             <Row>
-                                                {SkillGroups.map((group: Group) => {
+                                                {orderedSkillGroups.map((group: Group) => {
                                                     return <CustomInput invalid={submitted && this.props.skillGroupIds.length === 0} checked={this.props.skillGroupIds.indexOf(group.groupId) > -1} onChange={e => this.props.toggleSkillGroup(e.target)} key={"group-" + group.groupId} type="checkbox" id={"skills-group-" + group.groupId} name="skillsGroup" className="pr-4" label={group.name} />
                                                 })}
                                             </Row>
