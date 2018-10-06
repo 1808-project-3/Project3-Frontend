@@ -242,7 +242,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                     <FormGroup row>
                                         <Label for="inputCustomerName" lg={4} className="font-weight-bold">CUSTOMER NAME</Label>
                                         <Col lg={8} className="my-auto">
-                                            <Input invalid={submitted && !resource.project.customerName} value={resource.project.customerName ? resource.project.customerName : ''} onChange={e => this.props.updateResource(e.target)} type="text" name="customerName" id="inputCustomerName" required />
+                                            <Input readOnly={existingProject} invalid={submitted && !resource.project.customerName} value={resource.project.customerName ? resource.project.customerName : ''} onChange={e => this.props.updateResource(e.target)} type="text" name="customerName" id="inputCustomerName" required />
                                             <FormFeedback>Please enter a customer name</FormFeedback>
                                         </Col>
                                     </FormGroup>
@@ -258,9 +258,9 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                 </Collapse>
                                 <Collapse isOpen={newProject || (existingProject && resource.project.pId > 0)}>
                                     <FormGroup row>
-                                        <Label for="inputProjectName" lg={4} className="font-weight-bold">PROJECT NAME</Label>
+                                        <Label readOnly={existingProject} for="inputProjectName" lg={4} className="font-weight-bold">PROJECT NAME</Label>
                                         <Col lg={8} className="my-auto">
-                                            <Input invalid={submitted && !resource.project.name} value={resource.project.name ? resource.project.name : ''} onChange={e => this.props.updateResource(e.target)} type="text" name="projectName" id="inputProjectName" required />
+                                            <Input readOnly={existingProject} invalid={submitted && !resource.project.name} value={resource.project.name ? resource.project.name : ''} onChange={e => this.props.updateResource(e.target)} type="text" name="projectName" id="inputProjectName" required />
                                             <FormFeedback>Please enter a project name</FormFeedback>
                                         </Col>
                                     </FormGroup>
@@ -304,7 +304,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                                     calendarIcon={<IoMdCalendar />}
                                                     clearIcon={null as any}
                                                     maxDate={resource.project.endDate ? resource.project.endDate : undefined}
-                                                    disabled={this.props.dateTbd}
+                                                    disabled={this.props.dateTbd || existingProject}
                                                     required
                                                 />
                                                 <span className="my-auto">To</span>
@@ -314,7 +314,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                                     calendarIcon={<IoMdCalendar />}
                                                     clearIcon={null as any}
                                                     minDate={resource.project.startDate ? resource.project.startDate : undefined}
-                                                    disabled={this.props.dateTbd}
+                                                    disabled={this.props.dateTbd || existingProject}
                                                     required
                                                 />
                                             </div>
@@ -324,14 +324,14 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                 <Collapse isOpen={newProject || (existingProject && resource.project.pId > 0)}>
                                     <FormGroup row>
                                         <Col lg={{ size: 8, offset: 4 }}>
-                                            <CustomInput invalid={showDateError} checked={this.props.dateTbd} onChange={e => this.props.updateResource(e.target)} type="checkbox" id={"date-tbd"} name="date-tbd" label={"To be decided"} />
+                                            <CustomInput disabled={existingProject} invalid={showDateError} checked={this.props.dateTbd} onChange={e => this.props.updateResource(e.target)} type="checkbox" id={"date-tbd"} name="date-tbd" label={"To be decided"} />
                                             {showDateError && <FormFeedback className="d-inline-block">{dateErrorMessage}</FormFeedback>}
                                         </Col>
                                     </FormGroup>
                                     <FormGroup row>
                                         <Label for="inputSupervisorId" lg={4} className="font-weight-bold">HCM SUPERVISOR ID</Label>
                                         <Col lg={8} className="my-auto">
-                                            <Input invalid={submitted && !supervisor.assocId} value={this.props.supervisorIdInput ? this.props.supervisorIdInput : ''} onChange={e => this.props.updateResource(e.target)} type="text" name="supervisorId" id="inputSupervisorId" required />
+                                            <Input readOnly={existingProject} invalid={submitted && !supervisor.assocId} value={this.props.supervisorIdInput ? this.props.supervisorIdInput : ''} onChange={e => this.props.updateResource(e.target)} type="text" name="supervisorId" id="inputSupervisorId" required />
                                             <FormFeedback>Could not find supervisor with this ID</FormFeedback>
                                         </Col>
                                     </FormGroup>
@@ -344,13 +344,14 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                     <FormGroup row>
                                         <Label for="inputLocation" lg={4} className="font-weight-bold">LOCATION</Label>
                                         <Col lg={8} className="my-auto">
-                                            <Input invalid={submitted && !resource.project.location.locationId} value={resource.project.location.locationId ? resource.project.location.locationId : ""} onChange={e => this.props.updateResource(e.target)} type="select" name="location" id="inputLocation" required>
-                                                <option value="" hidden></option>
-                                                {this.props.listOfLocations.map((location: Location) => {
-                                                    return (
-                                                        <option value={location.locationId} key={location.locationId}>{location.name}</option>
-                                                    )
-                                                })}
+                                            <Input readOnly={existingProject} invalid={submitted && !resource.project.location.locationId} value={resource.project.location.locationId ? newProject ? resource.project.location.locationId : resource.project.location.name : ""} onChange={e => this.props.updateResource(e.target)} type={newProject ? "select" : "text"} name="location" id="inputLocation" required>
+                                                {newProject && <option value="" hidden></option>}
+                                                {newProject &&
+                                                    this.props.listOfLocations.map((location: Location) => {
+                                                        return (
+                                                            <option value={location.locationId} key={location.locationId}>{location.name}</option>
+                                                        )
+                                                    })}
                                             </Input>
                                             <FormFeedback>Please choose a project location</FormFeedback>
                                         </Col>
