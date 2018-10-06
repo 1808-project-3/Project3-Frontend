@@ -123,8 +123,8 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                 <FormGroup row>
                                     <Label for="aopCertified" lg={4} className="font-weight-bold">AOP CERTIFIED</Label>
                                     <Col lg={8} className="my-auto">
-                                        <CustomInput invalid={submitted && resource.aupCertified === undefined} onChange={e => this.props.updateResource(e.target)} defaultChecked={resource.aupCertified} type="radio" id="aop-certified-yes" name="aopCertified" className="d-inline-block pr-4" label="YES" required />
-                                        <CustomInput invalid={submitted && resource.aupCertified === undefined} onChange={e => this.props.updateResource(e.target)} defaultChecked={resource.aupCertified !== undefined && !resource.aupCertified} type="radio" id="aop-certified-no" name="aopCertified" className="d-inline-block" label="NO" required />
+                                        <CustomInput invalid={submitted && resource.aupCertified === undefined} onChange={e => this.props.updateResource(e.target)} checked={resource.aupCertified || false} type="radio" id="aop-certified-yes" name="aopCertified" className="d-inline-block pr-4" label="YES" required />
+                                        <CustomInput invalid={submitted && resource.aupCertified === undefined} onChange={e => this.props.updateResource(e.target)} checked={resource.aupCertified !== undefined && !resource.aupCertified} type="radio" id="aop-certified-no" name="aopCertified" className="d-inline-block" label="NO" required />
                                         {submitted && resource.aupCertified === undefined && <FormFeedback className="d-inline-block">Please choose either yes or no</FormFeedback>}
                                     </Col>
                                 </FormGroup>
