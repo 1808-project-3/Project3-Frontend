@@ -153,6 +153,9 @@ export const addSkillsReducer = (state = initialState, action: any) => {
         case addSkillsTypes.FETCH_PROJECT:
             const newProjectResource = new Resource({ ...state.resource });
             newProjectResource.project = action.payload.project;
+            if (!action.payload.project.startDate || !action.payload.project.endDate) {
+                newState.dateTbd = true;
+            }
             newState.resource = newProjectResource;
             return newState;
         case addSkillsTypes.ADD_CERTIFICATION:
