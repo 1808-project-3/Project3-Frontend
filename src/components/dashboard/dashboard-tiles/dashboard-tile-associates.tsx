@@ -14,11 +14,10 @@ export default class AssociatesTile extends React.Component<any,any> {
 
     public async componentDidMount() {
         console.log('got here');
-        const res = await axios.get('http://localhost:8080/users',{headers: {"JWT": 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2Vycy9Uek1Vb2NNRjRwIiwiZXhwIjo2MjUxNjM3OTYwMCwidXNlcmlkIjoxMjM0NTYsInNjb3BlIjoic2VsZiBncm91cHMvdXNlcnMifQ.nD9kCwmbAIpFj__Qq_e2_XOkbBCe6zhXu713DoBOCjY’' }});
+        const res = await axios.get('http://localhost:8080/users', {headers: {"JWT": 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2Vycy9Uek1Vb2NNRjRwIiwiZXhwIjo2MjUxNjM3OTYwMCwidXNlcmlkIjoxMjM0NTYsInNjb3BlIjoic2VsZiBncm91cHMvdXNlcnMifQ.nD9kCwmbAIpFj__Qq_e2_XOkbBCe6zhXu713DoBOCjY' }});
         console.log('after fetch');
         this.setState({numOfAssociates: res.data.length});
         console.log(this.state.numOfAssociates);
-        
     }
 
     public render() {
