@@ -331,7 +331,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                     <FormGroup row>
                                         <Label for="inputSupervisorId" lg={4} className="font-weight-bold">HCM SUPERVISOR ID</Label>
                                         <Col lg={8} className="my-auto">
-                                            <Input readOnly={existingProject} invalid={submitted && !supervisor.assocId} value={this.props.supervisorIdInput ? this.props.supervisorIdInput : ''} onChange={e => this.props.updateResource(e.target)} type="text" name="supervisorId" id="inputSupervisorId" required />
+                                            <Input readOnly={existingProject} invalid={submitted && !supervisor.assocId} value={newProject ? this.props.supervisorIdInput ? this.props.supervisorIdInput : '' : supervisor.assocId} onChange={e => this.props.updateResource(e.target)} type="text" name="supervisorId" id="inputSupervisorId" required />
                                             <FormFeedback>Could not find supervisor with this ID</FormFeedback>
                                         </Col>
                                     </FormGroup>
