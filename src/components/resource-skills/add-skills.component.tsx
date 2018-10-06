@@ -373,16 +373,16 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                 </Collapse>
                             </Col>
                         </Row>
-                        <div className="fixed-bottom position-sticky bg-white pb-4">
-                            <hr />
-                            <Container>
-                                <Row>
-                                    <Button onClick={this.props.cancelResource} color="secondary" className="ml-auto px-4"><small>CANCEL</small></Button>
-                                    <Button onClick={() => this.props.submitResource(resource)} color="secondary" className="ml-4 px-3"><IoMdAddCircleOutline /><small className="ml-2">ADD USER</small></Button>
-                                </Row>
-                            </Container>
-                        </div>
                     </Container>
+                    <div className="fixed-bottom position-sticky bg-white pb-4">
+                        <hr />
+                        <Container>
+                            <Row>
+                                <Button onClick={this.props.cancelResource} color="secondary" className="ml-auto px-4"><small>CANCEL</small></Button>
+                                <Button onClick={() => this.props.submitResource(resource)} color="secondary" className="ml-4 px-3"><IoMdAddCircleOutline /><small className="ml-2">ADD USER</small></Button>
+                            </Row>
+                        </Container>
+                    </div>
                 </Form>
             </>
         );
