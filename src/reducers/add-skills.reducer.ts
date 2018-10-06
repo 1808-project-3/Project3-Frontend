@@ -156,6 +156,9 @@ export const addSkillsReducer = (state = initialState, action: any) => {
             if (!action.payload.project.startDate || !action.payload.project.endDate) {
                 newState.dateTbd = true;
             }
+            if (action.payload.project.startDate && action.payload.project.endDate) {
+                newState.dateTbd = false;
+            }
             newState.resource = newProjectResource;
             return newState;
         case addSkillsTypes.ADD_CERTIFICATION:
