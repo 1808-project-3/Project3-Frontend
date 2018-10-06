@@ -26,7 +26,6 @@ import * as Autocomplete from 'react-autocomplete';
 import { Certification } from '../../models/Certification';
 import Badge from 'reactstrap/lib/Badge';
 
-
 interface IProps extends RouteComponentProps<{}>, IAddSkillsState {
     fetchAssociate: (assocId: number) => void
     fetchSupervisor: (supId: number) => void
@@ -51,6 +50,7 @@ interface IProps extends RouteComponentProps<{}>, IAddSkillsState {
 class AddSkillsComponent extends React.Component<IProps, {}> {
     private customerNameInput: HTMLInputElement | null;
     private projectIdInput: HTMLInputElement | null;
+
     public constructor(props: any) {
         super(props);
         this.props.fetchCompetencyTaggingList();
@@ -423,7 +423,6 @@ const mapDispatchToProps = {
     updateCertificationSearch: addSkillsActions.updateCertificationSearch,
     updateResource: addSkillsActions.updateResource,
     updateResourceSkills: addSkillsActions.updateResourceSkills
-
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddSkillsComponent);
