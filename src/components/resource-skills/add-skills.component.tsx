@@ -53,6 +53,9 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
 
     public constructor(props: any) {
         super(props);
+    }
+
+    public componentDidMount() {
         this.props.fetchCompetencyTaggingList();
         this.props.fetchGradeList();
         this.props.fetchLocationList();
