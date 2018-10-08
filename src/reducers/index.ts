@@ -6,6 +6,7 @@ import { Grade } from "../models/Grade";
 import { Location } from "../models/Location";
 import { CompetencyTag } from "../models/CompetencyTag";
 import { Certification } from "../models/Certification";
+import { resourceSkillsDisplayReducer } from "./resource-skills-display.reducer";
 
 export interface ISignInState {
   credentials: {
@@ -31,12 +32,19 @@ export interface IAddSkillsState {
   supervisorIdInput: string
 }
 
+export interface IResourceSkillsDisplayState {
+  isConfirm: boolean,
+  currentResource: Resource
+}
+
 export interface IState {
   signIn: ISignInState,
-  addSkills: IAddSkillsState
+  addSkills: IAddSkillsState,
+  resourceSkillsDisplayState: IResourceSkillsDisplayState
 }
 
 export const state = combineReducers<IState>({
   addSkills: addSkillsReducer,
+  resourceSkillsDisplayState: resourceSkillsDisplayReducer,
   signIn: signInReducer
 })
