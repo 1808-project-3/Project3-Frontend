@@ -18,20 +18,18 @@ const AppNav: React.StatelessComponent<any> = (props) => {
         </button>
         <div className="collapse navbar-collapse" id="navbarsExample04">
           <ul className="navbar-nav ml-auto margin-nav">
-            <li className="nav-item active dropdown">
-              <a className="nav-link dropdown-toggle pointer" id="examples-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Test Components</a>
-              <div className="dropdown-menu" aria-labelledby="examples-dropdown">
-                <div className="dropdown-item">
-                  <Link to="/add-skills" className="unset-anchor nav-link active">AddSkills</Link>
-                  <Link to="/resource-skills-details" className="unset-anchor nav-link active">ResourceSkillsDetails</Link>
-                </div>
-              </div>
-            </li>
             <li className="nav-item active">
               <Link to="/home" className="unset-anchor nav-link">Home</Link>
             </li>
             <li className="nav-item active">
               <Link to="/sign-in" className="unset-anchor nav-link">Sign In</Link>
+            </li>
+
+            <li className="nav-item active dropdown">
+              <a className="nav-link dropdown-toggle pointer" id="examples-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Examples</a>
+              <div className="dropdown-menu" aria-labelledby="examples-dropdown">
+                <div className="dropdown-item"><Link to="/sign-in" className="unset-anchor nav-link active">Movies</Link></div>
+              </div>
             </li>
           </ul>
         </div>
