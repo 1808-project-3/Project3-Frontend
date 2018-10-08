@@ -13,7 +13,7 @@ interface IProps extends IResourceSkillsDisplayState{
 
 class ResourceSkillDisplayComponent extends React.Component<IProps, any>{
 
-    render() {
+    public render() {
         return (
             <div>
                 { this.props.isConfirm?<ResourceSkillsDetail resource={this.props.currentResource}/>: <AddSkillsComponent />}
