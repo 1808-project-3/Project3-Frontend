@@ -7,7 +7,8 @@ const initialState: ISignInState = {
     userId: ''
   },
   errorMessage: '',
-  modal: false
+  modal: false,
+  resetModal: false
 }
 
 export const signInReducer = (state = initialState, action: any) => {
@@ -52,6 +53,12 @@ export const signInReducer = (state = initialState, action: any) => {
       return {
         ...state,
         modal: !state.modal
+      }
+
+      case signInTypes.CHANGE_RESET:
+      return {
+        ...state,
+        resetModal: !state.resetModal
       }
   }
 

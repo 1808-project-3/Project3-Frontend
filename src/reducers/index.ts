@@ -8,7 +8,8 @@ export interface ISignInState {
     userId: string
   },
   errorMessage: string,
-  modal: boolean
+  modal: boolean,
+  resetModal: boolean
 }
 
 export interface IRegisterState {

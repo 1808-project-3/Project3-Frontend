@@ -1,5 +1,4 @@
 import { signInTypes } from "./sign-in.types";
-// import { environment } from '../../environment';
 import history from '../../history';
 import axios from 'axios';
 
@@ -34,6 +33,13 @@ export const updateError = (errorMessage: string) => {
       errorMessage
     },
     type: signInTypes.UPDATE_ERROR
+  }
+}
+
+export const changeReset = () => {
+  return {
+    payload: {},
+    type: signInTypes.CHANGE_RESET
   }
 }
 

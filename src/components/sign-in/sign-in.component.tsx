@@ -7,6 +7,7 @@ import { Button, Row, Col, Form, Modal, FormGroup, Label, Input, ModalHeader, Mo
 
 interface IProps extends RouteComponentProps<{}>, ISignInState {
   changeModal: () => any,
+  changeReset: () => any,
   updateError: (message: string) => any,
   updatePassword: (pass: string) => any,
   updateUsername: (userId: string) => any,
@@ -18,6 +19,12 @@ class SignInComponent extends React.Component<IProps, {}> {
   public forgotPassFields = {
     email: '',
     userID: 0
+  }
+
+  public resetPassFields = {
+    confirmPass: '',
+    newPass: '',
+    tempPass: ''
   }
 
   constructor(props: any) {
@@ -35,6 +42,13 @@ class SignInComponent extends React.Component<IProps, {}> {
   public forgotPassword = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log(this.forgotPassFields);
+    this.props.changeModal();
+    this.props.changeReset();
+  }
+
+  public ResetPassword = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log(this.forgotPassFields);
   }
 
 
@@ -43,12 +57,13 @@ class SignInComponent extends React.Component<IProps, {}> {
 
     return (
 
+      // forgot password modal
       <div id="sign-in-container">
         {this.props.modal && <div>
           <Modal isOpen={this.props.modal} className=''>
             <ModalHeader toggle={()=> {this.props.changeModal()}}><small className='forget-password-header font-weight-bold'>FORGOT PASSWORD</small></ModalHeader>
             <ModalBody>
-              <p><small>Enter User ID/Email and we will send you an email with a temporary password</small></p>
+              <p className="forget-password-label">Enter User ID/Email and we will send you an email with a temporary password</p>
               <Form onSubmit={this.forgotPassword}>
                 <FormGroup>
                   <Row>
@@ -86,6 +101,69 @@ class SignInComponent extends React.Component<IProps, {}> {
             </ModalBody>
           </Modal>
         </div>}
+
+        {/* Reset password modal */}
+        {this.props.resetModal && <div>
+          <Modal isOpen={this.props.resetModal} className=''>
+            <ModalHeader toggle={()=> {this.props.changeReset()}}><small className='forget-password-header font-weight-bold'>RESET PASSWORD</small></ModalHeader>
+            <ModalBody>
+              <p className="forget-password-label">Enter your temporary password to reset your password</p>
+              <Form onSubmit={this.ResetPassword}>
+                <FormGroup>
+                  <Row>
+                    <Col md={4}>
+                      <Label className='forget-password-label font-weight-bold'>TEMPORARY PASSWORD</Label>
+                    </Col>
+                    <Col md={7}>
+                      <Input onChange={(e)=> {
+                        this.resetPassFields = {
+                          ...this.resetPassFields,
+                          tempPass: e.target.value
+                        }
+                      }} required type="text"/>
+                    </Col>
+                  </Row>
+                </FormGroup>
+
+                <FormGroup>
+                  <Row>
+                    <Col md={4}>
+                      <Label><small className='forget-password-label font-weight-bold'>NEW PASSWORD</small></Label>
+                    </Col>
+                    <Col md={7}>
+                      <Input onChange={(e)=> {
+                        this.resetPassFields = {
+                          ...this.resetPassFields,
+                          newPass: e.target.value
+                        }
+                      }} required type="text"/>
+                    </Col>
+                  </Row>
+                </FormGroup>
+
+                <FormGroup>
+                  <Row>
+                    <Col md={4}>
+                      <Label><small className='forget-password-label font-weight-bold'>CONFIRM PASSWORD</small></Label>
+                    </Col>
+                    <Col md={7}>
+                      <Input onChange={(e)=> {
+                        this.resetPassFields = {
+                          ...this.resetPassFields,
+                          confirmPass: e.target.value
+                        }
+                      }} required type="text"/>
+                    </Col>
+                  </Row>
+                </FormGroup>
+
+                <Button id="rest-pass-button" color="secondary" type="submit"><small>RESET PASSWORD</small></Button>
+              </Form>
+            </ModalBody>
+          </Modal>
+        </div>}
+
+        {/* Start of normal sign in page */}
 
         <h1 className="h1 mb-3 font-weight-normal" id="name-banner">TALENT PORTAL</h1>
         <h1 className="h3 mb-4 font-weight-normal" id="login-banner">LOGIN</h1>
@@ -142,6 +220,7 @@ class SignInComponent extends React.Component<IProps, {}> {
 const mapStateToProps = (state: IState) => (state.signIn);
 const mapDispatchToProps = {
   changeModal: signInActions.changeModal,
+  changeReset: signInActions.changeReset,
   login: signInActions.login,
   updateError: signInActions.updateError,
   updatePassword: signInActions.updatePassword,

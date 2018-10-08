@@ -8,7 +8,6 @@ export class SearchResultComponent extends React.Component<any, {}> {
 
     public mockResults = [
         {
-            Actions: 'View/ Edit',
             AssociateName: 'John Wells',
             Certification: 'Cert Details',
             Grade: 'M',
@@ -17,7 +16,6 @@ export class SearchResultComponent extends React.Component<any, {}> {
 
         },
         {
-            Actions: 'View/ Edit',
             AssociateName: 'Bob Man',
             Certification: 'Cert Details',
             Grade: 'SA',
@@ -26,7 +24,6 @@ export class SearchResultComponent extends React.Component<any, {}> {
 
         },
         {
-            Actions: 'View/ Edit',
             AssociateName: 'Blake Kruppa',
             Certification: 'Cert Details',
             Grade: 'M',
@@ -49,7 +46,6 @@ export class SearchResultComponent extends React.Component<any, {}> {
                         <th><Label className="search-result-label"><small className='font-weight-bold'>CERTIFICATION</small></Label></th>
                         <th><Label className="search-result-label"><small className='font-weight-bold'>PROJECT DETAILS</small></Label></th>
                         <th><Label className="search-result-label"><small className='font-weight-bold'>GRADE</small></Label></th>
-                        <th><Label className="search-result-label"><small className='font-weight-bold'>DETAILS</small></Label></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -60,7 +56,6 @@ export class SearchResultComponent extends React.Component<any, {}> {
                         <td className="search-result-label"><small>{associate.Certification}</small></td>
                         <td className="search-result-label"><small>{associate.ProjectName}</small></td>
                         <td className="search-result-label"><small>{associate.Grade}</small></td>
-                        <td className="search-result-label"><small>{associate.Actions}</small></td>
                       </tr>
                     )}
                 </tbody>
