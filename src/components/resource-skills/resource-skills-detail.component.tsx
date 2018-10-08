@@ -41,15 +41,11 @@ export const ResourceSkillsDetail: React.StatelessComponent<IProps> = (props) =>
                             </Row>
                             <Row>
                                 <Col tag="dt" xl={4}>SKILLS - GROUP</Col>
-                                {resource.skills.map((skill: Skill) => {
-                                    return <Col key={skill.skillId} tag="dd" xl={8}>{skill.name}</Col>
-                                })}
+                                <Col tag="dd" xl={8}>{resource.skills.map((skill: Skill) => skill.name).join(', ')}</Col>
                             </Row>
                             <Row>
                                 <Col tag="dt" xl={4}>CERTIFICATIONS, IF ANY</Col>
-                                {resource.certifications.map((cert: Certification) => {
-                                    return <Col key={cert.certId} tag="dd" xl={8}>{cert.name}</Col>
-                                })}
+                                <Col tag="dd" xl={8}>{resource.certifications.map((cert: Certification) => cert.name).join(', ')}</Col>
                             </Row>
                             <Row>
                                 <Col tag="dt" xl={4}>CUSTOMER NAME</Col>
@@ -91,11 +87,19 @@ export const ResourceSkillsDetail: React.StatelessComponent<IProps> = (props) =>
                             </Row>
                             <Row>
                                 <Col tag="dt" xl={4}>RESUME DOCUMENT</Col>
-                                {resource.resumes.map((resume: Resume) => {
-                                    return <Col key={resume.resumeId} tag="dd" xl={8}><span className="mr-3">{resume.fileName}</span><TiDownload /></Col>
-                                })
-                                }
+                                <Col tag="dd" xl={8}><span className="mr-3">{resource.resumes.length && resource.resumes[0].fileName}</span><TiDownload /></Col>
                             </Row>
+                            {resource.resumes.length > 1 && resource.resumes.map((resume: Resume, idx: number) => {
+                                return (
+                                    idx > 0 ?
+                                        <Row key={resume.resumeId}>
+                                            <Col tag="dd" xl={{ size: 8, offset: 4 }}>
+                                                <span className="mr-3">{resume.fileName}</span><TiDownload />
+                                            </Col>
+                                        </Row> : null
+                                );
+                            })
+                            }
                         </Col>
                     </Row>
                 </CardBody>
@@ -121,4 +125,4 @@ const formatDate = (date: Date) => {
     const dd = day < 10 ? `0${day}` : day;
     const mm = month < 10 ? `0${month}` : month
     return <>{dd}/{mm}/{yyyy}</>;
-  }
+}
