@@ -48,7 +48,13 @@ export const addSkillsReducer = (state = initialState, action: any) => {
                     newState.resource = newResource;
                     break;
                 case "projectId":
-                    newState.projectIdInput = action.payload.value.replace(/[^\d]/, '');
+                    const projectIdNumbersOnly = action.payload.value.replace(/[^\d]/, '');
+                    newState.projectIdInput = projectIdNumbersOnly;
+                    if (state.newOrExistingProject === 'new') {
+                        const newProjectIdProject = new Project({ ...state.resource.project, pId: +projectIdNumbersOnly });
+                        newResource.project = newProjectIdProject;
+                        newState.resource = newResource;
+                    }
                     break;
                 case "projectName":
                     const newNameProject = new Project({ ...state.resource.project, name: action.payload.value });
