@@ -115,7 +115,6 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                         <span>There was a problem submitting the resource. You'll find more details highlighted below.</span>
                     </Alert>
                 }
-                <div>hello {this.props.toggleConfirm&&"notnull"}</div>
                 <Form innerRef={form => this.formElement = form}>
                     <Container>
                         <Row>
@@ -404,15 +403,15 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                 <Button onClick={this.props.cancelResource} color="secondary" className="ml-auto px-4"><small>CANCEL</small></Button>
                                 <Button onClick={() => {
                                     this.props.submitResource(resource);
-                                    if(this.formElement){
-                                        if(this.formElement.reportValidity()){
+                                    if (this.formElement) {
+                                        if (this.formElement.checkValidity()) {
                                             console.log("hello");
                                             this.props.updateParentResource(this.props.resource);
                                             this.props.toggleConfirm();
                                         }
 
                                     }
-                                    
+
                                 }} color="secondary" className="ml-4 px-3"><IoMdAddCircleOutline /><small className="ml-2">ADD USER</small></Button>
                                 <Button onClick={() => this.props.toggleConfirm()} className="ml-4 px-3">testToggle</Button>
                             </Row>

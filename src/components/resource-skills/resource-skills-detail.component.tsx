@@ -87,7 +87,9 @@ export const ResourceSkillsDetail: React.StatelessComponent<IProps> = (props) =>
                             </Row>
                             <Row>
                                 <Col tag="dt" xl={4}>RESUME DOCUMENT</Col>
-                                <Col tag="dd" xl={8}><span className="mr-3">{resource.resumes.length && resource.resumes[0].fileName}</span><TiDownload /></Col>
+                                {resource.resumes.length &&
+                                    <Col tag="dd" xl={8}><span className="mr-3">{resource.resumes[0].fileName}</span><TiDownload /></Col>
+                                }
                             </Row>
                             {resource.resumes.length > 1 && resource.resumes.map((resume: Resume, idx: number) => {
                                 return (
