@@ -75,7 +75,7 @@ export const ResourceSkillsDetail: React.StatelessComponent<IProps> = (props) =>
                             </Row>
                             <Row>
                                 <Col tag="dt" xl={4}>DATE OF JOINING</Col>
-                                <Col tag="dd" xl={8}>{resource.joinDate}</Col>
+                                <Col tag="dd" xl={8}>{formatDate(resource.project.startDate)}</Col>
                             </Row>
                             <Row>
                                 <Col tag="dt" xl={4}>HCM SUPERVISOR ID</Col>
@@ -111,3 +111,14 @@ export const ResourceSkillsDetail: React.StatelessComponent<IProps> = (props) =>
         </Container>
     );
 }
+
+
+const formatDate = (date: Date) => {
+    date = new Date(date)
+    const yyyy = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+    const dd = day < 10 ? `0${day}` : day;
+    const mm = month < 10 ? `0${month}` : month
+    return <>{dd}/{mm}/{yyyy}</>;
+  }
