@@ -1,6 +1,7 @@
 import { combineReducers } from "redux";
 import { signInReducer } from "./sign-in.reducer";
 import { registerReducer } from "./register";
+import { jwtReducer } from "./jwt";
 
 export interface ISignInState {
   credentials: {
@@ -23,12 +24,18 @@ export interface IRegisterState {
   errorMessage: string
 }
 
+export interface IJwtState {
+  jwt: string
+}
+
 export interface IState {
+  jwt: IJwtState,
   signIn: ISignInState,
   register: IRegisterState
 }
 
 export const state = combineReducers<IState>({
+  jwt: jwtReducer,
   register: registerReducer,
   signIn: signInReducer
 })

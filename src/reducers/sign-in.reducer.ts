@@ -43,8 +43,8 @@ export const signInReducer = (state = initialState, action: any) => {
       }
       if (!errorMessage) {
         newState.credentials = {
-          pass: '',
-          userId: ''
+          ...newState.credentials,
+          pass: ''
         }
       }
       return newState;

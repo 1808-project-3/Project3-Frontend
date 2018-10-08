@@ -1,17 +1,20 @@
 import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
-import { ISignInState, IState } from '../../reducers';
+import { ISignInState, IState, IJwtState } from '../../reducers';
 import * as signInActions from '../../actions/sign-in/sign-in.actions';
 import { connect } from 'react-redux';
 import { Button, Row, Col, Form, Modal, FormGroup, Label, Input, ModalHeader, ModalBody } from 'reactstrap';
+import axios from 'axios';
 
-interface IProps extends RouteComponentProps<{}>, ISignInState {
+interface IProps extends RouteComponentProps<{}> {
   changeModal: () => any,
   changeReset: () => any,
   updateError: (message: string) => any,
   updatePassword: (pass: string) => any,
   updateUsername: (userId: string) => any,
-  login: (e: React.FormEvent<HTMLFormElement>, credentials: any) => void
+  login: (e: React.FormEvent<HTMLFormElement>) => void,
+  signIn: ISignInState,
+  jwt: IJwtState
 }
 
 class SignInComponent extends React.Component<IProps, {}> {
@@ -31,6 +34,12 @@ class SignInComponent extends React.Component<IProps, {}> {
     super(props);
   }
 
+  public componentDidMount() {
+    console.log(this.props.jwt.jwt);
+    console.log(this.props.signIn.errorMessage);
+    console.log(this.props.signIn.modal)
+  }
+
   public passwordChange = (e: any) => {
     this.props.updatePassword(e.target.value);
   }
@@ -39,28 +48,86 @@ class SignInComponent extends React.Component<IProps, {}> {
     this.props.updateUsername(e.target.value);
   }
 
-  public forgotPassword = (e: React.FormEvent<HTMLFormElement>) => {
+  public login = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+      const resp = axios.post(`http://localhost:8087/users/login`, this.props.signIn.credentials)
+      console.log(resp);
+  
+      resp.then(res => {
+        switch (res.status) {
+          case 200:
+              if (res.data) {
+              this.props.updateError("");
+              this.props.login(res.data.jwt);
+              this.props.history.push('home');
+              }
+            break;
+          case 400:
+            console.log('invalid login');
+            this.props.updateError("Invalid Username or Password");
+            break;
+          default:
+            throw new Error("Failed to login at this time");
+        }
+      })
+        .catch(err => {
+          this.props.updateError('Failed to login at this time');
+          console.log(err);
+        });
+    }
+  
+
+  public forgotPassword = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log(this.forgotPassFields);
+    
+    const userInfo = {
+      email: this.forgotPassFields.email,
+      userId: this.forgotPassFields.userID
+     };
+
+    const res1 = await axios.post("http://localhost:8087/users/changePass", userInfo );
+    
+    if(res1.data){
+    console.log('successfull change password call');
     this.props.changeModal();
     this.props.changeReset();
+    }
+    else {
+      console.log('unsuccessfull change password call');
+    }
   }
 
-  public ResetPassword = (e: React.FormEvent<HTMLFormElement>) => {
+  public ResetPassword = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log(this.forgotPassFields);
+
+
+    const payload = {
+      currentPassword: this.resetPassFields.tempPass,
+      newPassword: this.resetPassFields.newPass,
+      userId: this.forgotPassFields.userID
+    };
+    const res2 = await axios.put("http://localhost:8087/users/resetPassword", payload,  {headers: {"JWT": this.props.jwt.jwt }});
+
+    if(res2.data){
+      console.log('successfull reset password');
+    }
+    else {
+      console.log('unsuccessfull reset password');
+    }
   }
 
 
   public render() {
-    const { errorMessage, credentials } = this.props;
+    const { errorMessage, credentials, modal, resetModal } = this.props.signIn;
 
     return (
 
       // forgot password modal
       <div id="sign-in-container">
-        {this.props.modal && <div>
-          <Modal isOpen={this.props.modal} className=''>
+        {modal && <div>
+          <Modal isOpen={modal} className=''>
             <ModalHeader toggle={()=> {this.props.changeModal()}}><small className='forget-password-header font-weight-bold'>FORGOT PASSWORD</small></ModalHeader>
             <ModalBody>
               <p className="forget-password-label">Enter User ID/Email and we will send you an email with a temporary password</p>
@@ -103,8 +170,8 @@ class SignInComponent extends React.Component<IProps, {}> {
         </div>}
 
         {/* Reset password modal */}
-        {this.props.resetModal && <div>
-          <Modal isOpen={this.props.resetModal} className=''>
+        {resetModal && <div>
+          <Modal isOpen={resetModal} className=''>
             <ModalHeader toggle={()=> {this.props.changeReset()}}><small className='forget-password-header font-weight-bold'>RESET PASSWORD</small></ModalHeader>
             <ModalBody>
               <p className="forget-password-label">Enter your temporary password to reset your password</p>
@@ -171,11 +238,8 @@ class SignInComponent extends React.Component<IProps, {}> {
         <div id="signin-form-container">
           <form className="form-signin" id="signin-form"
             onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
-              this.props.login(e, this.props.credentials);
-              // if(){
-
-              // }
-              this.props.history.push('home');
+              this.login(e);
+  
             }}>
 
             {/* <label htmlFor="inputUsername" className="sr-only">COGNIZANT ID</label> */}
@@ -200,8 +264,8 @@ class SignInComponent extends React.Component<IProps, {}> {
             <p id="forgot-password" className="clickable" onClick={() => { this.props.changeModal() }}><small>Forgot Password</small></p>
 
             <button className="btn btn-secondary btn-block" id="sign-in-button" type="submit">LOGIN</button>
-            {errorMessage && <p id="error-message">{errorMessage}</p>}
             <button onClick={() => { this.props.history.push('register') }} className="btn btn-outline-secondary btn-block" id="register-button" type="button">REGISTER</button>
+            {errorMessage && <p className="text-center" id="error-message">{errorMessage}</p>}
 
           </form>
         </div>
@@ -217,7 +281,14 @@ class SignInComponent extends React.Component<IProps, {}> {
   }
 }
 
-const mapStateToProps = (state: IState) => (state.signIn);
+// const mapStateToProps = (state: IState) => (state.signIn);
+const mapStateToProps = (state: IState) => {
+  return {
+      jwt: state.jwt,
+      signIn: state.signIn
+  }
+}
+
 const mapDispatchToProps = {
   changeModal: signInActions.changeModal,
   changeReset: signInActions.changeReset,
