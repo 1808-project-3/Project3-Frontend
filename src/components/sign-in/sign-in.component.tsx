@@ -3,7 +3,6 @@ import { RouteComponentProps } from 'react-router';
 import { ISignInState, IState } from '../../reducers';
 import * as signInActions from '../../actions/sign-in/sign-in.actions';
 import { connect } from 'react-redux';
-
 import { Link } from 'react-router-dom';
 
 interface IProps extends RouteComponentProps<{}>, ISignInState {
@@ -36,6 +35,8 @@ class SignInComponent extends React.Component<IProps, {}> {
       <div id="sign-in-container"> 
       
         <h1 className="h1 mb-3 font-weight-normal" id="name-banner">TALENT PORTAL</h1>
+        <h1 className="h3 mb-4 font-weight-normal" id="login-banner">LOGIN</h1>
+
         <div id="signin-form-container">
           <form className="form-signin" id="signin-form" 
           onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
@@ -46,8 +47,6 @@ class SignInComponent extends React.Component<IProps, {}> {
             this.props.history.push('home');
           }}>
             
-            <h1 className="h3 mb-3 font-weight-normal" id="login-banner">LOGIN</h1>
-
             <label htmlFor="inputUsername" className="sr-only">Cognizent ID</label>
             <input
               onChange={this.usernameChange}
