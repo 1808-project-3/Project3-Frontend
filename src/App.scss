@@ -127,3 +127,9 @@ nav {
 .clickable{
   cursor: pointer;
 }
+
+@media (min-width: 1200px){
+  #add-skills .same-size-col{
+    min-width: 506.5px;
+  }
+}

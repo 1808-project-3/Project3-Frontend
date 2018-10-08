@@ -109,7 +109,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
             return acc.concat(groupSkills);
         }, []);
         return (
-            <>
+            <div id="add-skills">
                 {submitted &&
                     <Alert className="mx-4" color="danger">
                         <span>There was a problem submitting the resource. You'll find more details highlighted below.</span>
@@ -118,7 +118,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                 <Form innerRef={form => this.formElement = form}>
                     <Container>
                         <Row>
-                            <Col className="border-col-right pr-5 mr-5-sm pb-5">
+                            <Col className="border-col-right pr-5 mr-5-sm pb-5 same-size-col">
                                 <Container>
                                     <FormGroup row>
                                         <Label for="inputAssociateId" className="font-weight-bold" lg={4}>ASSOCIATE ID</Label>
@@ -221,7 +221,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                     </Row>
                                 </Container>
                             </Col>
-                            <Col>
+                            <Col className="same-size-col">
                                 <Container>
                                     <Row>
                                         <Col className="text-center mb-2">
@@ -434,7 +434,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                         </Container>
                     </div>
                 </Form>
-            </>
+            </div>
         );
     }
 }
