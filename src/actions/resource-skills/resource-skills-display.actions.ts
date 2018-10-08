@@ -10,7 +10,7 @@ export const toggleConfirm = () => {
     }
 }
 
-export const updateResource = (newResource:Resource) => {
+export const updateResource = (newResource: Resource) => {
     return {
         payload: {
             newResource

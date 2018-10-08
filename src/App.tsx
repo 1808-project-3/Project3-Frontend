@@ -9,6 +9,7 @@ import { Provider } from 'react-redux';
 import { store } from './Store';
 import AddSkillsComponent from './components/resource-skills/add-skills.component';
 import { ResourceSkillsDetail } from './components/resource-skills/resource-skills-detail.component'
+import ResourceSkillDisplayComponent from './components/resource-skills/resource-skills-display'
 
 class App extends React.Component {
   public render() {
@@ -23,6 +24,7 @@ class App extends React.Component {
                 <Route path="/sign-in" component={SignInComponent} />
                 <Route path="/add-skills" component={AddSkillsComponent} />
                 <Route path="/resource-skills-details" component={ResourceSkillsDetail} />
+                <Route path="/test" component={ResourceSkillDisplayComponent} />
                 <Route component={HomeComponent} />
               </Switch>
             </div>

@@ -16,7 +16,7 @@ class ResourceSkillDisplayComponent extends React.Component<IProps, any>{
     public render() {
         return (
             <div>
-                { this.props.isConfirm?<ResourceSkillsDetail resource={this.props.currentResource}/>: <AddSkillsComponent />}
+                { this.props.isConfirm?<ResourceSkillsDetail resource={this.props.currentResource}/>: <AddSkillsComponent updateParentResource={this.props.updateResource} toggleConfirm={this.props.toggleConfirm} />}
             </div>
         );
     }
