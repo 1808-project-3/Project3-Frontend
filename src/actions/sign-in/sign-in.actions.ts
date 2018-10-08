@@ -12,6 +12,13 @@ export const updatePassword = (pass: string) => {
   }
 }
 
+export const changeModal = () => {
+  return {
+    payload: {},
+    type: signInTypes.CHANGE_MODAL
+  }
+}
+
 export const updateUsername = (userId: string) => {
   return {
     payload: {
