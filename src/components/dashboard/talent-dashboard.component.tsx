@@ -48,9 +48,6 @@ export default class TalentDashboard extends React.Component {
                         <ChartComponent />
                     </Col>
                 </Row>
-                
-
-
             </Container>
 
         )

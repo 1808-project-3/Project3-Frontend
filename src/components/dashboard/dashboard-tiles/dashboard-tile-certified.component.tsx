@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Card, Col, Row, CardFooter } from 'reactstrap';
 import { MdPerson } from 'react-icons/md/';
-// import axios from 'axios';
+import axios from 'axios';
 
 
 
@@ -17,24 +17,15 @@ export default class CertifiedAssociatesTile extends React.Component<any, any> {
         }
     }
 
-    // public async componentDidMount() {
-    //     console.log('got here');
-    //     const res = await axios.get('http://localhost:8080/users', { headers: { "JWT": 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2Vycy9Uek1Vb2NNRjRwIiwiZXhwIjo2MjUxNjM3OTYwMCwidXNlcmlkIjoxMjM0NTYsInNjb3BlIjoic2VsZiBncm91cHMvdXNlcnMifQ.nD9kCwmbAIpFj__Qq_e2_XOkbBCe6zhXu713DoBOCjY' } });
-    //     let aupCertCount = 0;
-    //     res.data.forEach((user:any) => {
-    //         const certified = user.resources.filter((aup:any) =>
-    //             aup.aupCert === true
-    //         )
-    //         if (certified.length > 0) {
-    //             aupCertCount++;
-    //         }
+    public async componentDidMount() {
+        const res = await axios.get('http://localhost:8080/users', { headers: { "JWT": 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2Vycy9Uek1Vb2NNRjRwIiwiZXhwIjo2MjUxNjM3OTYwMCwidXNlcmlkIjoxMjM0NTYsInNjb3BlIjoic2VsZiBncm91cHMvdXNlcnMifQ.nD9kCwmbAIpFj__Qq_e2_XOkbBCe6zhXu713DoBOCjY' } });
+        const certified = res.data.filter((user:any) => 
+                user.aupCert===true
+        );
+        this.setState({ numOfCertifiedAsso: certified.length});
+        
 
-    //     });
-    //     console.log('after fetch');
-    //     this.setState({ numOfCertifiedAsso: aupCertCount});
-    //     console.log(this.state.numOfCertifiedAsso);
-
-    // }
+    }
 
     public render() {
         return (
