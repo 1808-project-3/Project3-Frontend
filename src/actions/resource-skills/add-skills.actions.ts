@@ -1,20 +1,43 @@
-import { addSkillsTypes } from "./add-skills.types";
-import { Skill } from "../../models/Skill";
-import { Resume } from "../../models/Resume";
-import history from '../../history';
-import { Resource } from "../../models/Resource";
-import { Location } from "../../models/Location";
-import { Grade } from "../../models/Grade";
-import { CompetencyTag } from "../../models/CompetencyTag";
+import axios from 'axios';
+import MockCertifications from '../../assets/certifications.json';
+import MockCompetencyTags from '../../assets/competency-tags.json';
 import MockGrades from '../../assets/grades.json';
 import MockLocations from '../../assets/locations.json';
-import MockCompetencyTags from '../../assets/competency-tags.json';
-import MockCertifications from '../../assets/certifications.json';
-import MockUser from '../../assets/user.json';
 import MockProject from '../../assets/project.json';
+import MockUser from '../../assets/user.json';
+import history from '../../history';
 import { Certification } from "../../models/Certification";
-import { User } from "../../models/User";
+import { CompetencyTag } from "../../models/CompetencyTag";
+import { Grade } from "../../models/Grade";
+import { Group } from "../../models/Group";
+import { Location } from "../../models/Location";
 import { Project } from "../../models/Project";
+import { Resource } from "../../models/Resource";
+import { Resume } from "../../models/Resume";
+import { Skill } from "../../models/Skill";
+import { User } from "../../models/User";
+import { addSkillsTypes } from "./add-skills.types";
+
+export const fetchSkillGroupList = () => async (dispatch: any) => {
+    const res = await axios.get('http://ec2-54-70-66-176.us-west-2.compute.amazonaws.com:5002/skill-group', { headers: { "JWT": 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2Vycy9Uek1Vb2NNRjRwIiwiZXhwIjo2MjUxNjM3OTYwMCwidXNlcmlkIjoxMjM0NTYsInNjb3BlIjoic2VsZiBncm91cHMvdXNlcnMifQ.nD9kCwmbAIpFj__Qq_e2_XOkbBCe6zhXu713DoBOCjY' } });
+    const res1 = await axios.get('http://ec2-54-70-66-176.us-west-2.compute.amazonaws.com:5002/skills', { headers: { "JWT": 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2Vycy9Uek1Vb2NNRjRwIiwiZXhwIjo2MjUxNjM3OTYwMCwidXNlcmlkIjoxMjM0NTYsInNjb3BlIjoic2VsZiBncm91cHMvdXNlcnMifQ.nD9kCwmbAIpFj__Qq_e2_XOkbBCe6zhXu713DoBOCjY' } });
+    const groupsWithSkills: any[] = [];
+    res.data.forEach((el: any) => {
+        const group = new Group({ groupId: el.id, name: el.groupName });
+        const skills = res1.data.map((skill: any) => new Skill({ skillId: skill.id, name: skill.skillName, group: new Group({ groupId: skill.groupId }) }));
+        const groupSkills = skills.filter((skill: Skill) => skill.group.groupId === group.groupId);
+        groupsWithSkills.push({
+            ...group, skills: [...groupSkills]
+        });
+    });
+    const orderedGroupsWithSkills = groupsWithSkills.sort((sg1: Group, sg2: Group) => sg1.name < sg2.name ? -1 : 1);
+    dispatch({
+        payload: {
+            listOfSkillGroups: orderedGroupsWithSkills
+        },
+        type: addSkillsTypes.FETCH_SKILL_GROUPS
+    })
+}
 
 export const fetchProject = (projectId: number) => (dispatch: any) => {
     let project = new Project();

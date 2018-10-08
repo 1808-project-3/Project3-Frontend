@@ -7,6 +7,7 @@ import { Location } from "../models/Location";
 import { CompetencyTag } from "../models/CompetencyTag";
 import { Certification } from "../models/Certification";
 import { resourceSkillsDisplayReducer } from "./resource-skills-display.reducer";
+import { Group } from "../models/Group";
 
 export interface ISignInState {
   credentials: {
@@ -24,6 +25,7 @@ export interface IAddSkillsState {
   listOfCompetencyTaggings: CompetencyTag[],
   listOfGrades: Grade[],
   listOfLocations: Location[],
+  listOfSkillGroups: Group[],
   newOrExistingProject: string,
   projectIdInput: string,
   resource: Resource,

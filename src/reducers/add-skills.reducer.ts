@@ -15,6 +15,7 @@ const initialState: IAddSkillsState = {
     listOfCompetencyTaggings: [],
     listOfGrades: [],
     listOfLocations: [],
+    listOfSkillGroups: [],
     newOrExistingProject: 'none',
     projectIdInput: '',
     resource: new Resource(),
@@ -110,6 +111,9 @@ export const addSkillsReducer = (state = initialState, action: any) => {
             const newSkills = resourceHasSkill ? [...currentSkills].filter(skill => skill.skillId !== changedSkill.skillId) : [...currentSkills, changedSkill];
             const newSkillsResource = new Resource({ ...state.resource, skills: newSkills });
             newState.resource = newSkillsResource;
+            return newState;
+        case addSkillsTypes.FETCH_SKILL_GROUPS:
+            newState.listOfSkillGroups = action.payload.listOfSkillGroups;
             return newState;
         case addSkillsTypes.FETCH_GRADES:
             newState.listOfGrades = action.payload.listOfGrades;

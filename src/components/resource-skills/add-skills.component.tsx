@@ -1,30 +1,29 @@
 import * as React from 'react';
+import * as Autocomplete from 'react-autocomplete';
 import DatePicker from 'react-date-picker';
 import { IoMdAddCircleOutline, IoMdCalendar } from 'react-icons/io';
 import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router';
 import { CardHeader, Col, Container, CustomInput, Form, FormGroup } from 'reactstrap';
+import Alert from 'reactstrap/lib/Alert';
+import Badge from 'reactstrap/lib/Badge';
 import Button from 'reactstrap/lib/Button';
 import Card from 'reactstrap/lib/Card';
 import Collapse from 'reactstrap/lib/Collapse';
+import FormFeedback from 'reactstrap/lib/FormFeedback';
 import Input from 'reactstrap/lib/Input';
 import Label from 'reactstrap/lib/Label';
 import Row from 'reactstrap/lib/Row';
 import * as addSkillsActions from '../../actions/resource-skills/add-skills.actions';
-import SkillGroups from '../../assets/skill-groups.json';
+import { Certification } from '../../models/Certification';
+import { CompetencyTag } from '../../models/CompetencyTag';
+import { Grade } from '../../models/Grade';
 import { Group } from '../../models/Group';
+import { Location } from '../../models/Location';
+import { Resource } from '../../models/Resource';
 import { Skill } from '../../models/Skill';
 import { IAddSkillsState, IState } from '../../reducers';
 import { ClosablePill } from './closable-pill.component';
-import FormFeedback from 'reactstrap/lib/FormFeedback';
-import { Resource } from '../../models/Resource';
-import Alert from 'reactstrap/lib/Alert';
-import { Grade } from '../../models/Grade';
-import { CompetencyTag } from '../../models/CompetencyTag';
-import { Location } from '../../models/Location';
-import * as Autocomplete from 'react-autocomplete';
-import { Certification } from '../../models/Certification';
-import Badge from 'reactstrap/lib/Badge';
 
 interface IProps extends RouteComponentProps<{}>, IAddSkillsState {
     fetchAssociate: (assocId: number) => void
@@ -33,6 +32,7 @@ interface IProps extends RouteComponentProps<{}>, IAddSkillsState {
     fetchCompetencyTaggingList: () => void
     fetchGradeList: () => void
     fetchLocationList: () => void
+    fetchSkillGroupList: () => void
     fetchCertificationList: (search: string) => void
     updateCertificationSearch: (search: string) => void
     addCertification: (cert: Certification) => void
@@ -56,6 +56,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
     }
 
     public componentDidMount() {
+        this.props.fetchSkillGroupList();
         this.props.fetchCompetencyTaggingList();
         this.props.fetchGradeList();
         this.props.fetchLocationList();
@@ -96,9 +97,10 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                 dateErrorMessage = 'Please select a project start date or press to be decided';
             }
         }
-        const orderedSkillGroups = SkillGroups.sort((sg1: Group, sg2: Group) => sg1.name < sg2.name ? -1 : 1);
+        const orderedSkillGroups = this.props.listOfSkillGroups;
         const selectedGroups = orderedSkillGroups.filter((group: Group) => skillGroupIds.indexOf(group.groupId) > -1);
         const skills = selectedGroups.reduce((acc: any, val: any) => {
+            console.log(val);
             const groupSkills = val.skills.map((skill: any) => new Skill({ ...skill, group: new Group(val) }))
             return acc.concat(groupSkills);
         }, []);
@@ -417,6 +419,7 @@ const mapDispatchToProps = {
     fetchGradeList: addSkillsActions.fetchGradeList,
     fetchLocationList: addSkillsActions.fetchLocationList,
     fetchProject: addSkillsActions.fetchProject,
+    fetchSkillGroupList: addSkillsActions.fetchSkillGroupList,
     fetchSupervisor: addSkillsActions.fetchSupervisor,
     removeCertification: addSkillsActions.removeCertification,
     removeResume: addSkillsActions.removeResume,
