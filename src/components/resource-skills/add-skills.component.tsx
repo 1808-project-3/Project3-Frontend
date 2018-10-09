@@ -416,7 +416,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                 </Col>
                             </Row>
                         </Container>
-                        <div className="fixed-bottom position-sticky bg-white pb-4">
+                        <div className="fixed-bottom position-sticky bg-white pb-3">
                             <hr />
                             <Container>
                                 <Row>
