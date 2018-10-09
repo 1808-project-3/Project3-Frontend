@@ -2,6 +2,7 @@ import { combineReducers } from "redux";
 import { Resource } from "../models/Resource";
 import { addSkillsReducer } from "./add-skills.reducer";
 import { signInReducer } from "./sign-in.reducer";
+import {infoReducer} from "./info.reducer";
 import { Grade } from "../models/Grade";
 import { Location } from "../models/Location";
 import { CompetencyTag } from "../models/CompetencyTag";
@@ -16,6 +17,30 @@ export interface ISignInState {
   },
   errorMessage: string
 }
+
+/**
+ * IInfoState:
+ *
+ * tableType -          The type of table that is displayed based on type of skill.
+ *                      Choices are "UI", "Mobility", "CM", "Design".
+ * viewRow -            The id of the table row that is selected.
+ * resourceList -       The list of resources that are to be displayed in the Resources table.
+ * projectList -        The list of projects that are to be displayed in the Projects table.
+ * errorMessage -       The error message that is caught and displayed to the user.
+ */
+
+export interface IInfoState {
+    tableType: string
+    viewRow: number
+    resourceCMList: any[]
+    resourceDesignList: any[]
+    resourceList: any[]
+    resourceMobilityList: any[]
+    resourceUIList: any[]
+    projectList: any[]
+    projectName: string
+    associateList: any[]
+    errorMessage: string
 
 export interface IAddSkillsState {
   associateIdInput: string,
@@ -40,13 +65,15 @@ export interface IResourceSkillsDisplayState {
 }
 
 export interface IState {
-  signIn: ISignInState,
   addSkills: IAddSkillsState,
-  resourceSkillsDisplayState: IResourceSkillsDisplayState
+  info: IInfoState,
+  resourceSkillsDisplayState: IResourceSkillsDisplayState,
+  signIn: ISignInState
 }
 
 export const state = combineReducers<IState>({
   addSkills: addSkillsReducer,
+  info: infoReducer,
   resourceSkillsDisplayState: resourceSkillsDisplayReducer,
   signIn: signInReducer
 })
