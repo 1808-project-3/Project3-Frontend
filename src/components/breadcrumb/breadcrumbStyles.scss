@@ -1,0 +1,39 @@
+.breadcrumbNav{
+    grid-area: breadcrumb;
+    background-color: #f4f5f7;
+    border-radius: 0;
+    line-height: 4em;
+    color: #606060;
+    // display: grid;
+    // grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}
+
+.crumb{
+    display: inline-block;
+    margin: 0 2em 0 2em;
+    text-align: center;
+    font-size: 12px;
+    // place-self: center;
+}
+
+.breadcrumbDevider{
+    width: 1em;
+    display: inline-block;
+    text-align: center;
+    // place-self: center;
+}
+
+.inactive{
+    cursor: pointer;
+}
+.inactive:hover{
+    font-weight: bold;
+}
+
+.actv{
+    font-weight: bold;
+}
+
+.bci{
+    max-width: 60%;
+}
