@@ -133,15 +133,16 @@ export default class SkillDoughnut extends React.Component<any, any> {
     }
     
     public async componentDidMount() {
+        const list: any[] = [];        
         const listObj = {
-            skill: [{
-                skillName: "",
-                totalSkill: 0
-            }],
+            skill: [],
             skillGroupName: "",
             totalSkillGroup: 0            
         }
-        let list: any[] = [];
+        const skillObj = {
+            skillName: "",
+            totalSkill: 0
+        }
         console.log("before calls");
         const res = await axios.get('http://localhost:8087/users', {headers: {"JWT": 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2Vycy9Uek1Vb2NNRjRwIiwiZXhwIjo2MjUxNjM3OTYwMCwidXNlcmlkIjoxMjM0NTYsInNjb3BlIjoic2VsZiBncm91cHMvdXNlcnMifQ.nD9kCwmbAIpFj__Qq_e2_XOkbBCe6zhXu713DoBOCjY' }});
         const res1 = await axios.get('http://localhost:5002/skills', {headers: {"JWT": 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2Vycy9Uek1Vb2NNRjRwIiwiZXhwIjo2MjUxNjM3OTYwMCwidXNlcmlkIjoxMjM0NTYsInNjb3BlIjoic2VsZiBncm91cHMvdXNlcnMifQ.nD9kCwmbAIpFj__Qq_e2_XOkbBCe6zhXu713DoBOCjY' }});
@@ -153,21 +154,22 @@ export default class SkillDoughnut extends React.Component<any, any> {
         // loop through groups
         res2.data.forEach((group:any, i:any) => {
             // grabbing group name
-            list = [...list, listObj];
+            list.push(listObj);
             list[i].skillGroupName = group.groupName;
-            console.log(list);
             // iterating through users
             res.data.forEach((user:any) => {
                 let hasGroup = false;
                 // filter skills in group
                 const skillsInGroup = res1.data.filter((id:any) => 
-                    id.groupId === group.groupId
-                )
+                    id.groupId === group.id
+                )                
                 // iterating through skills in group
                 skillsInGroup.forEach((skill:any , k: any) => {
                     // adding skill name
+                    list[i].skill.push(skillObj);
                     list[i].skill[k].skillName = skill.skillName;
                     // filtering skills
+                    console.log(user)
                     const count = user.userSkills.filter((skillId:any) => 
                         skillId.skillId === skill.skillId
                     )
@@ -180,12 +182,10 @@ export default class SkillDoughnut extends React.Component<any, any> {
                 if (hasGroup) {
                     // skillgroup count
                     list[i].totalSkillGroup++;
-                }
+                }                
             })
         }) 
-        console.log(list)
-        this.setState({skillGroups: list});
-        console.log(this.state.skillGroups);
+        this.setState({skillGroups: list});        
         this.setState({ skillGroupChart: {data: getSkillGroupState()}, skillChart: {data: getSkillState() }});
         
     }
