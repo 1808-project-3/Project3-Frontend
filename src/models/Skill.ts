@@ -6,6 +6,7 @@ export class Skill {
     public group: Group
 
     public constructor(init?: Partial<Skill>) {
+        this.group = new Group();
         Object.assign(this, init);
     }
 }

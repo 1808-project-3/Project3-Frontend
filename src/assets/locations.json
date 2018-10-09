@@ -1,0 +1,18 @@
+[
+    {
+        "locationId": 1,
+        "name": "Location1"
+    },
+    {
+        "locationId": 2,
+        "name": "Location2"
+    },
+    {
+        "locationId": 3,
+        "name": "Location3"
+    },
+    {
+        "locationId": 4,
+        "name": "Location22"
+    }
+]

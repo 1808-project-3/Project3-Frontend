@@ -1,6 +1,14 @@
 import { combineReducers } from "redux";
+import { Resource } from "../models/Resource";
+import { addSkillsReducer } from "./add-skills.reducer";
 import { signInReducer } from "./sign-in.reducer";
 import {infoReducer} from "./info.reducer";
+import { Grade } from "../models/Grade";
+import { Location } from "../models/Location";
+import { CompetencyTag } from "../models/CompetencyTag";
+import { Certification } from "../models/Certification";
+import { resourceSkillsDisplayReducer } from "./resource-skills-display.reducer";
+import { Group } from "../models/Group";
 
 export interface ISignInState {
   credentials: {
@@ -33,15 +41,39 @@ export interface IInfoState {
     projectName: string
     associateList: any[]
     errorMessage: string
+
+export interface IAddSkillsState {
+  associateIdInput: string,
+  certificationSearch: string,
+  dateTbd: boolean,
+  listOfCertifications: Certification[],
+  listOfCompetencyTaggings: CompetencyTag[],
+  listOfGrades: Grade[],
+  listOfLocations: Location[],
+  listOfSkillGroups: Group[],
+  newOrExistingProject: string,
+  projectIdInput: string,
+  resource: Resource,
+  skillGroupIds: number[],
+  submitted: boolean,
+  supervisorIdInput: string
+}
+
+export interface IResourceSkillsDisplayState {
+  isConfirm: boolean,
+  currentResource: Resource
 }
 
 export interface IState {
-  signIn: ISignInState,
+  addSkills: IAddSkillsState,
   info: IInfoState,
+  resourceSkillsDisplayState: IResourceSkillsDisplayState,
+  signIn: ISignInState
 }
 
 export const state = combineReducers<IState>({
-    info: infoReducer,
-    signIn: signInReducer,
-});
-
+  addSkills: addSkillsReducer,
+  info: infoReducer,
+  resourceSkillsDisplayState: resourceSkillsDisplayReducer,
+  signIn: signInReducer
+})

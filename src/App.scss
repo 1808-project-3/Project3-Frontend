@@ -114,13 +114,31 @@ nav {
   cursor: pointer;
 }
 
-/*****************************
-  Clicker
-*****************************/
-.blue {
-  color: blue;
+.border-col-right {
+  border-right: 1px solid #ccc;
 }
 
-.red {
-  color: red;
+.px-75{
+  padding-right: .75rem!important;
+  padding-left: .75rem!important
+}
+
+.mr-5-sm{
+  margin-right: calc(3em - 15px);
+}
+
+.clickable{
+  cursor: pointer;
+}
+
+
+#add-skills .same-size-col{
+  min-width: 336px;
+}
+
+@media (min-width: 1200px){
+  #add-skills .same-size-col{
+    min-width: 540px;
+    max-width: 540px;
+  }
 }
