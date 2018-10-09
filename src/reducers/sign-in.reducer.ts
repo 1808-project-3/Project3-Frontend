@@ -3,10 +3,12 @@ import { ISignInState } from ".";
 
 const initialState: ISignInState = {
   credentials : {
-    password: '',
-    username: ''
+    pass: '',
+    userId: ''
   },
-  errorMessage: ''
+  errorMessage: '',
+  modal: false,
+  resetModal: false
 }
 
 export const signInReducer = (state = initialState, action: any) => {
@@ -21,7 +23,7 @@ export const signInReducer = (state = initialState, action: any) => {
         ...state,
         credentials: {
           ...state.credentials,
-          password: action.payload.password
+          pass: action.payload.pass
         }
       }
     case signInTypes.UPDATE_USERNAME:
@@ -29,8 +31,34 @@ export const signInReducer = (state = initialState, action: any) => {
         ...state,
         credentials: {
           ...state.credentials,
-          username: action.payload.username
+          userId: action.payload.userId
         }
+      }
+
+      case signInTypes.LOGIN:
+      const errorMessage = action.payload.errorMessage
+      const newState = {
+        ...state,
+        errorMessage
+      }
+      if (!errorMessage) {
+        newState.credentials = {
+          ...newState.credentials,
+          pass: ''
+        }
+      }
+      return newState;
+
+      case signInTypes.CHANGE_MODAL:
+      return {
+        ...state,
+        modal: !state.modal
+      }
+
+      case signInTypes.CHANGE_RESET:
+      return {
+        ...state,
+        resetModal: !state.resetModal
       }
   }
 
