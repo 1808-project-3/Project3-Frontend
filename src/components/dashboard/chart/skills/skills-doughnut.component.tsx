@@ -151,6 +151,7 @@ export default class SkillDoughnut extends React.Component<any, any> {
         console.log(res);
         console.log(res1);
         console.log(res2);
+        console.log("test");
         // loop through groups
         res2.data.forEach((group:any, i:any) => {
             // grabbing group name
