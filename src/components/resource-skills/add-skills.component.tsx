@@ -280,15 +280,17 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                                 this.projectIdInput.focus();
                                             }
                                         }}>
-                                        <Container>
-                                            <FormGroup row>
-                                                <Label for="inputProjectId" lg={4} className="font-weight-bold">PROJECT ID</Label>
-                                                <Col lg={8} className="my-auto">
-                                                    <Input innerRef={input => this.projectIdInput = input} invalid={submitted && !resource.project.pId} value={this.props.projectIdInput ? this.props.projectIdInput : ''} onChange={e => this.props.updateResource(e.target)} type="text" name="projectId" id="inputProjectId" required />
-                                                    <FormFeedback>{newProject ? "Please enter a project ID" : "Could not find project with this ID"}</FormFeedback>
-                                                </Col>
-                                            </FormGroup>
-                                        </Container>
+                                        {existingProject &&
+                                            <Container>
+                                                <FormGroup row>
+                                                    <Label for="inputProjectId" lg={4} className="font-weight-bold">PROJECT ID</Label>
+                                                    <Col lg={8} className="my-auto">
+                                                        <Input readOnly={newProject} innerRef={input => this.projectIdInput = input} invalid={submitted && !resource.project.pId} value={this.props.projectIdInput ? this.props.projectIdInput : ''} onChange={e => this.props.updateResource(e.target)} type="text" name="projectId" id="inputProjectId" required />
+                                                        <FormFeedback>{newProject ? "Please enter a project ID" : "Could not find project with this ID"}</FormFeedback>
+                                                    </Col>
+                                                </FormGroup>
+                                            </Container>
+                                        }
                                     </Collapse>
                                     <Collapse isOpen={newProject || (existingProject && resource.project.pId > 0)}>
                                         <Container>
