@@ -71,7 +71,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
         if (this.props.associateIdInput !== prevProps.associateIdInput && this.props.associateIdInput.length === 6) {
             this.props.fetchAssociate(+this.props.associateIdInput);
         }
-        if (this.props.supervisorIdInput !== prevProps.supervisorIdInput) {
+        if (this.props.supervisorIdInput !== prevProps.supervisorIdInput && this.props.supervisorIdInput.length === 6) {
             this.props.fetchSupervisor(+this.props.supervisorIdInput);
         }
         if (this.props.projectIdInput !== prevProps.projectIdInput && this.props.newOrExistingProject === 'existing') {
@@ -370,7 +370,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                             <FormGroup row>
                                                 <Label for="inputSupervisorId" lg={4} className="font-weight-bold">HCM SUPERVISOR ID</Label>
                                                 <Col lg={8} className="my-auto">
-                                                    <Input readOnly={existingProject} tabIndex={existingProject ? -1 : 0} invalid={submitted && !supervisor.assocId} value={existingProject ? supervisor.assocId ? supervisor.assocId : '' : this.props.supervisorIdInput} onChange={e => this.props.updateResource(e.target)} type="text" name="supervisorId" id="inputSupervisorId" required />
+                                                    <Input maxLength={6} readOnly={existingProject} tabIndex={existingProject ? -1 : 0} invalid={submitted && !supervisor.assocId} value={existingProject ? supervisor.assocId ? supervisor.assocId : '' : this.props.supervisorIdInput} onChange={e => this.props.updateResource(e.target)} type="text" name="supervisorId" id="inputSupervisorId" required />
                                                     <FormFeedback>Could not find supervisor with this ID</FormFeedback>
                                                 </Col>
                                             </FormGroup>
