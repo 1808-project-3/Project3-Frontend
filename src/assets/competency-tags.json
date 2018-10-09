@@ -1,0 +1,22 @@
+[
+    {
+        "tagId": 1,
+        "name": "Business"
+    },
+    {
+        "tagId": 2,
+        "name": "Process"
+    },
+    {
+        "tagId": 3,
+        "name": "Operations and IT Consulting"
+    },
+    {
+        "tagId": 4,
+        "name": "Application Testing"
+    },
+    {
+        "tagId": 5,
+        "name": "Enterprise Information Management"
+    }
+]
