@@ -58,9 +58,10 @@ body, html {
   
 }
 
-#within-root{
-  height: 100%;
+.search-result-table {
+background-color: white;
 }
+
 
 #gray-banner{
   width: 100%;
@@ -72,7 +73,9 @@ body, html {
 }
 
 #error-message{
-  color: white;
+  margin: auto;
+  margin-top: 1em;
+  color:red;
 }
 
 
@@ -80,13 +83,11 @@ body, html {
   position: relative;
   top: 65%;
   border-top: 1px solid #8c8b8b;
-  //margin-top: 80px;
   margin-bottom: 0px;
   margin-left: 20px;
   margin-right: 20px;
 }
 #register-form-button{
- // background-color: #6c757d;
   width: 25%;
   margin: auto;
   margin-top: 1em;
@@ -96,7 +97,6 @@ body, html {
   position: relative;
   top: 65%;
   border-top: 1px solid #8c8b8b;
-  //margin-top: 80px;
   margin-bottom: 0px;
   margin-left: 20px;
   margin-right: 20px;
@@ -145,10 +145,11 @@ body, html {
 
 #name-banner{
   color: rgb(185, 185, 185);
-  margin-top: 50px;
+  margin-top: 1.5em;
 }
 
 #login-banner{
+  margin-top: .4em;
   color: rgb(216, 216, 216);
 
 }
@@ -166,6 +167,25 @@ body, html {
   color:#a1a4a7;
 }
 
+.forget-password-label {
+  font-size: 75%;
+  color:#6c6d6f;
+
+}
+
+.forget-password-header {
+  font-size: 60%;
+  color:#6c6d6f;
+}
+
+#rest-pass-button {
+ float: right;
+}
+
+.search-result-label {
+  color:#6c6d6f;
+}
+
 #inputUsername{
   margin-bottom: 10px
 }
@@ -175,12 +195,14 @@ body, html {
   margin-bottom: 10px
 }
 
-#new-user-link{
-  margin-left: 20px;
+#forgot-password{
+  color: #a1a4a7;
   
 }
 
-
+.clickable{
+  cursor: pointer;
+}
 
 .rev-btn {
   background-color: $revature-orange;

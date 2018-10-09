@@ -87,7 +87,6 @@ export class RegisterComponent extends React.Component<IProps, {}> {
                 <h1 className="h3 mb-4 font-weight-normal" id="login-banner-register">REGISTER</h1>
                 <Form id='register-form' onSubmit={this.submit}>
 
-
                     <Row>
                         <Col md={6}>
                             <FormGroup>

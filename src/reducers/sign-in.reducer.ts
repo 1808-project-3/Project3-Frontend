@@ -6,7 +6,9 @@ const initialState: ISignInState = {
     pass: '',
     userId: ''
   },
-  errorMessage: ''
+  errorMessage: '',
+  modal: false,
+  resetModal: false
 }
 
 export const signInReducer = (state = initialState, action: any) => {
@@ -41,11 +43,23 @@ export const signInReducer = (state = initialState, action: any) => {
       }
       if (!errorMessage) {
         newState.credentials = {
-          pass: '',
-          userId: ''
+          ...newState.credentials,
+          pass: ''
         }
       }
       return newState;
+
+      case signInTypes.CHANGE_MODAL:
+      return {
+        ...state,
+        modal: !state.modal
+      }
+
+      case signInTypes.CHANGE_RESET:
+      return {
+        ...state,
+        resetModal: !state.resetModal
+      }
   }
 
   return state;
