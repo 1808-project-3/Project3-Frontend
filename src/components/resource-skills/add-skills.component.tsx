@@ -111,9 +111,13 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
         return (
             <>
                 {submitted &&
-                    <Alert className="mx-4" color="danger">
-                        <span>There was a problem submitting the resource. You'll find more details highlighted below.</span>
-                    </Alert>
+                    <Container>
+                        <Row>
+                            <Alert className="mx-auto d-inline-block" color="danger">
+                                <span>There was a problem submitting the resource. You'll find more details highlighted below.</span>
+                            </Alert>
+                        </Row>
+                    </Container>
                 }
                 <div id="add-skills">
                     <Form innerRef={form => this.formElement = form}>
