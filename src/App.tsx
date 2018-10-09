@@ -9,6 +9,7 @@ import SearchResultComponent from './components/search-result/search-result.comp
 import SignInComponent from './components/sign-in/sign-in.component';
 import './include/bootstrap';
 import { store } from './Store';
+import TalentDashboard from './components/dashboard/talent-dashboard.component';
 
 class App extends React.Component {
 
@@ -38,7 +39,7 @@ class App extends React.Component {
       <Switch>
         <Route path="/home/resources/search-results" component={SearchResultComponent} />
         <Route path="/home/add-skills" component={ResourceSkillDisplayComponent} />
-        <Route path="/home" />
+        <Route path="/home" component={TalentDashboard}/>
       </Switch>
     </Layout>
   )

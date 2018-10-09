@@ -1,5 +1,4 @@
 import axios from 'axios';
-import MockCertifications from '../../assets/certifications.json';
 import MockCompetencyTags from '../../assets/competency-tags.json';
 import MockGrades from '../../assets/grades.json';
 import MockLocations from '../../assets/locations.json';
@@ -86,10 +85,13 @@ export const fetchSupervisor = (supId: number) => (dispatch: any) => {
     })
 }
 
-export const fetchCertificationList = (search: string) => (dispatch: any) => {
+export const fetchCertificationList = (search: string) => async (dispatch: any) => {
+    // axios call here ... ListOfCertifications=...
+
+    const res = await axios.get('http://ec2-54-70-66-176.us-west-2.compute.amazonaws.com:5002/certifications', { headers: { "JWT": 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2Vycy9Uek1Vb2NNRjRwIiwiZXhwIjo2MjUxNjM3OTYwMCwidXNlcmlkIjoxMjM0NTYsInNjb3BlIjoic2VsZiBncm91cHMvdXNlcnMifQ.nD9kCwmbAIpFj__Qq_e2_XOkbBCe6zhXu713DoBOCjY' } });
     dispatch({
         payload: {
-            listOfCertifications: MockCertifications.map((cert: any) => new Certification(cert))
+            listOfCertifications: res.data.map((cert: any) => new Certification({ certId: cert.id, name: cert.certificationName }))
         },
         type: addSkillsTypes.FETCH_CERTIFICATIONS
     })
