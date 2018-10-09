@@ -1,7 +1,7 @@
 import * as React from 'react';
 import './breadcrumbStyles.css';
 
-export class Breadcrumb extends React.Component<any>
+export class Breadcrumb extends React.PureComponent<any>
 {
     constructor(props:any)
     {

@@ -2,19 +2,17 @@ import * as React from 'react';
 import './sidebarStyles.css';
 import { Link } from 'react-router-dom';
 
-export class SidebarButton extends React.Component<any, any>
-{
-    constructor(props:any)
+export const SidebarButton = (props: any) =>{
+    const purl = process.env.PUBLIC_URL;
+    let style = "sidebarButton";
+    console.log(`active:  ${props.active}`);
+    console.log(props.active);
+    if(props.active.active)
     {
-        super(props);
+        style += " active";
     }
-
-    public render()
-    {
-        const purl = process.env.PUBLIC_URL;
-        return(
-            <Link to={this.props.link}><div className="sidebarButton"><img className="sbimg" src={purl+this.props.icon}/></div></Link>
-        )
-    }
+    return(
+        <Link to={props.link}><div onClick={() => props.clicked(props.name)} className={style}><img className="sbimg" src={purl + props.icon}/></div></Link>
+    )
 }
 

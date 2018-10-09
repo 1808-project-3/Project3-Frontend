@@ -1,6 +1,7 @@
 import { combineReducers } from "redux";
 import { signInReducer } from "./sign-in.reducer";
 import { registerReducer } from "./register";
+import { searchReducer } from './search.reducer';
 
 export interface ISignInState {
   credentials: {
@@ -21,12 +22,22 @@ export interface IRegisterState {
   errorMessage: string
 }
 
+export interface ISearchResultsState {
+  associateName: string,
+  id: number,
+  certifcation: string,
+  projectDetails: string,
+  grade: string
+}
+
 export interface IState {
   signIn: ISignInState,
-  register: IRegisterState
+  register: IRegisterState,
+  searchResults: ISearchResultsState
 }
 
 export const state = combineReducers<IState>({
   register: registerReducer,
+  searchResults: searchReducer,
   signIn: signInReducer
 })

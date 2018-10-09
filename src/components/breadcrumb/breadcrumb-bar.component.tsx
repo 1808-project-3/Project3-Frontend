@@ -3,7 +3,7 @@ import './breadcrumbStyles.css';
 // import {Breadcrumb, BreadcrumbItem} from 'reactstrap';
 import {Breadcrumb} from './breadcrumb.component';
 
-export class BreadcrumbBar extends React.Component<any>
+export class BreadcrumbBar extends React.PureComponent<any>
 {
     constructor(props:any)
     {

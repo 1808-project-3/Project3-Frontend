@@ -7,32 +7,15 @@ import {NavLink} from './nav-link.component';
 import {NavTitle} from './nav-title.component';
 import './navStyles.css';
 
-export class AppNav extends React.Component<any>
-{
-  constructor(props:any)
-  {
-    super(props);
-  }
-  public render()
-  {
-    return (
-      <div className="topNavbar">
-        <NavTitle>TALENT PORTAL</NavTitle>
-        <NavLabel>Search</NavLabel>
-        <SearchBar history={this.props.history}/>
-        <NavLink path="/home/advanced-search">Advanced Search</NavLink>
-        <NavProfileText/>
-        <NavProfileImage/>
-      </div >
-    );
-  }
-  
+export const AppNav = (props: any) =>{
+  return (
+    <div className="topNavbar">
+      <NavTitle>TALENT PORTAL</NavTitle>
+      <NavLabel>Search</NavLabel>
+      <SearchBar history={props.history}/>
+      <NavLink path="/home/advanced-search">Advanced Search</NavLink>
+      <NavProfileText/>
+      <NavProfileImage/>
+    </div >
+  );
 }
-
-// const mapStateToProps = (state: IState) => (state)
-// export default connect(mapStateToProps)(AppNav);
-
-{/* <Navbar expand={false}>
-          <NavbarBrand>TALENT PORTAL</NavbarBrand>
-          <NavProfile/>
-        </Navbar> */}
