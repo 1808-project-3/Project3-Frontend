@@ -27,7 +27,9 @@ import { ClosablePill } from './closable-pill.component';
 
 interface IProps extends RouteComponentProps<{}>, IAddSkillsState {
     fetchAssociate: (assocId: number) => void
+    clearAssociate: () => void
     fetchSupervisor: (supId: number) => void
+    clearSupervisor: () => void
     fetchProject: (projectId: number) => void
     fetchCompetencyTaggingList: () => void
     fetchGradeList: () => void
@@ -68,11 +70,19 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
     }
 
     public componentDidUpdate(prevProps: IProps) {
-        if (this.props.associateIdInput !== prevProps.associateIdInput && this.props.associateIdInput.length === 6) {
-            this.props.fetchAssociate(+this.props.associateIdInput);
+        if (this.props.associateIdInput !== prevProps.associateIdInput) {
+            if (this.props.associateIdInput.length === 6) {
+                this.props.fetchAssociate(+this.props.associateIdInput);
+            } else if (this.props.resource.user.firstName) {
+                this.props.clearAssociate();
+            }
         }
-        if (this.props.supervisorIdInput !== prevProps.supervisorIdInput && this.props.supervisorIdInput.length === 6) {
-            this.props.fetchSupervisor(+this.props.supervisorIdInput);
+        if (this.props.supervisorIdInput !== prevProps.supervisorIdInput) {
+            if (this.props.supervisorIdInput.length === 6) {
+                this.props.fetchSupervisor(+this.props.supervisorIdInput);
+            } else if (this.props.resource.project.supervisor.firstName) {
+                this.props.clearSupervisor();
+            }
         }
         if (this.props.projectIdInput !== prevProps.projectIdInput && this.props.newOrExistingProject === 'existing') {
             this.props.fetchProject(+this.props.projectIdInput);
@@ -448,6 +458,8 @@ const mapDispatchToProps = {
     addCertification: addSkillsActions.addCertification,
     addResumes: addSkillsActions.addResumes,
     cancelResource: addSkillsActions.cancelResource,
+    clearAssociate: addSkillsActions.clearAssociate,
+    clearSupervisor: addSkillsActions.clearSupervisor,
     fetchAssociate: addSkillsActions.fetchAssociate,
     fetchCertificationList: addSkillsActions.fetchCertificationList,
     fetchCompetencyTaggingList: addSkillsActions.fetchCompetencyTaggingList,

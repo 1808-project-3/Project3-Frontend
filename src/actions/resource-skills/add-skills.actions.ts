@@ -72,6 +72,20 @@ export const fetchAssociate = (assocId: number) => (dispatch: any) => {
     })
 }
 
+export const clearAssociate = () => {
+    return{
+        payload: {},
+        type: addSkillsTypes.CLEAR_ASSOCIATE
+    }
+}
+
+export const clearSupervisor = () => {
+    return{
+        payload: {},
+        type: addSkillsTypes.CLEAR_SUPERVISOR
+    }
+}
+
 export const fetchSupervisor = (supId: number) => (dispatch: any) => {
     let supervisor = new User();
     if (supId) {
