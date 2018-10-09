@@ -104,7 +104,6 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
         const orderedSkillGroups = this.props.listOfSkillGroups;
         const selectedGroups = orderedSkillGroups.filter((group: Group) => skillGroupIds.indexOf(group.groupId) > -1);
         const skills = selectedGroups.reduce((acc: any, val: any) => {
-            console.log(val);
             const groupSkills = val.skills.map((skill: any) => new Skill({ ...skill, group: new Group(val) }))
             return acc.concat(groupSkills);
         }, []);
@@ -426,7 +425,6 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                         this.props.submitResource(resource);
                                         if (this.formElement) {
                                             if (this.formElement.checkValidity()) {
-                                                console.log("hello");
                                                 this.props.updateParentResource(this.props.resource);
                                                 this.props.toggleConfirm();
                                             }
