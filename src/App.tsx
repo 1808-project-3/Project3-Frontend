@@ -8,10 +8,10 @@ import { Provider } from 'react-redux';
 import { store } from './Store';
 import RegisterComponent from './components/register/register.component';
 import SearchResultComponent from './components/search-result/search-result.component';
-import projectListTableComponent from "./components/project-list/project-list-table/project-list-table.component";
-import AddSkillsComponent from './components/resource-skills/add-skills.component';
+// import projectListTableComponent from "./components/project-list/project-list-table/project-list-table.component";
+// import AddSkillsComponent from './components/resource-skills/add-skills.component';
 import { ResourceSkillsDetail } from './components/resource-skills/resource-skills-detail.component'
-import ResourceSkillDisplayComponent from './components/resource-skills/resource-skills-display'
+// import ResourceSkillDisplayComponent from './components/resource-skills/resource-skills-display'
 
 class App extends React.Component {
 
@@ -40,6 +40,7 @@ class App extends React.Component {
     <Layout location={props.location} history={props.history}>
       <Switch>
         <Route path="/home/resouces/search-results" component={SearchResultComponent} />
+        <Route path="/rs" component={ResourceSkillsDetail}/>
         <Route path="/home" />
       </Switch>
     </Layout>

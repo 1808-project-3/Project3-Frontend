@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { IoMdAddCircleOutline } from 'react-icons/io';
-import { TiDownload } from 'react-icons/ti';
+// import { IoMdAddCircleOutline } from 'react-icons/io';
+// import { TiDownload } from 'react-icons/ti';
 import { CardBody, Container } from 'reactstrap';
 import Button from 'reactstrap/lib/Button';
 import Card from 'reactstrap/lib/Card';
