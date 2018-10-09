@@ -1,0 +1,22 @@
+[
+    {
+        "gradeId": 1,
+        "name": "D"
+    },
+    {
+        "gradeId": 2,
+        "name": "SD"
+    },
+    {
+        "gradeId": 3,
+        "name": "A"
+    },
+    {
+        "gradeId": 4,
+        "name": "SA"
+    },
+    {
+        "gradeId": 5,
+        "name": "M"
+    }
+]
