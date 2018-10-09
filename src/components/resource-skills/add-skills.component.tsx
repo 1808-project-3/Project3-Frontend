@@ -33,7 +33,7 @@ interface IProps extends RouteComponentProps<{}>, IAddSkillsState {
     fetchGradeList: () => void
     fetchLocationList: () => void
     fetchSkillGroupList: () => void
-    fetchCertificationList: (search: string) => void
+    fetchCertificationList: () => void
     updateCertificationSearch: (search: string) => void
     addCertification: (cert: Certification) => void
     removeCertification: (certId: number) => void
@@ -64,12 +64,10 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
         this.props.fetchCompetencyTaggingList();
         this.props.fetchGradeList();
         this.props.fetchLocationList();
+        this.props.fetchCertificationList();
     }
 
     public componentDidUpdate(prevProps: IProps) {
-        if (this.props.certificationSearch && this.props.certificationSearch !== prevProps.certificationSearch) {
-            this.props.fetchCertificationList(this.props.certificationSearch);
-        }
         if (this.props.associateIdInput !== prevProps.associateIdInput) {
             this.props.fetchAssociate(+this.props.associateIdInput);
         }
@@ -187,7 +185,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                             <Col lg={8} className="my-auto">
                                                 <Autocomplete
                                                     getItemValue={cert => '' + cert.certId}
-                                                    items={this.props.listOfCertifications.filter(cert => resource.certifications.every(addedCert => addedCert.certId !== cert.certId))}
+                                                    items={this.props.listOfCertifications.filter(cert => cert.name.toLowerCase().includes(this.props.certificationSearch.toLowerCase()) && resource.certifications.every(addedCert => addedCert.certId !== cert.certId))}
                                                     renderItem={(cert, isHighlighted) =>
                                                         <div className="px-4" key={cert.certId} style={{ background: isHighlighted ? 'lightgray' : 'white' }}>
                                                             {cert.name}
