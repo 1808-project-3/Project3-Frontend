@@ -214,7 +214,7 @@ export const removeResume = (resumeId: number) => {
 }
 
 export const cancelResource = () => {
-    history.push('/dashboard')
+    history.push('/home')
     return {
         payload: {},
         type: addSkillsTypes.CANCEL_RESOURCE
