@@ -6,6 +6,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import SignInComponent from './components/sign-in/sign-in.component';
 import { Provider } from 'react-redux';
 import { store } from './Store';
+import TalentDashboard from './components/dashboard/talent-dashboard.component';
 import RegisterComponent from './components/register/register.component';
 import SearchResultComponent from './components/search-result/search-result.component';
 import projectListTableComponent from "./components/project-list/project-list-table/project-list-table.component";
