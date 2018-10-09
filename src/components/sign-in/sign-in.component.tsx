@@ -89,7 +89,7 @@ class SignInComponent extends React.Component<IProps, {}> {
     const res1 = await axios.post("http://localhost:8087/users/changePass", userInfo );
     
     if(res1.data){
-    console.log('successfull change password call');
+    console.log('successfull forgot password call');
     this.props.changeModal();
     this.props.changeReset();
     }
@@ -101,7 +101,7 @@ class SignInComponent extends React.Component<IProps, {}> {
   public ResetPassword = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log(this.forgotPassFields);
-
+    
 
     const payload = {
       currentPassword: this.resetPassFields.tempPass,
