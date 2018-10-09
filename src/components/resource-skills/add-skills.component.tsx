@@ -68,7 +68,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
     }
 
     public componentDidUpdate(prevProps: IProps) {
-        if (this.props.associateIdInput !== prevProps.associateIdInput) {
+        if (this.props.associateIdInput !== prevProps.associateIdInput && this.props.associateIdInput.length === 6) {
             this.props.fetchAssociate(+this.props.associateIdInput);
         }
         if (this.props.supervisorIdInput !== prevProps.supervisorIdInput) {
@@ -125,7 +125,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                         <FormGroup row>
                                             <Label for="inputAssociateId" className="font-weight-bold" lg={4}>ASSOCIATE ID</Label>
                                             <Col lg={8} className="my-auto">
-                                                <Input invalid={submitted && !resource.user.assocId} value={this.props.associateIdInput ? this.props.associateIdInput : ''} onChange={e => this.props.updateResource(e.target)} type="text" name="associateId" id="inputAssociateId" required autoFocus />
+                                                <Input maxLength={6} invalid={submitted && !resource.user.assocId} value={this.props.associateIdInput ? this.props.associateIdInput : ''} onChange={e => this.props.updateResource(e.target)} type="text" name="associateId" id="inputAssociateId" required autoFocus />
                                                 <FormFeedback>Could not find user with this Associate ID</FormFeedback>
                                             </Col>
                                         </FormGroup>
