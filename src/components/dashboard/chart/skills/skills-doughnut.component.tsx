@@ -133,21 +133,29 @@ export default class SkillDoughnut extends React.Component<any, any> {
     }
     
     public async componentDidMount() {
-        const list = [{
+        const listObj = {
             skill: [{
                 skillName: "",
                 totalSkill: 0
             }],
             skillGroupName: "",
             totalSkillGroup: 0            
-        }]
-        const res = await axios.get('http://localhost:8080/users', {headers: {"JWT": 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2Vycy9Uek1Vb2NNRjRwIiwiZXhwIjo2MjUxNjM3OTYwMCwidXNlcmlkIjoxMjM0NTYsInNjb3BlIjoic2VsZiBncm91cHMvdXNlcnMifQ.nD9kCwmbAIpFj__Qq_e2_XOkbBCe6zhXu713DoBOCjY' }});
+        }
+        let list: any[] = [];
+        console.log("before calls");
+        const res = await axios.get('http://localhost:8087/users', {headers: {"JWT": 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2Vycy9Uek1Vb2NNRjRwIiwiZXhwIjo2MjUxNjM3OTYwMCwidXNlcmlkIjoxMjM0NTYsInNjb3BlIjoic2VsZiBncm91cHMvdXNlcnMifQ.nD9kCwmbAIpFj__Qq_e2_XOkbBCe6zhXu713DoBOCjY' }});
         const res1 = await axios.get('http://localhost:5002/skills', {headers: {"JWT": 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2Vycy9Uek1Vb2NNRjRwIiwiZXhwIjo2MjUxNjM3OTYwMCwidXNlcmlkIjoxMjM0NTYsInNjb3BlIjoic2VsZiBncm91cHMvdXNlcnMifQ.nD9kCwmbAIpFj__Qq_e2_XOkbBCe6zhXu713DoBOCjY' }});
         const res2 = await axios.get('http://localhost:5002/skill-group', {headers: {"JWT": 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2Vycy9Uek1Vb2NNRjRwIiwiZXhwIjo2MjUxNjM3OTYwMCwidXNlcmlkIjoxMjM0NTYsInNjb3BlIjoic2VsZiBncm91cHMvdXNlcnMifQ.nD9kCwmbAIpFj__Qq_e2_XOkbBCe6zhXu713DoBOCjY' }});
+        console.log("after calls")
+        console.log(res);
+        console.log(res1);
+        console.log(res2);
         // loop through groups
         res2.data.forEach((group:any, i:any) => {
             // grabbing group name
+            list = [...list, listObj];
             list[i].skillGroupName = group.groupName;
+            console.log(list);
             // iterating through users
             res.data.forEach((user:any) => {
                 let hasGroup = false;
@@ -177,7 +185,7 @@ export default class SkillDoughnut extends React.Component<any, any> {
         }) 
         console.log(list)
         this.setState({skillGroups: list});
-        // console.log(this.state.skillGroups);
+        console.log(this.state.skillGroups);
         this.setState({ skillGroupChart: {data: getSkillGroupState()}, skillChart: {data: getSkillState() }});
         
     }
