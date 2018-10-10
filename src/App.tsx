@@ -1,15 +1,15 @@
 import * as React from 'react';
-import './include/bootstrap';
+import { Provider } from 'react-redux';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
 import { Layout } from './components/layout/layout.component';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import SignInComponent from './components/sign-in/sign-in.component';
-import { Provider } from 'react-redux';
-import { store } from './Store';
-// import TalentDashboard from './components/dashboard/talent-dashboard.component';
 import RegisterComponent from './components/register/register.component';
+import ResourceSkillDisplayComponent from './components/resource-skills/resource-skills-display';
 import SearchResultComponent from './components/search-result/search-result.component';
-import {HomeComponent} from "./components/home/home.component";
+import SignInComponent from './components/sign-in/sign-in.component';
+import './include/bootstrap';
+import { store } from './Store';
+import TalentDashboard from './components/dashboard/talent-dashboard.component';
 // import projectListTableComponent from "./components/project-list/project-list-table/project-list-table.component";
 // import AddSkillsComponent from './components/resource-skills/add-skills.component';
 // import { ResourceSkillsDetail } from './components/resource-skills/resource-skills-detail.component'
@@ -29,7 +29,6 @@ class App extends React.Component {
               <Route component={SignInComponent} />
             </Switch>
           </div>
-
         </BrowserRouter>
       </Provider>
     );
@@ -41,8 +40,9 @@ class App extends React.Component {
   public wrappedRoutes = (props: any) => (
     <Layout location={props.location} history={props.history}>
       <Switch>
-        <Route path="/home/resouces/search-results" component={SearchResultComponent} />
-        <Route path="/home" component={HomeComponent}/>
+        <Route path="/home/resources/search-results" component={SearchResultComponent} />
+        <Route path="/home/add-skills" component={ResourceSkillDisplayComponent} />
+        <Route path="/home" component={TalentDashboard}/>
       </Switch>
     </Layout>
   )

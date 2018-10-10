@@ -78,6 +78,9 @@ fabric.properties
 misc.xml
 vcs.xml
 
+# mac
+/.vscode
+
 
 # misc
 .DS_Store
