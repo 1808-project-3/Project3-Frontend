@@ -3,12 +3,13 @@ import { RouteComponentProps } from 'react-router';
 import { ISignInState, IState, IJwtState } from '../../reducers';
 import * as signInActions from '../../actions/sign-in/sign-in.actions';
 import { connect } from 'react-redux';
-import { Button, Row, Col, Form, Modal, FormGroup, Label, Input, ModalHeader, ModalBody } from 'reactstrap';
+import { Alert, Button, Row, Col, Form, Modal, FormGroup, Label, Input, ModalHeader, ModalBody } from 'reactstrap';
 import axios from 'axios';
 
 interface IProps extends RouteComponentProps<{}> {
   changeModal: () => any,
   changeReset: () => any,
+  updateForgotError: (message: string) => any,
   updateError: (message: string) => any,
   updatePassword: (pass: string) => any,
   updateUsername: (userId: string) => any,
@@ -55,6 +56,7 @@ class SignInComponent extends React.Component<IProps, {}> {
     console.log(resp);
 
     resp.then(res => {
+      console.log(res.status);
       switch (res.status) {
         case 200:
           if (res.data) {
@@ -73,7 +75,7 @@ class SignInComponent extends React.Component<IProps, {}> {
       }
     })
       .catch(err => {
-        this.props.updateError('Failed to login at this time');
+        this.props.updateError("Invalid Username or Password");
         console.log(err);
       });
   }
@@ -87,20 +89,43 @@ class SignInComponent extends React.Component<IProps, {}> {
       email: this.forgotPassFields.email,
       userId: this.forgotPassFields.userID
     };
-
-    const res1 = await axios.post("http://ec2-18-191-67-157.us-east-2.compute.amazonaws.com:8087/users/changePass", userInfo);
-
-    if (res1) {
-      console.log('successfull forgot password call');
+    try {
+      const res1 = await axios.post('http://ec2-18-191-67-157.us-east-2.compute.amazonaws.com:8087/users/changePass', userInfo);
       console.log(res1);
-      this.resetPassFields.tempPass = res1.data;
-      this.props.changeModal();
-      this.props.changeReset();
+      if (res1) {
+        console.log('successfull forgot password call');
+        console.log(res1);
+        this.resetPassFields.tempPass = res1.data;
+        this.props.updateForgotError("");
+        this.props.changeModal();
+        this.props.changeReset();
+      }
+      else {
+        this.props.updateForgotError("Could not find a user with that email / userID");
+        console.log('unsuccessfull change password call');
+      }
     }
-    else {
+    catch (error) {
+      console.log(error);
+      this.props.updateForgotError("Could not find a user with that email / userID");
       console.log('unsuccessfull change password call');
     }
   }
+  // catch {}
+  //   const res1 = await axios.post('http://ec2-18-191-67-157.us-east-2.compute.amazonaws.com:8087/users/changePass', userInfo);
+  //   console.log(res1);
+  //   if(res1) {
+  //     console.log('successfull forgot password call');
+  //     console.log(res1);
+  //     this.resetPassFields.tempPass = res1.data;
+  //     this.props.changeModal();
+  //     this.props.changeReset();
+  //   }
+  //     else {
+  //   this.props.updateForgotError("Could not find a user with that email / userID");
+  //   console.log('unsuccessfull change password call');
+  // }
+  //   }
 
   public ResetPassword = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -119,32 +144,38 @@ class SignInComponent extends React.Component<IProps, {}> {
             const res2 = await axios.put("http://ec2-18-191-67-157.us-east-2.compute.amazonaws.com:8087/users/resetPassword", payload);
 
             if (res2.data) {
+              this.props.updateForgotError("");
               console.log('successfull reset password');
               console.log(res2.data);
               this.props.changeReset();
             }
             else {
+              this.props.updateForgotError("Server Error");
               console.log('unsuccessfull reset password api call');
             }
           }
           else {
+            this.props.updateForgotError("New password did not match");
             console.log('New password did not match');
             console.log(this.resetPassFields.newPass);
             console.log(this.resetPassFields.confirmPass);
           }
         }
         else {
+          this.props.updateForgotError("new password contains userID");
           console.log('new password contains userID');
           console.log(this.resetPassFields.newPass);
         }
       }
       else {
+        this.props.updateForgotError("Invalid password, must be greater than 8 length and contain 1 character, digit and special character");
         console.log('invalid regex password');
         console.log(this.resetPassFields.newPass);
         // this.props.updateError('Invalid password, must be greater than 8 length and contain 1 character, digit and special character');
       }
     }
     else {
+      this.props.updateForgotError("temp pass did not match");
       console.log('temp pass did not match');
       console.log(this.resetPassFields.tempPass);
       console.log(this.resetPassFields.tempPassConfirm);
@@ -153,7 +184,7 @@ class SignInComponent extends React.Component<IProps, {}> {
 
 
   public render() {
-    const { errorMessage, credentials, modal, resetModal } = this.props.signIn;
+    const { errorMessage, errorForgotMessage, credentials, modal, resetModal } = this.props.signIn;
 
     return (
 
@@ -198,6 +229,12 @@ class SignInComponent extends React.Component<IProps, {}> {
                 </FormGroup>
                 <Button id="rest-pass-button" color="secondary" type="submit"><small>RESET PASSWORD</small></Button>
               </Form>
+              <Row>
+                <Col md={1}></Col>
+                <Col>
+                {errorForgotMessage && <Alert id="register-alert" className="p-1" color="danger"><small>{errorForgotMessage}</small></Alert>}
+                </Col>
+              </Row>
             </ModalBody>
           </Modal>
         </div>}
@@ -259,6 +296,12 @@ class SignInComponent extends React.Component<IProps, {}> {
 
                 <Button id="rest-pass-button" color="secondary" type="submit"><small>RESET PASSWORD</small></Button>
               </Form>
+              <Row>
+                <Col md={1}></Col>
+                <Col>
+                {errorForgotMessage && <Alert id="register-alert" className="p-1" color="danger"><small>{errorForgotMessage}</small></Alert>}
+                </Col>
+              </Row>
             </ModalBody>
           </Modal>
         </div>}
@@ -298,9 +341,9 @@ class SignInComponent extends React.Component<IProps, {}> {
 
             <button className="btn btn-secondary btn-block" id="sign-in-button" type="submit">LOGIN</button>
             <button onClick={() => { this.props.history.push('register') }} className="btn btn-outline-secondary btn-block" id="register-button" type="button">REGISTER</button>
-            {errorMessage && <p className="text-center" id="error-message">{errorMessage}</p>}
 
           </form>
+          {errorMessage && <p className="text-center" id="error-message">{errorMessage}</p>}
         </div>
         <div id="gray-banner">
           <hr id="line"></hr>
@@ -327,6 +370,7 @@ const mapDispatchToProps = {
   changeReset: signInActions.changeReset,
   login: signInActions.login,
   updateError: signInActions.updateError,
+  updateForgotError: signInActions.updateForgotError,
   updatePassword: signInActions.updatePassword,
   updateUsername: signInActions.updateUsername,
 }
