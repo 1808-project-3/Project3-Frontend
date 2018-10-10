@@ -29,7 +29,6 @@ class App extends React.Component {
               <Route component={SignInComponent} />
             </Switch>
           </div>
-
         </BrowserRouter>
       </Provider>
     );
