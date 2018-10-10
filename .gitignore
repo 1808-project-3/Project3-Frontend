@@ -78,6 +78,9 @@ fabric.properties
 misc.xml
 vcs.xml
 
+# mac
+/.vscode
+
 
 # misc
 .DS_Store
@@ -89,3 +92,4 @@ vcs.xml
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+debug.log

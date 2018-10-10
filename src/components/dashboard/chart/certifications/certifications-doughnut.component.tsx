@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Col, Table, Row, Card } from 'reactstrap';
 import { Doughnut } from 'react-chartjs-2';
-// import { MdCreate } from 'react-icons/md/';
+import { MdCreate } from 'react-icons/md/';
 import axios from 'axios';
 
 
@@ -122,9 +122,8 @@ export default class CertificationsDoughnutComponent extends React.Component<any
 
 
     public async componentDidMount() {
-        // setInterval(() => {
-        //     this.setState({ data: getState() });
-        // }, 4000);
+        console.log('got here');
+        
         // const res = await axios.get('http://localhost:5002/certifications');
         // const res2 = await axios.get('http://localhost:8888/projects');
         const res = await axios.get('http://ec2-54-70-66-176.us-west-2.compute.amazonaws.com:5002/certifications', { headers: { "JWT": 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2Vycy9Uek1Vb2NNRjRwIiwiZXhwIjoxNTM5MTkzMzAwLCJ1c2VyaWQiOjEyMzQ1Niwic2NvcGUiOiJzZWxmIGdyb3Vwcy91c2VycyJ9.qVDbspNmTvomDEyBwpw7ZRLvjRSc1trBcSoyL9nz7I8' } });
@@ -132,10 +131,8 @@ export default class CertificationsDoughnutComponent extends React.Component<any
         // const res = await axios.get('http://ec2-18-222-202-19.us-east-2.compute.amazonaws.com:5002/certifications',{ headers:{ "JWT": 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2Vycy9Uek1Vb2NNRjRwIiwiZXhwIjoxNTM5MDkzNTM2LCJ1c2VyaWQiOjEyMzQ1Niwic2NvcGUiOiJzZWxmIGdyb3Vwcy91c2VycyJ9.kwAWHSfLYD6esizHno-ba4J3SHa33-nXX_YPnnA4168' } }); 
         const res1 = await axios.get('http://ec2-18-191-67-157.us-east-2.compute.amazonaws.com:8087/users', { headers: { "JWT": 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2Vycy9Uek1Vb2NNRjRwIiwiZXhwIjoxNTM5MTkzMzAwLCJ1c2VyaWQiOjEyMzQ1Niwic2NvcGUiOiJzZWxmIGdyb3Vwcy91c2VycyJ9.qVDbspNmTvomDEyBwpw7ZRLvjRSc1trBcSoyL9nz7I8' } });
         const res2 = await axios.get('http://ec2-18-221-142-75.us-east-2.compute.amazonaws.com:8088/project', { headers: { "JWT": 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2Vycy9Uek1Vb2NNRjRwIiwiZXhwIjoxNTM5MTkzMzAwLCJ1c2VyaWQiOjEyMzQ1Niwic2NvcGUiOiJzZWxmIGdyb3Vwcy91c2VycyJ9.qVDbspNmTvomDEyBwpw7ZRLvjRSc1trBcSoyL9nz7I8' } });
+        console.log('after axios calls');
 
-
-        console.log(res.data);
-        console.log(res1.data);
 
         let countOne = 0;
         let countTwo = 0;
@@ -170,13 +167,13 @@ export default class CertificationsDoughnutComponent extends React.Component<any
         });// end of foreach res1
 
         let certNumber:any = [];
-        certNumber = [...certNumber, countOne, countTwo, countThree, countFour, countFive, countSix];
+        certNumber = [countOne, countTwo, countThree, countFour, countFive, countSix];
         console.log(certNumber);
         this.setState({
                 ...this.state.data.datasets,
                 cert: certNumber
         })
-        
+        console.log('here is certification component')
         console.log(this.state.data.datasets.cert);
 
 
@@ -268,7 +265,7 @@ export default class CertificationsDoughnutComponent extends React.Component<any
                         </thead>
 
                         <tbody>
-                            {/* <tr>
+                            <tr>
                                 <td>James</td>
                                 <td>1234</td>
                                 <td>Certification Details</td>
@@ -276,7 +273,7 @@ export default class CertificationsDoughnutComponent extends React.Component<any
                                 <td>M</td>
                                 <td>View/Edit</td>
                                 <td onClick={this.handleEdit} style={{ cursor: 'pointer' }}><MdCreate /></td>
-                            </tr> */}
+                            </tr>
 
                             {
                                 // this.state.certification.map((cer: any) => (
