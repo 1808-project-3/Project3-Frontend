@@ -45,7 +45,6 @@ export class ProjectListTableComponent extends React.Component<IProps, any> {
   public render() {
     const listEntries: any[] = [];
     for (const l of this.props.projectList) {
-      console.log(l.name);
       if(+this.props.viewRow === +l.projectId && this.state.open){
           listEntries.push(
               <tr data-id={l.projectId} key={l.projectId} data-project={l.name} onClick={this.chooseRow}>

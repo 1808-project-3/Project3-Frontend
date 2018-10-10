@@ -2,7 +2,7 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { IState } from "../../../reducers";
 import { getProjectList } from "../../../actions/info/info.actions";
-import ReactExport from "react-data-export";
+// import ReactExport from "react-data-export";
 
 interface IProps {
   associateList: any[];
@@ -41,9 +41,9 @@ class ProjectListExport extends React.Component<IProps, any> {
   }
 
   public render() {
-    const ExcelFile = ReactExport.ExcelFile;
-    const ExcelSheet = ReactExport.ExcelFile.ExcelSheet;
-    const ExcelColumn = ReactExport.ExcelFile.ExcelColumn;
+    // const ExcelFile = ReactExport.ExcelFile;
+    // const ExcelSheet = ReactExport.ExcelFile.ExcelSheet;
+    // const ExcelColumn = ReactExport.ExcelFile.ExcelColumn;
     return (
       <div>
         <ExcelFile element={<button className="btn btn-secondary btn-sm">EXPORT TO XLS</button>}>

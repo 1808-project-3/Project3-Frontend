@@ -2,7 +2,6 @@ import { infoTypes } from "./info.types";
 // import {mock} from "../../mock/mock";
 import {api} from "../../API/api";
 import axios from "axios";
-import {mock} from "../../mock/mock";
 // import {Resource} from "../../models/Resource";
 
 /**
@@ -81,7 +80,7 @@ export const getProjectList = () => (dispatch: any) => {
 }
 
 export const getAssociateList = () => (dispatch: any) => {
-    axios.get(mock.projectAssociates)
+    axios.get(api.users, {headers: {"JWT": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2Vycy9Uek1Vb2NNRjRwIiwiZXhwIjo2MjUxNjM3OTYwMCwidXNlcmlkIjoxMjM0NTYsInNjb3BlIjoic2VsZiBncm91cHMvdXNlcnMifQ.nD9kCwmbAIpFj__Qq_e2_XOkbBCe6zhXu713DoBOCjY"}})
         .then(response => {
             const associateEntries: any[] = [];
             for (const r of response.data) {
