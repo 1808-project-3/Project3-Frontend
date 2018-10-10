@@ -128,5 +128,5 @@ const formatDate = (date: Date) => {
     const dd = day < 10 ? `0${day}` : day;
     const mm = month < 10 ? `0${month}` : month
     const validDate = dd && mm && yyyy;
-    return <>{validDate ? `${dd}/${mm}/${yyyy}` : ''}</>;
+    return `${validDate ? `${mm}/${dd}/${yyyy}` : ''}`;
 }
