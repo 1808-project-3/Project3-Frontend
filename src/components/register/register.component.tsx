@@ -1,84 +1,97 @@
 import * as React from 'react';
-import { IRegisterState, IState } from '../../reducers';
+import { IRegisterState, IState, IJwtState } from '../../reducers';
 import { connect } from 'react-redux';
 import { updateFields, updateError, clearFields } from '../../actions/register/register.actions';
 import { Alert, Row, Col, Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { RouteComponentProps } from 'react-router';
-import axios from 'axios';
+import { apiClient } from 'src/axios/api-client';
 
 
-interface IProps extends RouteComponentProps<{}>, IRegisterState {
+interface IProps extends RouteComponentProps<{}> {
+    /** updateFields updates all the form fields in the state */   
     updateFields: (event: any) => any
+    /** updateError updates the errormessage in the state */
     updateError: (message: string) => any
+    /** clearFeilds clears all the state fields for the register component */
     clearFields: () => any
+    /** jwt is the state access for the IJwtState in the connection */
+    jwt: IJwtState
+    /** register is the state access for the IRegisterState in the connection */
+    register: IRegisterState
 }
-
+/**
+ *   This component takes in values from the user to register a new associate 
+ *   A lead must be the one registering the associate 
+ */
 export class RegisterComponent extends React.Component<IProps, {}> {
 
     public showError = false;
 
-    public submit = async(e: React.FormEvent<HTMLFormElement>) => {
+    public submit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         console.log('in submit');
 
         const regex = /(?=^.{8,}$)(?=.*[0-9]+.*)(?=.*[!@#$%^*()+{};:.,'?/&_-]+.*)(?=.*[a-zA-Z]+.*)(?!.*\s).*$/;
-        if (this.props.userID.toString().length !== 6) {
+        if (this.props.register.userID.toString().length !== 6) {
             console.log('invalid userID length');
-            console.log(this.props.userID);
+            console.log(this.props.register.userID);
             this.props.updateError(`Invalid userID length
            Length must be 6 `);
             this.showError = true;
         }
-        
-        else if (regex.test(String(this.props.password))) {
-            if (!this.props.password.includes(this.props.userID.toString())) {
-                if (this.props.password === this.props.confirmPassword) {
+
+        else if (regex.test(String(this.props.register.password))) {
+            if (!this.props.register.password.includes(this.props.register.userID.toString())) {
+                if (this.props.register.password === this.props.register.confirmPassword) {
                     console.log('valid password');
-                    console.log(this.props.password);
+                    console.log(this.props.register.password);
                     this.showError = false;
                     this.props.updateError('');
 
 
                     const payload = {
 
-                        email: this.props.email,
-                        firstName: this.props.firstName,
-                        lastName: this.props.lastName,                       
-                        pass: this.props.password,
-                        role: this.props.roleProfile,
-                        userId: this.props.userID
+                        email: this.props.register.email,
+                        firstName: this.props.register.firstName,
+                        lastName: this.props.register.lastName,
+                        pass: this.props.register.password,
+                        role: this.props.register.roleProfile,
+                        userId: this.props.register.userID
 
                     };
-                    const res = await axios.post('http://localhost:8080/users', payload)
-                    console.log(res.data);
-                    this.props.clearFields();
-                    this.props.history.push('dashboard');
+                    // const res = await axios.post(environment.context + 'users', payload, {headers: {"JWT": this.props.jwt.jwt }})
+                    const res = await apiClient.post('users', payload)
+                    if (res.data) {
+                        console.log(res.data);
+                        console.log('successful register');
+                        this.props.clearFields();
+                        this.props.history.push('home');
+                    }
 
                 }
                 else {
                     console.log('passwords do not match');
-                    console.log(this.props.password);
-                    console.log(this.props.confirmPassword);
+                    console.log(this.props.register.password);
+                    console.log(this.props.register.confirmPassword);
                     this.props.updateError(`Passwords didn't match`);
                     this.showError = true;
                 }
             }
             else {
-                console.log('invalid password');
-                console.log(this.props.password);
-                this.props.updateError('Invalid password');
+                console.log('invalid password, has userID');
+                console.log(this.props.register.password);
+                this.props.updateError('Invalid password, Cannot Contain UserID');
                 this.showError = true;
             }
         }
         else {
             console.log('invalid regex password');
-            console.log(this.props.password);
-            this.props.updateError('Invalid password');
+            console.log(this.props.register.password);
+            this.props.updateError('Invalid password, must be greater than 8 length and contain 1 character, digit and special character');
             this.showError = true;
         }
 
     }
-
 
     public render() {
         return (
@@ -96,7 +109,7 @@ export class RegisterComponent extends React.Component<IProps, {}> {
                                     </Col>
                                     <Col md={7}>
                                         <Input required onChange={(e) => { this.props.updateFields(e.target) }}
-                                            type="text" name="firstName" placeholder="Name" value={this.props.firstName} />
+                                            type="text" name="firstName" placeholder="Name" value={this.props.register.firstName} />
 
                                     </Col>
                                 </Row>
@@ -108,7 +121,7 @@ export class RegisterComponent extends React.Component<IProps, {}> {
                                     </Col>
                                     <Col md={7}>
                                         <Input required onChange={(e) => { this.props.updateFields(e.target) }}
-                                            type="text" name="lastName" placeholder="Last Name" value={this.props.lastName} />
+                                            type="text" name="lastName" placeholder="Last Name" value={this.props.register.lastName} />
 
                                     </Col>
                                 </Row>
@@ -120,7 +133,7 @@ export class RegisterComponent extends React.Component<IProps, {}> {
                                     </Col>
                                     <Col md={7}>
                                         <Input required onChange={(e) => { this.props.updateFields(e.target) }}
-                                            type="email" name="email" placeholder="username@portal.com" value={this.props.email} />
+                                            type="email" name="email" placeholder="username@portal.com" value={this.props.register.email} />
 
                                     </Col>
                                 </Row>
@@ -131,7 +144,7 @@ export class RegisterComponent extends React.Component<IProps, {}> {
                                         <Label className="register-label"><small className='font-weight-bold'>ROLE PROFILE</small></Label>
                                     </Col>
                                     <Col md={7}>
-                                        <Input required onChange={(e) => { this.props.updateFields(e.target) }} type="select" name="roleProfile" value={this.props.roleProfile}>
+                                        <Input required onChange={(e) => { this.props.updateFields(e.target) }} type="select" name="roleProfile" value={this.props.register.roleProfile}>
                                             <option className="text-secondary" value='' hidden>Select Role</option>
                                             <option value={1}>Competency Lead</option>
                                             <option value={2}>Talent Enablement Lead</option>
@@ -150,7 +163,7 @@ export class RegisterComponent extends React.Component<IProps, {}> {
                                     </Col>
                                     <Col md={7}>
                                         <Input required onChange={(e) => { this.props.updateFields(e.target) }}
-                                            type="number" name="userID" placeholder="User ID" value={this.props.userID} />
+                                            type="number" name="userID" placeholder="User ID" value={this.props.register.userID} />
 
                                     </Col>
                                 </Row>
@@ -162,7 +175,7 @@ export class RegisterComponent extends React.Component<IProps, {}> {
                                     </Col>
                                     <Col md={7}>
                                         <Input required onChange={(e) => { this.props.updateFields(e.target) }}
-                                            type="password" name="password" placeholder="Enter Password" value={this.props.password} />
+                                            type="password" name="password" placeholder="Enter Password" value={this.props.register.password} />
 
                                     </Col>
                                 </Row>
@@ -174,7 +187,7 @@ export class RegisterComponent extends React.Component<IProps, {}> {
                                     </Col>
                                     <Col md={7}>
                                         <Input required onChange={(e) => { this.props.updateFields(e.target) }}
-                                            type="password" name="confirmPassword" placeholder="Confirm" value={this.props.confirmPassword} />
+                                            type="password" name="confirmPassword" placeholder="Confirm" value={this.props.register.confirmPassword} />
 
                                     </Col>
                                 </Row>
@@ -182,7 +195,7 @@ export class RegisterComponent extends React.Component<IProps, {}> {
                                     <Col md={4}>
                                     </Col>
                                     <Col md={5}>
-                                        {this.showError && <Alert className="p-1" color="danger"><small>{this.props.errorMessage}</small></Alert>}
+                                        {this.showError && <Alert id="register-alert" className="p-1" color="danger"><small>{this.props.register.errorMessage}</small></Alert>}
                                     </Col>
                                 </Row>
                             </FormGroup>
@@ -194,14 +207,20 @@ export class RegisterComponent extends React.Component<IProps, {}> {
                 </Form>
                 <div id="gray-banner-register">
                     <hr id="line-register"></hr>
-                    <p id="copyright-tag">© COGNIZENT</p>
+                    <p id="copyright-tag">© COGNIZANT</p>
                 </div>
             </div>
         );
     }
 }
 
-const mapStateToProps = (state: IState) => (state.register);
+// const mapStateToProps = (state: IState) => (state.register);
+const mapStateToProps = (state: IState) => {
+    return {
+        jwt: state.jwt,
+        register: state.register
+    }
+}
 const mapDispatchToProps = {
     clearFields,
     updateError,

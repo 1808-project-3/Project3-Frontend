@@ -1,7 +1,9 @@
 import * as React from 'react';
 import { IState } from '../../reducers';
 import { connect } from 'react-redux';
-import { Table, Label } from 'reactstrap';
+import { Table, Label, Row, Col } from 'reactstrap';
+import RecentlyAddedProjectsComponent from '../dashboard/project-cards/recently-added-projects';
+import ResourceRequirementComponent from '../dashboard/project-cards/resource-requirement';
 
 
 export class SearchResultComponent extends React.Component<any, {}> {
@@ -37,29 +39,38 @@ export class SearchResultComponent extends React.Component<any, {}> {
     public render() {
         return (
             <div>
+                <Row> 
+                <Col>
                 <Label className="search-result-label"><small className='font-weight-bold'>SEARCH RESULTS</small></Label>
-            <Table className='search-result-table'>
-                <thead>
-                    <tr>
-                        <th><Label className="search-result-label"><small className='font-weight-bold'>ASSOCIATE NAME</small></Label></th>
-                        <th><Label className="search-result-label"><small className='font-weight-bold'>ID</small></Label></th>
-                        <th><Label className="search-result-label"><small className='font-weight-bold'>CERTIFICATION</small></Label></th>
-                        <th><Label className="search-result-label"><small className='font-weight-bold'>PROJECT DETAILS</small></Label></th>
-                        <th><Label className="search-result-label"><small className='font-weight-bold'>GRADE</small></Label></th>
-                    </tr>
-                </thead>
-                <tbody>
-                {this.mockResults.map((associate: any) =>
-                      <tr key={associate.ID}>
-                        <td className="search-result-label"><small>{associate.AssociateName}</small></td>
-                        <td className="search-result-label"><small>{associate.ID}</small></td>
-                        <td className="search-result-label"><small>{associate.Certification}</small></td>
-                        <td className="search-result-label"><small>{associate.ProjectName}</small></td>
-                        <td className="search-result-label"><small>{associate.Grade}</small></td>
-                      </tr>
-                    )}
-                </tbody>
-            </Table>
+                <Table className='search-result-table'>
+                    <thead>
+                        <tr>
+                            <th><Label className="search-result-label"><small className='font-weight-bold'>ASSOCIATE NAME</small></Label></th>
+                            <th><Label className="search-result-label"><small className='font-weight-bold'>ID</small></Label></th>
+                            <th><Label className="search-result-label"><small className='font-weight-bold'>CERTIFICATION</small></Label></th>
+                            <th><Label className="search-result-label"><small className='font-weight-bold'>PROJECT DETAILS</small></Label></th>
+                            <th><Label className="search-result-label"><small className='font-weight-bold'>GRADE</small></Label></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {this.mockResults.map((associate: any) =>
+                            <tr key={associate.ID}>
+                                <td className="search-result-label"><small>{associate.AssociateName}</small></td>
+                                <td className="search-result-label"><small>{associate.ID}</small></td>
+                                <td className="search-result-label"><small>{associate.Certification}</small></td>
+                                <td className="search-result-label"><small>{associate.ProjectName}</small></td>
+                                <td className="search-result-label"><small>{associate.Grade}</small></td>
+                            </tr>
+                        )}
+                    </tbody>
+                </Table>
+                </Col>
+                <Col md={3}>
+                <RecentlyAddedProjectsComponent />
+                <br/>
+                <ResourceRequirementComponent />
+                </Col>
+                </Row>
             </div>
         );
     }
