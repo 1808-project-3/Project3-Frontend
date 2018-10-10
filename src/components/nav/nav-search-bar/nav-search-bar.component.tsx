@@ -32,6 +32,8 @@ export class SearchBar extends React.Component<any, any>
             users: userObjects.data
         });
 
+        console.log(this.state.users);
+
         const certifications = await axios.get("http://ec2-54-70-66-176.us-west-2.compute.amazonaws.com:5002/certifications", 
         {headers: {"JWT": 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2Vycy9Uek1Vb2NNRjRwIiwiZXhwIjo2MjUxNjM3OTYwMCwidXNlcmlkIjoxMjM0NTYsInNjb3BlIjoic2VsZiBncm91cHMvdXNlcnMifQ.nD9kCwmbAIpFj__Qq_e2_XOkbBCe6zhXu713DoBOCjY' }})
         this.setState({
@@ -127,17 +129,17 @@ export class SearchBar extends React.Component<any, any>
                 resources.forEach((res:any) => {
                     const grade = res.grades.grade;
                     const certifications:any = [];
-                    res.certs.forEach((certs:any) => {
-                        const certId = certs.certId;
+                    res.certs.forEach((cert:any) => {
+                        const certId = cert.certId;
                         const allCerts = this.state.certifications;
-                        for(let k = 0; k < allCerts; k++)
-                        {
-                            const allId = allCerts[k].id;
+                        allCerts.forEach((allCert:any) => {
+                            const allId = allCert.id;
                             if(certId === allId)
                             {
-                                certifications.push(allCerts[k].certificationName);
+                                alert("cert found");
+                                certifications.push(allCert.certificationName);
                             }
-                        }
+                        });
                     });
                     
                     const projectId = res.projectId;
@@ -162,6 +164,7 @@ export class SearchBar extends React.Component<any, any>
                     results.push(result);
                 });
                 store.dispatch(searchActions.setSearchResults(results));
+                console.log(store.getState());
                 this.props.history.push("/home/resources/search-results");
             }
             else
