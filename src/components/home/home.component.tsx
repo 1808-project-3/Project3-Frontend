@@ -1,5 +1,5 @@
 import * as React from 'react';
-import TabComponent from "../resource-list/tab.component";
+import ProjectListTableComponent from "../project-list/project-list-table/project-list-table.component";
 
 export class HomeComponent extends React.Component {
 
@@ -7,7 +7,7 @@ export class HomeComponent extends React.Component {
     return (
       <div>
           <span className="text-secondary font-weight-bold mb-3">RESOURCE LIST</span>
-          <TabComponent />
+          <ProjectListTableComponent />
       </div>
     );
   }
