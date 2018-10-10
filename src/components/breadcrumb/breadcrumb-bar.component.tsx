@@ -19,8 +19,6 @@ export class BreadcrumbBar extends React.PureComponent<any>
             brokenPath = brokenPath.slice(1);
         }
         const locations = this.formatPath(this.props.location.pathname);
-        console.log(`locations: ${locations}`);
-        console.log(`brokenPath: ${brokenPath}`);
         let crumbs:any = [];
 
         for(let i = 0; i < locations.length; i++)
@@ -35,7 +33,6 @@ export class BreadcrumbBar extends React.PureComponent<any>
                 for(let c = 0; c <= i; c++)
                 {
                     currentPath += "/"+brokenPath[c];
-                    console.log(currentPath);
                 }
                 crumbs.push(<Breadcrumb history={this.props.history} path={currentPath}>{locations[i]}</Breadcrumb>)
             }
