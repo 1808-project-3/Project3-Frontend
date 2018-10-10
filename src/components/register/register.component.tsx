@@ -4,7 +4,9 @@ import { connect } from 'react-redux';
 import { updateFields, updateError, clearFields } from '../../actions/register/register.actions';
 import { Alert, Row, Col, Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { RouteComponentProps } from 'react-router';
-import axios from 'axios';
+// import axios from 'axios';
+// import { environment } from 'src/environment';
+import { apiClient } from 'src/axios/api-client';
 
 
 interface IProps extends RouteComponentProps<{}> {
@@ -19,7 +21,7 @@ export class RegisterComponent extends React.Component<IProps, {}> {
 
     public showError = false;
 
-    public submit = async(e: React.FormEvent<HTMLFormElement>) => {
+    public submit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         console.log('in submit');
 
@@ -31,7 +33,7 @@ export class RegisterComponent extends React.Component<IProps, {}> {
            Length must be 6 `);
             this.showError = true;
         }
-        
+
         else if (regex.test(String(this.props.register.password))) {
             if (!this.props.register.password.includes(this.props.register.userID.toString())) {
                 if (this.props.register.password === this.props.register.confirmPassword) {
@@ -45,16 +47,20 @@ export class RegisterComponent extends React.Component<IProps, {}> {
 
                         email: this.props.register.email,
                         firstName: this.props.register.firstName,
-                        lastName: this.props.register.lastName,                       
+                        lastName: this.props.register.lastName,
                         pass: this.props.register.password,
                         role: this.props.register.roleProfile,
                         userId: this.props.register.userID
 
                     };
-                    const res = await axios.post('http://ec2-18-191-67-157.us-east-2.compute.amazonaws.com:8087/users', payload, {headers: {"JWT": this.props.jwt.jwt }})
-                    console.log(res.data);
-                    this.props.clearFields();
-                    this.props.history.push('home');
+                    // const res = await axios.post(environment.context + 'users', payload, {headers: {"JWT": this.props.jwt.jwt }})
+                    const res = await apiClient.post('users', payload)
+                    if (res.data) {
+                        console.log(res.data);
+                        console.log('successful register');
+                        this.props.clearFields();
+                        this.props.history.push('home');
+                    }
 
                 }
                 else {
@@ -209,7 +215,7 @@ const mapStateToProps = (state: IState) => {
         jwt: state.jwt,
         register: state.register
     }
-  }
+}
 const mapDispatchToProps = {
     clearFields,
     updateError,

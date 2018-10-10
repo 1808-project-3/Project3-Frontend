@@ -60,6 +60,7 @@ class SignInComponent extends React.Component<IProps, {}> {
           if (res.data) {
             this.props.updateError("");
             this.props.login(res.data.jwt);
+            localStorage.setItem('jwt', res.data.jwt);
             this.props.history.push('home');
           }
           break;
