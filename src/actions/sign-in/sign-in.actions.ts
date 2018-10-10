@@ -1,18 +1,25 @@
 import { signInTypes } from "./sign-in.types";
 
-export const updatePassword = (password: string) => {
+export const updatePassword = (pass: string) => {
   return {
     payload: {
-      password
+      pass
     },
     type: signInTypes.UPDATE_PASSWORD
   }
 }
 
-export const updateUsername = (username: string) => {
+export const changeModal = () => {
+  return {
+    payload: {},
+    type: signInTypes.CHANGE_MODAL
+  }
+}
+
+export const updateUsername = (userId: string) => {
   return {
     payload: {
-      username
+      userId
     },
     type: signInTypes.UPDATE_USERNAME
   }
@@ -24,6 +31,42 @@ export const updateError = (errorMessage: string) => {
       errorMessage
     },
     type: signInTypes.UPDATE_ERROR
+  }
+}
+
+export const changeReset = () => {
+  return {
+    payload: {},
+    type: signInTypes.CHANGE_RESET
+  }
+}
+
+// export const loginSuccess = (data: any) => {
+//   return{ 
+//     payload: {
+//       currentUser: data.credentials,
+//       errorMessage: ''
+//     },
+//     type: signInTypes.LOGIN
+//   }
+// }
+
+// export const loginInvalid = (data: any) => {
+//   return {
+//     payload: {
+//       currentUser: null,
+//       errorMessage: "Invalid Username or Password"
+//     },
+//     type: signInTypes.LOGIN
+//   }
+// }
+
+export const login = (jwt: string) => {
+  return {
+    payload: {
+      jwt
+    },
+    type: signInTypes.LOGIN
   }
 }
 
