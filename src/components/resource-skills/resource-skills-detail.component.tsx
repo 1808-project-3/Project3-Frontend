@@ -14,6 +14,7 @@ import { Resume } from '../../models/Resume';
 
 interface IProps {
     resource: Resource
+    toggleConfirm: () => void
 }
 
 export const ResourceSkillsDetail: React.StatelessComponent<IProps> = (props) => {
@@ -110,7 +111,7 @@ export const ResourceSkillsDetail: React.StatelessComponent<IProps> = (props) =>
             <Row>
                 <Col>
                     <div className="d-flex justify-content-end">
-                        <Button color="secondary" className="ml-auto px-5" disabled><small>EDIT</small></Button>
+                        <Button color="secondary" className="ml-auto px-5" onClick={() => props.toggleConfirm()}><small>EDIT</small></Button>
                         <Button color="secondary" className="ml-4 px-4"><IoMdAddCircleOutline /><small className="ml-2">CONFIRM</small></Button>
                     </div>
                 </Col>
@@ -128,5 +129,5 @@ const formatDate = (date: Date) => {
     const dd = day < 10 ? `0${day}` : day;
     const mm = month < 10 ? `0${month}` : month
     const validDate = dd && mm && yyyy;
-    return <>{validDate ? `${dd}/${mm}/${yyyy}` : ''}</>;
+    return `${validDate ? `${mm}/${dd}/${yyyy}` : ''}`;
 }
