@@ -24,14 +24,13 @@ export interface ISignInState {
 }
 
 export interface IInfoState {
-  tableType: string
+  tableType: number
   viewRow: number
-  resourceCMList: any[]
-  resourceDesignList: any[]
   resourceList: any[]
-  resourceMobilityList: any[]
-  resourceUIList: any[]
   projectList: any[]
+  certificationList: any[]
+  skillGroupList: any[]
+  skillsList: any[]
   projectName: string
   associateList: any[]
   errorMessage: string

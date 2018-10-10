@@ -6,8 +6,8 @@ export class HomeComponent extends React.Component {
   public render() {
     return (
       <div>
-				<span className="text-secondary font-weight-bold mb-3">PROJECT LIST</span>
-        <TabComponent />
+          <span className="text-secondary font-weight-bold mb-3">PROJECT LIST</span>
+          <TabComponent />
       </div>
     );
   }

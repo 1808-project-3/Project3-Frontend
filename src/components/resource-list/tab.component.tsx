@@ -5,12 +5,12 @@ import classnames from 'classnames';
 import { connect } from "react-redux";
 import { IState } from "../../reducers";
 import TablesComponent from "./tables/tables.component";
-import ResourceListExport from "./tables/resourceListExport";
+// import ResourceListExport from "./tables/resourceListExport";
 
 interface IProps {
     tableType: string;
-    getResourceList: (text: string) => any;
-    updateTableType: (text: string) => any;
+    getResourceList: () => any;
+    updateTableType: (tab: number) => any;
 }
 
 /**
@@ -32,22 +32,27 @@ export class TabComponent extends React.Component<IProps, any> {
             });
         }
         if (tab === "1") {
-            this.props.updateTableType("UI");
+            this.props.updateTableType(4);
         }
         else if (tab === "2") {
-            this.props.updateTableType("Mobility");
+            this.props.updateTableType(1);
         }
         else if (tab === "3") {
-            this.props.updateTableType("CM");
+            this.props.updateTableType(3);
         }
         else if (tab === "4") {
-            this.props.updateTableType("Design");
+            this.props.updateTableType(2);
         }
+    }
+
+    public componentDidMount() {
+        this.props.updateTableType(4);
+        this.props.getResourceList();
     }
 
     public componentDidUpdate() {
         console.log("The table type selected is: " + this.props.tableType);
-        this.props.getResourceList(this.props.tableType);
+        this.props.getResourceList();
     }
 
 
@@ -92,7 +97,7 @@ export class TabComponent extends React.Component<IProps, any> {
                         </Nav>
                     </div>
                     <div className="col-md-2">
-                        <span className="pl-0"><ResourceListExport /></span>
+                        {/*<span className="pl-0"><ResourceListExport /></span>*/}
                     </div>
                 </Row>
 

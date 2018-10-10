@@ -1,6 +1,9 @@
 import { infoTypes } from "./info.types";
-import {mock} from "../../mock/mock";
+// import {mock} from "../../mock/mock";
+import {api} from "../../API/api";
 import axios from "axios";
+import {mock} from "../../mock/mock";
+// import {Resource} from "../../models/Resource";
 
 /**
  * This action uses axios make a GET request for all resources based on tableType
@@ -8,23 +11,8 @@ import axios from "axios";
  * Determines which API endpoint is used for the GET request
  */
 
-export const getResourceList = (tableType: string) => (dispatch: any) => {
-    let path = '';
-    console.log("getResourceList params: " + tableType);
-    if (tableType === "UI") {
-        path = mock.ui;
-    }
-    else if (tableType === "Mobility") {
-        path = mock.mobility;
-    }
-    else if (tableType === "CM") {
-        path = mock.cm;
-    }
-    else if (tableType === "Design") {
-        path = mock.design;
-    }
-
-    axios.get(path)
+export const getResourceList = () => (dispatch: any) => {
+    axios.get(api.resources, {headers: {"JWT": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2Vycy9Uek1Vb2NNRjRwIiwiZXhwIjo2MjUxNjM3OTYwMCwidXNlcmlkIjoxMjM0NTYsInNjb3BlIjoic2VsZiBncm91cHMvdXNlcnMifQ.nD9kCwmbAIpFj__Qq_e2_XOkbBCe6zhXu713DoBOCjY"}})
         .then(response => {
             const resourceEntries: any[] = [];
             for (const r of response.data) {
@@ -59,44 +47,6 @@ export const getProjectName = (data: any) => {
 }
 
 
-// get individual resource list for each tab
-
-export const getResourceUIList = (data: any) => {
-    return {
-        payload: {
-            data
-        },
-        type: infoTypes.GET_RESOURCE_UI_LIST
-    }
-}
-
-export const getResourceMobilityList = (data: any) => {
-    return {
-        payload: {
-            data
-        },
-        type: infoTypes.GET_RESOURCE_MOBILITY_LIST
-    }
-}
-
-
-export const getResourceCMList = (data: any) => {
-    return {
-        payload: {
-            data
-        },
-        type: infoTypes.GET_RESOURCE_CM_LIST
-    }
-}
-
-export const getResourceDesignList = (data: any) => {
-    return {
-        payload: {
-            data
-        },
-        type: infoTypes.GET_RESOURCE_DESIGN_LIST
-    }
-}
 
 
 /**
@@ -105,7 +55,7 @@ export const getResourceDesignList = (data: any) => {
  */
 
 export const getProjectList = () => (dispatch: any) => {
-    axios.get(mock.projects)
+    axios.get(api.projects, {headers: {"JWT": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2Vycy9Uek1Vb2NNRjRwIiwiZXhwIjo2MjUxNjM3OTYwMCwidXNlcmlkIjoxMjM0NTYsInNjb3BlIjoic2VsZiBncm91cHMvdXNlcnMifQ.nD9kCwmbAIpFj__Qq_e2_XOkbBCe6zhXu713DoBOCjY"}})
         .then(response => {
             const projectEntries: any[] = [];
             for (const r of response.data) {
@@ -163,10 +113,10 @@ export const getAssociateList = () => (dispatch: any) => {
  * This signifies the passed in tableType.
  */
 
-export const updateTableType = (text: string) => {
+export const updateTableType = (tab: number) => {
     return {
         payload: {
-            tableType: text
+            tableType: tab
         },
         type: infoTypes.UPDATE_TABLE_TYPE
     }

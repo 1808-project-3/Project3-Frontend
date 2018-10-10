@@ -1,13 +1,13 @@
 import * as React from "react";
-import { Table } from 'reactstrap';
 import { connect } from "react-redux";
-import { getResourceList, updateTableType, getResourceUIList, getResourceMobilityList, getResourceCMList, getResourceDesignList} from "../../../actions/info/info.actions";
+import { getResourceList, updateTableType} from "../../../actions/info/info.actions";
 import { IState } from "../../../reducers";
+import {Table} from "reactstrap";
 
 interface IProps {
     resourceList: any[];
-    tableType: string;
-    getResourceList: (text: string) => any;
+    tableType: number;
+    getResourceList: () => any;
     updateTableType: (text: string) => any;
 }
 
@@ -18,25 +18,98 @@ interface IProps {
 class TablesComponent extends React.Component<IProps, any> {
     constructor(props: any) {
         super(props);
+        this.insertTableInfo = this.insertTableInfo.bind(this);
+    }
+
+    public insertTableInfo(row: any){
+        return <tr key={row.resourceId}>
+            <td>{row.associateId}</td>
+            <td>{row.associateId}</td>
+            <td>{row.aupCert}</td>
+            <td>{row.projectId}</td>
+            <td>{row.grades.grade}</td>
+        </tr>
     }
 
     public componentDidMount() {
-        this.props.getResourceList("UI");
+        this.props.getResourceList();
     }
 
     public render() {
         const resourceEntries: any[] = [];
         if (this.props.resourceList[0] !== null) {
             for (const r of this.props.resourceList) {
+                if(r.skills.length > 0){
+                    for(const s of r.skills){
+                        switch (this.props.tableType) {
+                            case 1:
+                                if(s.skillId === 1 || s.skillId === 5){
+                                    resourceEntries.push(
+                                        <tr key={r.resourceId}>
+                                            <td>{r.associateId}</td>
+                                            <td>{r.associateId}</td>
+                                            <td>{r.aupCert}</td>
+                                            <td>{r.projectId}</td>
+                                            <td>{r.grades.grade}</td>
+                                        </tr>
+                                    )
+                                }
+                                break;
+                            case 2:
+                                if(s.skillId === 2 || s.skillId === 3 || s.skillId === 4){
+                                    resourceEntries.push(
+                                        <tr key={r.resourceId}>
+                                            <td>{r.associateId}</td>
+                                            <td>{r.associateId}</td>
+                                            <td>{r.aupCert}</td>
+                                            <td>{r.projectId}</td>
+                                            <td>{r.grades.grade}</td>
+                                        </tr>
+                                    )
+                                }
+                                break;
+                            case 3:
+                                if(s.skillId === 3){
+                                    resourceEntries.push(
+                                        <tr key={r.resourceId}>
+                                            <td>{r.associateId}</td>
+                                            <td>{r.associateId}</td>
+                                            <td>{r.aupCert}</td>
+                                            <td>{r.projectId}</td>
+                                            <td>{r.grades.grade}</td>
+                                        </tr>
+                                    )
+                                }
+                                break;
+                            case 4:
+                                if(s.skillId === 7 || s.skillId === 8 || s.skillId === 9 || s.skillId === 10){
+                                    resourceEntries.push(
+                                        <tr key={r.resourceId}>
+                                            <td>{r.associateId}</td>
+                                            <td>{r.associateId}</td>
+                                            <td>{r.aupCert}</td>
+                                            <td>{r.projectId}</td>
+                                            <td>{r.grades.grade}</td>
+                                        </tr>
+                                    )
+                                }
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                }
+                else {
                 resourceEntries.push(
-                    <tr key={r.user_id}>
-                        <td>{r.first_name} {r.last_name}</td>
-                        <td>{r.user_id}</td>
-                        <td>{r.certifications.name}</td>
-                        <td>{r.project_name}</td>
-                        <td>{r.grade}</td>
+                    <tr key={r.resourceId}>
+                        <td>NOTHING</td>
+                        <td>NOTHING</td>
+                        <td>NOTHING</td>
+                        <td>NOTHING</td>
+                        <td>NOTHING</td>
                     </tr>
                 )
+                }
             }
         }
         return (
@@ -59,21 +132,13 @@ class TablesComponent extends React.Component<IProps, any> {
 }
 const mapStateToProps = (state: IState) => {
     return {
-        resourceCMList: state.info.resourceCMList,
-        resourceDesignList: state.info.resourceDesignList,
         resourceList: state.info.resourceList,
-        resourceMobilityList: state.info.resourceMobilityList,
-        resourceUIList: state.info.resourceUIList,
         tableType: state.info.tableType,
     };
 };
 
 const mapDispatchToProps = {
-    getResourceCMList,
-    getResourceDesignList,
     getResourceList,
-    getResourceMobilityList,
-    getResourceUIList,
     updateTableType,
 };
 

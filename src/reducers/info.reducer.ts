@@ -3,15 +3,14 @@ import {infoTypes} from "../actions/info/info.types";
 
 const initialState: IInfoState = {
     associateList: [],
+    certificationList: [],
     errorMessage: "",
     projectList: [],
     projectName: "",
-    resourceCMList: [],
-    resourceDesignList: [],
     resourceList: [],
-    resourceMobilityList: [],
-    resourceUIList: [],
-    tableType: "",
+    skillGroupList: [],
+    skillsList: [],
+    tableType: 0,
     viewRow: 0,
 };
 
