@@ -1,5 +1,4 @@
 import axios from 'axios';
-import MockCertifications from '../../assets/certifications.json';
 import MockCompetencyTags from '../../assets/competency-tags.json';
 import MockGrades from '../../assets/grades.json';
 import MockLocations from '../../assets/locations.json';
@@ -73,6 +72,20 @@ export const fetchAssociate = (assocId: number) => (dispatch: any) => {
     })
 }
 
+export const clearAssociate = () => {
+    return{
+        payload: {},
+        type: addSkillsTypes.CLEAR_ASSOCIATE
+    }
+}
+
+export const clearSupervisor = () => {
+    return{
+        payload: {},
+        type: addSkillsTypes.CLEAR_SUPERVISOR
+    }
+}
+
 export const fetchSupervisor = (supId: number) => (dispatch: any) => {
     let supervisor = new User();
     if (supId) {
@@ -86,10 +99,11 @@ export const fetchSupervisor = (supId: number) => (dispatch: any) => {
     })
 }
 
-export const fetchCertificationList = (search: string) => (dispatch: any) => {
+export const fetchCertificationList = () => async (dispatch: any) => {
+    const res = await axios.get('http://ec2-54-70-66-176.us-west-2.compute.amazonaws.com:5002/certifications', { headers: { "JWT": 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2Vycy9Uek1Vb2NNRjRwIiwiZXhwIjo2MjUxNjM3OTYwMCwidXNlcmlkIjoxMjM0NTYsInNjb3BlIjoic2VsZiBncm91cHMvdXNlcnMifQ.nD9kCwmbAIpFj__Qq_e2_XOkbBCe6zhXu713DoBOCjY' } });
     dispatch({
         payload: {
-            listOfCertifications: MockCertifications.map((cert: any) => new Certification(cert))
+            listOfCertifications: res.data.map((cert: any) => new Certification({ certId: cert.id, name: cert.certificationName }))
         },
         type: addSkillsTypes.FETCH_CERTIFICATIONS
     })
@@ -214,7 +228,7 @@ export const removeResume = (resumeId: number) => {
 }
 
 export const cancelResource = () => {
-    history.push('/dashboard')
+    history.push('/home')
     return {
         payload: {},
         type: addSkillsTypes.CANCEL_RESOURCE
