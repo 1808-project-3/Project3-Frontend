@@ -1,0 +1,83 @@
+
+.topNavbar{
+    grid-area: topbar;
+    border-bottom: solid 1px #eeeeee;
+    color: #606060;
+    display: grid;
+    grid-template-columns: 1fr auto auto auto auto auto;
+}
+
+.profileText{
+    width: auto;
+    display: inline-block;
+    text-align: right;
+    margin-right: 1em;
+    place-self: center;
+}
+
+.profileName{
+    font-size: 14px;
+}
+
+.profileLogged{
+    font-size: 12px;
+    color: grey;
+}
+
+.profileImage{
+    width: 2em;
+    height: 2em;
+    display: inline-block;
+    background-color: grey;
+    border-radius: 1em;
+    margin-right: 2em;
+    place-self: center;
+}
+
+.title{
+    display: inline-block;
+    margin-left: 3em;
+    font-weight: bold;
+    place-self: center start;
+}
+
+.navLabel{
+    display: inline-block;
+    margin-right: 1em;
+    place-self: center;
+    font-size: 13px;
+}
+
+.navLink{
+    display: inline-block;
+    margin-right: 6em;
+    place-self: center;
+    font-size: 13px;
+}
+
+.searchContainer{
+    height: 60%;
+    display: inline-block;
+    border: solid 1px #DDD;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-right: 1em;
+    place-self: center;
+}
+
+.searchForm{
+    height: 100%;
+}
+
+.searchInput{
+    width: 20em;
+    height: 100%;
+    display: inline-block;
+    border: none;
+    font-size: 12px;
+}
+.searchIcon{
+    display: inline-block;
+    width: 1.5em;
+    cursor: pointer;
+}
