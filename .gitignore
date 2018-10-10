@@ -67,6 +67,9 @@ fabric.properties
 # dependencies
 /node_modules
 
+# vscode
+/.vscode
+
 # testing
 /coverage
 
@@ -77,6 +80,9 @@ fabric.properties
 # idea misc
 misc.xml
 vcs.xml
+
+# mac
+/.vscode
 
 
 # misc
