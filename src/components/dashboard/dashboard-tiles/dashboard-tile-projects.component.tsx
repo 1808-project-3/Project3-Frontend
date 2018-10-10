@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Card, Col, CardFooter, Row } from 'reactstrap';
-import { MdLibraryBooks } from 'react-icons/md/'
+import { MdLibraryBooks } from 'react-icons/md/';
 import axios from 'axios';
 
 export default class ProjectsTile extends React.Component<any,any> {

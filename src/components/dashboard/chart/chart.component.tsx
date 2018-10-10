@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {Card,Col,  Row,TabContent,TabPane,Nav,NavItem,NavLink} from 'reactstrap';
 import classnames from 'classnames';
-import SkillDoughnutComponent from './skills/skills-doughnut.component';
+// import SkillDoughnutComponent from './skills/skills-doughnut.component';
 // import SelectedCertificationTableComponent from './certifications/selected-certification-table.component';
 import CertificationsDoughnutComponent from './certifications/certifications-doughnut.component';
 
@@ -11,6 +11,8 @@ export default class ChartComponent  extends React.Component<any,any> {
     
     // displays total number of associates in db
     // clicking this page opens the associates list page
+
+    
 
     constructor(props:any) {
         super(props);
@@ -66,7 +68,7 @@ export default class ChartComponent  extends React.Component<any,any> {
                             <TabPane tabId="1">
                                 <Row>
                                     <Col md={12}>
-                                        <SkillDoughnutComponent />
+                                        {/* <SkillDoughnutComponent /> */}
                                     </Col>
                                 </Row>                                
 

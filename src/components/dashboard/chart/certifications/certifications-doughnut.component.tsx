@@ -1,9 +1,8 @@
 import * as React from 'react';
 import { Col, Table, Row, Card } from 'reactstrap';
-import { Doughnut } from 'react-chartjs-2';
+import { Doughnut } from 'react-chartjs-2'
 import { MdCreate } from 'react-icons/md/';
 import axios from 'axios';
-
 
 
 
@@ -54,6 +53,7 @@ export default class CertificationsDoughnutComponent extends React.Component<any
     constructor(props: any) {
         super(props);
         this.state = {
+           
             certification: [{
                 certName: "",
                 user: [{
@@ -65,7 +65,8 @@ export default class CertificationsDoughnutComponent extends React.Component<any
 
                 }]
             }],
-            data: {
+            
+            dataCert: {
                 datasets: [{
                     backgroundColor: [
                         '#FF6384', // red
@@ -77,7 +78,7 @@ export default class CertificationsDoughnutComponent extends React.Component<any
                     ],
                     borderColor: 'rgba(255,255,255,0.54)',
 
-                    cert: [],
+                    data: [],
                     hoverBackgroundColor: [
                         '#FF6384', // red
                         '#36A2EB', // blue
@@ -96,6 +97,12 @@ export default class CertificationsDoughnutComponent extends React.Component<any
                     'MCSD: Microsoft'
                 ],
             },
+            userCertName : "",
+            userTable:{
+                userCert:"",
+                userName:"",
+                
+            },
 
             options: {
                 legend: {
@@ -103,7 +110,13 @@ export default class CertificationsDoughnutComponent extends React.Component<any
                         boxWidth: 10,
                         padding: 80
                     },
+                    onClick: (e:any, legendItem:any) => {
+                        // console.log(legendItem.text);
+                        this.getCertName(legendItem.text);
+                    },
+
                     position: 'right'
+                    
                 }
             },
 
@@ -120,19 +133,34 @@ export default class CertificationsDoughnutComponent extends React.Component<any
 
     }
 
+    public getCertName(name:any){
+        // console.log(name);
+
+        if(name){
+            this.setState({
+                userCertName: name
+            })
+        }
+        console.log(this.state.userCertName);
+
+
+
+        
+
+    }
+
 
     public async componentDidMount() {
-        console.log('got here');
-        
         // const res = await axios.get('http://localhost:5002/certifications');
         // const res2 = await axios.get('http://localhost:8888/projects');
-        const res = await axios.get('http://ec2-54-70-66-176.us-west-2.compute.amazonaws.com:5002/certifications', { headers: { "JWT": 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2Vycy9Uek1Vb2NNRjRwIiwiZXhwIjoxNTM5MTkzMzAwLCJ1c2VyaWQiOjEyMzQ1Niwic2NvcGUiOiJzZWxmIGdyb3Vwcy91c2VycyJ9.qVDbspNmTvomDEyBwpw7ZRLvjRSc1trBcSoyL9nz7I8' } });
+        // const res = await axios.get('http://ec2-54-70-66-176.us-west-2.compute.amazonaws.com:5002/certifications', { headers: { "JWT": 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2Vycy9Uek1Vb2NNRjRwIiwiZXhwIjoxNTM5MTkzMzAwLCJ1c2VyaWQiOjEyMzQ1Niwic2NvcGUiOiJzZWxmIGdyb3Vwcy91c2VycyJ9.qVDbspNmTvomDEyBwpw7ZRLvjRSc1trBcSoyL9nz7I8' } });
         // backup certification
         // const res = await axios.get('http://ec2-18-222-202-19.us-east-2.compute.amazonaws.com:5002/certifications',{ headers:{ "JWT": 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2Vycy9Uek1Vb2NNRjRwIiwiZXhwIjoxNTM5MDkzNTM2LCJ1c2VyaWQiOjEyMzQ1Niwic2NvcGUiOiJzZWxmIGdyb3Vwcy91c2VycyJ9.kwAWHSfLYD6esizHno-ba4J3SHa33-nXX_YPnnA4168' } }); 
         const res1 = await axios.get('http://ec2-18-191-67-157.us-east-2.compute.amazonaws.com:8087/users', { headers: { "JWT": 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2Vycy9Uek1Vb2NNRjRwIiwiZXhwIjoxNTM5MTkzMzAwLCJ1c2VyaWQiOjEyMzQ1Niwic2NvcGUiOiJzZWxmIGdyb3Vwcy91c2VycyJ9.qVDbspNmTvomDEyBwpw7ZRLvjRSc1trBcSoyL9nz7I8' } });
-        const res2 = await axios.get('http://ec2-18-221-142-75.us-east-2.compute.amazonaws.com:8088/project', { headers: { "JWT": 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2Vycy9Uek1Vb2NNRjRwIiwiZXhwIjoxNTM5MTkzMzAwLCJ1c2VyaWQiOjEyMzQ1Niwic2NvcGUiOiJzZWxmIGdyb3Vwcy91c2VycyJ9.qVDbspNmTvomDEyBwpw7ZRLvjRSc1trBcSoyL9nz7I8' } });
-        console.log('after axios calls');
+        // const res2 = await axios.get('http://ec2-18-221-142-75.us-east-2.compute.amazonaws.com:8088/project', { headers: { "JWT": 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2Vycy9Uek1Vb2NNRjRwIiwiZXhwIjoxNTM5MTkzMzAwLCJ1c2VyaWQiOjEyMzQ1Niwic2NvcGUiOiJzZWxmIGdyb3Vwcy91c2VycyJ9.qVDbspNmTvomDEyBwpw7ZRLvjRSc1trBcSoyL9nz7I8' } });
+       
 
+        console.log (res1);
 
         let countOne = 0;
         let countTwo = 0;
@@ -166,76 +194,129 @@ export default class CertificationsDoughnutComponent extends React.Component<any
             }
         });// end of foreach res1
 
-        let certNumber:any = [];
-        certNumber = [countOne, countTwo, countThree, countFour, countFive, countSix];
-        console.log(certNumber);
+        // let certNumber:any = [];
+        // certNumber = [countOne, countTwo, countThree, countFour, countFive, countSix];
         this.setState({
-                ...this.state.data.datasets,
-                cert: certNumber
+                dataCert:{datasets:[{data: [countOne, countTwo, countThree, countFour, countFive, countSix]}]}
         })
-        console.log('here is certification component')
-        console.log(this.state.data.datasets.cert);
+        // console.log(this.state.dataCert);
+
+        res1.data.forEach((user:any)=>{
+            if(user.userCerts.length>0){
+                user.userCerts.forEach((certName:any)=>{
+                    if(certName.certId===1){
+                        const theName ='OCA: Oracle Certified Associate';
+                        if(theName ===this.state.userCertName){
+                            console.log('found');
+                        }
+                    }
+                })
+            }
+
+        });
+
+        // let tempCertification = [{
+        //     user: [{
+        //         associateId: 0,
+        //         associateName: "",
+        //         certName: "",
+        //         grade: "",
+        //         projectDetails: "",
+
+        //     }]
+        // }];
+
+        // res1.data.forEach((user:any,i:any)=>{
+    
+        //         tempCertification = [{
+        //             user = [{
+        //                 associateId =  user.associateId,
+        //                 associateName =  `${user.firstName} ${user.lastName}`,
+        //                 // grade: user.resources[0].grades.grade,
+        //                 grade: 'M',
+        //                 projectDeatils: 'Test'
+
+        //             }]
+        //         }]
+
+         
+        // })
 
 
-        const certification = [{
-            certName: "",
-            user: [{
-                associateId: 0,
-                associateName: "",
-                certName: "",
-                grade: "",
-                projectDetails: "",
+        // for(let i=0; i<res1.data.length; i++){
+        //     if(res1.data[i].userCerts){
+        //         res1.data[i].userCerts.forEach((cert:any)=>{
+        //             if(this.state.userCertName ===cert){
+        //                 console.log(`found ${cert}`);
+        //             }
 
-            }]
-        }];
+        //         })
+        //     }
+        // }
+        
 
-        res.data.forEach((certName: any, i: any) => {
-            certification[i].certName = certName.certificationName;
-            certification.push({
-                certName: "",
-                user: [{
-                    associateId: 0,
-                    associateName: "",
-                    certName: "",
-                    grade: "",
-                    projectDetails: "",
+        
+        
 
-                }]
-            });
+        // const certification = [{
+        //     certName: "",
+        //     user: [{
+        //         associateId: 0,
+        //         associateName: "",
+        //         certName: "",
+        //         grade: "",
+        //         projectDetails: "",
+
+        //     }]
+        // }];
+
+        // res.data.forEach((certName: any, i: any) => {
+        //     certification[i].certName = certName.certificationName;
+        //     certification.push({
+        //         certName: "",
+        //         user: [{
+        //             associateId: 0,
+        //             associateName: "",
+        //             certName: "",
+        //             grade: "",
+        //             projectDetails: "",
+
+        //         }]
+        //     });
             //  console.log(certification[i].certName);
             //  console.log(i);
 
-            res2.data.forEach((proj: any) => {
+            // res2.data.forEach((proj: any) => {
 
-                res1.data.forEach((user: any, j: any) => {
+            //     res1.data.forEach((user: any, j: any) => {
 
-                    // console.log(user);
+            //         // console.log(user);
 
-                    // console.log(this.state.certification[i].user[j]);
-                    let userHasCert = [];
-                    let filter = [];
-                    if (user.aupCert) {
-                        userHasCert = res1.data.filter((hasCert: any) =>
-                            hasCert.aupCert === true
-                        );
+            //         // console.log(this.state.certification[i].user[j]);
+            //         let userHasCert = [];
+            //         let filter = [];
+            //         if (user.aupCert) {
+            //             userHasCert = res1.data.filter((hasCert: any) =>
+            //                 hasCert.aupCert === true
+            //             );
 
-                        // console.log(userHasCert);
+            //             // console.log(userHasCert);
 
-                        filter = res1.data.filter((resc: any) => resc.projectId === proj.projectId);
-                        // console.log(filter);
-                    }
+            //             filter = res1.data.filter((resc: any) => resc.projectId === proj.projectId);
+            //             // console.log(filter);
+            //         }
 
-                    if (userHasCert.length > 0 && filter.length > 0) {
-                        certification[i].user[j].associateName = user.firstName + " " + user.lastName;
-                        certification[i].user[j].associateId = user.associateId;
-                        certification[i].user[j].certName = certName.certificationName;
-                        certification[i].user[j].projectDetails = proj.name;
-                        certification[i].user[j].grade = user.grade;
-                    }
-                });
-            })
+            //         if (userHasCert.length > 0 && filter.length > 0) {
+            //             certification[i].user[j].associateName = user.firstName + " " + user.lastName;
+            //             certification[i].user[j].associateId = user.associateId;
+            //             certification[i].user[j].certName = certName.certificationName;
+            //             certification[i].user[j].projectDetails = proj.name;
+            //             certification[i].user[j].grade = user.grade;
+            //         }
+            //     });
+            // })
 
-        });
+        // });
     }
 
     public render() {
@@ -243,7 +324,7 @@ export default class CertificationsDoughnutComponent extends React.Component<any
             <Card md={12}>
                 <Row>
                     <Col md={12}>
-                        <Doughnut data={this.state.data} options={this.state.options} />
+                        <Doughnut data={this.state.dataCert} options={this.state.options} />
                     </Col>
                 </Row>
 
@@ -268,7 +349,7 @@ export default class CertificationsDoughnutComponent extends React.Component<any
                             <tr>
                                 <td>James</td>
                                 <td>1234</td>
-                                <td>Certification Details</td>
+                                <td>{this.state.userTable.userCert}</td>
                                 <td>Project Name</td>
                                 <td>M</td>
                                 <td>View/Edit</td>
@@ -276,18 +357,18 @@ export default class CertificationsDoughnutComponent extends React.Component<any
                             </tr>
 
                             {
-                                // this.state.certification.map((cer: any) => (
-                                //     <tr key={cer.user.associateId}>
-                                //         <td>{cer.user.associateName}</td>
-                                //         <td>{cer.user.associateId}</td>
-                                //         <td>{cer.user.certName}</td>
-                                //         <td>{cer.user.projectDetails}</td>
-                                //         <td>{cer.user.grade}</td>
-                                //         <td>View</td>
-                                //         <td onClick={this.handleEdit} style={{ cursor: 'pointer' }}><MdCreate /></td>
+                                this.state.certification.map((cer: any) => (
+                                    <tr key={cer.user.associateId}>
+                                        <td>{cer.user.associateName}</td>
+                                        <td>{cer.user.associateId}</td>
+                                        <td>{cer.user.certName}</td>
+                                        <td>{cer.user.projectDetails}</td>
+                                        <td>{cer.user.grade}</td>
+                                        <td>View</td>
+                                        <td onClick={this.handleEdit} style={{ cursor: 'pointer' }}><MdCreate /></td>
 
-                                //     </tr>
-                                // ))
+                                    </tr>
+                                ))
                             }
                         </tbody>
                     </Table>

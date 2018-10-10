@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { Card, Col,Row,CardFooter} from 'reactstrap';
+import { Card, Col,Row,CardFooter} from 'reactstrap'
 import {MdGroup} from 'react-icons/md/'
-import axios from 'axios';
+import axios from 'axios'
 
 export default class AssociatesTile extends React.Component<any,any> {
     constructor(props:any) {
