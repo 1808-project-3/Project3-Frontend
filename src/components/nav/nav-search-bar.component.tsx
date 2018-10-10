@@ -54,7 +54,7 @@ export class SearchBar extends React.Component<any, any>
             // something something axios
             // let results = [{blank: ""}];
             // store.dispatch(searchActions.setSearchResults(results))
-            this.props.history.push("/home/resouces/search-results");
+            this.props.history.push("/home/resources/search-results");
         }
     }
 }

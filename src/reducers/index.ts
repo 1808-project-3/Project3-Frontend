@@ -18,6 +18,7 @@ export interface ISignInState {
     pass: string,
     userId: string
   },
+  errorForgotMessage: string,
   errorMessage: string,
   modal: boolean,
   resetModal: boolean

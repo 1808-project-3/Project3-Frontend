@@ -34,6 +34,15 @@ export const updateError = (errorMessage: string) => {
   }
 }
 
+export const updateForgotError = (errorForgotMessage: string) => {
+  return {
+    payload: {
+      errorForgotMessage
+    },
+    type: signInTypes.UPDATE_FORGOT_ERROR
+  }
+}
+
 export const changeReset = () => {
   return {
     payload: {},
