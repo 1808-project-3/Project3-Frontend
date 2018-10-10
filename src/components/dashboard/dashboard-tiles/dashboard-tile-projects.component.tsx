@@ -15,7 +15,7 @@ export default class ProjectsTile extends React.Component<any,any> {
     }
 
     public async componentDidMount() {
-         const res = await axios.get('http://ec2-18-221-142-75.us-east-2.compute.amazonaws.com:8088/project', {headers: {"JWT": 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2Vycy9Uek1Vb2NNRjRwIiwiZXhwIjoxNTM5MTkzMzAwLCJ1c2VyaWQiOjEyMzQ1Niwic2NvcGUiOiJzZWxmIGdyb3Vwcy91c2VycyJ9.qVDbspNmTvomDEyBwpw7ZRLvjRSc1trBcSoyL9nz7I8' }});
+         const res = await axios.get('http://ec2-18-221-142-75.us-east-2.compute.amazonaws.com:8088/project', {headers: {"JWT": 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2Vycy9Uek1Vb2NNRjRwIiwiZXhwIjoxNTM5Mjc5OTI0LCJ1c2VyaWQiOjEyMzQ1Niwic2NvcGUiOiJzZWxmIGdyb3Vwcy91c2VycyJ9.HxJgOEmMplGHLHjp-I-QpzIX7b5tAXLLxXKMbJ2-mgc' }});
         // const res = await axios.get('http://localhost:8080/project', {headers: {"JWT": 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2Vycy9Uek1Vb2NNRjRwIiwiZXhwIjoxNTM5MDkzNTM2LCJ1c2VyaWQiOjEyMzQ1Niwic2NvcGUiOiJzZWxmIGdyb3Vwcy91c2VycyJ9.kwAWHSfLYD6esizHno-ba4J3SHa33-nXX_YPnnA4168' }});
         this.setState({numOfProjects: res.data.length});
         console.log(this.state.numOfProjects);
