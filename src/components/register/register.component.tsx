@@ -4,19 +4,25 @@ import { connect } from 'react-redux';
 import { updateFields, updateError, clearFields } from '../../actions/register/register.actions';
 import { Alert, Row, Col, Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { RouteComponentProps } from 'react-router';
-// import axios from 'axios';
-// import { environment } from 'src/environment';
 import { apiClient } from 'src/axios/api-client';
 
 
 interface IProps extends RouteComponentProps<{}> {
+    /** updateFields updates all the form fields in the state */   
     updateFields: (event: any) => any
+    /** updateError updates the errormessage in the state */
     updateError: (message: string) => any
+    /** clearFeilds clears all the state fields for the register component */
     clearFields: () => any
+    /** jwt is the state access for the IJwtState in the connection */
     jwt: IJwtState
+    /** register is the state access for the IRegisterState in the connection */
     register: IRegisterState
 }
-
+/**
+ *   This component takes in values from the user to register a new associate 
+ *   A lead must be the one registering the associate 
+ */
 export class RegisterComponent extends React.Component<IProps, {}> {
 
     public showError = false;
@@ -86,7 +92,6 @@ export class RegisterComponent extends React.Component<IProps, {}> {
         }
 
     }
-
 
     public render() {
         return (

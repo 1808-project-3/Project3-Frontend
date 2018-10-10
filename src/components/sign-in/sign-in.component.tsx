@@ -111,21 +111,7 @@ class SignInComponent extends React.Component<IProps, {}> {
       console.log('unsuccessfull change password call');
     }
   }
-  // catch {}
-  //   const res1 = await axios.post('http://ec2-18-191-67-157.us-east-2.compute.amazonaws.com:8087/users/changePass', userInfo);
-  //   console.log(res1);
-  //   if(res1) {
-  //     console.log('successfull forgot password call');
-  //     console.log(res1);
-  //     this.resetPassFields.tempPass = res1.data;
-  //     this.props.changeModal();
-  //     this.props.changeReset();
-  //   }
-  //     else {
-  //   this.props.updateForgotError("Could not find a user with that email / userID");
-  //   console.log('unsuccessfull change password call');
-  // }
-  //   }
+  
 
   public ResetPassword = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
