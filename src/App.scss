@@ -75,6 +75,10 @@ background-color: white;
 
 }
 
+#register-alert {
+  margin-top: 1em;
+}
+
 #error-message{
   margin: auto;
   margin-top: 1em;
@@ -288,6 +292,133 @@ nav {
   cursor: pointer;
 }
 
+.red {
+  color: red;
+}
+/*****************************
+ Skill Group in Dashboard
+*****************************/
+.skillgroup-cards-container {
+  width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;   
+  
+}
+.skillgroup-skill-card {
+  height: 65%;
+}
+.skillgroup-skill-card-content {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: left;
+  align-items: center;
+}
+.skill-card-num-associates {
+  font-weight: bold;
+  font-size: 2em;
+  margin-top: 15%;
+  margin-right: 4%;
+  margin-left: 3%;
+}
+.skill-card-name {
+  text-align: left;
+  // font-weight: bold;
+  font-size: 0.7em;
+  color: #7C7A7A;
+  margin-top: 15%;
+  margin-right: 15%;
+  margin-left: 3%;
+}
+
+/*****************************
+ three cards in Dashboard
+*****************************/
+
+.project-number-card {
+  font-weight: bold;
+  font-size: 35px;
+  color:#36A2EB;
+  margin-top:24px;
+  margin-left:10px;
+
+}
+.project-name-card {
+  font-weight:bold;
+  font-size:1em;
+  margin-top:8%;
+  margin-left:2%;
+}
+.three-card-icons{
+  margin-top:8%;
+}
+.three-card-footer{
+  text-align: left;
+}
+.three-card-button-col{
+  text-align: center;
+  margin-top:40px;
+
+}
+.three-card-button{
+  width: 100%;
+  height:60%;
+}
+
+
+/*****************************
+  PROJECT CARDS
+*****************************/
+
+.project-card-link{
+  text-align: right;
+  text-decoration: underline;
+}
+
+.project-card-li-gray{
+  background-color: lightgray;
+  display: block;
+  border: 0 none;
+}
+
+.project-card-li-white{
+  background-color: white;
+  border: 0 none;
+}
+.project-name-card {
+  font-weight:bold;
+  font-size: 13px;
+  margin-top:30px;
+  margin-left:24px;
+}
+
+/*****************************
+  PROJECT CARDS
+*****************************/
+.project-card-link {
+  text-align: right;
+  text-decoration: underline; }
+
+.project-card-li-gray {
+  background-color: lightgray;
+  display: block;
+  border: 0 none; }
+
+.project-card-li-white {
+  background-color: white;
+  border: 0 none; }
+
+.project-card-list {
+  display: flex;
+  width: 100%; }
+
+.project-card-header {
+  background-color: white;
+  font-weight: bold; }
+
+.project-card-resource-id {
+  font-weight: bold;
+  padding-right: 10%; }
 
 #add-skills .same-size-col{
   min-width: 336px;

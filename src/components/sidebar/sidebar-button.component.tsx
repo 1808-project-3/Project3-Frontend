@@ -10,7 +10,7 @@ export const SidebarButton = (props: any) => {
 
     if(props.active.active)
     {
-        style += " active";
+        style += " sbactive";
     }
     
     return(

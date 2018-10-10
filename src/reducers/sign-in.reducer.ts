@@ -6,6 +6,7 @@ const initialState: ISignInState = {
     pass: '',
     userId: ''
   },
+  errorForgotMessage: '',
   errorMessage: '',
   modal: false,
   resetModal: false
@@ -17,6 +18,11 @@ export const signInReducer = (state = initialState, action: any) => {
       return {
         ...state,
         errorMessage: action.payload.errorMessage
+      }
+      case signInTypes.UPDATE_FORGOT_ERROR:
+      return {
+        ...state,
+        errorForgotMessage: action.payload.errorForgotMessage
       }
     case signInTypes.UPDATE_PASSWORD:
       return {

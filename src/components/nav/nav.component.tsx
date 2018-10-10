@@ -13,7 +13,7 @@ export const AppNav = (props: any) =>{
       <NavTitle>TALENT PORTAL</NavTitle>
       <NavLabel>Search</NavLabel>
       <SearchBar history={props.history}/>
-      <NavLink path="/home/advanced-search">Advanced Search</NavLink>
+      <NavLink path="/register">Register</NavLink>
       <NavProfileText/>
       <NavProfileImage/>
     </div >

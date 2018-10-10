@@ -18,6 +18,7 @@ interface IProps {
 
 export const ResourceSkillsDetail: React.StatelessComponent<IProps> = (props) => {
     const { resource } = props;
+    const validDate = resource.project.startDate && resource.project.endDate;
     return (
         <Container className="pb-3">
             <Card className="w-100 mb-4">
@@ -33,7 +34,7 @@ export const ResourceSkillsDetail: React.StatelessComponent<IProps> = (props) =>
                             </Row>
                             <Row>
                                 <Col tag="dt" xl={4}>ASSOCIATE NAME</Col>
-                                <Col tag="dd" xl={8}>{`${resource.user.firstName} ${resource.user.lastName}`}</Col>
+                                <Col tag="dd" xl={8}>{`${resource.user.firstName || ''} ${resource.user.lastName || ''}`}</Col>
                             </Row>
                             <Row>
                                 <Col tag="dt" xl={4}>AOP CERTIFIED</Col>
@@ -70,8 +71,8 @@ export const ResourceSkillsDetail: React.StatelessComponent<IProps> = (props) =>
                                 <Col tag="dd" xl={8}>{resource.compentencyTagging.name}</Col>
                             </Row>
                             <Row>
-                                <Col tag="dt" xl={4}>DATE OF JOINING</Col>
-                                <Col tag="dd" xl={8}>{formatDate(resource.project.startDate)}</Col>
+                                <Col tag="dt" xl={4}>PROJECT DATE</Col>
+                                <Col tag="dd" xl={8}>{validDate ? `${formatDate(resource.project.startDate)} - ${formatDate(resource.project.endDate)}` : 'To be decided'}</Col>
                             </Row>
                             <Row>
                                 <Col tag="dt" xl={4}>HCM SUPERVISOR ID</Col>
@@ -79,7 +80,7 @@ export const ResourceSkillsDetail: React.StatelessComponent<IProps> = (props) =>
                             </Row>
                             <Row>
                                 <Col tag="dt" xl={4}>HCM SUPERVISOR NAME</Col>
-                                <Col tag="dd" xl={8}>{`${resource.project.supervisor.firstName} ${resource.project.supervisor.lastName}`}</Col>
+                                <Col tag="dd" xl={8}>{`${resource.project.supervisor.firstName || ''} ${resource.project.supervisor.lastName || ''}`}</Col>
                             </Row>
                             <Row>
                                 <Col tag="dt" xl={4}>LOCATION</Col>
@@ -126,5 +127,6 @@ const formatDate = (date: Date) => {
     const day = date.getDate();
     const dd = day < 10 ? `0${day}` : day;
     const mm = month < 10 ? `0${month}` : month
-    return <>{dd}/{mm}/{yyyy}</>;
+    const validDate = dd && mm && yyyy;
+    return <>{validDate ? `${dd}/${mm}/${yyyy}` : ''}</>;
 }
