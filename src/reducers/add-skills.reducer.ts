@@ -197,6 +197,16 @@ export const addSkillsReducer = (state = initialState, action: any) => {
             }
             newState.newOrExistingProject = action.payload.newOrExisting;
             return newState;
+        case addSkillsTypes.CLEAR_ASSOCIATE:
+            const clearAssociateResource = new Resource({ ...state.resource });
+            clearAssociateResource.user = new User();
+            newState.resource = clearAssociateResource;
+            return newState;
+        case addSkillsTypes.CLEAR_SUPERVISOR:
+            const clearSupervisorResource = new Resource({ ...state.resource });
+            clearSupervisorResource.project = new Project({ ...state.resource.project, supervisor: new User() });
+            newState.resource = clearSupervisorResource;
+            return newState;
     }
     return state;
 }
