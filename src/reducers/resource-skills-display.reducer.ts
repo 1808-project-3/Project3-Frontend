@@ -10,9 +10,10 @@ const initialState: IResourceSkillsDisplayState = {
 export const resourceSkillsDisplayReducer = (state = initialState, action: any) => {
     switch(action.type){
         case resourceSkillsDisplayTypes.TOGGLE_CONFIRM:
+            const confirm = state.currentResource.skills.length > 0;
             return{
                 ...state,
-                isConfirm: !state.isConfirm
+                isConfirm: confirm ? !state.isConfirm : false
             };
         case resourceSkillsDisplayTypes.UPDATE_RESOURCE:
             return{
