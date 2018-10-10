@@ -5,7 +5,7 @@ import classnames from 'classnames';
 import { connect } from "react-redux";
 import { IState } from "../../reducers";
 import TablesComponent from "./tables/tables.component";
-// import ResourceListExport from "./tables/resourceListExport";
+import ResourceListExport from "./tables/resourceListExport";
 
 interface IProps {
     tableType: string;
@@ -51,7 +51,6 @@ export class TabComponent extends React.Component<IProps, any> {
     }
 
     public componentDidUpdate() {
-        console.log("The table type selected is: " + this.props.tableType);
         this.props.getResourceList();
     }
 
@@ -97,7 +96,7 @@ export class TabComponent extends React.Component<IProps, any> {
                         </Nav>
                     </div>
                     <div className="col-md-2">
-                        {/*<span className="pl-0"><ResourceListExport /></span>*/}
+                        <span className="pl-0"><ResourceListExport /></span>
                     </div>
                 </Row>
 

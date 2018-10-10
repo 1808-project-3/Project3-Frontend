@@ -56,7 +56,7 @@ class TablesComponent extends React.Component<IProps, any> {
                       }
                       break;
                   case 3:
-                      if(skill.skillId === 3){
+                      if(skill.skillId === 6){
                           ifTrue = true;
                       }
                       break;
@@ -71,6 +71,7 @@ class TablesComponent extends React.Component<IProps, any> {
               }
             });
             if (ifTrue) {
+              ifTrue = false;
               return (
                 <tr key={item.associateId}>
                   <td>{item.associateId}</td>
