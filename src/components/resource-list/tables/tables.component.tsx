@@ -21,18 +21,7 @@ interface IProps {
 class TablesComponent extends React.Component<IProps, any> {
   constructor(props: any) {
     super(props);
-    // this.insertTableInfo = this.insertTableInfo.bind(this);
   }
-
-  // public insertTableInfo(row: any){
-  //     return <tr key={row.resourceId}>
-  //         <td>{row.associateId}</td>
-  //         <td>{row.associateId}</td>
-  //         <td>{row.aupCert}</td>
-  //         <td>{row.projectId}</td>
-  //         <td>{row.grades.grade}</td>
-  //     </tr>
-  // }
 
   public componentDidMount() {
     this.props.getResourceList();
@@ -41,94 +30,6 @@ class TablesComponent extends React.Component<IProps, any> {
   public render() {
     console.log(this.props.resourceList);
     let ifTrue = false;
-    // let resourceEntries: any;
-    // if (this.props.resourceList[0] !== null) {
-    //   resourceEntries = this.props.resourceList.map(list => {
-    //     list.skills.map((skill: any) => {
-    //       return (
-    //         <tr key={list.associateId}>
-    //           <td>{list.associateId}</td>
-    //           <td> {list.associateId} </td>
-    //           <td> {list.aupCert} </td>
-    //           <td> {list.projectId} </td>
-    //           <td> {list.grades.grade} </td>
-    //         </tr>
-    //       );
-    //     });
-    //   });
-
-    //   for (const r of this.props.resourceList) {
-    //     if (r.skills.length > 0) {
-    //       for (const s of r.skills) {
-    //         switch (this.props.tableType) {
-    //           case 1:
-    //             if (s.skillId === 1 || s.skillId === 5) {
-    //               {
-    //                 resourceEntries;
-    //               }
-    //             }
-    //             break;
-    //           case 2:
-    //             if (s.skillId === 2 || s.skillId === 3 || s.skillId === 4) {
-    //               resourceEntries.push(
-    //                 <tr key={r.resourceId}>
-    //                   <td>{r.associateId}</td>
-    //                   <td>{r.associateId}</td>
-    //                   <td>{r.aupCert}</td>
-    //                   <td>{r.projectId}</td>
-    //                   <td>{r.grades.grade}</td>
-    //                 </tr>
-    //               );
-    //             }
-    //             break;
-    //           case 3:
-    //             if (s.skillId === 3) {
-    //               resourceEntries.push(
-    //                 <tr key={r.resourceId}>
-    //                   <td>{r.associateId}</td>
-    //                   <td>{r.associateId}</td>
-    //                   <td>{r.aupCert}</td>
-    //                   <td>{r.projectId}</td>
-    //                   <td>{r.grades.grade}</td>
-    //                 </tr>
-    //               );
-    //             }
-    //             break;
-    //           case 4:
-    //             if (
-    //               s.skillId === 7 ||
-    //               s.skillId === 8 ||
-    //               s.skillId === 9 ||
-    //               s.skillId === 10
-    //             ) {
-    //               resourceEntries.push(
-    //                 <tr key={r.resourceId}>
-    //                   <td>{r.associateId}</td>
-    //                   <td>{r.associateId}</td>
-    //                   <td>{r.aupCert}</td>
-    //                   <td>{r.projectId}</td>
-    //                   <td>{r.grades.grade}</td>
-    //                 </tr>
-    //               );
-    //             }
-    //             break;
-    //           default:
-    //             break;
-    //         }
-    //       }
-    //     } else {
-    //       resourceEntries.push(
-    //         <tr key={r.resourceId}>
-    //           <td>NOTHING</td>
-    //           <td>NOTHING</td>
-    //           <td>NOTHING</td>
-    //           <td>NOTHING</td>
-    //           <td>NOTHING</td>
-    //         </tr>
-    //       );
-    //     }
-    //   }
-    // }
     return (
       <Table>
         <thead>
@@ -143,27 +44,30 @@ class TablesComponent extends React.Component<IProps, any> {
         <tbody>
           {this.props.resourceList.map(item => {
             item.skills.forEach((skill: any) => {
-              ifTrue = false;
-              if (
-                (this.props.tableType === 1 && skill.skillId === 1) ||
-                skill.skillId === 5
-              ) {
-                ifTrue = true;
-              } else if (
-                (this.props.tableType === 2 && skill.skillId === 2) ||
-                skill.skillId === 4 ||
-                skill.skillId === 3
-              ) {
-                ifTrue = true;
-              } else if (this.props.tableType === 3 && skill.skillId === 3) {
-                ifTrue = true;
-              } else if (
-                (this.props.tableType === 4 && skill.skillId === 7) ||
-                skill.skillId === 8 ||
-                skill.skillId === 9 ||
-                skill.skillId === 10
-              ) {
-                ifTrue = true;
+              switch (this.props.tableType) {
+                  case 1:
+                      if(skill.skillId === 1 || skill.skillId === 5){
+                          ifTrue = true;
+                      }
+                      break;
+                  case 2:
+                      if(skill.skillId === 2 || skill.skillId === 3 || skill.skillId === 4){
+                          ifTrue = true;
+                      }
+                      break;
+                  case 3:
+                      if(skill.skillId === 3){
+                          ifTrue = true;
+                      }
+                      break;
+                  case 4:
+                      if(skill.skillId === 7 || skill.skillId === 8 || skill.skillId === 9 || skill.skillId === 10){
+                          ifTrue = true;
+                      }
+                      break;
+                  default:
+                      ifTrue = false;
+                      break;
               }
             });
             if (ifTrue) {
@@ -178,13 +82,7 @@ class TablesComponent extends React.Component<IProps, any> {
               );
             } else {
               return (
-                <tr key={item.associateId}>
-                  <td />
-                  <td> </td>
-                  <td> </td>
-                  <td> </td>
-                  <td> {item.grades.grade} </td>
-                </tr>
+                null
               );
             }
           })}
