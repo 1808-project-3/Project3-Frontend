@@ -4,7 +4,6 @@ import MockGrades from '../../assets/grades.json';
 import MockLocations from '../../assets/locations.json';
 import MockProject from '../../assets/project.json';
 import MockUser from '../../assets/user.json';
-import history from '../../history';
 import { Certification } from "../../models/Certification";
 import { CompetencyTag } from "../../models/CompetencyTag";
 import { Grade } from "../../models/Grade";
@@ -73,14 +72,14 @@ export const fetchAssociate = (assocId: number) => (dispatch: any) => {
 }
 
 export const clearAssociate = () => {
-    return{
+    return {
         payload: {},
         type: addSkillsTypes.CLEAR_ASSOCIATE
     }
 }
 
 export const clearSupervisor = () => {
-    return{
+    return {
         payload: {},
         type: addSkillsTypes.CLEAR_SUPERVISOR
     }
@@ -228,7 +227,6 @@ export const removeResume = (resumeId: number) => {
 }
 
 export const cancelResource = () => {
-    history.push('/home')
     return {
         payload: {},
         type: addSkillsTypes.CANCEL_RESOURCE
