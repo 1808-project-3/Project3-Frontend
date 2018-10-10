@@ -162,11 +162,11 @@ export class SearchBar extends React.Component<any, any>
                     results.push(result);
                 });
                 store.dispatch(searchActions.setSearchResults(results));
-                this.props.history.push("/home/resouces/search-results");
+                this.props.history.push("/home/resources/search-results");
             }
             else
             {
-                alert("could not find user");
+                this.props.history.push("/home/resources/search-results");
             }
         }
     }
