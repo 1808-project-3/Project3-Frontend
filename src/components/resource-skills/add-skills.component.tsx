@@ -430,7 +430,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                             <hr />
                             <Container>
                                 <Row>
-                                    <Button onClick={this.props.cancelResource} color="secondary" className="ml-auto px-4"><small>CANCEL</small></Button>
+                                    <Button onClick={this.cancel} color="secondary" className="ml-auto px-4"><small>CANCEL</small></Button>
                                     <Button onClick={() => {
                                         this.props.submitResource(resource);
                                         if (this.formElement) {
@@ -449,6 +449,11 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                 </div>
             </>
         );
+    }
+
+    private cancel = () => {
+        this.props.cancelResource();
+        this.props.history.push('home');
     }
 }
 
