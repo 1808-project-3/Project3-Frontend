@@ -1,7 +1,7 @@
 import * as searchActions from '../actions/search/search.actions';
 
 const initialState = {
-    results: [{}]
+    searchResults: []
 }
 
 export const searchReducer = (state = initialState, action: any) => {
@@ -11,7 +11,7 @@ export const searchReducer = (state = initialState, action: any) => {
     {
         return{
             ...state,
-            searchResults: action.searchResults
+            searchResults: action.payload.searchResults
         }
     }
     else

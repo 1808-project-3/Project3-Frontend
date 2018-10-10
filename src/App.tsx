@@ -6,25 +6,14 @@ import { Layout } from './components/layout/layout.component';
 import RegisterComponent from './components/register/register.component';
 import ResourceSkillDisplayComponent from './components/resource-skills/resource-skills-display';
 import SearchResultComponent from './components/search-result/search-result.component';
-<<<<<<< HEAD
-// import projectListTableComponent from "./components/project-list/project-list-table/project-list-table.component";
-// import AddSkillsComponent from './components/resource-skills/add-skills.component';
-import { ResourceSkillsDetail } from './components/resource-skills/resource-skills-detail.component'
-=======
 import SignInComponent from './components/sign-in/sign-in.component';
 import './include/bootstrap';
 import { store } from './Store';
 import TalentDashboard from './components/dashboard/talent-dashboard.component';
-// import projectListTableComponent from "./components/project-list/project-list-table/project-list-table.component";
-// import AddSkillsComponent from './components/resource-skills/add-skills.component';
-// import { ResourceSkillsDetail } from './components/resource-skills/resource-skills-detail.component'
-// import ResourceSkillDisplayComponent from './components/resource-skills/resource-skills-display'
 
+// import { ResourceSkillsDetail } from './components/resource-skills/resource-skills-detail.component'
 // import projectListTableComponent from "./components/project-list/project-list-table/project-list-table.component";
 // import AddSkillsComponent from './components/resource-skills/add-skills.component';
-// import { ResourceSkillsDetail } from './components/resource-skills/resource-skills-detail.component'
->>>>>>> 320ad1a94b06a4081ed79431b70ee625dbc8a7c5
-// import ResourceSkillDisplayComponent from './components/resource-skills/resource-skills-display'
 
 class App extends React.Component {
 
@@ -51,15 +40,9 @@ class App extends React.Component {
   public wrappedRoutes = (props: any) => (
     <Layout location={props.location} history={props.history}>
       <Switch>
-<<<<<<< HEAD
-        <Route path="/home/resouces/search-results" component={SearchResultComponent} />
-        <Route path="/rs" component={ResourceSkillsDetail}/>
-        <Route path="/home" />
-=======
         <Route path="/home/resources/search-results" component={SearchResultComponent} />
         <Route path="/home/add-skills" component={ResourceSkillDisplayComponent} />
         <Route path="/home" component={TalentDashboard}/>
->>>>>>> 320ad1a94b06a4081ed79431b70ee625dbc8a7c5
       </Switch>
     </Layout>
   )
