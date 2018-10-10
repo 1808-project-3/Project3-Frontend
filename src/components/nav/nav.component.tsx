@@ -7,7 +7,7 @@ import {NavLink} from './nav-link.component';
 import {NavTitle} from './nav-title.component';
 import './navStyles.css';
 
-const AppNav: React.StatelessComponent<any> = (props) => {
+export const AppNav = (props: any) =>{
   return (
     <div className="topNavbar">
       <NavTitle>TALENT PORTAL</NavTitle>
