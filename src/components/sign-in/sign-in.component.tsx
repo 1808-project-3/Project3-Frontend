@@ -105,31 +105,49 @@ class SignInComponent extends React.Component<IProps, {}> {
   public ResetPassword = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log(this.resetPassFields);
+    const regex = /(?=^.{8,}$)(?=.*[0-9]+.*)(?=.*[!@#$%^*()+{};:.,'?/&_-]+.*)(?=.*[a-zA-Z]+.*)(?!.*\s).*$/;
     if (this.resetPassFields.tempPass === this.resetPassFields.tempPassConfirm) {
-      if (this.resetPassFields.newPass === this.resetPassFields.confirmPass) {
+      if (regex.test(String(this.resetPassFields.newPass))) {
+        if (!this.resetPassFields.newPass.includes(this.forgotPassFields.userID.toString())) {
+          if (this.resetPassFields.newPass === this.resetPassFields.confirmPass) {
 
-        const payload = {
-          currentPassword: this.resetPassFields.tempPass,
-          newPassword: this.resetPassFields.newPass,
-          userId: this.forgotPassFields.userID
-        };
-        const res2 = await axios.put("http://ec2-18-191-67-157.us-east-2.compute.amazonaws.com:8087/users/resetPassword", payload);
+            const payload = {
+              currentPassword: this.resetPassFields.tempPass,
+              newPassword: this.resetPassFields.newPass,
+              userId: this.forgotPassFields.userID
+            };
+            const res2 = await axios.put("http://ec2-18-191-67-157.us-east-2.compute.amazonaws.com:8087/users/resetPassword", payload);
 
-        if (res2.data) {
-          console.log('successfull reset password');
-          console.log(res2.data);
-          this.props.changeReset();
+            if (res2.data) {
+              console.log('successfull reset password');
+              console.log(res2.data);
+              this.props.changeReset();
+            }
+            else {
+              console.log('unsuccessfull reset password api call');
+            }
+          }
+          else {
+            console.log('New password did not match');
+            console.log(this.resetPassFields.newPass);
+            console.log(this.resetPassFields.confirmPass);
+          }
         }
         else {
-          console.log('unsuccessfull reset password');
+          console.log('new password contains userID');
+          console.log(this.resetPassFields.newPass);
         }
       }
       else {
-        console.log('New password did not match');
+        console.log('invalid regex password');
+        console.log(this.resetPassFields.newPass);
+        // this.props.updateError('Invalid password, must be greater than 8 length and contain 1 character, digit and special character');
       }
     }
     else {
       console.log('temp pass did not match');
+      console.log(this.resetPassFields.tempPass);
+      console.log(this.resetPassFields.tempPassConfirm);
     }
   }
 
