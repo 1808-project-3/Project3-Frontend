@@ -27,7 +27,7 @@ export default class ProjectsTile extends React.Component<any,any> {
             <Card className="text-center">
                 <Row>
                 <Col md={2}>
-                    <div className="skillgroup-skill-card-content">
+                    <div className="skill-card-content">
                         <p className="project-number-card">{this.state.numOfProjects}</p>
 
                     </div>
