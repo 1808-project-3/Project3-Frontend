@@ -421,7 +421,7 @@ export default class CertificationsDoughnutComponent extends React.Component<any
 
                                     </tr>
                                 ))
-                            ) : (<div>not selected</div>)
+                            ) : (<tr><td>not selected</td></tr>)
 
 
 
