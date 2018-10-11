@@ -1,9 +1,6 @@
-import { apiClient } from '../../axios/api-client'
-import MockCompetencyTags from '../../assets/competency-tags.json';
-import MockGrades from '../../assets/grades.json';
-import MockLocations from '../../assets/locations.json';
 import MockProject from '../../assets/project.json';
 import MockUser from '../../assets/user.json';
+import { apiClient } from '../../axios/api-client';
 import { Certification } from "../../models/Certification";
 import { CompetencyTag } from "../../models/CompetencyTag";
 import { Grade } from "../../models/Grade";
@@ -109,10 +106,9 @@ export const fetchCertificationList = () => async (dispatch: any) => {
 
 export const fetchCompetencyTaggingList = () => async (dispatch: any) => {
     const res = await apiClient.get('competency');
-    console.log(res.data);
     dispatch({
         payload: {
-            listOfCompetencyTaggings: MockCompetencyTags.map((tag: any) => new CompetencyTag(tag))
+            listOfCompetencyTaggings: res.data.map((tag: any) => new CompetencyTag({ tagId: tag.ctId, name: tag.ct }))
         },
         type: addSkillsTypes.FETCH_COMPETENCY_TAGGINGS
     })
@@ -120,20 +116,19 @@ export const fetchCompetencyTaggingList = () => async (dispatch: any) => {
 
 export const fetchGradeList = () => async (dispatch: any) => {
     const res = await apiClient.get('grades');
-    console.log(res.data);
     dispatch({
         payload: {
-            listOfGrades: MockGrades.map((grade: any) => new Grade(grade))
+            listOfGrades: res.data.map((grade: any) => new Grade({ gradeId: grade.gradeId, name: grade.grade }))
         },
         type: addSkillsTypes.FETCH_GRADES
     })
 }
 
-export const fetchLocationList = () => (dispatch: any) => {
-    // fetch needs to pull list of possible grades
+export const fetchLocationList = () => async (dispatch: any) => {
+    const res = await apiClient.get('location');
     dispatch({
         payload: {
-            listOfLocations: MockLocations.map((location: any) => new Location(location))
+            listOfLocations: res.data.map((location: any) => new Location({ name: location.locationName }))
         },
         type: addSkillsTypes.FETCH_LOCATIONS
     })

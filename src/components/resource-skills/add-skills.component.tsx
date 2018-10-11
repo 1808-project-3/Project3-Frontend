@@ -397,12 +397,12 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                                 <Label for="inputLocation" lg={4} className="font-weight-bold">LOCATION</Label>
                                                 <Col lg={8} className="my-auto">
                                                     {existingProject ?
-                                                        <Input readOnly={existingProject} tabIndex={existingProject ? -1 : 0} invalid={submitted && !resource.project.location.locationId} value={resource.project.location.locationId ? resource.project.location.name : ""} onChange={e => this.props.updateResource(e.target)} type="text" name="location" id="inputLocation" required />
-                                                        : <Input readOnly={existingProject} tabIndex={existingProject ? -1 : 0} invalid={submitted && !resource.project.location.locationId} value={resource.project.location.locationId ? resource.project.location.locationId : ""} onChange={e => this.props.updateResource(e.target)} type="select" name="location" id="inputLocation" required >
+                                                        <Input readOnly={existingProject} tabIndex={existingProject ? -1 : 0} invalid={submitted && !resource.project.location.name} value={resource.project.location.name ? resource.project.location.name : ""} onChange={e => this.props.updateResource(e.target)} type="text" name="location" id="inputLocation" required />
+                                                        : <Input readOnly={existingProject} tabIndex={existingProject ? -1 : 0} invalid={submitted && !resource.project.location.name} value={resource.project.location.name ? resource.project.location.name : ""} onChange={e => this.props.updateResource(e.target)} type="select" name="location" id="inputLocation" required >
                                                             <option value="" hidden></option>
                                                             {this.props.listOfLocations.map((location: Location) => {
                                                                 return (
-                                                                    <option value={location.locationId} key={location.locationId}>{location.name}</option>
+                                                                    <option value={location.name} key={location.name}>{location.name}</option>
                                                                 )
                                                             })}
                                                         </Input>}
@@ -439,9 +439,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                                 this.props.updateParentResource(this.props.resource);
                                                 this.props.toggleConfirm();
                                             }
-
                                         }
-
                                     }} color="secondary" className="ml-4 px-3"><IoMdAddCircleOutline /><small className="ml-2">ADD USER</small></Button>
                                 </Row>
                             </Container>
