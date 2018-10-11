@@ -35,8 +35,13 @@ export class SearchResultComponent extends React.Component<any, {}> {
         }
     ]
 
+    public componentDidMount() {
+        console.log(this.props.searchResults.searchResults);
+    }
+
 
     public render() {
+        const { searchResults } = this.props.searchResults;
         return (
             <div>
                 <Row> 
@@ -53,13 +58,13 @@ export class SearchResultComponent extends React.Component<any, {}> {
                         </tr>
                     </thead>
                     <tbody>
-                        {this.mockResults.map((associate: any) =>
-                            <tr key={associate.ID}>
-                                <td className="search-result-label"><small>{associate.AssociateName}</small></td>
-                                <td className="search-result-label"><small>{associate.ID}</small></td>
-                                <td className="search-result-label"><small>{associate.Certification}</small></td>
-                                <td className="search-result-label"><small>{associate.ProjectName}</small></td>
-                                <td className="search-result-label"><small>{associate.Grade}</small></td>
+                        {searchResults.map((associate: any) =>
+                            <tr key={associate.associateId}>
+                                <td className="search-result-label"><small>{associate.associateName}</small></td>
+                                <td className="search-result-label"><small>{associate.associateId}</small></td>
+                                <td className="search-result-label"><small>{associate.certifications.toString()}</small></td>
+                                <td className="search-result-label"><small>{associate.projectName}</small></td>
+                                <td className="search-result-label"><small>{associate.grade}</small></td>
                             </tr>
                         )}
                     </tbody>
@@ -79,6 +84,7 @@ export class SearchResultComponent extends React.Component<any, {}> {
 const mapStateToProps = (state: IState) => {
     return {
         register: state.register,
+        searchResults: state.searchResults,
         signIn: state.signIn
     }
 }

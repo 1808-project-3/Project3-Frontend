@@ -13,7 +13,7 @@ interface IProps extends RouteComponentProps<{}> {
   updateError: (message: string) => any,
   updatePassword: (pass: string) => any,
   updateUsername: (userId: string) => any,
-  login: (e: React.FormEvent<HTMLFormElement>) => void,
+  login: (jwt: string, user: any) => void,
   signIn: ISignInState,
   jwt: IJwtState
 }
@@ -60,8 +60,9 @@ class SignInComponent extends React.Component<IProps, {}> {
       switch (res.status) {
         case 200:
           if (res.data) {
+            console.log(res.data);
             this.props.updateError("");
-            this.props.login(res.data.jwt);
+            this.props.login(res.data.jwt, res.data.user);
             localStorage.setItem('jwt', res.data.jwt);
             this.props.history.push('home');
           }

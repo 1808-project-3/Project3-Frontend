@@ -14,11 +14,11 @@ export class Breadcrumb extends React.PureComponent<any>
         let style = "crumb";
         if(this.props.active)
         {
-            style += " actv";
+            style += " bcActive";
         }
         else
         {
-            style += " inactive";
+            style += " bcInactive";
         }
         return(
             <div onClick={this.clicked} className={style}>
