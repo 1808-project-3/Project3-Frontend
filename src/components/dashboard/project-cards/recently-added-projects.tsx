@@ -11,18 +11,20 @@ export default class RecentlyAddedProjectsComponent extends React.Component<any,
         }
     }
 
-    public async componentDidMount(){
+    public componentDidMount(){
         // axios call to get projects
-        const res= await apiClient.get('http://ec2-18-221-142-75.us-east-2.compute.amazonaws.com:8088/project/recent');
-        if(res.status===200){
-            this.setState({
-                ...this.state,
-                recentlyAddedProjects: res.data
-            })
-        }
-        else{
-            throw new Error('Failed to retrieve recent projects');
-        }
+        const res= apiClient.get('http://ec2-18-221-142-75.us-east-2.compute.amazonaws.com:8088/project/recent');
+        res.then((projects) => {
+            if(projects.status===200){
+                this.setState({
+                    ...this.state,
+                    recentlyAddedProjects: projects.data
+                })
+            }
+            else{
+                throw new Error('Failed to retrieve recent projects');
+            }
+        })
     }
 
     public render(){
