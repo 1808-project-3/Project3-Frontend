@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Card, CardHeader, CardBody, ListGroup, ListGroupItem, CardLink } from 'reactstrap';
-import axios from 'axios';
+import { apiClient } from '../../../axios/api-client';
 
 export default class RecentlyAddedProjectsComponent extends React.Component<any, any> {
 
@@ -11,22 +11,18 @@ export default class RecentlyAddedProjectsComponent extends React.Component<any,
         }
     }
 
-    public componentDidMount(){
+    public async componentDidMount(){
         // axios call to get projects
-        axios.get('http://ec2-18-221-142-75.us-east-2.compute.amazonaws.com:8088/project/recent')
-        .then(resp => {
-          if (resp.status === 200) {
-            const recentProjects = resp.data;
-            this.setState({ 
+        const res= await apiClient.get('http://ec2-18-221-142-75.us-east-2.compute.amazonaws.com:8088/project/recent');
+        if(res.status===200){
+            this.setState({
                 ...this.state,
-                recentlyAddedProjects: recentProjects})
-            return;
-          }
-          throw new Error('Failed to retrieve recent projects');
-        })
-        .catch(err => {
-          console.error(err);
-        });
+                recentlyAddedProjects: res.data
+            })
+        }
+        else{
+            throw new Error('Failed to retrieve recent projects');
+        }
     }
 
     public render(){
@@ -38,7 +34,7 @@ export default class RecentlyAddedProjectsComponent extends React.Component<any,
                         <ListGroup className="project-card-list">
                             {this.state.recentlyAddedProjects.map((project: any, index: number) => {
                                 return (
-                                    <ListGroupItem className={(index%2===0)? "project-card-li-gray" : "project-card-li-white"} key={project.id}>{project.name}</ListGroupItem>
+                                    <ListGroupItem className={(index%2===0)? "project-card-li-gray" : "project-card-li-white"} key={project.projectId}>{project.name}</ListGroupItem>
                                 )
                             })}
                         </ListGroup>
