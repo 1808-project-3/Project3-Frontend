@@ -1,15 +1,23 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import {
-  getResourceList,
-  updateTableType
+    getAssociateList,
+    getCertificationList,
+    getResourceList,
+    updateTableType
 } from "../../../actions/info/info.actions";
 import { IState } from "../../../reducers";
 import { Table } from "reactstrap";
 
+
 interface IProps {
+  associateList: any[];
+  certificationList: any[];
+  projectList: any[];
   resourceList: any[];
   tableType: number;
+  getAssociateList: () => any;
+  getCertificationList: () => any;
   getResourceList: () => any;
   updateTableType: (text: string) => any;
 }
@@ -19,87 +27,140 @@ interface IProps {
  */
 
 class TablesComponent extends React.Component<IProps, any> {
-  constructor(props: any) {
-    super(props);
-  }
+    constructor(props: any) {
+        super(props);
+        this.findCert = this.findCert.bind(this);
+        this.findName = this.findName.bind(this);
+        this.findProjectName = this.findProjectName.bind(this);
+    }
 
-  public componentDidMount() {
-    this.props.getResourceList();
-  }
-
-  public render() {
-    console.log(this.props.resourceList);
-    let ifTrue = false;
-    return (
-      <Table>
-        <thead>
-          <tr>
-            <th>Associate Name</th>
-            <th>ID</th>
-            <th>Certification</th>
-            <th>Project Details</th>
-            <th>Grade</th>
-          </tr>
-        </thead>
-        <tbody>
-          {this.props.resourceList.map(item => {
-            item.skills.forEach((skill: any) => {
-              switch (this.props.tableType) {
-                  case 1:
-                      if(skill.skillId === 1 || skill.skillId === 5){
-                          ifTrue = true;
-                      }
-                      break;
-                  case 2:
-                      if(skill.skillId === 2 || skill.skillId === 3 || skill.skillId === 4){
-                          ifTrue = true;
-                      }
-                      break;
-                  case 3:
-                      if(skill.skillId === 6){
-                          ifTrue = true;
-                      }
-                      break;
-                  case 4:
-                      if(skill.skillId === 7 || skill.skillId === 8 || skill.skillId === 9 || skill.skillId === 10){
-                          ifTrue = true;
-                      }
-                      break;
-                  default:
-                      ifTrue = false;
-                      break;
-              }
-            });
-            if (ifTrue) {
-              ifTrue = false;
-              return (
-                <tr key={item.associateId}>
-                  <td>{item.associateId}</td>
-                  <td> {item.associateId} </td>
-                  <td> {item.aupCert} </td>
-                  <td> {item.projectId} </td>
-                  <td> {item.grades.grade} </td>
-                </tr>
-              );
-            } else {
-              return (
-                null
-              );
+    public findCert = (id: any) => {
+        let certName = "";
+        this.props.certificationList.forEach((cert: any) => {
+            if (+id === cert.id) {
+                certName = cert.certificationName;
             }
-          })}
-        </tbody>
-      </Table>
-    );
-  }
+        });
+        return certName
+    };
+
+    public findName = (id: any) => {
+        let name = ``;
+        this.props.associateList.forEach((a: any) => {
+            if (+id === +a.associateId) {
+                name = `${a.firstName} ${a.lastName}`;
+            }
+        });
+        return name;
+    };
+
+    public findProjectName = (id: any) => {
+        let name = "";
+        this.props.projectList.forEach((p: any) => {
+            if (+id === p.projectId) {
+                name = p.name;
+            }
+        });
+        return name;
+    };
+
+    public componentDidMount() {
+        this.props.getAssociateList();
+        this.props.getCertificationList();
+        this.props.getResourceList();
+    }
+
+    public render() {
+        let ifTrue = false;
+        if (this.props.associateList.length === 0) {
+            return (
+                <div id="loading">
+                    <br/>
+                    <span>Loading...</span>
+                </div>
+            );
+        }
+        else {
+            return (
+                <Table>
+                    <thead>
+                    <tr>
+                        <th>Associate Name</th>
+                        <th>ID</th>
+                        <th>Certification</th>
+                        <th>Project Details</th>
+                        <th>Grade</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {this.props.resourceList.map(item => {
+                        item.skills.forEach((skill: any) => {
+                            switch (this.props.tableType) {
+                                case 1:
+                                    if (skill.skillId === 1 || skill.skillId === 5) {
+                                        ifTrue = true;
+                                    }
+                                    break;
+                                case 2:
+                                    if (skill.skillId === 2 || skill.skillId === 3 || skill.skillId === 4) {
+                                        ifTrue = true;
+                                    }
+                                    break;
+                                case 3:
+                                    if (skill.skillId === 6) {
+                                        ifTrue = true;
+                                    }
+                                    break;
+                                case 4:
+                                    if (skill.skillId === 7 || skill.skillId === 8 || skill.skillId === 9 || skill.skillId === 10) {
+                                        ifTrue = true;
+                                    }
+                                    break;
+                                default:
+                                    ifTrue = false;
+                                    break;
+                            }
+                        });
+                        if (ifTrue) {
+                            ifTrue = false;
+                            return (
+                                <tr key={item.associateId}>
+                                    <td>{this.findName(item.associateId)}</td>
+                                    <td> {item.associateId} </td>
+                                    <td>{item.certs.map((c: any) => {
+                                        const certName = this.findCert(c.certId);
+                                        return <p key={c.id}>{certName}</p>
+                                    })}</td>
+                                    <td> {this.findProjectName(item.projectId)} </td>
+                                    <td> {item.grades.grade} </td>
+                                </tr>
+                            );
+                        } else {
+                            return (
+                                null
+                            );
+                        }
+                    })}
+                    </tbody>
+                </Table>
+            );
+        }
+    }
 }
+
 const mapStateToProps = (state: IState) => {
   return {
+    associateList: state.info.associateList,
+    certificationList: state.info.certificationList,
+    projectList: state.info.projectList,
     resourceList: state.info.resourceList,
     tableType: state.info.tableType
   };
 };
 
 const mapDispatchToProps = {
+  getAssociateList,
+  getCertificationList,
   getResourceList,
   updateTableType
 };

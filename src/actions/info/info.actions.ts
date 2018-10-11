@@ -4,6 +4,23 @@ import {api} from "../../API/api";
 import axios from "axios";
 // import {Resource} from "../../models/Resource";
 
+
+export const getCertificationList = () => (dispatch: any) => {
+    axios.get(api.certifications, {headers: {"JWT": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2Vycy9Uek1Vb2NNRjRwIiwiZXhwIjo2MjUxNjM3OTYwMCwidXNlcmlkIjoxMjM0NTYsInNjb3BlIjoic2VsZiBncm91cHMvdXNlcnMifQ.nD9kCwmbAIpFj__Qq_e2_XOkbBCe6zhXu713DoBOCjY"}})
+        .then(response => {
+            const certifications: any[] = [];
+            for (const c of response.data){
+                certifications.push(c);
+            }
+            dispatch({
+                payload: {
+                    certificationList: certifications
+                },
+                type: infoTypes.GET_CERTIFICATION_LIST
+            })
+        })
+}
+
 /**
  * This action uses axios make a GET request for all resources based on tableType
  * @param tableType
