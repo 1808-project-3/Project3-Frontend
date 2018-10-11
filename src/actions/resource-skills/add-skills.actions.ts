@@ -1,5 +1,3 @@
-import MockProject from '../../assets/project.json';
-import MockUser from '../../assets/user.json';
 import { apiClient } from '../../axios/api-client';
 import { Certification } from "../../models/Certification";
 import { CompetencyTag } from "../../models/CompetencyTag";
@@ -33,18 +31,19 @@ export const fetchSkillGroupList = () => async (dispatch: any) => {
     })
 }
 
-export const fetchProject = (projectId: number) => (dispatch: any) => {
-    let project = new Project();
-    if (projectId) {
-        project = new Project(MockProject);
-        project.supervisor = new User(project.supervisor);
-        project.location = new Location(project.location);
-        if (project.startDate) {
-            project.startDate = new Date(project.startDate);
-        }
-        if (project.endDate) {
-            project.endDate = new Date(project.endDate);
-        }
+export const fetchProject = (projectId: number) => async (dispatch: any) => {
+    const res = await apiClient.get(`project/${projectId}`);
+    const projectData = res.data;
+    const res2 = await apiClient.get(`users/${projectData.supervisorId}`);
+    const supervisor = res2.data
+    const project = new Project({ pId: projectData.projectId, name: projectData.name, customerName: projectData.customer });
+    project.supervisor = new User({ assocId: supervisor.userId, uId: supervisor.associateId, firstName: supervisor.firstName, lastName: supervisor.lastName, emailAddress: supervisor.email, roleId: supervisor.role })
+    project.location = new Location({ name: projectData.location });
+    if (projectData.startDate) {
+        project.startDate = new Date(projectData.startDate);
+    }
+    if (projectData.endDate) {
+        project.endDate = new Date(projectData.endDate);
     }
     dispatch({
         payload: {
@@ -79,14 +78,12 @@ export const clearSupervisor = () => {
     }
 }
 
-export const fetchSupervisor = (supId: number) => (dispatch: any) => {
-    let supervisor = new User();
-    if (supId) {
-        supervisor = new User(MockUser);
-    }
+export const fetchSupervisor = (supId: number) => async (dispatch: any) => {
+    const res = await apiClient.get(`users/${supId}`);
+    const userData = res.data;
     dispatch({
         payload: {
-            supervisor
+            supervisor: new User({ assocId: userData.userId, uId: userData.associateId, firstName: userData.firstName, lastName: userData.lastName, emailAddress: userData.email, roleId: userData.role })
         },
         type: addSkillsTypes.FETCH_SUPERVISOR
     })
