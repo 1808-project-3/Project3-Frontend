@@ -1,4 +1,4 @@
-import axios from 'axios';
+import { apiClient } from '../../axios/api-client'
 import MockCompetencyTags from '../../assets/competency-tags.json';
 import MockGrades from '../../assets/grades.json';
 import MockLocations from '../../assets/locations.json';
@@ -16,8 +16,8 @@ import { User } from "../../models/User";
 import { addSkillsTypes } from "./add-skills.types";
 
 export const fetchSkillGroupList = () => async (dispatch: any) => {
-    const res = await axios.get('http://ec2-54-70-66-176.us-west-2.compute.amazonaws.com:5002/skill-group', { headers: { "JWT": 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2Vycy9Uek1Vb2NNRjRwIiwiZXhwIjo2MjUxNjM3OTYwMCwidXNlcmlkIjoxMjM0NTYsInNjb3BlIjoic2VsZiBncm91cHMvdXNlcnMifQ.nD9kCwmbAIpFj__Qq_e2_XOkbBCe6zhXu713DoBOCjY' } });
-    const res1 = await axios.get('http://ec2-54-70-66-176.us-west-2.compute.amazonaws.com:5002/skills', { headers: { "JWT": 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2Vycy9Uek1Vb2NNRjRwIiwiZXhwIjo2MjUxNjM3OTYwMCwidXNlcmlkIjoxMjM0NTYsInNjb3BlIjoic2VsZiBncm91cHMvdXNlcnMifQ.nD9kCwmbAIpFj__Qq_e2_XOkbBCe6zhXu713DoBOCjY' } });
+    const res = await apiClient.get('skill-group');
+    const res1 = await apiClient.get('skills');
     const groupsWithSkills: any[] = [];
     res.data.forEach((el: any) => {
         const group = new Group({ groupId: el.id, name: el.groupName });
@@ -98,7 +98,7 @@ export const fetchSupervisor = (supId: number) => (dispatch: any) => {
 }
 
 export const fetchCertificationList = () => async (dispatch: any) => {
-    const res = await axios.get('http://ec2-54-70-66-176.us-west-2.compute.amazonaws.com:5002/certifications', { headers: { "JWT": 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2Vycy9Uek1Vb2NNRjRwIiwiZXhwIjo2MjUxNjM3OTYwMCwidXNlcmlkIjoxMjM0NTYsInNjb3BlIjoic2VsZiBncm91cHMvdXNlcnMifQ.nD9kCwmbAIpFj__Qq_e2_XOkbBCe6zhXu713DoBOCjY' } });
+    const res = await apiClient.get('certifications');
     dispatch({
         payload: {
             listOfCertifications: res.data.map((cert: any) => new Certification({ certId: cert.id, name: cert.certificationName }))
