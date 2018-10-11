@@ -12,10 +12,6 @@ import './include/bootstrap';
 import { store } from './Store';
 import { ProtectedRoute } from './components/routes/protected-route.component';
 
-// import { ResourceSkillsDetail } from './components/resource-skills/resource-skills-detail.component'
-// import projectListTableComponent from "./components/project-list/project-list-table/project-list-table.component";
-// import AddSkillsComponent from './components/resource-skills/add-skills.component';
-
 class App extends React.Component {
 
   public render() {
