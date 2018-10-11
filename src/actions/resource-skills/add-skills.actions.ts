@@ -1,24 +1,20 @@
-import axios from 'axios';
-import MockCompetencyTags from '../../assets/competency-tags.json';
-import MockGrades from '../../assets/grades.json';
-import MockLocations from '../../assets/locations.json';
 import MockProject from '../../assets/project.json';
 import MockUser from '../../assets/user.json';
+import { apiClient } from '../../axios/api-client';
 import { Certification } from "../../models/Certification";
 import { CompetencyTag } from "../../models/CompetencyTag";
 import { Grade } from "../../models/Grade";
 import { Group } from "../../models/Group";
 import { Location } from "../../models/Location";
 import { Project } from "../../models/Project";
-import { Resource } from "../../models/Resource";
 import { Resume } from "../../models/Resume";
 import { Skill } from "../../models/Skill";
 import { User } from "../../models/User";
 import { addSkillsTypes } from "./add-skills.types";
 
 export const fetchSkillGroupList = () => async (dispatch: any) => {
-    const res = await axios.get('http://ec2-54-70-66-176.us-west-2.compute.amazonaws.com:5002/skill-group', { headers: { "JWT": 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2Vycy9Uek1Vb2NNRjRwIiwiZXhwIjo2MjUxNjM3OTYwMCwidXNlcmlkIjoxMjM0NTYsInNjb3BlIjoic2VsZiBncm91cHMvdXNlcnMifQ.nD9kCwmbAIpFj__Qq_e2_XOkbBCe6zhXu713DoBOCjY' } });
-    const res1 = await axios.get('http://ec2-54-70-66-176.us-west-2.compute.amazonaws.com:5002/skills', { headers: { "JWT": 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2Vycy9Uek1Vb2NNRjRwIiwiZXhwIjo2MjUxNjM3OTYwMCwidXNlcmlkIjoxMjM0NTYsInNjb3BlIjoic2VsZiBncm91cHMvdXNlcnMifQ.nD9kCwmbAIpFj__Qq_e2_XOkbBCe6zhXu713DoBOCjY' } });
+    const res = await apiClient.get('skill-group');
+    const res1 = await apiClient.get('skills');
     const groupsWithSkills: any[] = [];
     res.data.forEach((el: any) => {
         const group = new Group({ groupId: el.id, name: el.groupName });
@@ -58,14 +54,12 @@ export const fetchProject = (projectId: number) => (dispatch: any) => {
     })
 }
 
-export const fetchAssociate = (assocId: number) => (dispatch: any) => {
-    let associate = new User();
-    if (assocId) {
-        associate = new User(MockUser);
-    }
+export const fetchAssociate = (assocId: number) => async (dispatch: any) => {
+    const res = await apiClient.get(`users/${assocId}`);
+    const userData = res.data;
     dispatch({
         payload: {
-            associate
+            associate: new User({ assocId: userData.userId, uId: userData.associateId, firstName: userData.firstName, lastName: userData.lastName, emailAddress: userData.email, roleId: userData.role })
         },
         type: addSkillsTypes.FETCH_ASSOCIATE
     })
@@ -99,7 +93,7 @@ export const fetchSupervisor = (supId: number) => (dispatch: any) => {
 }
 
 export const fetchCertificationList = () => async (dispatch: any) => {
-    const res = await axios.get('http://ec2-54-70-66-176.us-west-2.compute.amazonaws.com:5002/certifications', { headers: { "JWT": 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2Vycy9Uek1Vb2NNRjRwIiwiZXhwIjo2MjUxNjM3OTYwMCwidXNlcmlkIjoxMjM0NTYsInNjb3BlIjoic2VsZiBncm91cHMvdXNlcnMifQ.nD9kCwmbAIpFj__Qq_e2_XOkbBCe6zhXu713DoBOCjY' } });
+    const res = await apiClient.get('certifications');
     dispatch({
         payload: {
             listOfCertifications: res.data.map((cert: any) => new Certification({ certId: cert.id, name: cert.certificationName }))
@@ -108,30 +102,31 @@ export const fetchCertificationList = () => async (dispatch: any) => {
     })
 }
 
-export const fetchCompetencyTaggingList = () => (dispatch: any) => {
+export const fetchCompetencyTaggingList = () => async (dispatch: any) => {
+    const res = await apiClient.get('competency');
     dispatch({
         payload: {
-            listOfCompetencyTaggings: MockCompetencyTags.map((tag: any) => new CompetencyTag(tag))
+            listOfCompetencyTaggings: res.data.map((tag: any) => new CompetencyTag({ tagId: tag.ctId, name: tag.ct }))
         },
         type: addSkillsTypes.FETCH_COMPETENCY_TAGGINGS
     })
 }
 
-export const fetchGradeList = () => (dispatch: any) => {
-    // Fetch needs to pull list of possible Grades
+export const fetchGradeList = () => async (dispatch: any) => {
+    const res = await apiClient.get('grades');
     dispatch({
         payload: {
-            listOfGrades: MockGrades.map((grade: any) => new Grade(grade))
+            listOfGrades: res.data.map((grade: any) => new Grade({ gradeId: grade.gradeId, name: grade.grade }))
         },
         type: addSkillsTypes.FETCH_GRADES
     })
 }
 
-export const fetchLocationList = () => (dispatch: any) => {
-    // fetch needs to pull list of possible grades
+export const fetchLocationList = () => async (dispatch: any) => {
+    const res = await apiClient.get('location');
     dispatch({
         payload: {
-            listOfLocations: MockLocations.map((location: any) => new Location(location))
+            listOfLocations: res.data.map((location: any) => new Location({ name: location.locationName }))
         },
         type: addSkillsTypes.FETCH_LOCATIONS
     })
@@ -233,10 +228,10 @@ export const cancelResource = () => {
     }
 }
 
-export const submitResource = (resource: Resource) => (dispatch: any) => {
+export const submitResource = (valid: boolean) => (dispatch: any) => {
     dispatch({
         payload: {
-            submitted: true
+            submitted: valid
         },
         type: addSkillsTypes.SUBMIT_RESOURCE
     })

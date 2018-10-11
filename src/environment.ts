@@ -1,9 +1,9 @@
 const dev = {
-  context: "http://localhost:8080/"
+  context: "http://ec2-35-153-210-251.compute-1.amazonaws.com:8888/"
 };
 
 const prod = {
-  context: "http://ec2-18-218-165-41.us-east-2.compute.amazonaws.com:8080/"
+  context: "http://ec2-35-153-210-251.compute-1.amazonaws.com:8888/"
 };
 
 export const environment = process.env.NODE_ENV === "production" ? prod : dev;

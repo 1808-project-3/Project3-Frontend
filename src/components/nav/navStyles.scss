@@ -55,29 +55,3 @@
     font-size: 13px;
 }
 
-.searchContainer{
-    height: 60%;
-    display: inline-block;
-    border: solid 1px #DDD;
-    border-radius: 5px;
-    overflow: hidden;
-    margin-right: 1em;
-    place-self: center;
-}
-
-.searchForm{
-    height: 100%;
-}
-
-.searchInput{
-    width: 20em;
-    height: 100%;
-    display: inline-block;
-    border: none;
-    font-size: 12px;
-}
-.searchIcon{
-    display: inline-block;
-    width: 1.5em;
-    cursor: pointer;
-}
