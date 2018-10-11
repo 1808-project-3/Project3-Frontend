@@ -12,6 +12,8 @@ export default class ChartComponent  extends React.Component<any,any> {
     // displays total number of associates in db
     // clicking this page opens the associates list page
 
+    
+
     constructor(props:any) {
         super(props);
     
@@ -73,12 +75,8 @@ export default class ChartComponent  extends React.Component<any,any> {
                             </TabPane>
 
 
-                            <TabPane tabId="2">
-                                <Row>
-                                    <Col md={12}>
-                                    <CertificationsDoughnutComponent/>
-                                    </Col>                    
-                                </Row>
+                            <TabPane tabId="2">    
+                                <CertificationsDoughnutComponent/>
                             </TabPane>
 
                         </TabContent>

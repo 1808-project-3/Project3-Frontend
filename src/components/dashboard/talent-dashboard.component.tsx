@@ -7,7 +7,7 @@ import CertifiedAssociatesTile from './dashboard-tiles/dashboard-tile-certified.
 import ProjectsTile from './dashboard-tiles/dashboard-tile-projects.component';
 import RecentlyAddedProjectsComponent from './project-cards/recently-added-projects';
 import ResourceRequirementComponent from './project-cards/resource-requirement';
-import {MdSend} from 'react-icons/md'
+import {MdSend} from 'react-icons/md';
 
 
 export default class TalentDashboard extends React.Component {
@@ -48,9 +48,6 @@ export default class TalentDashboard extends React.Component {
                         <ChartComponent />
                     </Col>
                 </Row>
-                
-
-
             </Container>
 
         )

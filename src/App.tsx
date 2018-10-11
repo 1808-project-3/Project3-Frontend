@@ -25,7 +25,9 @@ class App extends React.Component {
             <Switch>
               <Route path="/sign-in" component={SignInComponent} />
               <Route path="/register" component={RegisterComponent} />
+              <Route path="/dashboard" component={TalentDashboard} />
               <Route path="/home" component={this.wrappedRoutes} />
+
               <Route component={SignInComponent} />
             </Switch>
           </div>

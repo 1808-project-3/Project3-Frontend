@@ -50,7 +50,7 @@ class SignInComponent extends React.Component<IProps, {}> {
 
   public login = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-      const resp = axios.post(`http://localhost:8087/users/login`, this.props.signIn.credentials)
+      const resp = axios.post(`http://ec2-18-191-67-157.us-east-2.compute.amazonaws.com:8087/users/login`, this.props.signIn.credentials)
       console.log(resp);
   
       resp.then(res => {
