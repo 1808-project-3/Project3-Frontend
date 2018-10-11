@@ -1,5 +1,4 @@
 import MockProject from '../../assets/project.json';
-import MockUser from '../../assets/user.json';
 import { apiClient } from '../../axios/api-client';
 import { Certification } from "../../models/Certification";
 import { CompetencyTag } from "../../models/CompetencyTag";
@@ -79,14 +78,12 @@ export const clearSupervisor = () => {
     }
 }
 
-export const fetchSupervisor = (supId: number) => (dispatch: any) => {
-    let supervisor = new User();
-    if (supId) {
-        supervisor = new User(MockUser);
-    }
+export const fetchSupervisor = (supId: number) => async (dispatch: any) => {
+    const res = await apiClient.get(`users/${supId}`);
+    const userData = res.data;
     dispatch({
         payload: {
-            supervisor
+            supervisor: new User({ assocId: userData.userId, uId: userData.associateId, firstName: userData.firstName, lastName: userData.lastName, emailAddress: userData.email, roleId: userData.role })
         },
         type: addSkillsTypes.FETCH_SUPERVISOR
     })
