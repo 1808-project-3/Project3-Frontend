@@ -78,7 +78,7 @@ export const addSkillsReducer = (state = initialState, action: any) => {
                     newState.resource = newResource;
                     break;
                 case "location":
-                    const newLocation = new Location(state.listOfLocations.find(location => location.locationId === +action.payload.value));
+                    const newLocation = new Location(state.listOfLocations.find(location => location.name === action.payload.value));
                     const newLocationProject = new Project({ ...state.resource.project, location: newLocation });
                     newResource.project = newLocationProject;
                     newState.resource = newResource;
