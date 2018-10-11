@@ -10,7 +10,6 @@ import { Grade } from "../../models/Grade";
 import { Group } from "../../models/Group";
 import { Location } from "../../models/Location";
 import { Project } from "../../models/Project";
-import { Resource } from "../../models/Resource";
 import { Resume } from "../../models/Resume";
 import { Skill } from "../../models/Skill";
 import { User } from "../../models/User";
@@ -233,10 +232,10 @@ export const cancelResource = () => {
     }
 }
 
-export const submitResource = (resource: Resource) => (dispatch: any) => {
+export const submitResource = (valid: boolean) => (dispatch: any) => {
     dispatch({
         payload: {
-            submitted: true
+            submitted: valid
         },
         type: addSkillsTypes.SUBMIT_RESOURCE
     })

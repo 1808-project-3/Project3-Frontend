@@ -47,7 +47,7 @@ interface IProps extends RouteComponentProps<{}>, IAddSkillsState {
     toggleSkillGroup: (event: any) => void
     showOrHideProject: (newOrExisting: string) => void
     cancelResource: () => void
-    submitResource: (resource: Resource) => void
+    submitResource: (valid: boolean) => void
     updateParentResource: (newResource: Resource) => void
 }
 
@@ -67,6 +67,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
         this.props.fetchGradeList();
         this.props.fetchLocationList();
         this.props.fetchCertificationList();
+        this.props.submitResource(false);
     }
 
     public componentDidUpdate(prevProps: IProps) {
@@ -432,7 +433,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                 <Row>
                                     <Button onClick={this.cancel} color="secondary" className="ml-auto px-4"><small>CANCEL</small></Button>
                                     <Button onClick={() => {
-                                        this.props.submitResource(resource);
+                                        this.props.submitResource(true);
                                         if (this.formElement) {
                                             if (this.formElement.checkValidity()) {
                                                 this.props.updateParentResource(this.props.resource);
