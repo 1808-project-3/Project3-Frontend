@@ -6,6 +6,8 @@
     "build-css": "node-sass-chokidar src/ -o src/",
     "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
     "start-js": "react-scripts-ts start",
+    "styleguide": "styleguidist server",
+    "styleguide:build": "styleguidist build",
     "start": "npm-run-all -p watch-css start-js",
     "build-js": "react-scripts-ts build",
     "build": "npm-run-all build-css build-js",
@@ -69,6 +71,8 @@
     "enzyme": "^3.4.4",
     "enzyme-adapter-react-16": "^1.2.0",
     "json-loader": "^0.5.4",
+    "react-docgen-typescript": "^1.10.0",
+    "react-styleguidist": "^7.3.10",
     "typescript": "^2.9.1",
     "webpack": "^3.0.0"
   }

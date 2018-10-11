@@ -12,12 +12,14 @@ import { CompetencyTag } from "../models/CompetencyTag";
 import { Certification } from "../models/Certification";
 import { resourceSkillsDisplayReducer } from "./resource-skills-display.reducer";
 import { Group } from "../models/Group";
+import { User } from "src/models/User";
 
 export interface ISignInState {
   credentials: {
     pass: string,
     userId: string
   },
+  currentUser: User,
   errorForgotMessage: string,
   errorMessage: string,
   modal: boolean,

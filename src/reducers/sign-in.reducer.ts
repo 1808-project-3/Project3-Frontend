@@ -1,15 +1,18 @@
 import { signInTypes } from "../actions/sign-in/sign-in.types";
 import { ISignInState } from ".";
+import { User } from "src/models/User";
 
 const initialState: ISignInState = {
   credentials : {
     pass: '',
     userId: ''
   },
+  currentUser: new User,
   errorForgotMessage: '',
   errorMessage: '',
   modal: false,
-  resetModal: false
+  resetModal: false,
+  
 }
 
 export const signInReducer = (state = initialState, action: any) => {
@@ -42,18 +45,11 @@ export const signInReducer = (state = initialState, action: any) => {
       }
 
       case signInTypes.LOGIN:
-      const errorMessage = action.payload.errorMessage
-      const newState = {
+      
+      return {
         ...state,
-        errorMessage
-      }
-      if (!errorMessage) {
-        newState.credentials = {
-          ...newState.credentials,
-          pass: ''
+        currentUser: action.payload.currentUser
         }
-      }
-      return newState;
 
       case signInTypes.CHANGE_MODAL:
       return {

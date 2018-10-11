@@ -24,6 +24,7 @@ import { Resource } from '../../models/Resource';
 import { Skill } from '../../models/Skill';
 import { IAddSkillsState, IState } from '../../reducers';
 import { ClosablePill } from './closable-pill.component';
+import { getCurrentUser } from '../../helpers';
 
 interface IProps extends RouteComponentProps<{}>, IAddSkillsState {
     fetchAssociate: (assocId: number) => void
@@ -47,7 +48,7 @@ interface IProps extends RouteComponentProps<{}>, IAddSkillsState {
     toggleSkillGroup: (event: any) => void
     showOrHideProject: (newOrExisting: string) => void
     cancelResource: () => void
-    submitResource: (resource: Resource) => void
+    submitResource: (valid: boolean) => void
     updateParentResource: (newResource: Resource) => void
 }
 
@@ -67,6 +68,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
         this.props.fetchGradeList();
         this.props.fetchLocationList();
         this.props.fetchCertificationList();
+        this.props.submitResource(false);
     }
 
     public componentDidUpdate(prevProps: IProps) {
@@ -92,15 +94,12 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
     public render() {
         const { resource, skillGroupIds, submitted } = this.props;
         const user = resource.user;
-        const validAssociateName = user.firstName && user.lastName;
-        const associateName = `${user.firstName} ${user.lastName}`
         const supervisor = resource.project.supervisor;
-        const validSupervisorName = supervisor.firstName && supervisor.lastName;
-        const supervisorName = `${supervisor.firstName} ${supervisor.lastName}`
         const showDateError = submitted && !((resource.project.startDate && resource.project.endDate) || this.props.dateTbd);
         const newProject = this.props.newOrExistingProject === 'new'
         const existingProject = this.props.newOrExistingProject === 'existing';
         const noProject = this.props.newOrExistingProject === 'none';
+        const currentUser = getCurrentUser();
         let dateErrorMessage = 'Please select a project start and end date or press to be decided';
         if (showDateError) {
             if (resource.project.startDate) {
@@ -142,17 +141,19 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                         <FormGroup row>
                                             <Label for="inputAssociateName" className="font-weight-bold" lg={4}>ASSOCIATE NAME</Label>
                                             <Col lg={8} className="my-auto">
-                                                <Input value={validAssociateName ? associateName : ''} onChange={e => this.props.updateResource(e.target)} type="text" name="associateName" id="inputAssociateName" placeholder="Autofills with valid Associate ID" readOnly tabIndex={-1} />
+                                                <Input value={user.getFullName()} onChange={e => this.props.updateResource(e.target)} type="text" name="associateName" id="inputAssociateName" placeholder="Autofills with valid Associate ID" readOnly tabIndex={-1} />
                                             </Col>
                                         </FormGroup>
-                                        <FormGroup row>
-                                            <Label for="aopCertified" lg={4} className="font-weight-bold">AOP CERTIFIED</Label>
-                                            <Col lg={8} className="my-auto">
-                                                <CustomInput invalid={submitted && resource.aupCertified === undefined} onChange={e => this.props.updateResource(e.target)} checked={resource.aupCertified || false} type="radio" id="aop-certified-yes" name="aopCertified" className="d-inline-block pr-4" label="YES" required />
-                                                <CustomInput invalid={submitted && resource.aupCertified === undefined} onChange={e => this.props.updateResource(e.target)} checked={resource.aupCertified !== undefined && !resource.aupCertified} type="radio" id="aop-certified-no" name="aopCertified" className="d-inline-block" label="NO" required />
-                                                {submitted && resource.aupCertified === undefined && <FormFeedback className="d-inline-block">Please choose either yes or no</FormFeedback>}
-                                            </Col>
-                                        </FormGroup>
+                                        {currentUser && currentUser.isTalentEnablementLead() &&
+                                            <FormGroup row>
+                                                <Label for="aopCertified" lg={4} className="font-weight-bold">AOP CERTIFIED</Label>
+                                                <Col lg={8} className="my-auto">
+                                                    <CustomInput invalid={submitted && resource.aupCertified === undefined} onChange={e => this.props.updateResource(e.target)} checked={resource.aupCertified || false} type="radio" id="aop-certified-yes" name="aopCertified" className="d-inline-block pr-4" label="YES" required />
+                                                    <CustomInput invalid={submitted && resource.aupCertified === undefined} onChange={e => this.props.updateResource(e.target)} checked={resource.aupCertified !== undefined && !resource.aupCertified} type="radio" id="aop-certified-no" name="aopCertified" className="d-inline-block" label="NO" required />
+                                                    {submitted && resource.aupCertified === undefined && <FormFeedback className="d-inline-block">Please choose either yes or no</FormFeedback>}
+                                                </Col>
+                                            </FormGroup>
+                                        }
                                         <FormGroup row>
                                             <Label for="skillsGroup" lg={4} className="font-weight-bold">SKILLS - GROUP</Label>
                                             <Col lg={8} className="my-auto">
@@ -389,7 +390,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                             <FormGroup row>
                                                 <Label for="inputSupervisorName" lg={4} className="font-weight-bold">HCM SUPERVISOR NAME</Label>
                                                 <Col lg={8} className="my-auto">
-                                                    <Input value={validSupervisorName ? supervisorName : ''} onChange={e => this.props.updateResource(e.target)} type="text" name="supervisorName" id="inputSupervisorName" placeholder="Autofills with valid supervisor ID" readOnly tabIndex={-1} />
+                                                    <Input value={supervisor.getFullName()} onChange={e => this.props.updateResource(e.target)} type="text" name="supervisorName" id="inputSupervisorName" placeholder="Autofills with valid supervisor ID" readOnly tabIndex={-1} />
                                                 </Col>
                                             </FormGroup>
                                             <FormGroup row>
@@ -432,7 +433,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                 <Row>
                                     <Button onClick={this.cancel} color="secondary" className="ml-auto px-4"><small>CANCEL</small></Button>
                                     <Button onClick={() => {
-                                        this.props.submitResource(resource);
+                                        this.props.submitResource(true);
                                         if (this.formElement) {
                                             if (this.formElement.checkValidity()) {
                                                 this.props.updateParentResource(this.props.resource);
