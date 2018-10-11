@@ -107,7 +107,9 @@ export const fetchCertificationList = () => async (dispatch: any) => {
     })
 }
 
-export const fetchCompetencyTaggingList = () => (dispatch: any) => {
+export const fetchCompetencyTaggingList = () => async (dispatch: any) => {
+    const res = await apiClient.get('competency');
+    console.log(res.data);
     dispatch({
         payload: {
             listOfCompetencyTaggings: MockCompetencyTags.map((tag: any) => new CompetencyTag(tag))
@@ -116,8 +118,9 @@ export const fetchCompetencyTaggingList = () => (dispatch: any) => {
     })
 }
 
-export const fetchGradeList = () => (dispatch: any) => {
-    // Fetch needs to pull list of possible Grades
+export const fetchGradeList = () => async (dispatch: any) => {
+    const res = await apiClient.get('grades');
+    console.log(res.data);
     dispatch({
         payload: {
             listOfGrades: MockGrades.map((grade: any) => new Grade(grade))
