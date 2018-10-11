@@ -1,25 +1,23 @@
-import axios from 'axios';
+import { apiClient } from '../../axios/api-client'
 import MockCompetencyTags from '../../assets/competency-tags.json';
 import MockGrades from '../../assets/grades.json';
 import MockLocations from '../../assets/locations.json';
 import MockProject from '../../assets/project.json';
 import MockUser from '../../assets/user.json';
-import history from '../../history';
 import { Certification } from "../../models/Certification";
 import { CompetencyTag } from "../../models/CompetencyTag";
 import { Grade } from "../../models/Grade";
 import { Group } from "../../models/Group";
 import { Location } from "../../models/Location";
 import { Project } from "../../models/Project";
-import { Resource } from "../../models/Resource";
 import { Resume } from "../../models/Resume";
 import { Skill } from "../../models/Skill";
 import { User } from "../../models/User";
 import { addSkillsTypes } from "./add-skills.types";
 
 export const fetchSkillGroupList = () => async (dispatch: any) => {
-    const res = await axios.get('http://ec2-54-70-66-176.us-west-2.compute.amazonaws.com:5002/skill-group', { headers: { "JWT": 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2Vycy9Uek1Vb2NNRjRwIiwiZXhwIjo2MjUxNjM3OTYwMCwidXNlcmlkIjoxMjM0NTYsInNjb3BlIjoic2VsZiBncm91cHMvdXNlcnMifQ.nD9kCwmbAIpFj__Qq_e2_XOkbBCe6zhXu713DoBOCjY' } });
-    const res1 = await axios.get('http://ec2-54-70-66-176.us-west-2.compute.amazonaws.com:5002/skills', { headers: { "JWT": 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2Vycy9Uek1Vb2NNRjRwIiwiZXhwIjo2MjUxNjM3OTYwMCwidXNlcmlkIjoxMjM0NTYsInNjb3BlIjoic2VsZiBncm91cHMvdXNlcnMifQ.nD9kCwmbAIpFj__Qq_e2_XOkbBCe6zhXu713DoBOCjY' } });
+    const res = await apiClient.get('skill-group');
+    const res1 = await apiClient.get('skills');
     const groupsWithSkills: any[] = [];
     res.data.forEach((el: any) => {
         const group = new Group({ groupId: el.id, name: el.groupName });
@@ -73,14 +71,14 @@ export const fetchAssociate = (assocId: number) => (dispatch: any) => {
 }
 
 export const clearAssociate = () => {
-    return{
+    return {
         payload: {},
         type: addSkillsTypes.CLEAR_ASSOCIATE
     }
 }
 
 export const clearSupervisor = () => {
-    return{
+    return {
         payload: {},
         type: addSkillsTypes.CLEAR_SUPERVISOR
     }
@@ -100,7 +98,7 @@ export const fetchSupervisor = (supId: number) => (dispatch: any) => {
 }
 
 export const fetchCertificationList = () => async (dispatch: any) => {
-    const res = await axios.get('http://ec2-54-70-66-176.us-west-2.compute.amazonaws.com:5002/certifications', { headers: { "JWT": 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2Vycy9Uek1Vb2NNRjRwIiwiZXhwIjo2MjUxNjM3OTYwMCwidXNlcmlkIjoxMjM0NTYsInNjb3BlIjoic2VsZiBncm91cHMvdXNlcnMifQ.nD9kCwmbAIpFj__Qq_e2_XOkbBCe6zhXu713DoBOCjY' } });
+    const res = await apiClient.get('certifications');
     dispatch({
         payload: {
             listOfCertifications: res.data.map((cert: any) => new Certification({ certId: cert.id, name: cert.certificationName }))
@@ -109,7 +107,9 @@ export const fetchCertificationList = () => async (dispatch: any) => {
     })
 }
 
-export const fetchCompetencyTaggingList = () => (dispatch: any) => {
+export const fetchCompetencyTaggingList = () => async (dispatch: any) => {
+    const res = await apiClient.get('competency');
+    console.log(res.data);
     dispatch({
         payload: {
             listOfCompetencyTaggings: MockCompetencyTags.map((tag: any) => new CompetencyTag(tag))
@@ -118,8 +118,9 @@ export const fetchCompetencyTaggingList = () => (dispatch: any) => {
     })
 }
 
-export const fetchGradeList = () => (dispatch: any) => {
-    // Fetch needs to pull list of possible Grades
+export const fetchGradeList = () => async (dispatch: any) => {
+    const res = await apiClient.get('grades');
+    console.log(res.data);
     dispatch({
         payload: {
             listOfGrades: MockGrades.map((grade: any) => new Grade(grade))
@@ -228,17 +229,16 @@ export const removeResume = (resumeId: number) => {
 }
 
 export const cancelResource = () => {
-    history.push('/home')
     return {
         payload: {},
         type: addSkillsTypes.CANCEL_RESOURCE
     }
 }
 
-export const submitResource = (resource: Resource) => (dispatch: any) => {
+export const submitResource = (valid: boolean) => (dispatch: any) => {
     dispatch({
         payload: {
-            submitted: true
+            submitted: valid
         },
         type: addSkillsTypes.SUBMIT_RESOURCE
     })

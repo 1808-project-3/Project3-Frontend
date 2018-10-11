@@ -1,65 +1,81 @@
 import * as React from 'react';
 import { IState } from '../../reducers';
 import { connect } from 'react-redux';
-import { Table, Label } from 'reactstrap';
+import { Table, Label, Row, Col } from 'reactstrap';
+import RecentlyAddedProjectsComponent from '../dashboard/project-cards/recently-added-projects';
+import ResourceRequirementComponent from '../dashboard/project-cards/resource-requirement';
 
 
 export class SearchResultComponent extends React.Component<any, {}> {
 
-    public mockResults = [
-        {
-            AssociateName: 'John Wells',
-            Certification: 'Cert Details',
-            Grade: 'M',
-            ID: 348847,
-            ProjectName: 'Project Name',
+    // public mockResults = [
+    //     {
+    //         AssociateName: 'John Wells',
+    //         Certification: 'Cert Details',
+    //         Grade: 'M',
+    //         ID: 348847,
+    //         ProjectName: 'Project Name',
 
-        },
-        {
-            AssociateName: 'Bob Man',
-            Certification: 'Cert Details',
-            Grade: 'SA',
-            ID: 948347,
-            ProjectName: 'Project Name',
+    //     },
+    //     {
+    //         AssociateName: 'Bob Man',
+    //         Certification: 'Cert Details',
+    //         Grade: 'SA',
+    //         ID: 948347,
+    //         ProjectName: 'Project Name',
 
-        },
-        {
-            AssociateName: 'Blake Kruppa',
-            Certification: 'Cert Details',
-            Grade: 'M',
-            ID: 69_420,
-            ProjectName: 'Talent Portal Server Dream',
+    //     },
+    //     {
+    //         AssociateName: 'Blake Kruppa',
+    //         Certification: 'Cert Details',
+    //         Grade: 'M',
+    //         ID: 69_420,
+    //         ProjectName: 'Talent Portal Server Dream',
 
-        }
-    ]
+    //     }
+    // ]
+
+    public componentDidMount() {
+        console.log(this.props.searchResults.searchResults);
+    }
 
 
     public render() {
+        const { searchResults } = this.props.searchResults;
         return (
             <div>
+                <Row> 
+                <Col>
                 <Label className="search-result-label"><small className='font-weight-bold'>SEARCH RESULTS</small></Label>
-            <Table className='search-result-table'>
-                <thead>
-                    <tr>
-                        <th><Label className="search-result-label"><small className='font-weight-bold'>ASSOCIATE NAME</small></Label></th>
-                        <th><Label className="search-result-label"><small className='font-weight-bold'>ID</small></Label></th>
-                        <th><Label className="search-result-label"><small className='font-weight-bold'>CERTIFICATION</small></Label></th>
-                        <th><Label className="search-result-label"><small className='font-weight-bold'>PROJECT DETAILS</small></Label></th>
-                        <th><Label className="search-result-label"><small className='font-weight-bold'>GRADE</small></Label></th>
-                    </tr>
-                </thead>
-                <tbody>
-                {this.mockResults.map((associate: any) =>
-                      <tr key={associate.ID}>
-                        <td className="search-result-label"><small>{associate.AssociateName}</small></td>
-                        <td className="search-result-label"><small>{associate.ID}</small></td>
-                        <td className="search-result-label"><small>{associate.Certification}</small></td>
-                        <td className="search-result-label"><small>{associate.ProjectName}</small></td>
-                        <td className="search-result-label"><small>{associate.Grade}</small></td>
-                      </tr>
-                    )}
-                </tbody>
-            </Table>
+                <Table className='search-result-table'>
+                    <thead>
+                        <tr>
+                            <th><Label className="search-result-label"><small className='font-weight-bold'>ASSOCIATE NAME</small></Label></th>
+                            <th><Label className="search-result-label"><small className='font-weight-bold'>ID</small></Label></th>
+                            <th><Label className="search-result-label"><small className='font-weight-bold'>CERTIFICATION</small></Label></th>
+                            <th><Label className="search-result-label"><small className='font-weight-bold'>PROJECT DETAILS</small></Label></th>
+                            <th><Label className="search-result-label"><small className='font-weight-bold'>GRADE</small></Label></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {searchResults.map((associate: any) =>
+                            <tr key={associate.associateId}>
+                                <td className="search-result-label"><small>{associate.associateName}</small></td>
+                                <td className="search-result-label"><small>{associate.associateId}</small></td>
+                                <td className="search-result-label"><small>{associate.certifications.toString()}</small></td>
+                                <td className="search-result-label"><small>{associate.projectName}</small></td>
+                                <td className="search-result-label"><small>{associate.grade}</small></td>
+                            </tr>
+                        )}
+                    </tbody>
+                </Table>
+                </Col>
+                <Col md={3}>
+                <RecentlyAddedProjectsComponent />
+                <br/>
+                <ResourceRequirementComponent />
+                </Col>
+                </Row>
             </div>
         );
     }
@@ -68,6 +84,7 @@ export class SearchResultComponent extends React.Component<any, {}> {
 const mapStateToProps = (state: IState) => {
     return {
         register: state.register,
+        searchResults: state.searchResults,
         signIn: state.signIn
     }
 }

@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { Provider } from 'react-redux';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Switch } from 'react-router-dom';
 import './App.css';
+import TalentDashboard from './components/dashboard/talent-dashboard.component';
 import { Layout } from './components/layout/layout.component';
 import RegisterComponent from './components/register/register.component';
 import ResourceSkillDisplayComponent from './components/resource-skills/resource-skills-display';
@@ -9,11 +10,11 @@ import SearchResultComponent from './components/search-result/search-result.comp
 import SignInComponent from './components/sign-in/sign-in.component';
 import './include/bootstrap';
 import { store } from './Store';
-import TalentDashboard from './components/dashboard/talent-dashboard.component';
+import { ProtectedRoute } from './components/routes/protected-route.component';
+
+// import { ResourceSkillsDetail } from './components/resource-skills/resource-skills-detail.component'
 // import projectListTableComponent from "./components/project-list/project-list-table/project-list-table.component";
 // import AddSkillsComponent from './components/resource-skills/add-skills.component';
-// import { ResourceSkillsDetail } from './components/resource-skills/resource-skills-detail.component'
-// import ResourceSkillDisplayComponent from './components/resource-skills/resource-skills-display'
 
 class App extends React.Component {
 
@@ -23,15 +24,12 @@ class App extends React.Component {
         <BrowserRouter>
           <div id="main-content-container">
             <Switch>
-              <Route path="/sign-in" component={SignInComponent} />
-              <Route path="/register" component={RegisterComponent} />
-              <Route path="/dashboard" component={TalentDashboard} />
-              <Route path="/home" component={this.wrappedRoutes} />
-
-              <Route component={SignInComponent} />
+              <ProtectedRoute path="/sign-in" component={SignInComponent} />
+              <ProtectedRoute path="/register" component={RegisterComponent} />
+              <ProtectedRoute path="/home" component={this.wrappedRoutes} />
+              <ProtectedRoute component={SignInComponent} />
             </Switch>
           </div>
-
         </BrowserRouter>
       </Provider>
     );
@@ -43,9 +41,9 @@ class App extends React.Component {
   public wrappedRoutes = (props: any) => (
     <Layout location={props.location} history={props.history}>
       <Switch>
-        <Route path="/home/resources/search-results" component={SearchResultComponent} />
-        <Route path="/home/add-skills" component={ResourceSkillDisplayComponent} />
-        <Route path="/home" component={TalentDashboard}/>
+        <ProtectedRoute path="/home/resources/search-results" component={SearchResultComponent} />
+        <ProtectedRoute path="/home/add-skills" component={ResourceSkillDisplayComponent} />
+        <ProtectedRoute path="/home" component={TalentDashboard} />
       </Switch>
     </Layout>
   )
