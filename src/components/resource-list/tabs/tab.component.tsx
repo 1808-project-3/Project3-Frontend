@@ -64,6 +64,9 @@ export class TabComponent extends React.Component<IProps, any> {
     public render() {
         return (
             <Container fluid>
+                <span className="secondary-color font-weight-bold mb-3">RESOURCE LIST</span>
+                <br/>
+                <br/>
                 <Row>
                     <div className="col-md-10">
                         <Nav tabs>
