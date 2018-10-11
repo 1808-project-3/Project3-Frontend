@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Card, CardHeader, CardBody, ListGroup, ListGroupItem, CardLink } from 'reactstrap';
+import axios from 'axios';
 
 export default class RecentlyAddedProjectsComponent extends React.Component<any, any> {
 
@@ -12,26 +13,20 @@ export default class RecentlyAddedProjectsComponent extends React.Component<any,
 
     public componentDidMount(){
         // axios call to get projects
-        const projects=[{
-                            id: 1,
-                            name: 'Project 1'
-                        }, 
-                        {
-                            id: 2,
-                            name: 'Project 2'
-                        }, 
-                        {
-                            id: 3,
-                            name: 'Project 3'
-                        },
-                        {
-                            id: 4,
-                            name: 'Project 4'
-                        }];
-        this.setState({
-            ...this.state,
-            recentlyAddedProjects: projects
+        axios.get('http://ec2-18-221-142-75.us-east-2.compute.amazonaws.com:8088/project/recent')
+        .then(resp => {
+          if (resp.status === 200) {
+            const recentProjects = resp.data;
+            this.setState({ 
+                ...this.state,
+                recentlyAddedProjects: recentProjects})
+            return;
+          }
+          throw new Error('Failed to retrieve recent projects');
         })
+        .catch(err => {
+          console.error(err);
+        });
     }
 
     public render(){
