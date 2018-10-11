@@ -10,7 +10,7 @@ import SignInComponent from './components/sign-in/sign-in.component';
 import './include/bootstrap';
 import { store } from './Store';
 import TalentDashboard from './components/dashboard/talent-dashboard.component';
-import { getCurrentUser } from './helpers';
+// import { getCurrentUser } from './helpers';
 
 // import { ResourceSkillsDetail } from './components/resource-skills/resource-skills-detail.component'
 // import projectListTableComponent from "./components/project-list/project-list-table/project-list-table.component";
@@ -25,14 +25,8 @@ class App extends React.Component {
           <div id="main-content-container">
             <Switch>
               <Route path="/sign-in" component={SignInComponent} />
-              {getCurrentUser() &&
-                (
                   <Route path="/register" component={RegisterComponent} />
-                )}
-              {getCurrentUser() &&
-                (
                   <Route path="/home" component={this.wrappedRoutes} />
-                )}
               <Route component={SignInComponent} />
             </Switch>
           </div>
