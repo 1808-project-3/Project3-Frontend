@@ -24,22 +24,10 @@ class App extends React.Component {
         <BrowserRouter>
           <div id="main-content-container">
             <Switch>
-<<<<<<< HEAD
-              <Route path="/sign-in" component={SignInComponent} />
-              <Route path="/register" component={RegisterComponent} />
-              {
-              false &&  
-                (
-                <Route path="/home" component={this.wrappedRoutes} />
-                )
-              }
-              <Route component={SignInComponent} />
-=======
               <ProtectedRoute path="/sign-in" component={SignInComponent} />
               <ProtectedRoute path="/register" component={RegisterComponent} />
               <ProtectedRoute path="/home" component={this.wrappedRoutes} />
               <ProtectedRoute component={SignInComponent} />
->>>>>>> 8ae8b121e6ac98dc0668b4f9c6ba56afc794e1ac
             </Switch>
           </div>
         </BrowserRouter>

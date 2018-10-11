@@ -12,8 +12,11 @@ import { Certification } from '../../models/Certification';
 import { Skill } from '../../models/Skill';
 import { Resume } from '../../models/Resume';
 import { getCurrentUser } from '../../helpers';
+import { apiClient } from 'src/axios/api-client';
+import { RouteComponentProps } from 'react-router';
 
-interface IProps {
+
+interface IProps extends RouteComponentProps<{}> {
     resource: Resource
     toggleConfirm: () => void
 }
@@ -27,8 +30,71 @@ export class ResourceSkillsDetail extends React.Component<IProps, any> {
         }
     }
 
-    public postResource = () => {
-        this.setState({ errorMessage: "Error Submitting" });
+    public postResource = async (resource: Resource) => {
+        const projJSON = {
+            customer: resource.project.customerName,
+            description: "no desc",
+            endDate: resource.project.endDate,
+            location: resource.project.location.name,
+            name: resource.project.name,
+            startDate: resource.project.startDate,
+            supervisorId: resource.project.supervisor.uId
+        }
+
+        const resJSON = {
+            "associateId": resource.user.uId,
+            "aupCert": resource.aupCertified,
+            "certs": [
+                resource.certifications.map((cert) => {
+                    return { "certId": cert.certId }
+                })
+            ],
+            "competencyTags": {
+                "ct": resource.compentencyTagging.name,
+                "ctId": resource.compentencyTagging.tagId
+            },
+            "grades": {
+                "grade": resource.grade.name,
+                "gradeId": resource.grade.gradeId
+            },
+            "joinDate": "",
+            "leaveDate": "",
+            "projectId": 0,
+            "resumes": [
+                resource.resumes.map((resume) => {
+                    return { "resume": resume.url }
+                })
+            ],
+            "skills": resource.skills.map((skill) => {
+                return {
+                    "skillId": skill.skillId
+                }
+            })
+        }
+        try {
+            const resProject = await apiClient.post(`project`, {...projJSON,location:"Tampa FL"});
+            if (resProject.data) {
+                console.log(resProject.data);
+                const resResource = await apiClient.post(`users/update/${resource.user.uId}`, { ...resJSON, "projectId": resProject.data.id });
+                if (resResource.data) {
+                    this.props.history.push('home');
+                    this.props.toggleConfirm();
+                }
+                else {
+                    this.setState({ errorMessage: "Error Submitting" });
+                }
+
+            }
+            else {
+                this.setState({ errorMessage: "Error Submitting" });
+            }
+        }
+        catch (err) {
+            console.log(err);
+            this.setState({ errorMessage: "Error Submitting" });
+        }
+
+
     };
     public render() {
         const resource = this.props.resource;
@@ -39,9 +105,6 @@ export class ResourceSkillsDetail extends React.Component<IProps, any> {
                 <Card className="w-100 mb-4">
                     <CardHeader className="font-weight-bold bg-white">
                         SKILL DETAILS
-                        {this.state.errorMessage && (<Alert className="mx-auto d-inline-block" color="danger">
-                                <span>There was a problem submitting the resource. You'll find more details highlighted below.</span>
-                            </Alert>)}
                     </CardHeader>
                     <CardBody>
                         <Row tag="dl">
@@ -128,10 +191,15 @@ export class ResourceSkillsDetail extends React.Component<IProps, any> {
                     </CardBody>
                 </Card>
                 <Row>
+                    {this.state.errorMessage && (<Alert className="mx-auto d-inline-block" color="danger">
+                        <span>There was a problem creating the resource.</span>
+                    </Alert>)}
+                </Row>
+                <Row>
                     <Col>
                         <div className="d-flex justify-content-end">
                             <Button color="secondary" className="ml-auto px-5" onClick={() => this.props.toggleConfirm()}><small>EDIT</small></Button>
-                            <Button color="secondary" className="ml-4 px-4" onClick={() => this.postResource()} ><IoMdAddCircleOutline /><small className="ml-2">CONFIRM</small></Button>
+                            <Button color="secondary" className="ml-4 px-4" onClick={() => this.postResource(this.props.resource)} ><IoMdAddCircleOutline /><small className="ml-2">CONFIRM</small></Button>
                         </div>
                     </Col>
                 </Row>
