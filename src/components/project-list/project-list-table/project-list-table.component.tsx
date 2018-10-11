@@ -1,8 +1,9 @@
 import * as React from "react";
 import {
-  getProjectList,
-  getProjectName,
-  updateViewRow
+    getAssociateList,
+    getProjectList,
+    getProjectName,
+    updateViewRow
 } from "../../../actions/info/info.actions";
 import { connect } from "react-redux";
 import { IState } from "../../../reducers";
@@ -15,6 +16,7 @@ interface IProps {
   projectList: any[];
   getProjectName: (name: string) => any;
   updateViewRow: (id: number) => any;
+  getAssociateList: () => any;
   getProjectList: () => any;
 }
 
@@ -27,10 +29,12 @@ interface IProps {
 export class ProjectListTableComponent extends React.Component<IProps, any> {
   constructor(props: any) {
     super(props);
+    this.state = {open: false};
     this.chooseRow = this.chooseRow.bind(this);
   }
 
   public chooseRow(e: any) {
+    this.setState({open: !this.state.open});
     const currentTarget = e.currentTarget.dataset;
     this.props.getProjectName(currentTarget.project);
     this.props.updateViewRow(currentTarget.id);
@@ -38,19 +42,20 @@ export class ProjectListTableComponent extends React.Component<IProps, any> {
 
   public componentDidMount() {
     this.props.getProjectList();
+    this.props.getAssociateList();
   }
 
   public render() {
     const listEntries: any[] = [];
     for (const l of this.props.projectList) {
-      if(+this.props.viewRow === +l.id){
+      if(+this.props.viewRow === +l.projectId && this.state.open){
           listEntries.push(
-              <tr data-id={l.id} key={l.id} data-project={l.project_name} onClick={this.chooseRow}>
-                  <td>{l.project_name}</td>
-                  <td>{l.id}</td>
-                  <td>{l.start_date}</td>
-                  <td>{l.end_date}</td>
-                  <td>{l.project_details}</td>
+              <tr data-id={l.projectId} key={l.projectId} data-project={l.name} onClick={this.chooseRow}>
+                  <td>{l.name}</td>
+                  <td>{l.projectId}</td>
+                  <td>{l.startDate}</td>
+                  <td>{l.endDate}</td>
+                  <td>{l.description}</td>
               </tr>
           );
           listEntries.push(
@@ -63,12 +68,12 @@ export class ProjectListTableComponent extends React.Component<IProps, any> {
       }
       else {
         listEntries.push(
-          <tr data-id={l.id} key={l.id} data-project={l.project_name} onClick={this.chooseRow}>
-            <td>{l.project_name}</td>
-            <td>{l.id}</td>
-            <td>{l.start_date}</td>
-            <td>{l.end_date}</td>
-            <td>{l.project_details}</td>
+          <tr data-id={l.projectId} key={l.projectId} data-project={l.name} onClick={this.chooseRow}>
+            <td>{l.name}</td>
+            <td>{l.projectId}</td>
+            <td>{l.startDate}</td>
+            <td>{l.endDate}</td>
+            <td>{l.description}</td>
           </tr>
         );
       }
@@ -97,12 +102,14 @@ export class ProjectListTableComponent extends React.Component<IProps, any> {
 }
 const mapStateToProps = (state: IState) => {
   return {
+    associateList: state.info.associateList,
     projectList: state.info.projectList,
     viewRow: state.info.viewRow
   };
 };
 
 const mapDispatchToProps = {
+  getAssociateList,
   getProjectList,
   getProjectName,
   updateViewRow
