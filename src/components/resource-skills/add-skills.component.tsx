@@ -452,7 +452,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
 
     private cancel = () => {
         this.props.cancelResource();
-        this.props.history.push('home');
+        this.props.history.push('/home');
     }
 }
 
