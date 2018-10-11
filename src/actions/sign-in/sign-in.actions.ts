@@ -1,4 +1,6 @@
 import { signInTypes } from "./sign-in.types";
+import { User } from "src/models/User";
+
 
 export const updatePassword = (pass: string) => {
   return {
@@ -70,9 +72,18 @@ export const changeReset = () => {
 //   }
 // }
 
-export const login = (jwt: string) => {
+export const login = (jwt: string, user: any) => {
+  const currentUser = new User({
+    assocId: user.userId,
+    emailAddress: user.email,
+    firstName: user.firstName,
+    lastName: user.lastName,
+    roleId: user.role,
+    uId: user.associateId
+  })
   return {
     payload: {
+      currentUser,
       jwt
     },
     type: signInTypes.LOGIN
