@@ -35,7 +35,7 @@ export const fetchProject = (projectId: number) => async (dispatch: any) => {
     const res = await apiClient.get(`project/${projectId}`);
     const projectData = res.data;
     if (projectData) {
-        const res2 = await apiClient.get(`users/${projectData.supervisorId}`);
+        const res2 = await apiClient.get(`users/associate/${projectData.supervisorId}`);
         const supervisor = res2.data
         const project = new Project({ pId: projectData.projectId, name: projectData.name, customerName: projectData.customer });
         project.supervisor = new User({ assocId: supervisor.userId, uId: supervisor.associateId, firstName: supervisor.firstName, lastName: supervisor.lastName, emailAddress: supervisor.email, roleId: supervisor.role })
