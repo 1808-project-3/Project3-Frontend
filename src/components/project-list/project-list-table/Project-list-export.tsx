@@ -12,50 +12,15 @@ interface IProps {
   getProjectList: () => any;
 }
 
-class ProjectListExport extends React.Component<IProps, any> {
+/**
+ * This component exports all projects to an xls file.
+ */
+
+export class ProjectListExport extends React.Component<IProps, any> {
   public componentDidMount() {
     this.props.getProjectList();
 
   }
-
-  // public formatData = (obj: any, viewRow: any) => {
-  //   const temp: any = [];
-  //   let ifTrue = false;
-  //   let aupCert: any;
-  //   let join: any;
-  //   let gradeInfo: any;
-  //   console.log("Here's obj: " + obj);
-  //     console.log("Here's viewRow: " + viewRow);
-  //   obj.map((item: any) => {
-  //       item.resources.forEach((project: any) => {
-  //           if(+project.projectId === +viewRow){
-  //               ifTrue = true;
-  //               if(aupCert){
-  //                   aupCert = "YES"
-  //               }
-  //               else {
-  //                   aupCert = "NO"
-  //               }
-  //               join = project.joinDate;
-  //               gradeInfo = project.grades.grade;
-  //           }
-  //       });
-  //       if(ifTrue){
-  //           console.log("I'm True!!");
-  //           ifTrue = false;
-  //           temp.push({
-  //               aup: aupCert,
-  //               grade: gradeInfo,
-  //               id: item.userId,
-  //               joinDate: join,
-  //               name: `${item.firstName} ${item.lastName}`
-  //           })
-  //       }
-  //   });
-  //   console.log("This is the temp: " + temp);
-  //   return temp;
-  // }
-
 
   public render() {
     const ExcelFile = ReactExport.ExcelFile;
