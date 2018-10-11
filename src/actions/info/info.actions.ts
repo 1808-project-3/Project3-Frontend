@@ -1,12 +1,29 @@
 import { infoTypes } from "./info.types";
-// import {mock} from "../../mock/mock";
 import {api} from "../../API/api";
 import axios from "axios";
-import {mock} from "../../mock/mock";
-// import {Resource} from "../../models/Resource";
 
 /**
- * This action uses axios make a GET request for all resources based on tableType
+ * This action uses axios to make a GET request for all certifications and updates the certificationList in the state store.
+ */
+
+export const getCertificationList = () => (dispatch: any) => {
+    axios.get(api.certifications, {headers: {"JWT": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2Vycy9Uek1Vb2NNRjRwIiwiZXhwIjo2MjUxNjM3OTYwMCwidXNlcmlkIjoxMjM0NTYsInNjb3BlIjoic2VsZiBncm91cHMvdXNlcnMifQ.nD9kCwmbAIpFj__Qq_e2_XOkbBCe6zhXu713DoBOCjY"}})
+        .then(response => {
+            const certifications: any[] = [];
+            for (const c of response.data){
+                certifications.push(c);
+            }
+            dispatch({
+                payload: {
+                    certificationList: certifications
+                },
+                type: infoTypes.GET_CERTIFICATION_LIST
+            })
+        })
+}
+
+/**
+ * This action uses axios make a GET request for all resources based on tableType and updates the resourceList in the state store.
  * @param tableType
  * Determines which API endpoint is used for the GET request
  */
@@ -36,6 +53,12 @@ export const getResourceList = () => (dispatch: any) => {
             })
         })
 }
+
+/**
+ * This action updates project name with the one passed in.
+ * @param data
+ *  The passed in project name.
+ */
 
 export const getProjectName = (data: any) => {
     return {
@@ -80,8 +103,12 @@ export const getProjectList = () => (dispatch: any) => {
         })
 }
 
+/**
+ * This action uses axios to make a GET request for all associates/users and updates the associateList in the state store.
+ */
+
 export const getAssociateList = () => (dispatch: any) => {
-    axios.get(mock.projectAssociates)
+    axios.get(api.users, {headers: {"JWT": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2Vycy9Uek1Vb2NNRjRwIiwiZXhwIjo2MjUxNjM3OTYwMCwidXNlcmlkIjoxMjM0NTYsInNjb3BlIjoic2VsZiBncm91cHMvdXNlcnMifQ.nD9kCwmbAIpFj__Qq_e2_XOkbBCe6zhXu713DoBOCjY"}})
         .then(response => {
             const associateEntries: any[] = [];
             for (const r of response.data) {

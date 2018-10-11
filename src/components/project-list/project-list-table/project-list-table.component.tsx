@@ -1,8 +1,9 @@
 import * as React from "react";
 import {
-  getProjectList,
-  getProjectName,
-  updateViewRow
+    getAssociateList,
+    getProjectList,
+    getProjectName,
+    updateViewRow
 } from "../../../actions/info/info.actions";
 import { connect } from "react-redux";
 import { IState } from "../../../reducers";
@@ -15,6 +16,7 @@ interface IProps {
   projectList: any[];
   getProjectName: (name: string) => any;
   updateViewRow: (id: number) => any;
+  getAssociateList: () => any;
   getProjectList: () => any;
 }
 
@@ -40,12 +42,12 @@ export class ProjectListTableComponent extends React.Component<IProps, any> {
 
   public componentDidMount() {
     this.props.getProjectList();
+    this.props.getAssociateList();
   }
 
   public render() {
     const listEntries: any[] = [];
     for (const l of this.props.projectList) {
-      console.log(l.name);
       if(+this.props.viewRow === +l.projectId && this.state.open){
           listEntries.push(
               <tr data-id={l.projectId} key={l.projectId} data-project={l.name} onClick={this.chooseRow}>
@@ -100,12 +102,14 @@ export class ProjectListTableComponent extends React.Component<IProps, any> {
 }
 const mapStateToProps = (state: IState) => {
   return {
+    associateList: state.info.associateList,
     projectList: state.info.projectList,
     viewRow: state.info.viewRow
   };
 };
 
 const mapDispatchToProps = {
+  getAssociateList,
   getProjectList,
   getProjectName,
   updateViewRow

@@ -1,14 +1,17 @@
 import * as React from "react";
 import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Container } from 'reactstrap';
-import { getResourceList, updateTableType } from "../../actions/info/info.actions";
+import {getAssociateList, getProjectList, getResourceList, updateTableType} from "../../actions/info/info.actions";
 import classnames from 'classnames';
 import { connect } from "react-redux";
 import { IState } from "../../reducers";
-import TablesComponent from "./tables/tables.component";
-// import ResourceListExport from "./tables/resourceListExport";
+import TablesComponent  from "./tables/tables.component";
+import ResourceListExport from "./tables/resourceListExport";
 
 interface IProps {
+    associateList: any[];
     tableType: string;
+    getAssociateList: () => any;
+    getProjectList: () => any;
     getResourceList: () => any;
     updateTableType: (tab: number) => any;
 }
@@ -47,11 +50,13 @@ export class TabComponent extends React.Component<IProps, any> {
 
     public componentDidMount() {
         this.props.updateTableType(4);
+        this.props.getProjectList();
         this.props.getResourceList();
+        this.props.getAssociateList();
+
     }
 
     public componentDidUpdate() {
-        console.log("The table type selected is: " + this.props.tableType);
         this.props.getResourceList();
     }
 
@@ -97,7 +102,7 @@ export class TabComponent extends React.Component<IProps, any> {
                         </Nav>
                     </div>
                     <div className="col-md-2">
-                        {/*<span className="pl-0"><ResourceListExport /></span>*/}
+                        <span className="pl-0"><ResourceListExport /></span>
                     </div>
                 </Row>
 
@@ -125,11 +130,14 @@ export class TabComponent extends React.Component<IProps, any> {
 }
 const mapStateToProps = (state: IState) => {
     return {
+        associateList: state.info.associateList,
         tableType: state.info.tableType
     };
 };
 
 const mapDispatchToProps = {
+    getAssociateList,
+    getProjectList,
     getResourceList,
     updateTableType
 };
