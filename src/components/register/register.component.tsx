@@ -59,9 +59,11 @@ export class RegisterComponent extends React.Component<IProps, {}> {
                         userId: this.props.register.userID
 
                     };
-                    // const res = await axios.post(environment.context + 'users', payload, {headers: {"JWT": this.props.jwt.jwt }})
+                
                     const res = await apiClient.post('users', payload)
+       /* name of response ^                type ^  end^point   ^ what your sending if anything */    
                     if (res.data) {
+                        /*  ^ check if response exists */
                         console.log(res.data);
                         console.log('successful register');
                         this.props.clearFields();
