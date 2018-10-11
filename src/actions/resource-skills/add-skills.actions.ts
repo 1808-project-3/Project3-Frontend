@@ -54,14 +54,12 @@ export const fetchProject = (projectId: number) => (dispatch: any) => {
     })
 }
 
-export const fetchAssociate = (assocId: number) => (dispatch: any) => {
-    let associate = new User();
-    if (assocId) {
-        associate = new User(MockUser);
-    }
+export const fetchAssociate = (assocId: number) => async (dispatch: any) => {
+    const res = await apiClient.get(`users/${assocId}`);
+    const userData = res.data;
     dispatch({
         payload: {
-            associate
+            associate: new User({ assocId: userData.userId, uId: userData.associateId, firstName: userData.firstName, lastName: userData.lastName, emailAddress: userData.email, roleId: userData.role })
         },
         type: addSkillsTypes.FETCH_ASSOCIATE
     })
