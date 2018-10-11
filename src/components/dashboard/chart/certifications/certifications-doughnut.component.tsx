@@ -133,17 +133,116 @@ export default class CertificationsDoughnutComponent extends React.Component<any
             })
         }
 
-        // const tempCertification = [{
-        //     certId: [],
-        //     user: [{
-        //         associateId: 0,
-        //         associateName: "",
-        //         certName: "",
-        //         grade: "",
-        //         projectDetails: "",
-        //         userCerts: []
-        //     }]
-        // }];
+        const tempCertification = [{
+            certId: [],
+            user: [{
+                associateId: 0,
+                associateName: "",
+                certName: "",
+                grade: "",
+                projectDetails: "",
+                userCerts: []
+            }]
+        }];
+        if (this.state.certification) {
+            for (const users of this.state.certification) {
+                if (users.certId.length > 0) {
+                  
+                    for (const certId of users.certId) {
+                        if (certId === 1 && this.state.certNameId === 1) {
+                            tempCertification.push({
+                                certId: [],
+                                user: [{
+                                    associateId: users.user[0].associateId,
+                                    associateName: `${users.user[0].associateName}`,
+                                    certName: "OCA: Oracle Certified Associate",
+                                    grade: users.user[0].grade,
+                                    projectDetails: 'Test',
+                                    userCerts: users.user[0].userCerts,
+                                }]
+
+                            })
+                        } // end if
+                        else if (certId === 2 && this.state.certNameId === 2) {
+                           
+                            tempCertification.push({
+                                certId: [],
+                                user: [{
+                                    associateId: users.user[0].associateId,
+                                    associateName: `${users.user[0].associateName}`,
+                                    certName: 'AWS Certified Developer - Associate Level',
+                                    grade: users.user[0].grade,
+                                    projectDetails: 'Test',
+                                    userCerts: users.user[0].userCerts,
+                                }]
+
+                            })
+                        }
+                        else if (certId === 3 && this.state.certNameId === 3) {
+                            tempCertification.push({
+                                certId: [],
+                                user: [{
+                                    associateId: users.user[0].associateId,
+                                    associateName: `${users.user[0].associateName}`,
+                                    certName: 'Scrum Alliance',
+                                    grade: users.user[0].grade,
+                                    projectDetails: 'Test',
+                                    userCerts: users.user[0].userCerts,
+                                }]
+
+                            })
+                        }
+                        else if (certId === 4 && this.state.certNameId === 4) {
+                            tempCertification.push({
+                                certId: [],
+                                user: [{
+                                    associateId: users.user[0].associateId,
+                                    associateName: `${users.user[0].associateName}`,
+                                    certName: 'PMI: Project Management Institute',
+                                    grade: users.user[0].grade,
+                                    projectDetails: 'Test',
+                                    userCerts: users.user[0].userCerts,
+                                }]
+
+                            })
+                        }
+                        else if (certId === 5 && this.state.certNameId === 5) {
+                            tempCertification.push({
+                                certId: [],
+                                user: [{
+                                    associateId: users.user[0].associateId,
+                                    associateName: `${users.user[0].associateName}`,
+                                    certName: 'Red Hat',
+                                    grade: users.user[0].grade,
+                                    projectDetails: 'Test',
+                                    userCerts: users.user[0].userCerts,
+                                }]
+
+                            })
+                        }
+                        else if (certId === 6 && this.state.certNameId === 6) {
+                            tempCertification.push({
+                                certId: [],
+                                user: [{
+                                    associateId: users.user[0].associateId,
+                                    associateName: `${users.user[0].associateName}`,
+                                    certName: 'MCSD: Microsoft',
+                                    grade: users.user[0].grade,
+                                    projectDetails: 'Test',
+                                    userCerts: users.user[0].userCerts,
+                                }]
+
+                            })
+                        }
+                    }
+                }
+            }
+        }// end if
+        // console.log(tempCertification);
+        this.setState({
+            certification: tempCertification
+        })
+        console.log(this.state.certification);
 
 
         
@@ -210,8 +309,9 @@ export default class CertificationsDoughnutComponent extends React.Component<any
             }]
         }];
         console.log(res1.data);
-        res1.data.forEach((users: any) => {
 
+
+        res1.data.forEach((users: any) => {
             const userCertId: any = [];
             users.userCerts.forEach((cer: any) => {
                 userCertId.push(cer.certId);
@@ -239,116 +339,12 @@ export default class CertificationsDoughnutComponent extends React.Component<any
             certification: tempCertification
         })
 
-        if (this.state.certification) {
-            for (const users of this.state.certification) {
-                if (users.certId.length > 0) {
-                    console.log(users.user[0].associateName);
-                    for (const certId of users.certId) {
-                        if (certId === 1 && this.state.certNameId === 1) {
-                            console.log(users);
-                            tempCertification.push({
-                                certId: [],
-                                user: [{
-                                    associateId: users.user[0].associateId,
-                                    associateName: `${users.user[0].associateName}`,
-                                    certName: "OCA: Oracle Certified Associate",
-                                    grade: users.user[0].grade,
-                                    projectDetails: 'Test',
-                                    userCerts: users.user[0].userCerts,
-                                }]
 
-                            })
-                        } // end if
-                        else if (certId === 2 && this.state.certNameId === 2) {
-                            console.log(users);
-                            tempCertification.push({
-                                certId: [],
-                                user: [{
-                                    associateId: users.user[0].associateId,
-                                    associateName: `${users.user[0].associateName}`,
-                                    certName: 'AWS Certified Developer - Associate Level',
-                                    grade: users.user[0].grade,
-                                    projectDetails: 'Test',
-                                    userCerts: users.user[0].userCerts,
-                                }]
-
-                            })
-                        }
-                        else if (certId === 3 && this.state.certNameId === 3) {
-                            console.log(users);
-                            tempCertification.push({
-                                certId: [],
-                                user: [{
-                                    associateId: users.user[0].associateId,
-                                    associateName: `${users.user[0].associateName}`,
-                                    certName: 'Scrum Alliance',
-                                    grade: users.user[0].grade,
-                                    projectDetails: 'Test',
-                                    userCerts: users.user[0].userCerts,
-                                }]
-
-                            })
-                        }
-                        else if (certId === 4 && this.state.certNameId === 4) {
-                            console.log(users);
-                            tempCertification.push({
-                                certId: [],
-                                user: [{
-                                    associateId: users.user[0].associateId,
-                                    associateName: `${users.user[0].associateName}`,
-                                    certName: 'PMI: Project Management Institute',
-                                    grade: users.user[0].grade,
-                                    projectDetails: 'Test',
-                                    userCerts: users.user[0].userCerts,
-                                }]
-
-                            })
-                        }
-                        else if (certId === 5 && this.state.certNameId === 5) {
-                            console.log(users);
-                            tempCertification.push({
-                                certId: [],
-                                user: [{
-                                    associateId: users.user[0].associateId,
-                                    associateName: `${users.user[0].associateName}`,
-                                    certName: 'Red Hat',
-                                    grade: users.user[0].grade,
-                                    projectDetails: 'Test',
-                                    userCerts: users.user[0].userCerts,
-                                }]
-
-                            })
-                        }
-                        else if (certId === 6 && this.state.certNameId === 6) {
-                            console.log(users);
-                            tempCertification.push({
-                                certId: [],
-                                user: [{
-                                    associateId: users.user[0].associateId,
-                                    associateName: `${users.user[0].associateName}`,
-                                    certName: 'MCSD: Microsoft',
-                                    grade: users.user[0].grade,
-                                    projectDetails: 'Test',
-                                    userCerts: users.user[0].userCerts,
-                                }]
-
-                            })
-                        }
-                    }
-
-                }
-
-            }
-        }// end if
-        this.setState({
-            certification: tempCertification
-        })
     }
 
 
 
     public render() {
-
         const selected = this.state.selected;
         const selectedCertName = this.state.selectedCertName;
         return (
