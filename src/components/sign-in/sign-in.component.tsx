@@ -5,6 +5,7 @@ import * as signInActions from '../../actions/sign-in/sign-in.actions';
 import { connect } from 'react-redux';
 import { Alert, Button, Row, Col, Form, Modal, FormGroup, Label, Input, ModalHeader, ModalBody } from 'reactstrap';
 import axios from 'axios';
+import { environment } from 'src/environment';
 
 interface IProps extends RouteComponentProps<{}> {
   changeModal: () => any,
@@ -52,7 +53,7 @@ class SignInComponent extends React.Component<IProps, {}> {
 
   public login = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const resp = axios.post(`http://ec2-18-191-67-157.us-east-2.compute.amazonaws.com:8087/users/login`, this.props.signIn.credentials)
+    const resp = axios.post(environment.context + `users/login`, this.props.signIn.credentials)
     console.log(resp);
 
     resp.then(res => {
@@ -91,7 +92,7 @@ class SignInComponent extends React.Component<IProps, {}> {
       userId: this.forgotPassFields.userID
     };
     try {
-      const res1 = await axios.post('http://ec2-18-191-67-157.us-east-2.compute.amazonaws.com:8087/users/changePass', userInfo);
+      const res1 = await axios.post(environment.context + 'users/changePass', userInfo);
       console.log(res1);
       if (res1) {
         console.log('successfull forgot password call');
@@ -128,7 +129,7 @@ class SignInComponent extends React.Component<IProps, {}> {
               newPassword: this.resetPassFields.newPass,
               userId: this.forgotPassFields.userID
             };
-            const res2 = await axios.put("http://ec2-18-191-67-157.us-east-2.compute.amazonaws.com:8087/users/resetPassword", payload);
+            const res2 = await axios.put(environment.context + "users/resetPassword", payload);
 
             if (res2.data) {
               this.props.updateForgotError("");
