@@ -65,6 +65,7 @@ class SignInComponent extends React.Component<IProps, {}> {
             this.props.updateError("");
             this.props.login(res.data.jwt, res.data.user);
             localStorage.setItem('jwt', res.data.jwt);
+            localStorage.setItem('userName', res.data.user.firstName);
             this.props.history.push('home');
           }
           break;

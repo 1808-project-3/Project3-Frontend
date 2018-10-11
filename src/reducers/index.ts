@@ -13,6 +13,7 @@ import { Certification } from "../models/Certification";
 import { resourceSkillsDisplayReducer } from "./resource-skills-display.reducer";
 import { Group } from "../models/Group";
 import { User } from "src/models/User";
+import { signInTypes } from "../actions/sign-in/sign-in.types";
 
 export interface ISignInState {
   credentials: {
@@ -94,8 +95,7 @@ export interface IState {
   register: IRegisterState,
   searchResults: ISearchResultsState
 }
-
-export const state = combineReducers<IState>({
+const reducers = {
   addSkills: addSkillsReducer,
   info: infoReducer,
   jwt: jwtReducer,
@@ -103,8 +103,17 @@ export const state = combineReducers<IState>({
   resourceSkillsDisplayState: resourceSkillsDisplayReducer,
   searchResults: searchReducer,
   signIn: signInReducer
-})
+}
 
+const reducer = combineReducers<IState>(reducers);
+
+export const state = (newState: any, action: any) => {
+  if (action.type === signInTypes.LOGOUT) {
+    newState = {}
+  }
+
+  return reducer(newState, action)
+}
 
 /**
  * IInfoState:
