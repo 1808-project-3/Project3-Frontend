@@ -24,16 +24,19 @@ import { Resource } from '../../models/Resource';
 import { Skill } from '../../models/Skill';
 import { IAddSkillsState, IState } from '../../reducers';
 import { ClosablePill } from './closable-pill.component';
+import { getCurrentUser } from '../../helpers';
 
 interface IProps extends RouteComponentProps<{}>, IAddSkillsState {
     fetchAssociate: (assocId: number) => void
+    clearAssociate: () => void
     fetchSupervisor: (supId: number) => void
+    clearSupervisor: () => void
     fetchProject: (projectId: number) => void
     fetchCompetencyTaggingList: () => void
     fetchGradeList: () => void
     fetchLocationList: () => void
     fetchSkillGroupList: () => void
-    fetchCertificationList: (search: string) => void
+    fetchCertificationList: () => void
     updateCertificationSearch: (search: string) => void
     addCertification: (cert: Certification) => void
     removeCertification: (certId: number) => void
@@ -45,7 +48,7 @@ interface IProps extends RouteComponentProps<{}>, IAddSkillsState {
     toggleSkillGroup: (event: any) => void
     showOrHideProject: (newOrExisting: string) => void
     cancelResource: () => void
-    submitResource: (resource: Resource) => void
+    submitResource: (valid: boolean) => void
     updateParentResource: (newResource: Resource) => void
 }
 
@@ -64,17 +67,24 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
         this.props.fetchCompetencyTaggingList();
         this.props.fetchGradeList();
         this.props.fetchLocationList();
+        this.props.fetchCertificationList();
+        this.props.submitResource(false);
     }
 
     public componentDidUpdate(prevProps: IProps) {
-        if (this.props.certificationSearch && this.props.certificationSearch !== prevProps.certificationSearch) {
-            this.props.fetchCertificationList(this.props.certificationSearch);
-        }
         if (this.props.associateIdInput !== prevProps.associateIdInput) {
-            this.props.fetchAssociate(+this.props.associateIdInput);
+            if (this.props.associateIdInput.length === 6) {
+                this.props.fetchAssociate(+this.props.associateIdInput);
+            } else if (this.props.resource.user.firstName) {
+                this.props.clearAssociate();
+            }
         }
         if (this.props.supervisorIdInput !== prevProps.supervisorIdInput) {
-            this.props.fetchSupervisor(+this.props.supervisorIdInput);
+            if (this.props.supervisorIdInput.length === 6) {
+                this.props.fetchSupervisor(+this.props.supervisorIdInput);
+            } else if (this.props.resource.project.supervisor.firstName) {
+                this.props.clearSupervisor();
+            }
         }
         if (this.props.projectIdInput !== prevProps.projectIdInput && this.props.newOrExistingProject === 'existing') {
             this.props.fetchProject(+this.props.projectIdInput);
@@ -84,15 +94,12 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
     public render() {
         const { resource, skillGroupIds, submitted } = this.props;
         const user = resource.user;
-        const validAssociateName = user.firstName && user.lastName;
-        const associateName = `${user.firstName} ${user.lastName}`
         const supervisor = resource.project.supervisor;
-        const validSupervisorName = supervisor.firstName && supervisor.lastName;
-        const supervisorName = `${supervisor.firstName} ${supervisor.lastName}`
         const showDateError = submitted && !((resource.project.startDate && resource.project.endDate) || this.props.dateTbd);
         const newProject = this.props.newOrExistingProject === 'new'
         const existingProject = this.props.newOrExistingProject === 'existing';
         const noProject = this.props.newOrExistingProject === 'none';
+        const currentUser = getCurrentUser();
         let dateErrorMessage = 'Please select a project start and end date or press to be decided';
         if (showDateError) {
             if (resource.project.startDate) {
@@ -104,16 +111,19 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
         const orderedSkillGroups = this.props.listOfSkillGroups;
         const selectedGroups = orderedSkillGroups.filter((group: Group) => skillGroupIds.indexOf(group.groupId) > -1);
         const skills = selectedGroups.reduce((acc: any, val: any) => {
-            console.log(val);
             const groupSkills = val.skills.map((skill: any) => new Skill({ ...skill, group: new Group(val) }))
             return acc.concat(groupSkills);
         }, []);
         return (
             <>
                 {submitted &&
-                    <Alert className="mx-4" color="danger">
-                        <span>There was a problem submitting the resource. You'll find more details highlighted below.</span>
-                    </Alert>
+                    <Container>
+                        <Row>
+                            <Alert className="mx-auto d-inline-block" color="danger">
+                                <span>There was a problem submitting the resource. You'll find more details highlighted below.</span>
+                            </Alert>
+                        </Row>
+                    </Container>
                 }
                 <div id="add-skills">
                     <Form innerRef={form => this.formElement = form}>
@@ -124,24 +134,26 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                         <FormGroup row>
                                             <Label for="inputAssociateId" className="font-weight-bold" lg={4}>ASSOCIATE ID</Label>
                                             <Col lg={8} className="my-auto">
-                                                <Input invalid={submitted && !resource.user.assocId} value={this.props.associateIdInput ? this.props.associateIdInput : ''} onChange={e => this.props.updateResource(e.target)} type="text" name="associateId" id="inputAssociateId" required autoFocus />
+                                                <Input maxLength={6} invalid={submitted && !resource.user.assocId} value={this.props.associateIdInput ? this.props.associateIdInput : ''} onChange={e => this.props.updateResource(e.target)} type="text" name="associateId" id="inputAssociateId" required autoFocus />
                                                 <FormFeedback>Could not find user with this Associate ID</FormFeedback>
                                             </Col>
                                         </FormGroup>
                                         <FormGroup row>
                                             <Label for="inputAssociateName" className="font-weight-bold" lg={4}>ASSOCIATE NAME</Label>
                                             <Col lg={8} className="my-auto">
-                                                <Input value={validAssociateName ? associateName : ''} onChange={e => this.props.updateResource(e.target)} type="text" name="associateName" id="inputAssociateName" placeholder="Autofills with valid Associate ID" readOnly tabIndex={-1} />
+                                                <Input value={user.getFullName()} onChange={e => this.props.updateResource(e.target)} type="text" name="associateName" id="inputAssociateName" placeholder="Autofills with valid Associate ID" readOnly tabIndex={-1} />
                                             </Col>
                                         </FormGroup>
-                                        <FormGroup row>
-                                            <Label for="aopCertified" lg={4} className="font-weight-bold">AOP CERTIFIED</Label>
-                                            <Col lg={8} className="my-auto">
-                                                <CustomInput invalid={submitted && resource.aupCertified === undefined} onChange={e => this.props.updateResource(e.target)} checked={resource.aupCertified || false} type="radio" id="aop-certified-yes" name="aopCertified" className="d-inline-block pr-4" label="YES" required />
-                                                <CustomInput invalid={submitted && resource.aupCertified === undefined} onChange={e => this.props.updateResource(e.target)} checked={resource.aupCertified !== undefined && !resource.aupCertified} type="radio" id="aop-certified-no" name="aopCertified" className="d-inline-block" label="NO" required />
-                                                {submitted && resource.aupCertified === undefined && <FormFeedback className="d-inline-block">Please choose either yes or no</FormFeedback>}
-                                            </Col>
-                                        </FormGroup>
+                                        {currentUser && currentUser.isTalentEnablementLead() &&
+                                            <FormGroup row>
+                                                <Label for="aopCertified" lg={4} className="font-weight-bold">AOP CERTIFIED</Label>
+                                                <Col lg={8} className="my-auto">
+                                                    <CustomInput invalid={submitted && resource.aupCertified === undefined} onChange={e => this.props.updateResource(e.target)} checked={resource.aupCertified || false} type="radio" id="aop-certified-yes" name="aopCertified" className="d-inline-block pr-4" label="YES" required />
+                                                    <CustomInput invalid={submitted && resource.aupCertified === undefined} onChange={e => this.props.updateResource(e.target)} checked={resource.aupCertified !== undefined && !resource.aupCertified} type="radio" id="aop-certified-no" name="aopCertified" className="d-inline-block" label="NO" required />
+                                                    {submitted && resource.aupCertified === undefined && <FormFeedback className="d-inline-block">Please choose either yes or no</FormFeedback>}
+                                                </Col>
+                                            </FormGroup>
+                                        }
                                         <FormGroup row>
                                             <Label for="skillsGroup" lg={4} className="font-weight-bold">SKILLS - GROUP</Label>
                                             <Col lg={8} className="my-auto">
@@ -184,7 +196,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                             <Col lg={8} className="my-auto">
                                                 <Autocomplete
                                                     getItemValue={cert => '' + cert.certId}
-                                                    items={this.props.listOfCertifications.filter(cert => resource.certifications.every(addedCert => addedCert.certId !== cert.certId))}
+                                                    items={this.props.listOfCertifications.filter(cert => cert.name.toLowerCase().includes(this.props.certificationSearch.toLowerCase()) && resource.certifications.every(addedCert => addedCert.certId !== cert.certId))}
                                                     renderItem={(cert, isHighlighted) =>
                                                         <div className="px-4" key={cert.certId} style={{ background: isHighlighted ? 'lightgray' : 'white' }}>
                                                             {cert.name}
@@ -279,15 +291,17 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                                 this.projectIdInput.focus();
                                             }
                                         }}>
-                                        <Container>
-                                            <FormGroup row>
-                                                <Label for="inputProjectId" lg={4} className="font-weight-bold">PROJECT ID</Label>
-                                                <Col lg={8} className="my-auto">
-                                                    <Input innerRef={input => this.projectIdInput = input} invalid={submitted && !resource.project.pId} value={this.props.projectIdInput ? this.props.projectIdInput : ''} onChange={e => this.props.updateResource(e.target)} type="text" name="projectId" id="inputProjectId" required />
-                                                    <FormFeedback>{newProject ? "Please enter a project ID" : "Could not find project with this ID"}</FormFeedback>
-                                                </Col>
-                                            </FormGroup>
-                                        </Container>
+                                        {existingProject &&
+                                            <Container>
+                                                <FormGroup row>
+                                                    <Label for="inputProjectId" lg={4} className="font-weight-bold">PROJECT ID</Label>
+                                                    <Col lg={8} className="my-auto">
+                                                        <Input readOnly={newProject} innerRef={input => this.projectIdInput = input} invalid={submitted && !resource.project.pId} value={this.props.projectIdInput ? this.props.projectIdInput : ''} onChange={e => this.props.updateResource(e.target)} type="text" name="projectId" id="inputProjectId" required />
+                                                        <FormFeedback>{newProject ? "Please enter a project ID" : "Could not find project with this ID"}</FormFeedback>
+                                                    </Col>
+                                                </FormGroup>
+                                            </Container>
+                                        }
                                     </Collapse>
                                     <Collapse isOpen={newProject || (existingProject && resource.project.pId > 0)}>
                                         <Container>
@@ -369,26 +383,26 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                             <FormGroup row>
                                                 <Label for="inputSupervisorId" lg={4} className="font-weight-bold">HCM SUPERVISOR ID</Label>
                                                 <Col lg={8} className="my-auto">
-                                                    <Input readOnly={existingProject} tabIndex={existingProject ? -1 : 0} invalid={submitted && !supervisor.assocId} value={existingProject ? supervisor.assocId ? supervisor.assocId : '' : this.props.supervisorIdInput} onChange={e => this.props.updateResource(e.target)} type="text" name="supervisorId" id="inputSupervisorId" required />
+                                                    <Input maxLength={6} readOnly={existingProject} tabIndex={existingProject ? -1 : 0} invalid={submitted && !supervisor.assocId} value={existingProject ? supervisor.assocId ? supervisor.assocId : '' : this.props.supervisorIdInput} onChange={e => this.props.updateResource(e.target)} type="text" name="supervisorId" id="inputSupervisorId" required />
                                                     <FormFeedback>Could not find supervisor with this ID</FormFeedback>
                                                 </Col>
                                             </FormGroup>
                                             <FormGroup row>
                                                 <Label for="inputSupervisorName" lg={4} className="font-weight-bold">HCM SUPERVISOR NAME</Label>
                                                 <Col lg={8} className="my-auto">
-                                                    <Input value={validSupervisorName ? supervisorName : ''} onChange={e => this.props.updateResource(e.target)} type="text" name="supervisorName" id="inputSupervisorName" placeholder="Autofills with valid supervisor ID" readOnly tabIndex={-1} />
+                                                    <Input value={supervisor.getFullName()} onChange={e => this.props.updateResource(e.target)} type="text" name="supervisorName" id="inputSupervisorName" placeholder="Autofills with valid supervisor ID" readOnly tabIndex={-1} />
                                                 </Col>
                                             </FormGroup>
                                             <FormGroup row>
                                                 <Label for="inputLocation" lg={4} className="font-weight-bold">LOCATION</Label>
                                                 <Col lg={8} className="my-auto">
                                                     {existingProject ?
-                                                        <Input readOnly={existingProject} tabIndex={existingProject ? -1 : 0} invalid={submitted && !resource.project.location.locationId} value={resource.project.location.locationId ? resource.project.location.name : ""} onChange={e => this.props.updateResource(e.target)} type="text" name="location" id="inputLocation" required />
-                                                        : <Input readOnly={existingProject} tabIndex={existingProject ? -1 : 0} invalid={submitted && !resource.project.location.locationId} value={resource.project.location.locationId ? resource.project.location.locationId : ""} onChange={e => this.props.updateResource(e.target)} type="select" name="location" id="inputLocation" required >
+                                                        <Input readOnly={existingProject} tabIndex={existingProject ? -1 : 0} invalid={submitted && !resource.project.location.name} value={resource.project.location.name ? resource.project.location.name : ""} onChange={e => this.props.updateResource(e.target)} type="text" name="location" id="inputLocation" required />
+                                                        : <Input readOnly={existingProject} tabIndex={existingProject ? -1 : 0} invalid={submitted && !resource.project.location.name} value={resource.project.location.name ? resource.project.location.name : ""} onChange={e => this.props.updateResource(e.target)} type="select" name="location" id="inputLocation" required >
                                                             <option value="" hidden></option>
                                                             {this.props.listOfLocations.map((location: Location) => {
                                                                 return (
-                                                                    <option value={location.locationId} key={location.locationId}>{location.name}</option>
+                                                                    <option value={location.name} key={location.name}>{location.name}</option>
                                                                 )
                                                             })}
                                                         </Input>}
@@ -413,24 +427,20 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                 </Col>
                             </Row>
                         </Container>
-                        <div className="fixed-bottom position-sticky bg-white pb-4">
+                        <div className="fixed-bottom position-sticky bg-white pb-3">
                             <hr />
                             <Container>
                                 <Row>
-                                    <Button onClick={this.props.cancelResource} color="secondary" className="ml-auto px-4"><small>CANCEL</small></Button>
+                                    <Button onClick={this.cancel} color="secondary" className="ml-auto px-4"><small>CANCEL</small></Button>
                                     <Button onClick={() => {
-                                        this.props.submitResource(resource);
+                                        this.props.submitResource(true);
                                         if (this.formElement) {
                                             if (this.formElement.checkValidity()) {
-                                                console.log("hello");
                                                 this.props.updateParentResource(this.props.resource);
                                                 this.props.toggleConfirm();
                                             }
-
                                         }
-
                                     }} color="secondary" className="ml-4 px-3"><IoMdAddCircleOutline /><small className="ml-2">ADD USER</small></Button>
-                                    <Button onClick={() => this.props.toggleConfirm()} className="ml-4 px-3">testToggle</Button>
                                 </Row>
                             </Container>
                         </div>
@@ -438,6 +448,11 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                 </div>
             </>
         );
+    }
+
+    private cancel = () => {
+        this.props.cancelResource();
+        this.props.history.push('/home');
     }
 }
 
@@ -447,6 +462,8 @@ const mapDispatchToProps = {
     addCertification: addSkillsActions.addCertification,
     addResumes: addSkillsActions.addResumes,
     cancelResource: addSkillsActions.cancelResource,
+    clearAssociate: addSkillsActions.clearAssociate,
+    clearSupervisor: addSkillsActions.clearSupervisor,
     fetchAssociate: addSkillsActions.fetchAssociate,
     fetchCertificationList: addSkillsActions.fetchCertificationList,
     fetchCompetencyTaggingList: addSkillsActions.fetchCompetencyTaggingList,
