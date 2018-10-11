@@ -292,17 +292,45 @@ nav {
   color: red;
 }
 /*****************************
- Skill Group in Dashboard
+ Dashboard - Skill Charts
 *****************************/
+.skill-group-chart {
+  padding-top: 15%;
+  padding-left: 5%;  
+}
+.skill-chart {
+  padding-top: 35%;
+  padding-right: 10%;
+}
+.skill-border {
+  margin-top: 10px;
+  border-bottom: 1px solid #E3E2E2;
+}
+.chart-selected-skill-group {
+  text-transform: uppercase;
+}
+
+/*****************************
+ Dashboard - Skill Group Cards
+*****************************/
+.cards-selected-skill-group {
+  margin-left: 10px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
 .skillgroup-cards-container {
-  width: 100%;
+  // width: 100%;
   display: flex;
   flex-flow: row wrap;
-  justify-content: space-around;   
+  justify-content: space-around;     
+}
+.skillgroup-cards-scrollbar {
   
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 .skillgroup-skill-card {
-  height: 65%;
+  height: 65%;  
 }
 .skillgroup-skill-card-content {
   display: flex;
@@ -318,8 +346,7 @@ nav {
   margin-left: 3%;
 }
 .skill-card-name {
-  text-align: left;
-  // font-weight: bold;
+  text-align: left;  
   font-size: 0.7em;
   color: #7C7A7A;
   margin-top: 15%;
