@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {Row, Col, Container, Card} from 'reactstrap';
 import { Doughnut } from 'react-chartjs-2';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 export default class SkillDoughnut extends React.Component<any, any> {
@@ -25,7 +24,7 @@ export default class SkillDoughnut extends React.Component<any, any> {
                     hoverBackgroundColor: [
                       '#FF6384', // red
                       '#36A2EB', // blue
-                      '#FFCE56',// yellow
+                      '#FFCE56', // yellow
                       '#24e216', // green
                       '#3713d6' // purple
                     ],
@@ -53,7 +52,7 @@ export default class SkillDoughnut extends React.Component<any, any> {
                       hoverBackgroundColor: [
                         '#FF6384', // red
                         '#36A2EB', // blue
-                        '#FFCE56',// yellow
+                        '#FFCE56', // yellow
                         '#24e216', // green
                         '#3713d6' // purple
                       ],
@@ -64,7 +63,7 @@ export default class SkillDoughnut extends React.Component<any, any> {
                     legend: {
                         labels: {
                             boxWidth: 10,
-                            padding: 20
+                            padding: 25
                         },
                         onClick: (e:any, legendItem:any) => {
                             console.log(legendItem.text);
@@ -92,9 +91,9 @@ export default class SkillDoughnut extends React.Component<any, any> {
     public async componentDidMount() {
         const list: any[] = [];        
                 
-        const res = await axios.get('http://localhost:8087/users', {headers: {"JWT": 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2Vycy9Uek1Vb2NNRjRwIiwiZXhwIjo2MjUxNjM3OTYwMCwidXNlcmlkIjoxMjM0NTYsInNjb3BlIjoic2VsZiBncm91cHMvdXNlcnMifQ.nD9kCwmbAIpFj__Qq_e2_XOkbBCe6zhXu713DoBOCjY' }});
-        const res1 = await axios.get('http://localhost:5002/skills', {headers: {"JWT": 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2Vycy9Uek1Vb2NNRjRwIiwiZXhwIjo2MjUxNjM3OTYwMCwidXNlcmlkIjoxMjM0NTYsInNjb3BlIjoic2VsZiBncm91cHMvdXNlcnMifQ.nD9kCwmbAIpFj__Qq_e2_XOkbBCe6zhXu713DoBOCjY' }});
-        const res2 = await axios.get('http://localhost:5002/skill-group', {headers: {"JWT": 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2Vycy9Uek1Vb2NNRjRwIiwiZXhwIjo2MjUxNjM3OTYwMCwidXNlcmlkIjoxMjM0NTYsInNjb3BlIjoic2VsZiBncm91cHMvdXNlcnMifQ.nD9kCwmbAIpFj__Qq_e2_XOkbBCe6zhXu713DoBOCjY' }});
+        const res = await axios.get('http://ec2-18-191-67-157.us-east-2.compute.amazonaws.com:8087/users', {headers: {"JWT": 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2Vycy9Uek1Vb2NNRjRwIiwiZXhwIjo2MjUxNjM3OTYwMCwidXNlcmlkIjoxMjM0NTYsInNjb3BlIjoic2VsZiBncm91cHMvdXNlcnMifQ.nD9kCwmbAIpFj__Qq_e2_XOkbBCe6zhXu713DoBOCjY' }});
+        const res1 = await axios.get('http://ec2-54-70-66-176.us-west-2.compute.amazonaws.com:5002/skills', {headers: {"JWT": 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2Vycy9Uek1Vb2NNRjRwIiwiZXhwIjo2MjUxNjM3OTYwMCwidXNlcmlkIjoxMjM0NTYsInNjb3BlIjoic2VsZiBncm91cHMvdXNlcnMifQ.nD9kCwmbAIpFj__Qq_e2_XOkbBCe6zhXu713DoBOCjY' }});
+        const res2 = await axios.get('http://ec2-54-70-66-176.us-west-2.compute.amazonaws.com:5002/skill-group', {headers: {"JWT": 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2Vycy9Uek1Vb2NNRjRwIiwiZXhwIjo2MjUxNjM3OTYwMCwidXNlcmlkIjoxMjM0NTYsInNjb3BlIjoic2VsZiBncm91cHMvdXNlcnMifQ.nD9kCwmbAIpFj__Qq_e2_XOkbBCe6zhXu713DoBOCjY' }});
           
         // loop through groups
         res2.data.forEach((group:any, i:any) => {
@@ -103,7 +102,7 @@ export default class SkillDoughnut extends React.Component<any, any> {
                 skills: [],
                 totalSkillGroup: 0            
             }
-            // grabbing group name
+            
             list.push(listObj); 
             list[i].skillGroupName = group.groupName;
             
@@ -113,8 +112,7 @@ export default class SkillDoughnut extends React.Component<any, any> {
                     skillName: "",
                     totalSkill: 0
                 }               
-
-                // add skill name
+                
                 if (skill.groupId === group.id) {
                     skillObj.skillName = skill.skillName;                                        
 
@@ -153,38 +151,35 @@ export default class SkillDoughnut extends React.Component<any, any> {
         return (
                 <Container>
                     <Row>
-                        <Col md={7}>
-                            <div style={{ paddingLeft:'5%', paddingTop: '20%' }}>
+                        <Col md={7}>                        
+                            <div className="skill-group-chart">
                             <Doughnut data={this.state.skillGroupChart.data} options={this.state.skillGroupChart.options}/>                              
                             </div>
                         </Col>
-                        <Col md={5}>
-                            <div style={{ paddingRight: '10%', paddingTop: '40%'}}>
+                        <Col md={5}>                        
+                            <div className="skill-chart">
                             <Doughnut data={this.state.skillChart.data} options={this.state.skillChart.options} />                        
                             </div>
                         </Col>
                     </Row>                                        
-                    <Row style={{marginTop: "10px", borderBottom: '1px solid #E3E2E2'}}>
-                        <Col md={6} style={{paddingLeft:'12%'}}>
-                            <p style={{color: '#7C7A7A'}}>TOTAL ASSOCIATES</p>
+                    <Row className="skill-border">
+                        <Col md={6} style={{paddingLeft:'16%'}}>
+                            <p>TOTAL ASSOCIATES</p>
                         </Col>
-                        <Col md={6} style={{paddingLeft: '6%', textAlign: "center"}}>
-                            <p style={{fontWeight: 'bold'}}>{this.state.selectedSkillGroup}</p>
+                        <Col md={6} style={{paddingLeft: '6%', textAlign: "center"}}>                        
+                            <p className="chart-selected-skill-group">{this.state.selectedSkillGroup}</p>
                         </Col>
                     </Row>                                                            
                     <Row style={{marginTop: "2%"}}>
                         <Col md={6}>
-                            <p style={{marginLeft: "10px"}}>{this.state.selectedSkillGroup}</p>
-                        </Col>
-                        <Col md={6} style={{display: "flex", justifyContent: "flex-end"}}>
-                            <Link to="" style={{marginRight: "30px"}}>View All</Link>
+                            <p className="cards-selected-skill-group">{this.state.selectedSkillGroup}</p>
                         </Col>
                     </Row>                    
                     <div className="skillgroup-cards-container">
 
-                        <Row style={{overflowY: 'scroll', overflowX: 'hidden', height: '10%'}}>
+                        <Row className="skillgroup-cards-scrollbar">
                         {this.state.skillChart.data.datasets[0].data.map((val:any, index: any) => (
-                            <Col sm="3" key={index}>
+                            <Col sm={3} key={index}>
                                 <Card className="skillgroup-skill-card">
                                     <div className="skillgroup-skill-card-content">
                                         <p className="skill-card-num-associates">{val}</p>
