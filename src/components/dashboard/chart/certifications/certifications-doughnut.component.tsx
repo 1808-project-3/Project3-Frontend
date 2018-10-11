@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Col, Table, Row, Card } from 'reactstrap';
 import { Doughnut } from 'react-chartjs-2'
 // import { MdCreate } from 'react-icons/md/';
-import axios from 'axios';
+import { apiClient } from 'src/axios/api-client';
 // import { Certification } from 'src/models/Certification';
 
 
@@ -266,8 +266,8 @@ export default class CertificationsDoughnutComponent extends React.Component<any
         // const res = await axios.get('http://ec2-54-70-66-176.us-west-2.compute.amazonaws.com:5002/certifications', { headers: { "JWT": 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2Vycy9Uek1Vb2NNRjRwIiwiZXhwIjoxNTM5MTkzMzAwLCJ1c2VyaWQiOjEyMzQ1Niwic2NvcGUiOiJzZWxmIGdyb3Vwcy91c2VycyJ9.qVDbspNmTvomDEyBwpw7ZRLvjRSc1trBcSoyL9nz7I8' } });
         // backup certification
         // const res = await axios.get('http://ec2-18-222-202-19.us-east-2.compute.amazonaws.com:5002/certifications',{ headers:{ "JWT": 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2Vycy9Uek1Vb2NNRjRwIiwiZXhwIjoxNTM5MDkzNTM2LCJ1c2VyaWQiOjEyMzQ1Niwic2NvcGUiOiJzZWxmIGdyb3Vwcy91c2VycyJ9.kwAWHSfLYD6esizHno-ba4J3SHa33-nXX_YPnnA4168' } }); 
-        const res1 = await axios.get('http://ec2-18-191-67-157.us-east-2.compute.amazonaws.com:8087/users', { headers: { "JWT": 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2Vycy9Uek1Vb2NNRjRwIiwiZXhwIjoxNTM5Mjc5OTI0LCJ1c2VyaWQiOjEyMzQ1Niwic2NvcGUiOiJzZWxmIGdyb3Vwcy91c2VycyJ9.HxJgOEmMplGHLHjp-I-QpzIX7b5tAXLLxXKMbJ2-mgc' } });
-        const res2 = await axios.get('http://ec2-18-221-142-75.us-east-2.compute.amazonaws.com:8088/project', { headers: { "JWT": 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2Vycy9Uek1Vb2NNRjRwIiwiZXhwIjoxNTM5Mjc5OTI0LCJ1c2VyaWQiOjEyMzQ1Niwic2NvcGUiOiJzZWxmIGdyb3Vwcy91c2VycyJ9.HxJgOEmMplGHLHjp-I-QpzIX7b5tAXLLxXKMbJ2-mgc' } });
+        const res1 = await apiClient.get('users');
+        const res2 = await apiClient.get('project');
 
         let countOne = 0;
         let countTwo = 0;

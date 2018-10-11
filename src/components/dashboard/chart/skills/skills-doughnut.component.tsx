@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {Row, Col, Container, Card} from 'reactstrap';
 import { Doughnut } from 'react-chartjs-2';
-import axios from 'axios';
+import { apiClient } from 'src/axios/api-client';
 import Scrollbars from 'react-custom-scrollbars';
 
 export default class SkillDoughnut extends React.Component<any, any> {
@@ -93,9 +93,9 @@ export default class SkillDoughnut extends React.Component<any, any> {
     public async componentDidMount() {
         const list: any[] = [];        
                 
-        const res = await axios.get('http://ec2-18-191-67-157.us-east-2.compute.amazonaws.com:8087/users', {headers: {"JWT": 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2Vycy9Uek1Vb2NNRjRwIiwiZXhwIjo2MjUxNjM3OTYwMCwidXNlcmlkIjoxMjM0NTYsInNjb3BlIjoic2VsZiBncm91cHMvdXNlcnMifQ.nD9kCwmbAIpFj__Qq_e2_XOkbBCe6zhXu713DoBOCjY' }});
-        const res1 = await axios.get('http://ec2-54-70-66-176.us-west-2.compute.amazonaws.com:5002/skills', {headers: {"JWT": 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2Vycy9Uek1Vb2NNRjRwIiwiZXhwIjo2MjUxNjM3OTYwMCwidXNlcmlkIjoxMjM0NTYsInNjb3BlIjoic2VsZiBncm91cHMvdXNlcnMifQ.nD9kCwmbAIpFj__Qq_e2_XOkbBCe6zhXu713DoBOCjY' }});
-        const res2 = await axios.get('http://ec2-54-70-66-176.us-west-2.compute.amazonaws.com:5002/skill-group', {headers: {"JWT": 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2Vycy9Uek1Vb2NNRjRwIiwiZXhwIjo2MjUxNjM3OTYwMCwidXNlcmlkIjoxMjM0NTYsInNjb3BlIjoic2VsZiBncm91cHMvdXNlcnMifQ.nD9kCwmbAIpFj__Qq_e2_XOkbBCe6zhXu713DoBOCjY' }});
+        const res = await apiClient.get('users');
+        const res1 = await apiClient.get('skills');
+        const res2 = await apiClient.get('skill-group');
           
         // loop through groups
         res2.data.forEach((group:any, i:any) => {

@@ -1,7 +1,8 @@
 import * as React from 'react';
-import { Card, Col,Row,CardFooter} from 'reactstrap'
-import {MdGroup} from 'react-icons/md/'
-import axios from 'axios'
+import { Card, Col,Row,CardFooter} from 'reactstrap';
+import {MdGroup} from 'react-icons/md/';
+import { apiClient } from 'src/axios/api-client';
+
 
 export default class AssociatesTile extends React.Component<any,any> {
     constructor(props:any) {
@@ -13,7 +14,7 @@ export default class AssociatesTile extends React.Component<any,any> {
     }
 
     public async componentDidMount() {
-        const res = await axios.get('http://ec2-18-191-67-157.us-east-2.compute.amazonaws.com:8087/users',{headers: {"JWT": 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2Vycy9Uek1Vb2NNRjRwIiwiZXhwIjoxNTM5Mjc5OTI0LCJ1c2VyaWQiOjEyMzQ1Niwic2NvcGUiOiJzZWxmIGdyb3Vwcy91c2VycyJ9.HxJgOEmMplGHLHjp-I-QpzIX7b5tAXLLxXKMbJ2-mgc' }});
+        const res = await apiClient.get('users');
         const resources = res.data.filter((resc:any)=>
             resc.resources.length>0 
         )
