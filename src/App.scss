@@ -296,10 +296,11 @@ nav {
 *****************************/
 .skill-group-chart {
   padding-top: 15%;
-  padding-left: 5%;  
+  height: 90%;
+  width: 105%;  
 }
 .skill-chart {
-  padding-top: 35%;
+  padding-top: 38%;
   padding-right: 10%;
 }
 .skill-border {
@@ -318,21 +319,16 @@ nav {
   text-transform: uppercase;
   font-weight: bold;
 }
-.skillgroup-cards-container {
+.skill-cards-container {
   // width: 100%;
   display: flex;
   flex-flow: row wrap;
   justify-content: space-around;     
 }
-.skillgroup-cards-scrollbar {
-  
-  overflow-y: scroll;
-  overflow-x: hidden;
-}
-.skillgroup-skill-card {
+.skill-card {
   height: 65%;  
 }
-.skillgroup-skill-card-content {
+.skill-card-content {
   display: flex;
   flex-flow: row nowrap;
   justify-content: left;
@@ -340,18 +336,28 @@ nav {
 }
 .skill-card-num-associates {
   font-weight: bold;
-  font-size: 2em;
-  margin-top: 15%;
-  margin-right: 4%;
+  font-size: 2.5vw;
+  margin-top: 10%;
+  margin-right: 8%;
   margin-left: 3%;
 }
-.skill-card-name {
-  text-align: left;  
-  font-size: 0.7em;
+.skill-card-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 10%;
+  margin-right: auto;
+}
+.skill-card-associates-in {
+  font-size: 1vw;
   color: #7C7A7A;
-  margin-top: 15%;
-  margin-right: 15%;
-  margin-left: 3%;
+  margin: auto;
+}
+.skill-card-skill-name {
+  font-weight: bold;
+  text-align: left;  
+  font-size: 1.2vw;
+  color: #7C7A7A;
 }
 
 /*****************************

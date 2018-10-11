@@ -2,6 +2,7 @@ import * as React from 'react';
 import {Row, Col, Container, Card} from 'reactstrap';
 import { Doughnut } from 'react-chartjs-2';
 import axios from 'axios';
+import Scrollbars from 'react-custom-scrollbars';
 
 export default class SkillDoughnut extends React.Component<any, any> {
 
@@ -63,7 +64,8 @@ export default class SkillDoughnut extends React.Component<any, any> {
                     legend: {
                         labels: {
                             boxWidth: 10,
-                            padding: 25
+                            fontSize: 14,
+                            padding: 30
                         },
                         onClick: (e:any, legendItem:any) => {
                             console.log(legendItem.text);
@@ -147,18 +149,22 @@ export default class SkillDoughnut extends React.Component<any, any> {
         this.setSkillChart(max.skillGroupName);        
     }
 
+    public padZero(num: any) {
+        return (num.toString().length < 2 && num ? "0" + num : num).toString();
+    }
+
     public render() {
         return (
                 <Container>
-                    <Row>
+                    <Row style={{height: "27.25vw"}}>
                         <Col md={7}>                        
                             <div className="skill-group-chart">
-                            <Doughnut data={this.state.skillGroupChart.data} options={this.state.skillGroupChart.options}/>                              
+                                <Doughnut data={this.state.skillGroupChart.data} options={this.state.skillGroupChart.options}/>                              
                             </div>
                         </Col>
                         <Col md={5}>                        
                             <div className="skill-chart">
-                            <Doughnut data={this.state.skillChart.data} options={this.state.skillChart.options} />                        
+                                <Doughnut data={this.state.skillChart.data} options={this.state.skillChart.options} />                        
                             </div>
                         </Col>
                     </Row>                                        
@@ -166,7 +172,7 @@ export default class SkillDoughnut extends React.Component<any, any> {
                         <Col md={6} style={{paddingLeft:'16%'}}>
                             <p>TOTAL ASSOCIATES</p>
                         </Col>
-                        <Col md={6} style={{paddingLeft: '6%', textAlign: "center"}}>                        
+                        <Col md={6} style={{paddingLeft: '5%', textAlign: "center"}}>                        
                             <p className="chart-selected-skill-group">{this.state.selectedSkillGroup}</p>
                         </Col>
                     </Row>                                                            
@@ -174,22 +180,26 @@ export default class SkillDoughnut extends React.Component<any, any> {
                         <Col md={6}>
                             <p className="cards-selected-skill-group">{this.state.selectedSkillGroup}</p>
                         </Col>
-                    </Row>                    
-                    <div className="skillgroup-cards-container">
-
-                        <Row className="skillgroup-cards-scrollbar">
-                        {this.state.skillChart.data.datasets[0].data.map((val:any, index: any) => (
-                            <Col sm={3} key={index}>
-                                <Card className="skillgroup-skill-card">
-                                    <div className="skillgroup-skill-card-content">
-                                        <p className="skill-card-num-associates">{val}</p>
-                                        <p className="skill-card-name">Associates In <strong>{this.state.skillChart.data.labels[index]}</strong></p>
-                                    </div>
-                                </Card>
-                            </Col>
-                        ))}    
-                        </Row>
-                    </div>
+                    </Row>
+                    <Scrollbars style={{height: "20vh"}}>
+                        <div className="skill-cards-container">                                                
+                            <Row>
+                            {this.state.skillChart.data.datasets[0].data.map((val:any, index: any) => (
+                                <Col sm={3} key={index}>
+                                    <Card className="skill-card">
+                                        <div className="skill-card-content">
+                                            <p className="skill-card-num-associates">{this.padZero(val)}</p>
+                                            <div className="skill-card-text">                                            
+                                                <p className="skill-card-associates-in">Associates In</p>
+                                                <p className="skill-card-skill-name">{this.state.skillChart.data.labels[index]}</p>
+                                            </div>
+                                        </div>
+                                    </Card>
+                                </Col>
+                            ))}    
+                            </Row>                        
+                        </div>
+                    </Scrollbars>
                 </Container>
         )
     }
