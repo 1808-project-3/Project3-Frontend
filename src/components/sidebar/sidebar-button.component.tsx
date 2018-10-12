@@ -18,5 +18,3 @@ export const SidebarButton = (props: any) => {
         </Link>
     )
 }
-
-// onClick={() => props.clicked(props.name)}
