@@ -45,7 +45,7 @@ export default class TalentDashboard extends React.Component<any,any> {
                         <CertifiedAssociatesTile users={usersList}/>
                     </Col>
                     <Col md={3} className="three-card-button-col">
-                     <Button className="three-card-button" onClick={() => this.props.history.push('/home/add-skills')}><MdSend size={45} color={"#36A2EB"}/>ADD PROFILE</Button>
+                     <Button className="three-card-button" onClick={() => this.props.history.push('/home/add-resource')}><MdSend size={45} color={"#36A2EB"}/>ADD PROFILE</Button>
                     </Col>
                 </Row>
 
