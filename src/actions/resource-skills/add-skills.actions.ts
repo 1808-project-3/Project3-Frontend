@@ -34,23 +34,32 @@ export const fetchSkillGroupList = () => async (dispatch: any) => {
 export const fetchProject = (projectId: number) => async (dispatch: any) => {
     const res = await apiClient.get(`project/${projectId}`);
     const projectData = res.data;
-    const res2 = await apiClient.get(`users/${projectData.supervisorId}`);
-    const supervisor = res2.data
-    const project = new Project({ pId: projectData.projectId, name: projectData.name, customerName: projectData.customer });
-    project.supervisor = new User({ assocId: supervisor.userId, uId: supervisor.associateId, firstName: supervisor.firstName, lastName: supervisor.lastName, emailAddress: supervisor.email, roleId: supervisor.role })
-    project.location = new Location({ name: projectData.location });
-    if (projectData.startDate) {
-        project.startDate = new Date(projectData.startDate);
+    if (projectData) {
+        const res2 = await apiClient.get(`users/associate/${projectData.supervisorId}`);
+        const supervisor = res2.data
+        const project = new Project({ pId: projectData.projectId, name: projectData.name, customerName: projectData.customer });
+        project.supervisor = new User({ assocId: supervisor.userId, uId: supervisor.associateId, firstName: supervisor.firstName, lastName: supervisor.lastName, emailAddress: supervisor.email, roleId: supervisor.role })
+        project.location = new Location({ name: projectData.location });
+        if (projectData.startDate) {
+            project.startDate = new Date(projectData.startDate);
+        }
+        if (projectData.endDate) {
+            project.endDate = new Date(projectData.endDate);
+        }
+        dispatch({
+            payload: {
+                project
+            },
+            type: addSkillsTypes.FETCH_PROJECT
+        })
+    } else {
+        dispatch({
+            payload: {
+                project: new Project()
+            },
+            type: addSkillsTypes.FETCH_PROJECT
+        })
     }
-    if (projectData.endDate) {
-        project.endDate = new Date(projectData.endDate);
-    }
-    dispatch({
-        payload: {
-            project
-        },
-        type: addSkillsTypes.FETCH_PROJECT
-    })
 }
 
 export const fetchAssociate = (assocId: number) => async (dispatch: any) => {

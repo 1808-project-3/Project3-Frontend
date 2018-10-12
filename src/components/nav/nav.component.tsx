@@ -6,6 +6,7 @@ import {SearchBar} from './nav-search-bar/nav-search-bar.component';
 import {NavLink} from './nav-link.component';
 import {NavTitle} from './nav-title.component';
 import './navStyles.css';
+import LogoutComponent from '../logout/logout.component';
 
 export const AppNav = (props: any) =>{
   return (
@@ -14,6 +15,7 @@ export const AppNav = (props: any) =>{
       <NavLabel>Search</NavLabel>
       <SearchBar history={props.history}/>
       <NavLink path="/register">Register</NavLink>
+      <LogoutComponent />
       <NavProfileText/>
       <NavProfileImage/>
     </div >

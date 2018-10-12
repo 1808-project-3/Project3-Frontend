@@ -90,3 +90,11 @@ export const login = (jwt: string, user: any) => {
   }
 }
 
+export const logout = () => {
+
+  return {
+    payload: {},
+    type: signInTypes.LOGOUT
+  }
+}
+
