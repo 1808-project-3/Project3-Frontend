@@ -35,8 +35,7 @@ export class RegisterComponent extends React.Component<IProps, {}> {
         if (this.props.register.userID.toString().length !== 6) {
             console.log('invalid userID length');
             console.log(this.props.register.userID);
-            this.props.updateError(`Invalid userID length
-           Length must be 6 `);
+            this.props.updateError(`UserID length must be 6 `);
             this.showError = true;
         }
 
