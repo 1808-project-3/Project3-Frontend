@@ -5,8 +5,8 @@ export class NavProfileText extends React.Component
 {
     public date = new Date();
     public checkMinutes = () =>  {
-        if(this.date.getMinutes() < 10) {
-            const newMinutes = 0 + this.date.getMinutes();
+        if(+this.date.getMinutes() < 10) {
+            const newMinutes = '0' + this.date.getMinutes();
             return newMinutes;
          }
          else{ return this.date.getMinutes(); }
