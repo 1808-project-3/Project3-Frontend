@@ -329,7 +329,7 @@ class SignInComponent extends React.Component<IProps, {}> {
             <p id="forgot-password" className="clickable" onClick={() => { this.props.changeModal() }}><small>Forgot Password</small></p>
 
             <button className="btn btn-secondary btn-block" id="sign-in-button" type="submit">LOGIN</button>
-            <button onClick={() => { this.props.history.push('register') }} className="btn btn-outline-secondary btn-block" id="register-button" type="button">REGISTER</button>
+            {/* <button onClick={() => { this.props.history.push('register') }} className="btn btn-outline-secondary btn-block" id="register-button" type="button">REGISTER</button> */}
 
           </form>
           {errorMessage && <p className="text-center" id="error-message">{errorMessage}</p>}
