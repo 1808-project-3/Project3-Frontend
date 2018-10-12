@@ -17,6 +17,7 @@ import { RouteComponentProps } from 'react-router';
 
 
 interface IProps extends RouteComponentProps<{}> {
+    cancelResource: () => void
     resource: Resource
     toggleConfirm: () => void
 }
@@ -82,10 +83,9 @@ export class ResourceSkillsDetail extends React.Component<IProps, any> {
                 const resResource = await apiClient.put(`users/update/${resource.user.uId}`, { ...resJSON, "projectId": projId });
                 
                 if (resResource.data) {
-                    console.log("pre home");
                     this.props.history.push('home');
-                    console.log("pre toggle");
                     this.props.toggleConfirm();
+                    this.props.cancelResource();
                 }
                 else {
                     this.setState({ errorMessage: "Error Submitting Resource" });
