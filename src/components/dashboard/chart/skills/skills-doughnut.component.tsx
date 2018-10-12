@@ -1,10 +1,14 @@
 import * as React from 'react';
 import {Row, Col, Container, Card} from 'reactstrap';
 import { Doughnut } from 'react-chartjs-2';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
+import { apiClient } from 'src/axios/api-client';
+import Scrollbars from 'react-custom-scrollbars';
 
-export default class SkillDoughnut extends React.Component<any, any> {
+interface IProps {
+    users: any
+}
+
+export default class SkillDoughnut extends React.Component<IProps, any> {
 
     constructor(props:any) {
         super(props);
@@ -25,7 +29,7 @@ export default class SkillDoughnut extends React.Component<any, any> {
                     hoverBackgroundColor: [
                       '#FF6384', // red
                       '#36A2EB', // blue
-                      '#FFCE56',// yellow
+                      '#FFCE56', // yellow
                       '#24e216', // green
                       '#3713d6' // purple
                     ],
@@ -53,7 +57,7 @@ export default class SkillDoughnut extends React.Component<any, any> {
                       hoverBackgroundColor: [
                         '#FF6384', // red
                         '#36A2EB', // blue
-                        '#FFCE56',// yellow
+                        '#FFCE56', // yellow
                         '#24e216', // green
                         '#3713d6' // purple
                       ],
@@ -64,7 +68,8 @@ export default class SkillDoughnut extends React.Component<any, any> {
                     legend: {
                         labels: {
                             boxWidth: 10,
-                            padding: 20
+                            fontSize: 14,
+                            padding: 30
                         },
                         onClick: (e:any, legendItem:any) => {
                             console.log(legendItem.text);
@@ -74,7 +79,7 @@ export default class SkillDoughnut extends React.Component<any, any> {
                     }
                 }
             },
-            skillGroups: []
+            skillGroups: []            
         };
       }
 
@@ -90,20 +95,20 @@ export default class SkillDoughnut extends React.Component<any, any> {
     }
     
     public async componentDidMount() {
-        const list: any[] = [];        
-                
-        const res = await axios.get('http://localhost:8087/users', {headers: {"JWT": 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2Vycy9Uek1Vb2NNRjRwIiwiZXhwIjo2MjUxNjM3OTYwMCwidXNlcmlkIjoxMjM0NTYsInNjb3BlIjoic2VsZiBncm91cHMvdXNlcnMifQ.nD9kCwmbAIpFj__Qq_e2_XOkbBCe6zhXu713DoBOCjY' }});
-        const res1 = await axios.get('http://localhost:5002/skills', {headers: {"JWT": 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2Vycy9Uek1Vb2NNRjRwIiwiZXhwIjo2MjUxNjM3OTYwMCwidXNlcmlkIjoxMjM0NTYsInNjb3BlIjoic2VsZiBncm91cHMvdXNlcnMifQ.nD9kCwmbAIpFj__Qq_e2_XOkbBCe6zhXu713DoBOCjY' }});
-        const res2 = await axios.get('http://localhost:5002/skill-group', {headers: {"JWT": 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2Vycy9Uek1Vb2NNRjRwIiwiZXhwIjo2MjUxNjM3OTYwMCwidXNlcmlkIjoxMjM0NTYsInNjb3BlIjoic2VsZiBncm91cHMvdXNlcnMifQ.nD9kCwmbAIpFj__Qq_e2_XOkbBCe6zhXu713DoBOCjY' }});
-          
-        // loop through groups
-        res2.data.forEach((group:any, i:any) => {
+        const list: any[] = [];                
+        
+        const res = this.props;        
+        const res1 = await apiClient.get('skills');
+        const res2 = await apiClient.get('skill-group');
+
+         // loop through groups
+         res2.data.forEach((group:any, i:any) => {
             const listObj = {            
                 skillGroupName: "",
                 skills: [],
                 totalSkillGroup: 0            
             }
-            // grabbing group name
+            
             list.push(listObj); 
             list[i].skillGroupName = group.groupName;
             
@@ -113,13 +118,12 @@ export default class SkillDoughnut extends React.Component<any, any> {
                     skillName: "",
                     totalSkill: 0
                 }               
-
-                // add skill name
+                
                 if (skill.groupId === group.id) {
                     skillObj.skillName = skill.skillName;                                        
 
                     // loop through users to check if they have that skill
-                    res.data.forEach((user:any) => {
+                    res.users.forEach((user:any) => {
                         user.userSkills.forEach((userSkill:any) => {
                             if (userSkill.skillId === skill.id) {
                                 skillObj.totalSkill++
@@ -146,55 +150,60 @@ export default class SkillDoughnut extends React.Component<any, any> {
             prev.totalSkillGroup > current.totalSkillGroup ? prev : current)
 
         // call method to set the sub chart of skills
-        this.setSkillChart(max.skillGroupName);        
+        this.setSkillChart(max.skillGroupName);                
+    }
+
+    public padZero(num: any) {
+        return (num.toString().length < 2 && num ? "0" + num : num).toString();
     }
 
     public render() {
         return (
                 <Container>
-                    <Row>
-                        <Col md={7}>
-                            <div style={{ paddingLeft:'5%', paddingTop: '20%' }}>
-                            <Doughnut data={this.state.skillGroupChart.data} options={this.state.skillGroupChart.options}/>                              
+                    <Row style={{height: "27.25vw"}}>
+                        <Col md={7}>                        
+                            <div className="skill-group-chart">
+                                <Doughnut data={this.state.skillGroupChart.data} options={this.state.skillGroupChart.options}/>                              
                             </div>
                         </Col>
-                        <Col md={5}>
-                            <div style={{ paddingRight: '10%', paddingTop: '40%'}}>
-                            <Doughnut data={this.state.skillChart.data} options={this.state.skillChart.options} />                        
+                        <Col md={5}>                        
+                            <div className="skill-chart">
+                                <Doughnut data={this.state.skillChart.data} options={this.state.skillChart.options} />                        
                             </div>
                         </Col>
                     </Row>                                        
-                    <Row style={{marginTop: "10px", borderBottom: '1px solid #E3E2E2'}}>
-                        <Col md={6} style={{paddingLeft:'12%'}}>
-                            <p style={{color: '#7C7A7A'}}>TOTAL ASSOCIATES</p>
+                    <Row className="skill-border">
+                        <Col md={6} style={{paddingLeft:'16%'}}>
+                            <p>TOTAL ASSOCIATES</p>
                         </Col>
-                        <Col md={6} style={{paddingLeft: '6%', textAlign: "center"}}>
-                            <p style={{fontWeight: 'bold'}}>{this.state.selectedSkillGroup}</p>
+                        <Col md={6} style={{paddingLeft: '5%', textAlign: "center"}}>                        
+                            <p className="chart-selected-skill-group">{this.state.selectedSkillGroup}</p>
                         </Col>
                     </Row>                                                            
                     <Row style={{marginTop: "2%"}}>
                         <Col md={6}>
-                            <p style={{marginLeft: "10px"}}>{this.state.selectedSkillGroup}</p>
+                            <p className="cards-selected-skill-group">{this.state.selectedSkillGroup}</p>
                         </Col>
-                        <Col md={6} style={{display: "flex", justifyContent: "flex-end"}}>
-                            <Link to="" style={{marginRight: "30px"}}>View All</Link>
-                        </Col>
-                    </Row>                    
-                    <div className="skillgroup-cards-container">
-
-                        <Row style={{overflowY: 'scroll', overflowX: 'hidden', height: '10%'}}>
-                        {this.state.skillChart.data.datasets[0].data.map((val:any, index: any) => (
-                            <Col sm="3" key={index}>
-                                <Card className="skillgroup-skill-card">
-                                    <div className="skillgroup-skill-card-content">
-                                        <p className="skill-card-num-associates">{val}</p>
-                                        <p className="skill-card-name">Associates In <strong>{this.state.skillChart.data.labels[index]}</strong></p>
-                                    </div>
-                                </Card>
-                            </Col>
-                        ))}    
-                        </Row>
-                    </div>
+                    </Row>
+                    <Scrollbars style={{height: "20vh"}}>
+                        <div className="skill-cards-container">                                                
+                            <Row>
+                            {this.state.skillChart.data.datasets[0].data.map((val:any, index: any) => (
+                                <Col sm={3} key={index}>
+                                    <Card className="skill-card">
+                                        <div className="skill-card-content">
+                                            <p className="skill-card-num-associates">{this.padZero(val)}</p>
+                                            <div className="skill-card-text">                                            
+                                                <p className="skill-card-associates-in">Associates In</p>
+                                                <p className="skill-card-skill-name">{this.state.skillChart.data.labels[index]}</p>
+                                            </div>
+                                        </div>
+                                    </Card>
+                                </Col>
+                            ))}    
+                            </Row>                        
+                        </div>
+                    </Scrollbars>
                 </Container>
         )
     }
