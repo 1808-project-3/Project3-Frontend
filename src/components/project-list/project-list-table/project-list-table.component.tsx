@@ -80,9 +80,11 @@ export class ProjectListTableComponent extends React.Component<IProps, any> {
     }
     return (
       <Container fluid>
-      <div>
-        <span className="float-right"><ProjectListExport /></span>
-      </div>
+          <span className="secondary-color font-weight-bold mb-3">PROJECT LIST</span>
+          <br/>
+          <div>
+            <span className="float-right"><ProjectListExport /></span>
+          </div>
         
         <Table hover>
           <thead>

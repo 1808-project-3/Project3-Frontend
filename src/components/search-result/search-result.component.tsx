@@ -8,33 +8,6 @@ import ResourceRequirementComponent from '../dashboard/project-cards/resource-re
 
 export class SearchResultComponent extends React.Component<any, {}> {
 
-    // public mockResults = [
-    //     {
-    //         AssociateName: 'John Wells',
-    //         Certification: 'Cert Details',
-    //         Grade: 'M',
-    //         ID: 348847,
-    //         ProjectName: 'Project Name',
-
-    //     },
-    //     {
-    //         AssociateName: 'Bob Man',
-    //         Certification: 'Cert Details',
-    //         Grade: 'SA',
-    //         ID: 948347,
-    //         ProjectName: 'Project Name',
-
-    //     },
-    //     {
-    //         AssociateName: 'Blake Kruppa',
-    //         Certification: 'Cert Details',
-    //         Grade: 'M',
-    //         ID: 69_420,
-    //         ProjectName: 'Talent Portal Server Dream',
-
-    //     }
-    // ]
-
     public componentDidMount() {
         console.log(this.props.searchResults.searchResults);
     }
