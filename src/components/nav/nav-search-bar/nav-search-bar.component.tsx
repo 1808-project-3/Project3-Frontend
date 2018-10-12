@@ -67,7 +67,7 @@ export class SearchBar extends React.Component<any, any>
         return(
             <div className="searchContainer">
                 <form className="searchForm" onSubmit={this.search}>
-                    <input onBlur={this.blurred} onFocus={this.focused} onChange={this.searchChanged} placeholder="Search, Project Details etc.." className="searchInput" type="text"/>
+                    <input onBlur={this.blurred} onFocus={this.focused} onChange={this.searchChanged} placeholder="Search by Name or ID" className="searchInput" type="text"/>
                     <img onClick={this.search} className="searchIcon" src={purl+"/images/search-icon.jpg"}/>
                 </form>
             </div>
@@ -136,7 +136,7 @@ export class SearchBar extends React.Component<any, any>
                             const allId = allCert.id;
                             if(certId === allId)
                             {
-                                alert("cert found");
+                                // alert("cert found");
                                 certifications.push(allCert.certificationName);
                             }
                         });

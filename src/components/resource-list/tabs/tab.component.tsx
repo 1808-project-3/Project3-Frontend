@@ -1,16 +1,27 @@
 import * as React from "react";
 import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Container } from 'reactstrap';
-import { getResourceList, updateTableType } from "../../actions/info/info.actions";
+import {
+    getAssociateList,
+    getProjectList,
+    getResourceList,
+    getSkillGroups,
+    updateTableType
+} from "../../../actions/info/info.actions";
 import classnames from 'classnames';
 import { connect } from "react-redux";
-import { IState } from "../../reducers";
-import TablesComponent from "./tables/tables.component";
-import ResourceListExport from "./tables/resourceListExport";
+import { IState } from "../../../reducers/index";
+import TablesComponent  from "../tables/tables.component";
+import ResourceListExport from "../tables/resourceListExport";
 
 interface IProps {
+    associateList: any[];
+    skillGroupList: any[];
     tableType: string;
-    getResourceList: (text: string) => any;
-    updateTableType: (text: string) => any;
+    getAssociateList: () => any;
+    getProjectList: () => any;
+    getResourceList: () => any;
+    getSkillGroups: () => any;
+    updateTableType: (tab: number) => any;
 }
 
 /**
@@ -32,28 +43,39 @@ export class TabComponent extends React.Component<IProps, any> {
             });
         }
         if (tab === "1") {
-            this.props.updateTableType("UI");
+            this.props.updateTableType(4);
         }
         else if (tab === "2") {
-            this.props.updateTableType("Mobility");
+            this.props.updateTableType(1);
         }
         else if (tab === "3") {
-            this.props.updateTableType("CM");
+            this.props.updateTableType(3);
         }
         else if (tab === "4") {
-            this.props.updateTableType("Design");
+            this.props.updateTableType(2);
         }
     }
 
+    public async componentDidMount() {
+        this.props.updateTableType(4);
+        this.props.getProjectList();
+        this.props.getResourceList();
+        await this.props.getSkillGroups();
+        this.props.getAssociateList();
+
+    }
+
     public componentDidUpdate() {
-        console.log("The table type selected is: " + this.props.tableType);
-        this.props.getResourceList(this.props.tableType);
+        this.props.getResourceList();
     }
 
 
     public render() {
         return (
             <Container fluid>
+                <span className="secondary-color font-weight-bold mb-3">RESOURCE LIST</span>
+                <br/>
+                <br/>
                 <Row>
                     <div className="col-md-10">
                         <Nav tabs>
@@ -62,7 +84,7 @@ export class TabComponent extends React.Component<IProps, any> {
                                     className={classnames({ active: this.state.activeTab === '1' })}
                                     onClick={() => { this.toggle('1'); }}
                                 >
-                                    UI/Dev
+                                    {this.props.skillGroupList !== undefined && this.props.skillGroupList[3]}
                         </NavLink>
                             </NavItem>
                             <NavItem>
@@ -70,7 +92,7 @@ export class TabComponent extends React.Component<IProps, any> {
                                     className={classnames({ active: this.state.activeTab === '2' })}
                                     onClick={() => { this.toggle('2'); }}
                                 >
-                                    Mobility
+                                    {this.props.skillGroupList !== undefined && this.props.skillGroupList[0]}
                         </NavLink>
                             </NavItem>
                             <NavItem>
@@ -78,7 +100,7 @@ export class TabComponent extends React.Component<IProps, any> {
                                     className={classnames({ active: this.state.activeTab === '3' })}
                                     onClick={() => { this.toggle('3'); }}
                                 >
-                                    Content Management
+                                    {this.props.skillGroupList !== undefined && this.props.skillGroupList[2]}
                         </NavLink>
                             </NavItem>
                             <NavItem>
@@ -86,7 +108,7 @@ export class TabComponent extends React.Component<IProps, any> {
                                     className={classnames({ active: this.state.activeTab === '4' })}
                                     onClick={() => { this.toggle('4'); }}
                                 >
-                                    Design
+                                    {this.props.skillGroupList !== undefined && this.props.skillGroupList[1]}
                         </NavLink>
                             </NavItem>
                         </Nav>
@@ -120,12 +142,17 @@ export class TabComponent extends React.Component<IProps, any> {
 }
 const mapStateToProps = (state: IState) => {
     return {
+        associateList: state.info.associateList,
+        skillGroupList: state.info.skillGroupList,
         tableType: state.info.tableType
     };
 };
 
 const mapDispatchToProps = {
+    getAssociateList,
+    getProjectList,
     getResourceList,
+    getSkillGroups,
     updateTableType
 };
 

@@ -1,11 +1,24 @@
 import * as React from 'react';
 import { Card, Col, CardFooter, Row } from 'reactstrap';
-import { MdLibraryBooks } from 'react-icons/md/'
+import { MdLibraryBooks } from 'react-icons/md/';
+import { apiClient } from 'src/axios/api-client';
 
-export default class ProjectsTile extends React.Component {
+export default class ProjectsTile extends React.Component<any,any> {
 
     // displays total number of projects based on the unique project ids in the db
     // clicking on this card opens project list page
+    constructor(props:any) {
+        super(props);
+        this.state = {
+            numOfProjects: 0
+      }
+    }
+
+    public componentDidMount() {
+        apiClient.get('project').then((res) => {
+            this.setState({numOfProjects: res.data.length});
+        })
+    }
 
     public render() {
         return (
@@ -14,8 +27,8 @@ export default class ProjectsTile extends React.Component {
             <Card className="text-center">
                 <Row>
                 <Col md={2}>
-                    <div className="skillgroup-skill-card-content">
-                        <p className="project-number-card">20</p>
+                    <div className="skill-card-content">
+                        <p className="project-number-card">{this.state.numOfProjects}</p>
 
                     </div>
                 </Col>

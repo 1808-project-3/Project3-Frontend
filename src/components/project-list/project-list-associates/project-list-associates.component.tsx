@@ -9,9 +9,10 @@ import CardText from "reactstrap/lib/CardText";
 import CardTitle from "reactstrap/lib/CardTitle";
 
 interface IProps {
-    exampleProp: string;
     associateList: any[];
+    projectList: any[];
     projectName: string;
+    viewRow: number;
     getAssociateList: () => any;
 }
 
@@ -24,61 +25,111 @@ interface IProps {
 export class ProjectListAssociatesComponent extends React.Component<IProps, any> {
     constructor(props: any) {
         super(props);
+        this.getSupervisor = this.getSupervisor.bind(this);
     }
 
-    public componentDidMount(){
-        this.props.getAssociateList();
+    public getSupervisor = (id: number) => {
+        let superId = 0;
+        let superName = ``;
+        this.props.projectList.forEach((project: any) => {
+            if(id === project.projectId){
+                superId = project.supervisorId;
+            }
+        })
+        this.props.associateList.forEach((a: any) => {
+            if(a.associateId === superId){
+                superName = `${a.firstName} ${a.lastName}`;
+            }
+        })
+        return superName;
     }
 
     public render() {
-        const entries: any[] = [];
-        for(const e of this.props.associateList){
-            if(e.project_name === this.props.projectName) {
-            entries.push(
-                <Col sm="4">
-                    <Card body className="mt-4">
-                        <Row>
-                            <Col sm="6">
-                                <CardTitle><strong>{e.first_name} {e.last_name}</strong></CardTitle>
-                            <CardText>({e.user_id})</CardText>
-                            <br/>
-                            <CardText>AUP CERTIFIED: </CardText>
-                                <CardText>DATE OF JOINING: </CardText>
-                                <CardText>HCM SUPERVISOR: </CardText>
-                            </Col>
-                            <Col sm="6">
-                                <CardTitle>{e.grade}</CardTitle>
-                            </Col>
-                        </Row>
-                    </Card>
-                </Col>
-            )}
-        }
-
-        if(entries === undefined){
-            return (
-                <div>
-                    There is nothing to show!
-                </div>
-            );
-        }
-        else {
+        let ifTrue = false;
+        let aup: any;
+        let joinDate: any;
+        let grade: any;
+        let hcmSupervisor: any;
         return (
             <div>
                 <h3>Associate List</h3>
                 <Row>
-                    {entries}
+                    {this.props.associateList.map(item => {
+                        item.resources.forEach((project: any) => {
+                            if(+project.projectId === +this.props.viewRow){
+                                ifTrue = true;
+                                if(project.aupCert){
+                                    aup = "YES"
+                                }
+                                else {
+                                    aup = "NO"
+                                }
+                                joinDate = project.joinDate;
+                                grade = project.grades.grade;
+                                hcmSupervisor = this.getSupervisor(+project.projectId);
+                            }
+                        });
+                        console.log("Supervisor: " + hcmSupervisor);
+                        if(ifTrue){
+                                ifTrue = false;
+                                return (
+                                    <Col sm="5" key={item.userId}>
+                                        <Card body className="mt-3">
+                                            <Row>
+                                                <Col sm="6">
+                                                    <CardTitle><strong>{item.firstName} {item.lastName}</strong></CardTitle>
+                                                    <CardText>({item.userId})</CardText>
+                                                </Col>
+                                                <Col sm="6">
+                                                    <CardTitle>{grade}</CardTitle>
+                                                </Col>
+                                            </Row>
+                                            <br/>
+                                            <Row>
+                                                <Col sm="6">
+                                                    <CardText>AUP CERTIFIED</CardText>
+                                                </Col>
+                                                <Col sm="6">
+                                                    <CardTitle>{aup}</CardTitle>
+                                                </Col>
+                                            </Row>
+                                            <Row>
+                                                <Col sm="6">
+                                                    <CardText>DATE OF JOINING</CardText>
+                                                </Col>
+                                                <Col sm="6">
+                                                    <CardTitle>{joinDate}</CardTitle>
+                                                </Col>
+                                            </Row>
+                                            <Row>
+                                                <Col sm="6">
+                                                    <CardText>HCM SUPERVISOR</CardText>
+                                                </Col>
+                                                <Col sm="6">
+                                                    <CardTitle>{hcmSupervisor}</CardTitle>
+                                                </Col>
+                                            </Row>
+                                        </Card>
+                                    </Col>
+                                );
+                        }
+                        else {
+                            return (null);
+                        }
+                    })
+                    }
                 </Row>
             </div>
         );
-        }
-
     }
 }
+
 const mapStateToProps = (state: IState) => {
     return {
         associateList: state.info.associateList,
-        projectName: state.info.projectName
+        projectList: state.info.projectList,
+        projectName: state.info.projectName,
+        viewRow: state.info.viewRow
     };
 };
 
