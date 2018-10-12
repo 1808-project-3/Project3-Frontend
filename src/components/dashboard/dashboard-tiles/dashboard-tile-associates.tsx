@@ -1,25 +1,32 @@
 import * as React from 'react';
 import { Card, Col,Row,CardFooter} from 'reactstrap';
 import {MdGroup} from 'react-icons/md/';
-import { apiClient } from 'src/axios/api-client';
+// import { apiClient } from 'src/axios/api-client';
 
+interface IProps {
+    users: any
+}
 
-export default class AssociatesTile extends React.Component<any,any> {
+export default class AssociatesTile extends React.Component<IProps, any> {
     constructor(props:any) {
         super(props);
         this.state = {
-            numOfResources: 0
-         
+            numOfResources: 0         
       }
     }
 
-    public async componentDidMount() {
-        const res = await apiClient.get('users');
-        const resources = res.data.filter((resc:any)=>
-            resc.resources.length>0 
-        )
+    public componentDidMount() {
+        // apiClient.get('users').then((res) => {
+        //     const resources = res.data.filter((resc:any)=>
+        //     resc.resources.length>0 
+        //     )
+        //     this.setState({numOfResources: resources.length});
+        //     }
+        // )
+        const res = this.props.users         
+        const resources = res.filter((resc:any)=>
+            resc.resources.length>0 );
         this.setState({numOfResources: resources.length});
-     
     }
 
     public render() {

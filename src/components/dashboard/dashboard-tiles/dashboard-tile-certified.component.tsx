@@ -1,30 +1,34 @@
 import * as React from 'react';
 import { Card, Col, Row, CardFooter } from 'reactstrap';
 import { MdPerson } from 'react-icons/md/';
-import { apiClient } from 'src/axios/api-client';
+// import { apiClient } from 'src/axios/api-client';
 
+interface IProps {
+    users: any
+}
 
-
-
-export default class CertifiedAssociatesTile extends React.Component<any, any> {
+export default class CertifiedAssociatesTile extends React.Component<IProps, any> {
 
     // displays total number of associates with certifications
     constructor(props: any) {
         super(props);
         this.state = {
             numOfCertifiedAsso: 0
-
         }
     }
 
-    public async componentDidMount() {
-        const res = await apiClient.get('users');
-        const certified = res.data.filter((user:any) => 
-                user.userCerts.length>0
-        );
+    public componentDidMount() {
+        // apiClient.get('users').then((res) => {
+        //     const certified = res.data.filter((user:any) => 
+        //         user.userCerts.length>0
+        //     );
+        //     this.setState({ numOfCertifiedAsso: certified.length});
+        // })
+        const res = this.props.users;
+        const certified = res.filter((user:any) => 
+                user.userCerts.length>0);
         this.setState({ numOfCertifiedAsso: certified.length});
-        
-
+                        
     }
 
     public render() {

@@ -5,9 +5,11 @@ import { Doughnut } from 'react-chartjs-2'
 import { apiClient } from 'src/axios/api-client';
 // import { Certification } from 'src/models/Certification';
 
+interface IProps {
+    users: any
+}
 
-
-export default class CertificationsDoughnutComponent extends React.Component<any, any> {
+export default class CertificationsDoughnutComponent extends React.Component<IProps, any> {
     constructor(props: any) {
         super(props);
         this.state = {
@@ -266,7 +268,7 @@ export default class CertificationsDoughnutComponent extends React.Component<any
         // const res = await axios.get('http://ec2-54-70-66-176.us-west-2.compute.amazonaws.com:5002/certifications', { headers: { "JWT": 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2Vycy9Uek1Vb2NNRjRwIiwiZXhwIjoxNTM5MTkzMzAwLCJ1c2VyaWQiOjEyMzQ1Niwic2NvcGUiOiJzZWxmIGdyb3Vwcy91c2VycyJ9.qVDbspNmTvomDEyBwpw7ZRLvjRSc1trBcSoyL9nz7I8' } });
         // backup certification
         // const res = await axios.get('http://ec2-18-222-202-19.us-east-2.compute.amazonaws.com:5002/certifications',{ headers:{ "JWT": 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2Vycy9Uek1Vb2NNRjRwIiwiZXhwIjoxNTM5MDkzNTM2LCJ1c2VyaWQiOjEyMzQ1Niwic2NvcGUiOiJzZWxmIGdyb3Vwcy91c2VycyJ9.kwAWHSfLYD6esizHno-ba4J3SHa33-nXX_YPnnA4168' } }); 
-        const res1 = await apiClient.get('users');
+        const res1 = this.props.users;
         const res2 = await apiClient.get('project');
 
         let countOne = 0;
@@ -275,7 +277,7 @@ export default class CertificationsDoughnutComponent extends React.Component<any
         let countFour = 0;
         let countFive = 0;
         let countSix = 0;
-        res1.data.forEach((user: any, i: any) => {
+        res1.forEach((user: any, i: any) => {
             if (user.userCerts.length > 0) {
                 user.userCerts.forEach((certs: any, j: any) => {
                     if (certs.certId === 1) {
@@ -326,7 +328,7 @@ export default class CertificationsDoughnutComponent extends React.Component<any
         });
       
 
-        res1.data.forEach((users: any) => {
+        res1.forEach((users: any) => {
             const userCertId: any = [];
             users.userCerts.forEach((cer: any) => {
                 userCertId.push(cer.certId);

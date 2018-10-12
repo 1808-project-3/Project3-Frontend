@@ -11,12 +11,12 @@ describe('<ChartComponent />', () => {
   })
 
   it ('renders one <Nav />', () => {
-    const wrapper = shallow(<ChartComponent/>);
+    const wrapper = shallow(<ChartComponent users={[]}/>);
     expect(wrapper.find(Nav)).toHaveLength(1);
   })
 
   it ('renders one <Card />', () => {
-    const wrapper = shallow(<ChartComponent/>);
+    const wrapper = shallow(<ChartComponent users={[]}/>);
     expect(wrapper.find(Card)).toHaveLength(1);
   })
 })

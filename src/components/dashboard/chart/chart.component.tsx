@@ -5,9 +5,11 @@ import SkillDoughnutComponent from './skills/skills-doughnut.component';
 // import SelectedCertificationTableComponent from './certifications/selected-certification-table.component';
 import CertificationsDoughnutComponent from './certifications/certifications-doughnut.component';
 
+interface IProps {
+    users: any
+}
 
-
-export default class ChartComponent  extends React.Component<any,any> {
+export default class ChartComponent  extends React.Component<IProps,any> {
     
     // displays total number of associates in db
     // clicking this page opens the associates list page
@@ -68,7 +70,7 @@ export default class ChartComponent  extends React.Component<any,any> {
                             <TabPane tabId="1">
                                 <Row>
                                     <Col md={12}>
-                                        <SkillDoughnutComponent />
+                                        {this.props ? <SkillDoughnutComponent users={this.props.users}/> : null}
                                     </Col>
                                 </Row>                                
 
@@ -76,7 +78,7 @@ export default class ChartComponent  extends React.Component<any,any> {
 
 
                             <TabPane tabId="2">    
-                                <CertificationsDoughnutComponent/>
+                                {this.props ? <CertificationsDoughnutComponent users={this.props.users}/> : null}
                             </TabPane>
 
                         </TabContent>

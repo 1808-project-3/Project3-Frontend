@@ -6,12 +6,12 @@ import { Doughnut } from 'react-chartjs-2';
 
 describe('<SkillDoughnut />', () => {
   it ('renders one <SkillDoughnut />', () => {
-    const wrapper = shallow(<ChartComponent/>);
+    const wrapper = shallow(<ChartComponent users={[]}/>);
     expect(wrapper.find(SkillDoughnut)).toHaveLength(1);
   })
 
   it ('renders two <Doughnut />', () => {
-    const wrapper = shallow(<SkillDoughnut/>);
+    const wrapper = shallow(<SkillDoughnut users={[]}/>);
     expect(wrapper.find(Doughnut)).toHaveLength(2);
   })
 })

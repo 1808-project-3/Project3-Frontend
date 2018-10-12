@@ -4,7 +4,11 @@ import { Doughnut } from 'react-chartjs-2';
 import { apiClient } from 'src/axios/api-client';
 import Scrollbars from 'react-custom-scrollbars';
 
-export default class SkillDoughnut extends React.Component<any, any> {
+interface IProps {
+    users: any
+}
+
+export default class SkillDoughnut extends React.Component<IProps, any> {
 
     constructor(props:any) {
         super(props);
@@ -75,7 +79,9 @@ export default class SkillDoughnut extends React.Component<any, any> {
                     }
                 }
             },
-            skillGroups: []
+            skillGroups: [],
+            skills: [],
+            users: []
         };
       }
 
@@ -89,16 +95,37 @@ export default class SkillDoughnut extends React.Component<any, any> {
         this.setState({selectedSkillGroup: skillGroup});        
         this.setState({skillChart: {data: {datasets: [{data: skillValues}], labels: skillLabels}}});
     }
+
+    public fetchUsers() {
+        const res = apiClient.get('users')
+        return res;
+    }
+
+    public fetchSkills() {
+        const res = apiClient.get('skills');
+        return res;
+    }
+
+    public fetchSkillGroups() {
+        const res = apiClient.get('skill-group');
+        return res;
+    }
+
+    public async fetchAll() {
+        const res = await Promise.all([ this.fetchUsers(), this.fetchSkills(), this.fetchSkillGroups()]);
+        return res;
+    }
     
     public async componentDidMount() {
-        const list: any[] = [];        
-                
-        const res = await apiClient.get('users');
+        const list: any[] = [];                
+        
+        const res = this.props;
+        // const res = this.fetchUsers();
         const res1 = await apiClient.get('skills');
         const res2 = await apiClient.get('skill-group');
-          
-        // loop through groups
-        res2.data.forEach((group:any, i:any) => {
+
+         // loop through groups
+         res2.data.forEach((group:any, i:any) => {
             const listObj = {            
                 skillGroupName: "",
                 skills: [],
@@ -119,7 +146,7 @@ export default class SkillDoughnut extends React.Component<any, any> {
                     skillObj.skillName = skill.skillName;                                        
 
                     // loop through users to check if they have that skill
-                    res.data.forEach((user:any) => {
+                    res.users.forEach((user:any) => {
                         user.userSkills.forEach((userSkill:any) => {
                             if (userSkill.skillId === skill.id) {
                                 skillObj.totalSkill++
@@ -146,7 +173,7 @@ export default class SkillDoughnut extends React.Component<any, any> {
             prev.totalSkillGroup > current.totalSkillGroup ? prev : current)
 
         // call method to set the sub chart of skills
-        this.setSkillChart(max.skillGroupName);        
+        this.setSkillChart(max.skillGroupName);                
     }
 
     public padZero(num: any) {

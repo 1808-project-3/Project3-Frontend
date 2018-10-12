@@ -14,10 +14,10 @@ export default class ProjectsTile extends React.Component<any,any> {
       }
     }
 
-    public async componentDidMount() {
-         const res = await apiClient.get('project');
-        // const res = await axios.get('http://localhost:8080/project', {headers: {"JWT": 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2Vycy9Uek1Vb2NNRjRwIiwiZXhwIjoxNTM5MDkzNTM2LCJ1c2VyaWQiOjEyMzQ1Niwic2NvcGUiOiJzZWxmIGdyb3Vwcy91c2VycyJ9.kwAWHSfLYD6esizHno-ba4J3SHa33-nXX_YPnnA4168' }});
-        this.setState({numOfProjects: res.data.length});
+    public componentDidMount() {
+        apiClient.get('project').then((res) => {
+            this.setState({numOfProjects: res.data.length});
+        })
     }
 
     public render() {

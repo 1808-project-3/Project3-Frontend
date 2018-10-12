@@ -13,7 +13,7 @@ describe('<AssociatesTile />', () => {
   })
 
   it ('renders one <Card />', () => {
-    const wrapper = shallow(<AssociatesTile/>);
+    const wrapper = shallow(<AssociatesTile users={[]}/>);
     expect(wrapper.find(Card)).toHaveLength(1);
   })
 })
@@ -25,7 +25,7 @@ describe('<CertifiedAssociatesTile />', () => {
   })
 
   it ('renders one <Card />', () => {
-    const wrapper = shallow(<CertifiedAssociatesTile/>);
+    const wrapper = shallow(<CertifiedAssociatesTile users={[]}/>);
     expect(wrapper.find(Card)).toHaveLength(1);
   })
 })

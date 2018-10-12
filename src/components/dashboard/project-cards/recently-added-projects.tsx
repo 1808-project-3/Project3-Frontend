@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Card, CardHeader, CardBody, ListGroup, ListGroupItem, CardLink } from 'reactstrap';
-import axios from 'axios';
+import { apiClient } from 'src/axios/api-client';
 
 export default class RecentlyAddedProjectsComponent extends React.Component<any, any> {
 
@@ -13,7 +13,7 @@ export default class RecentlyAddedProjectsComponent extends React.Component<any,
 
     public componentDidMount(){
         // axios call to get projects
-        axios.get('http://ec2-18-221-142-75.us-east-2.compute.amazonaws.com:8088/project/recent')
+        apiClient.get('project/recent')
         .then(resp => {
           if (resp.status === 200) {
             const recentProjects = resp.data;
