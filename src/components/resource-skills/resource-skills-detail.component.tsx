@@ -80,6 +80,7 @@ export class ResourceSkillsDetail extends React.Component<IProps, any> {
                 let projId;
                 existProj?projId=resource.project.pId:projId=resProject.data.id;
                 const resResource = await apiClient.put(`users/update/${resource.user.uId}`, { ...resJSON, "projectId": projId });
+                
                 if (resResource.data) {
                     console.log("pre home");
                     this.props.history.push('home');
@@ -87,12 +88,12 @@ export class ResourceSkillsDetail extends React.Component<IProps, any> {
                     this.props.toggleConfirm();
                 }
                 else {
-                    this.setState({ errorMessage: "Error Submitting" });
+                    this.setState({ errorMessage: "Error Submitting Resource" });
                 }
 
             }
             else {
-                this.setState({ errorMessage: "Error Submitting" });
+                this.setState({ errorMessage: "Error Submitting Project" });
             }
         }
         catch (err) {
