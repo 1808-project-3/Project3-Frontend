@@ -1,24 +1,32 @@
 import * as React from 'react';
 import { Card, Col,Row,CardFooter} from 'reactstrap';
-import {MdGroup} from 'react-icons/md/'
-import axios from 'axios';
+import {MdGroup} from 'react-icons/md/';
+// import { apiClient } from 'src/axios/api-client';
 
-export default class AssociatesTile extends React.Component<any,any> {
+interface IProps {
+    users: any
+}
+
+export default class AssociatesTile extends React.Component<IProps, any> {
     constructor(props:any) {
         super(props);
         this.state = {
-            numOfAssociates: 0
-         
+            numOfResources: 0         
       }
     }
 
-    public async componentDidMount() {
-        console.log('got here');
-        const res = await axios.get('http://ec2-18-191-67-157.us-east-2.compute.amazonaws.com/users',{headers: {"JWT": 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2Vycy9Uek1Vb2NNRjRwIiwiZXhwIjo2MjUxNjM3OTYwMCwidXNlcmlkIjoxMjM0NTYsInNjb3BlIjoic2VsZiBncm91cHMvdXNlcnMifQ.nD9kCwmbAIpFj__Qq_e2_XOkbBCe6zhXu713DoBOCjY' }});
-        console.log('after fetch');
-        this.setState({numOfAssociates: res.data.length});
-        console.log(this.state.numOfAssociates);
-        
+    public componentDidMount() {
+        // apiClient.get('users').then((res) => {
+        //     const resources = res.data.filter((resc:any)=>
+        //     resc.resources.length>0 
+        //     )
+        //     this.setState({numOfResources: resources.length});
+        //     }
+        // )
+        const res = this.props.users         
+        const resources = res.filter((resc:any)=>
+            resc.resources.length>0 );
+        this.setState({numOfResources: resources.length});
     }
 
     public render() {
@@ -26,8 +34,8 @@ export default class AssociatesTile extends React.Component<any,any> {
             <Card className="text-center">
                 <Row>
                 <Col md={2}>
-                    <div className="skillgroup-skill-card-content">
-                        <p className="project-number-card">{this.state.numOfAssociates}</p>
+                    <div className="skill-card-content">
+                        <p className="project-number-card">{this.state.numOfResources}</p>
                     </div>
                 </Col>
                 <Col md={6}>
@@ -37,7 +45,7 @@ export default class AssociatesTile extends React.Component<any,any> {
                     <p><MdGroup size={60} color={"#F0EEEE"} /></p>
                 </Col>
                 </Row>
-                <CardFooter className="three-card-footer">Project (15)</CardFooter>
+                <CardFooter className="three-card-footer">In Talent Portal</CardFooter>
             </Card>
           
 
