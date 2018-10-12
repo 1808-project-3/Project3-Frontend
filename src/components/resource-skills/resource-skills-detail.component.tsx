@@ -44,11 +44,10 @@ export class ResourceSkillsDetail extends React.Component<IProps, any> {
         const resJSON = {
             "associateId": resource.user.uId,
             "aupCert": resource.aupCertified,
-            "certs": [
+            "certs":
                 resource.certifications.map((cert) => {
                     return { "certId": cert.certId }
-                })
-            ],
+                }),
             "competencyTags": {
                 "ct": resource.compentencyTagging.name,
                 "ctId": resource.compentencyTagging.tagId
@@ -57,14 +56,11 @@ export class ResourceSkillsDetail extends React.Component<IProps, any> {
                 "grade": resource.grade.name,
                 "gradeId": resource.grade.gradeId
             },
-            "joinDate": "",
-            "leaveDate": "",
             "projectId": 0,
-            "resumes": [
+            "resumes": 
                 resource.resumes.map((resume) => {
                     return { "resume": resume.url }
-                })
-            ],
+                }),
             "skills": resource.skills.map((skill) => {
                 return {
                     "skillId": skill.skillId
@@ -72,12 +68,22 @@ export class ResourceSkillsDetail extends React.Component<IProps, any> {
             })
         }
         try {
-            const resProject = await apiClient.post(`project`, {...projJSON,location:"Tampa FL"});
-            if (resProject.data) {
-                console.log(resProject.data);
-                const resResource = await apiClient.post(`users/update/${resource.user.uId}`, { ...resJSON, "projectId": resProject.data.id });
+            let existProj = false;
+            if (resource.project.pId > 0){
+                existProj = !existProj;
+            }
+            let resProject = {data:{id:0}};
+            if(!existProj){
+                resProject = await apiClient.post(`project`, {...projJSON});
+            }
+            if (existProj || resProject.data) {
+                let projId;
+                existProj?projId=resource.project.pId:projId=resProject.data.id;
+                const resResource = await apiClient.put(`users/update/${resource.user.uId}`, { ...resJSON, "projectId": projId });
                 if (resResource.data) {
+                    console.log("pre home");
                     this.props.history.push('home');
+                    console.log("pre toggle");
                     this.props.toggleConfirm();
                 }
                 else {
