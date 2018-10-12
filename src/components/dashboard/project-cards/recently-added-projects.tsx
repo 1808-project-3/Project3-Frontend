@@ -24,9 +24,6 @@ export default class RecentlyAddedProjectsComponent extends React.Component<any,
           }
           throw new Error('Failed to retrieve recent projects');
         })
-        .catch(err => {
-          console.error(err);
-        });
     }
 
     public render(){
@@ -38,7 +35,7 @@ export default class RecentlyAddedProjectsComponent extends React.Component<any,
                         <ListGroup className="project-card-list">
                             {this.state.recentlyAddedProjects.map((project: any, index: number) => {
                                 return (
-                                    <ListGroupItem className={(index%2===0)? "project-card-li-gray" : "project-card-li-white"} key={project.id}>{project.name}</ListGroupItem>
+                                    <ListGroupItem className={(index%2===0)? "project-card-li-gray" : "project-card-li-white"} key={project.projectId}>{project.name}</ListGroupItem>
                                 )
                             })}
                         </ListGroup>
