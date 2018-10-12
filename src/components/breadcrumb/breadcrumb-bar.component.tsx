@@ -25,7 +25,7 @@ export class BreadcrumbBar extends React.PureComponent<any>
         {
             if(i === locations.length-1)
             {
-                crumbs.push(<Breadcrumb history={this.props.history} active>{locations[i]}</Breadcrumb>)
+                crumbs.push(<Breadcrumb key={"crumb" + i} history={this.props.history} active>{locations[i]}</Breadcrumb>)
             }
             else
             {
@@ -34,9 +34,9 @@ export class BreadcrumbBar extends React.PureComponent<any>
                 {
                     currentPath += "/"+brokenPath[c];
                 }
-                crumbs.push(<Breadcrumb history={this.props.history} path={currentPath}>{locations[i]}</Breadcrumb>)
+                crumbs.push(<Breadcrumb key={"crumb" + i} history={this.props.history} path={currentPath}>{locations[i]}</Breadcrumb>)
             }
-            crumbs.push(<div className="breadcrumbDevider"><img className="bci" src={bci}/></div>)
+            crumbs.push(<div key={"divider" + i} className="breadcrumbDevider"><img className="bci" src={bci}/></div>)
         }
       
         crumbs = crumbs.slice(0, crumbs.length-1);

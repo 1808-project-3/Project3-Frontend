@@ -1,16 +1,19 @@
 import * as React from "react";
 import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Container } from 'reactstrap';
-import { getResourceList, updateTableType } from "../../actions/info/info.actions";
+import {getAssociateList, getProjectList, getResourceList, updateTableType} from "../../../actions/info/info.actions";
 import classnames from 'classnames';
 import { connect } from "react-redux";
-import { IState } from "../../reducers";
-import TablesComponent from "./tables/tables.component";
-import ResourceListExport from "./tables/resourceListExport";
+import { IState } from "../../../reducers/index";
+import TablesComponent  from "../tables/tables.component";
+import ResourceListExport from "../tables/resourceListExport";
 
 interface IProps {
+    associateList: any[];
     tableType: string;
-    getResourceList: (text: string) => any;
-    updateTableType: (text: string) => any;
+    getAssociateList: () => any;
+    getProjectList: () => any;
+    getResourceList: () => any;
+    updateTableType: (tab: number) => any;
 }
 
 /**
@@ -32,28 +35,38 @@ export class TabComponent extends React.Component<IProps, any> {
             });
         }
         if (tab === "1") {
-            this.props.updateTableType("UI");
+            this.props.updateTableType(4);
         }
         else if (tab === "2") {
-            this.props.updateTableType("Mobility");
+            this.props.updateTableType(1);
         }
         else if (tab === "3") {
-            this.props.updateTableType("CM");
+            this.props.updateTableType(3);
         }
         else if (tab === "4") {
-            this.props.updateTableType("Design");
+            this.props.updateTableType(2);
         }
     }
 
+    public componentDidMount() {
+        this.props.updateTableType(4);
+        this.props.getProjectList();
+        this.props.getResourceList();
+        this.props.getAssociateList();
+
+    }
+
     public componentDidUpdate() {
-        console.log("The table type selected is: " + this.props.tableType);
-        this.props.getResourceList(this.props.tableType);
+        this.props.getResourceList();
     }
 
 
     public render() {
         return (
             <Container fluid>
+                <span className="secondary-color font-weight-bold mb-3">RESOURCE LIST</span>
+                <br/>
+                <br/>
                 <Row>
                     <div className="col-md-10">
                         <Nav tabs>
@@ -120,11 +133,14 @@ export class TabComponent extends React.Component<IProps, any> {
 }
 const mapStateToProps = (state: IState) => {
     return {
+        associateList: state.info.associateList,
         tableType: state.info.tableType
     };
 };
 
 const mapDispatchToProps = {
+    getAssociateList,
+    getProjectList,
     getResourceList,
     updateTableType
 };

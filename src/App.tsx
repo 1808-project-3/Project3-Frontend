@@ -11,10 +11,8 @@ import SignInComponent from './components/sign-in/sign-in.component';
 import './include/bootstrap';
 import { store } from './Store';
 import { ProtectedRoute } from './components/routes/protected-route.component';
-
-// import { ResourceSkillsDetail } from './components/resource-skills/resource-skills-detail.component'
-// import projectListTableComponent from "./components/project-list/project-list-table/project-list-table.component";
-// import AddSkillsComponent from './components/resource-skills/add-skills.component';
+import ResourceListComponent from "./components/resource-list/resource-list.component";
+import ProjectListComponent from "./components/project-list/project-list.component";
 
 class App extends React.Component {
 
@@ -43,6 +41,8 @@ class App extends React.Component {
       <Switch>
         <ProtectedRoute path="/home/resources/search-results" component={SearchResultComponent} />
         <ProtectedRoute path="/home/add-skills" component={ResourceSkillDisplayComponent} />
+        <ProtectedRoute path="/home/resources" component={ResourceListComponent}/>
+        <ProtectedRoute path="/home/projects" component={ProjectListComponent}/>
         <ProtectedRoute path="/home" component={TalentDashboard} />
       </Switch>
     </Layout>
