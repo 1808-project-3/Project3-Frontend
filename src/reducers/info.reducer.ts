@@ -41,6 +41,11 @@ export const infoReducer = (state: IInfoState = initialState, action: any) => {
                 ...state,
                 projectList: action.payload.projectList
             };
+        case infoTypes.GET_SKILL_GROUPS:
+            return {
+                ...state,
+                skillGroupList: action.payload.skillGroupList
+            };
         case infoTypes.UPDATE_TABLE_TYPE:
             return {
                 ...state,
