@@ -79,9 +79,7 @@ export default class SkillDoughnut extends React.Component<IProps, any> {
                     }
                 }
             },
-            skillGroups: [],
-            skills: [],
-            users: []
+            skillGroups: []            
         };
       }
 
@@ -95,32 +93,11 @@ export default class SkillDoughnut extends React.Component<IProps, any> {
         this.setState({selectedSkillGroup: skillGroup});        
         this.setState({skillChart: {data: {datasets: [{data: skillValues}], labels: skillLabels}}});
     }
-
-    public fetchUsers() {
-        const res = apiClient.get('users')
-        return res;
-    }
-
-    public fetchSkills() {
-        const res = apiClient.get('skills');
-        return res;
-    }
-
-    public fetchSkillGroups() {
-        const res = apiClient.get('skill-group');
-        return res;
-    }
-
-    public async fetchAll() {
-        const res = await Promise.all([ this.fetchUsers(), this.fetchSkills(), this.fetchSkillGroups()]);
-        return res;
-    }
     
     public async componentDidMount() {
         const list: any[] = [];                
         
-        const res = this.props;
-        // const res = this.fetchUsers();
+        const res = this.props;        
         const res1 = await apiClient.get('skills');
         const res2 = await apiClient.get('skill-group');
 
