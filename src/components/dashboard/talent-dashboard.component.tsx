@@ -9,6 +9,7 @@ import RecentlyAddedProjectsComponent from './project-cards/recently-added-proje
 import ResourceRequirementComponent from './project-cards/resource-requirement';
 import {MdSend} from 'react-icons/md';
 import { apiClient } from 'src/axios/api-client';
+import ReactLoading from 'react-loading';
 
 
 export default class TalentDashboard extends React.Component<any,any> {
@@ -66,7 +67,7 @@ export default class TalentDashboard extends React.Component<any,any> {
                     </Col>
                 </Row>
             </Container>
-            : <p>Loading Dashboard...</p> }
+            : <ReactLoading type={'spin'} color={'#5dc3f3'} height={100} width={100} className="loading-spinner" /> }
             </div>
 
         )

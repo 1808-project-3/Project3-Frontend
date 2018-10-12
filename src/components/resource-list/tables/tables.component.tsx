@@ -8,6 +8,7 @@ import {
 } from "../../../actions/info/info.actions";
 import { IState } from "../../../reducers";
 import { Table } from "reactstrap";
+import ReactLoading from 'react-loading';
 
 
 interface IProps {
@@ -74,9 +75,9 @@ class TablesComponent extends React.Component<IProps, any> {
         let ifTrue = false;
         if (this.props.associateList.length === 0) {
             return (
-                <div id="loading">
+                <div id="">
                     <br/>
-                    <span>Loading...</span>
+                    <ReactLoading type={'spin'} color={'#5dc3f3'} className="loading-spinner" />
                 </div>
             );
         }
