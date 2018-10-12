@@ -440,7 +440,7 @@ class AddSkillsComponent extends React.Component<IProps, {}> {
                                                 this.props.toggleConfirm();
                                             }
                                         }
-                                    }} color="secondary" className="ml-4 px-3"><IoMdAddCircleOutline /><small className="ml-2">ADD USER</small></Button>
+                                    }} color="secondary" className="ml-4 px-3"><IoMdAddCircleOutline /><small className="ml-2">ADD RESOURCE</small></Button>
                                 </Row>
                             </Container>
                         </div>

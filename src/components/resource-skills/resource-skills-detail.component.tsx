@@ -83,7 +83,7 @@ export class ResourceSkillsDetail extends React.Component<IProps, any> {
                 const resResource = await apiClient.put(`users/update/${resource.user.uId}`, { ...resJSON, "projectId": projId });
                 
                 if (resResource.data) {
-                    this.props.history.push('home');
+                    this.props.history.push('/home');
                     this.props.toggleConfirm();
                     this.props.cancelResource();
                 }
