@@ -12,10 +12,11 @@ export const SidebarButton = (props: any) => {
     
     return(
         <Link to={props.link}>
-            <div onClick={() => props.clicked(props.name)} className={style}>
+            <div  className={style}>
                 <img className="sbimg" src={purl + props.icon}/>
             </div>
         </Link>
     )
 }
 
+// onClick={() => props.clicked(props.name)}

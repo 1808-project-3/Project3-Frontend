@@ -9,7 +9,7 @@ export const Layout = (props: any) =>{
     return(
         <div className="layoutPage">
             <AppNav history={props.history}/>
-            <Sidebar/>
+            <Sidebar location={props.location}/>
             <BreadcrumbBar location={props.location} history={props.history}/>
             <div className="pageContent">
                 {props.children}

@@ -5,7 +5,7 @@ import {ButtonGroup} from './button-group.component';
 
 export const Sidebar = (props: any) =>{
     return(
-        <ButtonGroup>
+        <ButtonGroup location={props.location}>
             <SidebarButton name="button1" icon={"/images/briefcase-custom-icon.png"} link="/home"/>
             <SidebarButton name="button2" icon={"/images/flag-custom-icon.png"} link="/home/mystery-page-1/used-for-path-testing/long-path-here"/>
             <SidebarButton name="button3" icon={"/images/resource-custom-icon.png"} link="/home/resources"/>

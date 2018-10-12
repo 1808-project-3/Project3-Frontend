@@ -1,6 +1,5 @@
 import * as React from 'react';
 import './breadcrumbStyles.css';
-// import {Breadcrumb, BreadcrumbItem} from 'reactstrap';
 import {Breadcrumb} from './breadcrumb.component';
 
 export class BreadcrumbBar extends React.PureComponent<any>
