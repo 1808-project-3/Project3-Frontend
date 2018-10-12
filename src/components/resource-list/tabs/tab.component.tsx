@@ -1,6 +1,12 @@
 import * as React from "react";
 import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Container } from 'reactstrap';
-import {getAssociateList, getProjectList, getResourceList, updateTableType} from "../../../actions/info/info.actions";
+import {
+    getAssociateList,
+    getProjectList,
+    getResourceList,
+    getSkillGroups,
+    updateTableType
+} from "../../../actions/info/info.actions";
 import classnames from 'classnames';
 import { connect } from "react-redux";
 import { IState } from "../../../reducers/index";
@@ -9,10 +15,12 @@ import ResourceListExport from "../tables/resourceListExport";
 
 interface IProps {
     associateList: any[];
+    skillGroupList: any[];
     tableType: string;
     getAssociateList: () => any;
     getProjectList: () => any;
     getResourceList: () => any;
+    getSkillGroups: () => any;
     updateTableType: (tab: number) => any;
 }
 
@@ -48,10 +56,11 @@ export class TabComponent extends React.Component<IProps, any> {
         }
     }
 
-    public componentDidMount() {
+    public async componentDidMount() {
         this.props.updateTableType(4);
         this.props.getProjectList();
         this.props.getResourceList();
+        await this.props.getSkillGroups();
         this.props.getAssociateList();
 
     }
@@ -75,7 +84,7 @@ export class TabComponent extends React.Component<IProps, any> {
                                     className={classnames({ active: this.state.activeTab === '1' })}
                                     onClick={() => { this.toggle('1'); }}
                                 >
-                                    UI/Dev
+                                    {this.props.skillGroupList !== undefined && this.props.skillGroupList[3]}
                         </NavLink>
                             </NavItem>
                             <NavItem>
@@ -83,7 +92,7 @@ export class TabComponent extends React.Component<IProps, any> {
                                     className={classnames({ active: this.state.activeTab === '2' })}
                                     onClick={() => { this.toggle('2'); }}
                                 >
-                                    Mobility
+                                    {this.props.skillGroupList !== undefined && this.props.skillGroupList[0]}
                         </NavLink>
                             </NavItem>
                             <NavItem>
@@ -91,7 +100,7 @@ export class TabComponent extends React.Component<IProps, any> {
                                     className={classnames({ active: this.state.activeTab === '3' })}
                                     onClick={() => { this.toggle('3'); }}
                                 >
-                                    Content Management
+                                    {this.props.skillGroupList !== undefined && this.props.skillGroupList[2]}
                         </NavLink>
                             </NavItem>
                             <NavItem>
@@ -99,7 +108,7 @@ export class TabComponent extends React.Component<IProps, any> {
                                     className={classnames({ active: this.state.activeTab === '4' })}
                                     onClick={() => { this.toggle('4'); }}
                                 >
-                                    Design
+                                    {this.props.skillGroupList !== undefined && this.props.skillGroupList[1]}
                         </NavLink>
                             </NavItem>
                         </Nav>
@@ -134,6 +143,7 @@ export class TabComponent extends React.Component<IProps, any> {
 const mapStateToProps = (state: IState) => {
     return {
         associateList: state.info.associateList,
+        skillGroupList: state.info.skillGroupList,
         tableType: state.info.tableType
     };
 };
@@ -142,6 +152,7 @@ const mapDispatchToProps = {
     getAssociateList,
     getProjectList,
     getResourceList,
+    getSkillGroups,
     updateTableType
 };
 

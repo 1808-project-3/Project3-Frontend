@@ -134,6 +134,22 @@ export const getAssociateList = () => (dispatch: any) => {
 
 }
 
+export const getSkillGroups = () => (dispatch: any) => {
+    axios.get(api.skillGroup, {headers: {"JWT": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2Vycy9Uek1Vb2NNRjRwIiwiZXhwIjo2MjUxNjM3OTYwMCwidXNlcmlkIjoxMjM0NTYsInNjb3BlIjoic2VsZiBncm91cHMvdXNlcnMifQ.nD9kCwmbAIpFj__Qq_e2_XOkbBCe6zhXu713DoBOCjY"}})
+        .then(response => {
+            const skillGroupEntries: any[] = [];
+            for(const s of response.data){
+                skillGroupEntries.push(s.groupName);
+            }
+            dispatch({
+                payload: {
+                    skillGroupList: skillGroupEntries
+                },
+                type: infoTypes.GET_SKILL_GROUPS
+            })
+        })
+}
+
 /**
  * This action will update the tableType based on the passed in parameter.
  * @param text
