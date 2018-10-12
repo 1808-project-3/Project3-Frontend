@@ -32,7 +32,7 @@ class TablesComponent extends React.Component<IProps, any> {
         super(props);
         this.findCert = this.findCert.bind(this);
         this.findName = this.findName.bind(this);
-        this.findProjectName = this.findProjectName.bind(this);
+        this.findProjectLocation = this.findProjectLocation.bind(this);
     }
 
     public findCert = (id: any) => {
@@ -55,14 +55,14 @@ class TablesComponent extends React.Component<IProps, any> {
         return name;
     };
 
-    public findProjectName = (id: any) => {
-        let name = "";
+    public findProjectLocation = (id: any) => {
+        let location = "";
         this.props.projectList.forEach((p: any) => {
             if (+id === p.projectId) {
-                name = p.name;
+                location = p.location;
             }
         });
-        return name;
+        return location;
     };
 
     public componentDidMount() {
@@ -89,7 +89,7 @@ class TablesComponent extends React.Component<IProps, any> {
                         <th>Associate Name</th>
                         <th>ID</th>
                         <th>Certification</th>
-                        <th>Project Details</th>
+                        <th>Project Location</th>
                         <th>Grade</th>
                     </tr>
                     </thead>
@@ -132,7 +132,7 @@ class TablesComponent extends React.Component<IProps, any> {
                                         const certName = this.findCert(c.certId);
                                         return <p key={c.id}>{certName}</p>
                                     })}</td>
-                                    <td> {this.findProjectName(item.projectId)} </td>
+                                    <td> {this.findProjectLocation(item.projectId)} </td>
                                     <td> {item.grades.grade} </td>
                                 </tr>
                             );
