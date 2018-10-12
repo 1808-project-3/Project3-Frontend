@@ -1,3 +1,4 @@
+// I don't know why but user id and associate id is flipped in the database so there are inconsistencies between some components.
 export class User {
     public uId: number
     public assocId: number
@@ -27,6 +28,6 @@ export class User {
     }
 
     public getFullName() {
-        return `${this.firstName || ''} ${this.lastName || ''}`;
+        return (this.firstName && this.lastName) ? `${this.firstName} ${this.lastName}` : '';
     }
 }

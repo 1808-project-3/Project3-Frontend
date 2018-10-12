@@ -136,7 +136,7 @@ export class SearchBar extends React.Component<any, any>
                             const allId = allCert.id;
                             if(certId === allId)
                             {
-                                alert("cert found");
+                                // alert("cert found");
                                 certifications.push(allCert.certificationName);
                             }
                         });

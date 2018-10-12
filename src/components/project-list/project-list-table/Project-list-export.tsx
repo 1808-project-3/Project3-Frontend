@@ -12,34 +12,14 @@ interface IProps {
   getProjectList: () => any;
 }
 
-class ProjectListExport extends React.Component<IProps, any> {
+/**
+ * This component exports all projects to an xls file.
+ */
+
+export class ProjectListExport extends React.Component<IProps, any> {
   public componentDidMount() {
     this.props.getProjectList();
 
-  }
-
-  public formatData = (obj: any) => {
-    const temp: any = [];
-    obj.map((item: any) => {
-      if (item.project_name === this.props.projectName) {
-        temp.push({
-          associateName: `${item.first_name} ${item.last_name}`,
-          certification: item.certifications.name,
-          grade: item.grade,
-          id: item.user_id,
-          projectDetails: item.project_name
-        });
-      }
-    });
-    console.log(temp);
-    return temp;
-
-  }
-
-  public dataFilter = (dataArray: any) => {
-    return dataArray.filter((project: any) => {
-      return project.project_name === this.props.projectName;
-    })
   }
 
   public render() {
@@ -49,19 +29,12 @@ class ProjectListExport extends React.Component<IProps, any> {
     return (
       <div>
         <ExcelFile element={<button className="btn btn-secondary btn-sm">EXPORT TO XLS</button>}>
-          <ExcelSheet data={this.dataFilter(this.props.projectList)} name="Projects">
-            <ExcelColumn label="Project Name" value="project_name" />
-            <ExcelColumn label="Id" value="id" />
-            <ExcelColumn label="Start Date" value="start_date" />
-            <ExcelColumn label="End Date" value="end_date" />
-            <ExcelColumn label="Project Details" value="project_details" />
-          </ExcelSheet>
-          <ExcelSheet data={this.formatData(this.props.associateList)} name="Associates">
-            <ExcelColumn label="ASSOCIATE NAME" value="associateName" />
-            <ExcelColumn label="ID" value="id" />
-            <ExcelColumn label="CERTIFICATION" value="certification" />
-            <ExcelColumn label="PROJECT DETAILS" value="projectDetails" />
-            <ExcelColumn label="GRADE" value="grade" />
+          <ExcelSheet data={this.props.projectList} name="Projects">
+            <ExcelColumn label="Project Name" value="name" />
+            <ExcelColumn label="Id" value="projectId" />
+            <ExcelColumn label="Start Date" value="startDate" />
+            <ExcelColumn label="End Date" value="endDate" />
+            <ExcelColumn label="Project Details" value="description" />
           </ExcelSheet>
         </ExcelFile>
       </div>
