@@ -11,7 +11,7 @@ export const Sidebar = (props: any) => {
             <SidebarButton path={path} name="button2" icon={"/images/flag-custom-icon.png"} link="/home/mystery-page-1/used-for-path-testing/long-path-here" />
             <SidebarButton path={path} name="button3" icon={"/images/resource-custom-icon.png"} link="/home/resources" />
             <SidebarButton path={path} name="button4" icon={"/images/plus-custom-icon.png"} link="/home/add-skills" />
-            <SidebarButton path={path} name="button5" icon={"/images/check-custom-icon.png"} link="/home/project-list" />
+            <SidebarButton path={path} name="button5" icon={"/images/check-custom-icon.png"} link="/home/projects" />
         </ButtonGroup>
     )
 }

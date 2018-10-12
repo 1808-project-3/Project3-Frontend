@@ -1,11 +1,11 @@
 import * as React from "react";
 import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Container } from 'reactstrap';
-import {getAssociateList, getProjectList, getResourceList, updateTableType} from "../../actions/info/info.actions";
+import {getAssociateList, getProjectList, getResourceList, updateTableType} from "../../../actions/info/info.actions";
 import classnames from 'classnames';
 import { connect } from "react-redux";
-import { IState } from "../../reducers";
-import TablesComponent  from "./tables/tables.component";
-import ResourceListExport from "./tables/resourceListExport";
+import { IState } from "../../../reducers/index";
+import TablesComponent  from "../tables/tables.component";
+import ResourceListExport from "../tables/resourceListExport";
 
 interface IProps {
     associateList: any[];
@@ -64,6 +64,9 @@ export class TabComponent extends React.Component<IProps, any> {
     public render() {
         return (
             <Container fluid>
+                <span className="secondary-color font-weight-bold mb-3">RESOURCE LIST</span>
+                <br/>
+                <br/>
                 <Row>
                     <div className="col-md-10">
                         <Nav tabs>
