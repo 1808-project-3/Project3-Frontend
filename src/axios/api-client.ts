@@ -3,11 +3,7 @@ import { environment } from "src/environment";
 
 export const apiClient = axios.create({
     baseURL: environment.context,
-<<<<<<< HEAD
     timeout: 10000
-=======
-    timeout: 25000
->>>>>>> dev
 });
 
 
