@@ -22,10 +22,8 @@ export default class TalentDashboard extends React.Component<any,any> {
 
     public componentDidMount() {
         apiClient.get('users').then((res) => {
-            this.setState({users: res.data});
-            console.log(this.state);
-        })
-        console.log(this.state);
+            this.setState({users: res.data});            
+        })        
     }
 
     public render() {
