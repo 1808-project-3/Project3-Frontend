@@ -40,7 +40,7 @@ class App extends React.Component {
     <Layout location={props.location} history={props.history}>
       <Switch>
         <ProtectedRoute path="/home/resources/search-results" component={SearchResultComponent} />
-        <ProtectedRoute path="/home/add-skills" component={ResourceSkillDisplayComponent} />
+        <ProtectedRoute path="/home/add-resource" component={ResourceSkillDisplayComponent} />
         <ProtectedRoute path="/home/resources" component={ResourceListComponent}/>
         <ProtectedRoute path="/home/projects" component={ProjectListComponent}/>
         <ProtectedRoute path="/home" component={TalentDashboard} />

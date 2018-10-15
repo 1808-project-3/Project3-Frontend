@@ -17,9 +17,11 @@ export default class RecentlyAddedProjectsComponent extends React.Component<any,
         .then(resp => {
           if (resp.status === 200) {
             const recentProjects = resp.data;
+            if(recentProjects){
             this.setState({ 
                 ...this.state,
                 recentlyAddedProjects: recentProjects})
+            }
             return;
           }
           throw new Error('Failed to retrieve recent projects');

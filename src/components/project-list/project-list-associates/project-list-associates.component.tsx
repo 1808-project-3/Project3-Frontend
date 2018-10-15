@@ -33,7 +33,7 @@ export class ProjectListAssociatesComponent extends React.Component<IProps, any>
         let superName = ``;
         this.props.projectList.forEach((project: any) => {
             if(id === project.projectId){
-                superId = project.projectId;
+                superId = project.supervisorId;
             }
         })
         this.props.associateList.forEach((a: any) => {
@@ -73,25 +73,39 @@ export class ProjectListAssociatesComponent extends React.Component<IProps, any>
                         if(ifTrue){
                                 ifTrue = false;
                                 return (
-                                    <Col sm="4" key={item.userId}>
-                                        <Card body className="mt-4">
+                                    <Col sm="5" key={item.userId}>
+                                        <Card body className="mt-3">
                                             <Row>
                                                 <Col sm="6">
                                                     <CardTitle><strong>{item.firstName} {item.lastName}</strong></CardTitle>
                                                     <CardText>({item.userId})</CardText>
-                                                    <br/>
-                                                    <CardText>AUP CERTIFIED</CardText>
-                                                    <CardText>DATE OF JOINING</CardText>
-                                                    <CardText>HCM SUPERVISOR</CardText>
                                                 </Col>
                                                 <Col sm="6">
                                                     <CardTitle>{grade}</CardTitle>
-                                                    <br/>
-                                                    <br/>
-                                                    <br/>
+                                                </Col>
+                                            </Row>
+                                            <br/>
+                                            <Row>
+                                                <Col sm="6">
+                                                    <CardText>AUP CERTIFIED</CardText>
+                                                </Col>
+                                                <Col sm="6">
                                                     <CardTitle>{aup}</CardTitle>
+                                                </Col>
+                                            </Row>
+                                            <Row>
+                                                <Col sm="6">
+                                                    <CardText>DATE OF JOINING</CardText>
+                                                </Col>
+                                                <Col sm="6">
                                                     <CardTitle>{joinDate}</CardTitle>
-                                                    <br/>
+                                                </Col>
+                                            </Row>
+                                            <Row>
+                                                <Col sm="6">
+                                                    <CardText>HCM SUPERVISOR</CardText>
+                                                </Col>
+                                                <Col sm="6">
                                                     <CardTitle>{hcmSupervisor}</CardTitle>
                                                 </Col>
                                             </Row>
