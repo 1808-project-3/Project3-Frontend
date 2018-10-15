@@ -22,7 +22,10 @@ export default class SkillDoughnut extends React.Component<IProps, any> {
                             '#36A2EB', // blue
                             '#FFCE56', // yellow
                             '#24e216', // green
-                            '#3713d6' // purple
+                            '#3713d6', // purple
+                            '#FFA500', // orange
+                            '#000000', // black
+                            '#ff00ff' // fuschia
                         ],
                         borderColor: 'rgba(255,255,255,0.54)',
                         data: [],
@@ -31,7 +34,10 @@ export default class SkillDoughnut extends React.Component<IProps, any> {
                             '#36A2EB', // blue
                             '#FFCE56', // yellow
                             '#24e216', // green
-                            '#3713d6' // purple
+                            '#3713d6', // purple
+                            '#FFA500', // orange
+                            '#000000', // black
+                            '#ff00ff' // fuschia
                         ],
                     }],
                     labels: []
@@ -43,27 +49,33 @@ export default class SkillDoughnut extends React.Component<IProps, any> {
                 }
             },
             skillGroupChart: {
-                data: {
-                    datasets: [{
-                        backgroundColor: [
-                            '#FF6384', // red
-                            '#36A2EB', // blue
-                            '#FFCE56', // yellow
-                            '#24e216', // green
-                            '#3713d6' // purple
-                        ],
-                        borderColor: 'rgba(255,255,255,0.54)',
-                        data: [],
-                        hoverBackgroundColor: [
-                            '#FF6384', // red
-                            '#36A2EB', // blue
-                            '#FFCE56', // yellow
-                            '#24e216', // green
-                            '#3713d6' // purple
-                        ],
-                    }],
-                    labels: [],
-                },
+                data: {   
+                    datasets: [{                                      
+                      backgroundColor: [
+                        '#FF6384', // red
+                        '#36A2EB', // blue
+                        '#FFCE56', // yellow
+                        '#24e216', // green
+                        '#3713d6', // purple
+                        '#FFA500', // orange
+                        '#000000', // black
+                        '#ff00ff' // fuschia
+                      ],
+                      borderColor: 'rgba(255,255,255,0.54)',
+                      data: [],                    
+                      hoverBackgroundColor: [
+                        '#FF6384', // red
+                        '#36A2EB', // blue
+                        '#FFCE56', // yellow
+                        '#24e216', // green
+                        '#3713d6', // purple
+                        '#FFA500', // orange
+                        '#000000', // black
+                        '#ff00ff' // fuschia
+                      ],
+                    }],                      
+                      labels: [],                    
+                  },
                 options: {
                     legend: {
                         labels: {
