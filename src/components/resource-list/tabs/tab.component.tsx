@@ -1,10 +1,10 @@
 import * as React from "react";
 import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Container } from 'reactstrap';
 import {
-    getAssociateList,
+    getAssociateList, getCertificationList,
     getProjectList,
     getResourceList,
-    getSkillGroups,
+    getSkillGroups, getSkills,
     updateTableType
 } from "../../../actions/info/info.actions";
 import classnames from 'classnames';
@@ -16,10 +16,13 @@ import ResourceListExport from "../tables/resourceListExport";
 interface IProps {
     associateList: any[];
     skillGroupList: any[];
+    skillsList: any[];
     tableType: string;
     getAssociateList: () => any;
+    getCertificationList: () => any;
     getProjectList: () => any;
     getResourceList: () => any;
+    getSkills: () => any;
     getSkillGroups: () => any;
     updateTableType: (tab: number) => any;
 }
@@ -56,17 +59,14 @@ export class TabComponent extends React.Component<IProps, any> {
         }
     }
 
-    public async componentDidMount() {
+    public componentDidMount() {
         this.props.updateTableType(4);
+        this.props.getCertificationList();
         this.props.getProjectList();
         this.props.getResourceList();
-        await this.props.getSkillGroups();
+        this.props.getSkills();
+        this.props.getSkillGroups();
         this.props.getAssociateList();
-
-    }
-
-    public componentDidUpdate() {
-        this.props.getResourceList();
     }
 
 
@@ -143,16 +143,20 @@ export class TabComponent extends React.Component<IProps, any> {
 const mapStateToProps = (state: IState) => {
     return {
         associateList: state.info.associateList,
+        certificationList: state.info.certificationList,
         skillGroupList: state.info.skillGroupList,
+        skillsList: state.info.skillsList,
         tableType: state.info.tableType
     };
 };
 
 const mapDispatchToProps = {
     getAssociateList,
+    getCertificationList,
     getProjectList,
     getResourceList,
     getSkillGroups,
+    getSkills,
     updateTableType
 };
 

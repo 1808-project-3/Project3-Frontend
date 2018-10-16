@@ -2,8 +2,7 @@ import * as React from "react";
 import { connect } from "react-redux";
 import {
     getAssociateList,
-    getCertificationList,
-    getResourceList,
+    getResourceList, getSkills,
     updateTableType
 } from "../../../actions/info/info.actions";
 import { IState } from "../../../reducers";
@@ -16,10 +15,11 @@ interface IProps {
   certificationList: any[];
   projectList: any[];
   resourceList: any[];
+  skillsList: any[];
   tableType: number;
   getAssociateList: () => any;
-  getCertificationList: () => any;
   getResourceList: () => any;
+  getSkills: () => any;
   updateTableType: (text: string) => any;
 }
 
@@ -30,10 +30,45 @@ interface IProps {
 class TablesComponent extends React.Component<IProps, any> {
     constructor(props: any) {
         super(props);
+        this.filterResources = this.filterResources.bind(this);
         this.findCert = this.findCert.bind(this);
         this.findName = this.findName.bind(this);
         this.findProjectLocation = this.findProjectLocation.bind(this);
     }
+
+    public filterResources = (tableType: any) => {
+        const resources: any[] = [];
+        let ifTrue = false;
+        for(const item of this.props.resourceList){
+            for(const skill of item.skills){
+                if(ifTrue){
+                    break;
+                }
+                for(const s of this.props.skillsList){
+                    if(+skill.skillId === +s.id && +s.groupId === +tableType){
+                        ifTrue = true;
+                        break;
+                    }
+                }
+            }
+            if(ifTrue){
+                ifTrue = false;
+                resources.push(
+                    <tr key={item.resourceId}>
+                        <td>{this.findName(item.associateId)}</td>
+                        <td> {item.resourceId} </td>
+                        <td>{item.certs.map((c: any) => {
+                            const certName = this.findCert(c.certId);
+                            return <p key={c.id}>{certName}</p>
+                        })}</td>
+                        <td> {this.findProjectLocation(item.projectId)} </td>
+                        <td> {item.grades.grade} </td>
+                    </tr>
+                );
+            }
+        }
+        return resources;
+    };
 
     public findCert = (id: any) => {
         let certName = "";
@@ -65,14 +100,7 @@ class TablesComponent extends React.Component<IProps, any> {
         return location;
     };
 
-    public componentDidMount() {
-        this.props.getAssociateList();
-        this.props.getCertificationList();
-        this.props.getResourceList();
-    }
-
     public render() {
-        let ifTrue = false;
         if (this.props.associateList.length === 0) {
             return (
                 <div id="">
@@ -94,54 +122,7 @@ class TablesComponent extends React.Component<IProps, any> {
                     </tr>
                     </thead>
                     <tbody>
-                    {this.props.resourceList.map(item => {
-                        item.skills.forEach((skill: any) => {
-                            switch (this.props.tableType) {
-                                case 1:
-                                    if (skill.skillId === 1 || skill.skillId === 5) {
-                                        ifTrue = true;
-                                    }
-                                    break;
-                                case 2:
-                                    if (skill.skillId === 2 || skill.skillId === 3 || skill.skillId === 4) {
-                                        ifTrue = true;
-                                    }
-                                    break;
-                                case 3:
-                                    if (skill.skillId === 6) {
-                                        ifTrue = true;
-                                    }
-                                    break;
-                                case 4:
-                                    if (skill.skillId === 7 || skill.skillId === 8 || skill.skillId === 9 || skill.skillId === 10) {
-                                        ifTrue = true;
-                                    }
-                                    break;
-                                default:
-                                    ifTrue = false;
-                                    break;
-                            }
-                        });
-                        if (ifTrue) {
-                            ifTrue = false;
-                            return (
-                                <tr key={item.associateId}>
-                                    <td>{this.findName(item.associateId)}</td>
-                                    <td> {item.associateId} </td>
-                                    <td>{item.certs.map((c: any) => {
-                                        const certName = this.findCert(c.certId);
-                                        return <p key={c.id}>{certName}</p>
-                                    })}</td>
-                                    <td> {this.findProjectLocation(item.projectId)} </td>
-                                    <td> {item.grades.grade} </td>
-                                </tr>
-                            );
-                        } else {
-                            return (
-                                null
-                            );
-                        }
-                    })}
+                    {this.filterResources(this.props.tableType)}
                     </tbody>
                 </Table>
             );
@@ -155,14 +136,15 @@ const mapStateToProps = (state: IState) => {
     certificationList: state.info.certificationList,
     projectList: state.info.projectList,
     resourceList: state.info.resourceList,
+    skillsList: state.info.skillsList,
     tableType: state.info.tableType
   };
 };
 
 const mapDispatchToProps = {
   getAssociateList,
-  getCertificationList,
   getResourceList,
+  getSkills,
   updateTableType
 };
 
