@@ -52,7 +52,8 @@ export const getResourceList = () => (dispatch: any) => {
                 type: infoTypes.UPDATE_ERROR
             })
         })
-}
+};
+
 
 /**
  * This action updates project name with the one passed in.
@@ -148,7 +149,23 @@ export const getSkillGroups = () => (dispatch: any) => {
                 type: infoTypes.GET_SKILL_GROUPS
             })
         })
-}
+};
+
+export const getSkills = () => (dispatch: any) => {
+    axios.get(api.skills, {headers: {"JWT": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2Vycy9Uek1Vb2NNRjRwIiwiZXhwIjo2MjUxNjM3OTYwMCwidXNlcmlkIjoxMjM0NTYsInNjb3BlIjoic2VsZiBncm91cHMvdXNlcnMifQ.nD9kCwmbAIpFj__Qq_e2_XOkbBCe6zhXu713DoBOCjY"}})
+        .then(response => {
+            const skillsEntries: any[] = [];
+            for(const s of response.data){
+                skillsEntries.push(s);
+            }
+            dispatch({
+                payload: {
+                    skillsList: skillsEntries
+                },
+                type: infoTypes.GET_SKILLS
+            })
+        })
+};
 
 /**
  * This action will update the tableType based on the passed in parameter.
