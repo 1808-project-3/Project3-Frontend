@@ -30,7 +30,44 @@ export class ProjectListTableComponent extends React.Component<IProps, any> {
   constructor(props: any) {
     super(props);
     this.state = {open: false};
+    this.addProjects = this.addProjects.bind(this);
     this.chooseRow = this.chooseRow.bind(this);
+  }
+
+  public addProjects() {
+      const listEntries: any[] = [];
+      for (const l of this.props.projectList) {
+          if(+this.props.viewRow === +l.projectId && this.state.open){
+              listEntries.push(
+                  <tr data-id={l.projectId} key={l.projectId} data-project={l.name} onClick={this.chooseRow}>
+                      <td>{l.name}</td>
+                      <td>{l.projectId}</td>
+                      <td>{l.startDate}</td>
+                      <td>{l.endDate}</td>
+                      <td>{l.description}</td>
+                  </tr>
+              );
+              listEntries.push(
+                  <tr className="bg-light">
+                      <td colSpan={5}>
+                          <ProjectListAssociatesComponent />
+                      </td>
+                  </tr>
+              );
+          }
+          else {
+              listEntries.push(
+                  <tr data-id={l.projectId} key={l.projectId} data-project={l.name} onClick={this.chooseRow}>
+                      <td>{l.name}</td>
+                      <td>{l.projectId}</td>
+                      <td>{l.startDate}</td>
+                      <td>{l.endDate}</td>
+                      <td>{l.description}</td>
+                  </tr>
+              );
+          }
+      }
+      return listEntries;
   }
 
   public chooseRow(e: any) {
@@ -46,38 +83,7 @@ export class ProjectListTableComponent extends React.Component<IProps, any> {
   }
 
   public render() {
-    const listEntries: any[] = [];
-    for (const l of this.props.projectList) {
-      if(+this.props.viewRow === +l.projectId && this.state.open){
-          listEntries.push(
-              <tr data-id={l.projectId} key={l.projectId} data-project={l.name} onClick={this.chooseRow}>
-                  <td>{l.name}</td>
-                  <td>{l.projectId}</td>
-                  <td>{l.startDate}</td>
-                  <td>{l.endDate}</td>
-                  <td>{l.description}</td>
-              </tr>
-          );
-          listEntries.push(
-              <tr className="bg-light">
-                  <td colSpan={5}>
-                    <ProjectListAssociatesComponent />
-                  </td>
-              </tr>
-          );
-      }
-      else {
-        listEntries.push(
-          <tr data-id={l.projectId} key={l.projectId} data-project={l.name} onClick={this.chooseRow}>
-            <td>{l.name}</td>
-            <td>{l.projectId}</td>
-            <td>{l.startDate}</td>
-            <td>{l.endDate}</td>
-            <td>{l.description}</td>
-          </tr>
-        );
-      }
-    }
+    const projects = this.addProjects();
     return (
       <Container fluid>
           <span className="secondary-color font-weight-bold mb-3">PROJECT LIST</span>
@@ -96,7 +102,7 @@ export class ProjectListTableComponent extends React.Component<IProps, any> {
               <th>Project Details</th>
             </tr>
           </thead>
-          <tbody>{listEntries}</tbody>
+          <tbody>{projects}</tbody>
         </Table>
       </Container>
     );

@@ -83,7 +83,7 @@ class TablesComponent extends React.Component<IProps, any> {
     public findName = (id: any) => {
         let name = ``;
         this.props.associateList.forEach((a: any) => {
-            if (+id === +a.associateId) {
+            if (+id === a.associateId) {
                 name = `${a.firstName} ${a.lastName}`;
             }
         });
@@ -101,6 +101,7 @@ class TablesComponent extends React.Component<IProps, any> {
     };
 
     public render() {
+        const resources = this.filterResources(this.props.tableType);
         if (this.props.associateList.length === 0) {
             return (
                 <div id="">
@@ -122,7 +123,7 @@ class TablesComponent extends React.Component<IProps, any> {
                     </tr>
                     </thead>
                     <tbody>
-                    {this.filterResources(this.props.tableType)}
+                    {resources}
                     </tbody>
                 </Table>
             );
