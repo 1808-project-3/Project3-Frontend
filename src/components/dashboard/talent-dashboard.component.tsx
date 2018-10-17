@@ -22,10 +22,8 @@ export default class TalentDashboard extends React.Component<any,any> {
 
     public componentDidMount() {
         apiClient.get('users').then((res) => {
-            this.setState({users: res.data});
-            console.log(this.state);
-        })
-        console.log(this.state);
+            this.setState({users: res.data});            
+        })        
     }
 
     public render() {
@@ -45,7 +43,7 @@ export default class TalentDashboard extends React.Component<any,any> {
                         <CertifiedAssociatesTile users={usersList}/>
                     </Col>
                     <Col md={3} className="three-card-button-col">
-                     <Button className="three-card-button" onClick={() => this.props.history.push('/home/add-resource')}><MdSend size={45} color={"#36A2EB"}/>ADD PROFILE</Button>
+                     <Button className="three-card-button" onClick={() => this.props.history.push('/home/add-resource')}><MdSend size={45} color={"#36A2EB"}/>ADD RESOURCE</Button>
                     </Col>
                 </Row>
 
