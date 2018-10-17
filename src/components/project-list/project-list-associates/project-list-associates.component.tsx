@@ -33,7 +33,7 @@ export class ProjectListAssociatesComponent extends React.Component<IProps, any>
         let superName = ``;
         this.props.projectList.forEach((project: any) => {
             if(id === project.projectId){
-                superId = project.projectId;
+                superId = project.supervisorId;
             }
         })
         this.props.associateList.forEach((a: any) => {

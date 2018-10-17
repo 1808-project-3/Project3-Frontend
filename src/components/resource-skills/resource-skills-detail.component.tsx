@@ -17,6 +17,7 @@ import { RouteComponentProps } from 'react-router';
 
 
 interface IProps extends RouteComponentProps<{}> {
+    cancelResource: () => void
     resource: Resource
     toggleConfirm: () => void
 }
@@ -57,7 +58,7 @@ export class ResourceSkillsDetail extends React.Component<IProps, any> {
                 "gradeId": resource.grade.gradeId
             },
             "projectId": 0,
-            "resumes": 
+            "resumes":
                 resource.resumes.map((resume) => {
                     return { "resume": resume.url }
                 }),
@@ -69,23 +70,28 @@ export class ResourceSkillsDetail extends React.Component<IProps, any> {
         }
         try {
             let existProj = false;
-            if (resource.project.pId > 0){
-                existProj = !existProj;
+            if (resource.project.pId > 0) {
+                existProj = true;
             }
-            let resProject = {data:{id:0}};
-            if(!existProj){
-                resProject = await apiClient.post(`project`, {...projJSON});
+            let resProject = { data: { id: 0 } };
+            if (!existProj) {
+                resProject = await apiClient.post(`project`, { ...projJSON });
             }
             if (existProj || resProject.data) {
                 let projId;
-                existProj?projId=resource.project.pId:projId=resProject.data.id;
+                if (existProj) {
+                    projId = resource.project.pId;
+                } else {
+                    console.log("TEST");
+                    console.log(resProject.data);
+                    projId = resProject.data;
+                }
                 const resResource = await apiClient.put(`users/update/${resource.user.uId}`, { ...resJSON, "projectId": projId });
-                
+
                 if (resResource.data) {
-                    console.log("pre home");
-                    this.props.history.push('home');
-                    console.log("pre toggle");
+                    this.props.history.push('/home');
                     this.props.toggleConfirm();
+                    this.props.cancelResource();
                 }
                 else {
                     this.setState({ errorMessage: "Error Submitting Resource" });
