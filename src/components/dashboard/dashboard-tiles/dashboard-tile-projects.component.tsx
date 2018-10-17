@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Card, Col, CardFooter, Row } from 'reactstrap';
 import { MdLibraryBooks } from 'react-icons/md/';
-import { apiClient } from 'src/axios/api-client';
+import { apiClient } from '../../../axios/api-client';
 
 export default class ProjectsTile extends React.Component<any,any> {
 

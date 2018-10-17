@@ -1,6 +1,6 @@
 import { signInTypes } from "../actions/sign-in/sign-in.types";
 import { ISignInState } from ".";
-import { User } from "src/models/User";
+import { User } from "../models/User";
 
 const initialState: ISignInState = {
   credentials : {

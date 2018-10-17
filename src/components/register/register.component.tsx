@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { updateFields, updateError, clearFields } from '../../actions/register/register.actions';
 import { Alert, Row, Col, Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { RouteComponentProps } from 'react-router';
-import { apiClient } from 'src/axios/api-client';
+import { apiClient } from '../../axios/api-client';
 
 
 interface IProps extends RouteComponentProps<{}> {

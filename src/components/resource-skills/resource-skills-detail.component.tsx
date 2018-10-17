@@ -12,8 +12,8 @@ import { Certification } from '../../models/Certification';
 import { Skill } from '../../models/Skill';
 import { Resume } from '../../models/Resume';
 import { getCurrentUser } from '../../helpers';
-import { apiClient } from 'src/axios/api-client';
 import { RouteComponentProps } from 'react-router';
+import { apiClient } from '../../axios/api-client';
 
 
 interface IProps extends RouteComponentProps<{}> {

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Card, CardHeader, CardBody, ListGroup, ListGroupItem, CardLink } from 'reactstrap';
-import { apiClient } from 'src/axios/api-client';
+import { apiClient } from '../../../axios/api-client';
 
 export default class RecentlyAddedProjectsComponent extends React.Component<any, any> {
 

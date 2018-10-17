@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { Col, Table, Row, Card } from 'reactstrap';
 import { Doughnut } from 'react-chartjs-2'
+import { apiClient } from '../../../../axios/api-client';
 // import { MdCreate } from 'react-icons/md/';
-import { apiClient } from 'src/axios/api-client';
 // import { Certification } from 'src/models/Certification';
 
 interface IProps {

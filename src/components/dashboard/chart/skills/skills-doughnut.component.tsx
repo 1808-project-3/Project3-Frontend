@@ -1,8 +1,8 @@
 import * as React from 'react';
 import {Row, Col, Container, Card} from 'reactstrap';
 import { Doughnut } from 'react-chartjs-2';
-import { apiClient } from 'src/axios/api-client';
 import Scrollbars from 'react-custom-scrollbars';
+import { apiClient } from '../../../../axios/api-client';
 
 interface IProps {
     users: any

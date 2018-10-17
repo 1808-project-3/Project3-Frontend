@@ -5,7 +5,7 @@ import * as signInActions from '../../actions/sign-in/sign-in.actions';
 import { connect } from 'react-redux';
 import { Alert, Button, Row, Col, Form, Modal, FormGroup, Label, Input, ModalHeader, ModalBody } from 'reactstrap';
 import axios from 'axios';
-import { environment } from 'src/environment';
+import { environment } from '../../environment';
 
 interface IProps extends RouteComponentProps<{}> {
   changeModal: () => any,

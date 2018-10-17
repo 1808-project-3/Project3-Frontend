@@ -1,5 +1,5 @@
 import { signInTypes } from "./sign-in.types";
-import { User } from "src/models/User";
+import { User } from "../../models/User";
 
 
 export const updatePassword = (pass: string) => {

@@ -8,8 +8,8 @@ import ProjectsTile from './dashboard-tiles/dashboard-tile-projects.component';
 import RecentlyAddedProjectsComponent from './project-cards/recently-added-projects';
 import ResourceRequirementComponent from './project-cards/resource-requirement';
 import {MdSend} from 'react-icons/md';
-import { apiClient } from 'src/axios/api-client';
 import ReactLoading from 'react-loading';
+import { apiClient } from '../../axios/api-client';
 
 
 export default class TalentDashboard extends React.Component<any,any> {
